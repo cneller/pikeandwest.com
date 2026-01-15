@@ -1,0 +1,36 @@
+<header class="header">
+  <div class="container header__container">
+    <a href="/" class="header__logo" aria-label="Pike & West Home">
+      {{ $logo := resources.Get "images/logo/pike-west-logo-horizontal.png" }}
+      {{ if $logo }} {{ $resized := $logo.Resize "300x" }}
+      <img
+        src="{{ $resized.RelPermalink }}"
+        alt="Pike & West"
+        width="150"
+        height="45"
+      />
+      {{ else }}
+      <span
+        style="
+          font-family: 'Oswald', sans-serif;
+          font-size: 1.5rem;
+          letter-spacing: 0.1em;
+        "
+        >PIKE & WEST</span
+      >
+      {{ end }}
+    </a>
+
+    <nav class="header__nav" aria-label="Main navigation">
+      {{ range .Site.Menus.main }} {{ if eq .Name "Contact Us" }}
+      <a href="{{ .URL }}" class="header__link header__link--primary"
+        >{{ .Name }}</a
+      >
+      {{ else }}
+      <a href="{{ .URL }}" class="header__link header__link--outline"
+        >{{ .Name }}</a
+      >
+      {{ end }} {{ end }}
+    </nav>
+  </div>
+</header>
