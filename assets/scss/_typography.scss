@@ -1,0 +1,123 @@
+// =========================
+// Typography
+// =========================
+
+// Headings
+h1,
+.h1 {
+  font-size: $font-size-3xl;
+  letter-spacing: 0.15em;
+
+  @media (min-width: $breakpoint-md) {
+    font-size: $font-size-4xl;
+  }
+}
+
+h2,
+.h2 {
+  font-size: $font-size-2xl;
+  letter-spacing: 0.12em;
+
+  @media (min-width: $breakpoint-md) {
+    font-size: $font-size-3xl;
+  }
+}
+
+h3,
+.h3 {
+  font-size: $font-size-xl;
+  letter-spacing: 0.1em;
+
+  @media (min-width: $breakpoint-md) {
+    font-size: $font-size-2xl;
+  }
+}
+
+h4,
+.h4 {
+  font-size: $font-size-lg;
+}
+
+h5,
+.h5 {
+  font-size: $font-size-md;
+}
+
+h6,
+.h6 {
+  font-size: $font-size-base;
+}
+
+// Body text
+.text-sm {
+  font-size: $font-size-sm;
+}
+
+.text-md {
+  font-size: $font-size-md;
+}
+
+.text-lg {
+  font-size: $font-size-lg;
+}
+
+// Text alignment
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// Text transforms
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+// Font weights
+.font-light {
+  font-weight: $font-weight-light;
+}
+
+.font-regular {
+  font-weight: $font-weight-regular;
+}
+
+.font-medium {
+  font-weight: $font-weight-medium;
+}
+
+.font-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+.font-bold {
+  font-weight: $font-weight-bold;
+}
+
+// Tagline style (for hero)
+.tagline {
+  font-family: $font-primary;
+  font-size: $font-size-md;
+  font-weight: $font-weight-light;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $color-cream;
+
+  @media (min-width: $breakpoint-md) {
+    font-size: $font-size-lg;
+  }
+}
