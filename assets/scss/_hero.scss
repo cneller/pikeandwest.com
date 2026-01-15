@@ -1,0 +1,59 @@
+// =========================
+// Hero Section
+// =========================
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba($color-black, 0.5) 0%,
+      rgba($color-black, 0.2) 50%,
+      transparent 100%
+    );
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: $spacing-2xl;
+    color: $color-white;
+  }
+
+  &__title {
+    font-size: $font-size-2xl;
+    margin-bottom: $spacing-md;
+    color: $color-cream;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: $font-size-4xl;
+    }
+
+    span {
+      display: block;
+    }
+
+    .highlight {
+      color: $color-gold;
+    }
+  }
+
+  &__tagline {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__cta {
+    margin-top: $spacing-lg;
+  }
+}

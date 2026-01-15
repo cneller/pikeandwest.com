@@ -1,0 +1,123 @@
+// =========================
+// Utility Classes
+// =========================
+
+// Margins
+.mt-0 {
+  margin-top: 0;
+}
+.mt-1 {
+  margin-top: $spacing-sm;
+}
+.mt-2 {
+  margin-top: $spacing-md;
+}
+.mt-3 {
+  margin-top: $spacing-lg;
+}
+.mt-4 {
+  margin-top: $spacing-xl;
+}
+.mt-5 {
+  margin-top: $spacing-2xl;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+.mb-1 {
+  margin-bottom: $spacing-sm;
+}
+.mb-2 {
+  margin-bottom: $spacing-md;
+}
+.mb-3 {
+  margin-bottom: $spacing-lg;
+}
+.mb-4 {
+  margin-bottom: $spacing-xl;
+}
+.mb-5 {
+  margin-bottom: $spacing-2xl;
+}
+
+// Padding
+.py-3 {
+  padding-top: $spacing-lg;
+  padding-bottom: $spacing-lg;
+}
+.py-4 {
+  padding-top: $spacing-xl;
+  padding-bottom: $spacing-xl;
+}
+.py-5 {
+  padding-top: $spacing-2xl;
+  padding-bottom: $spacing-2xl;
+}
+
+// Display
+.d-none {
+  display: none;
+}
+.d-block {
+  display: block;
+}
+.d-flex {
+  display: flex;
+}
+.d-grid {
+  display: grid;
+}
+
+// Flexbox
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.align-center {
+  align-items: center;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.gap-1 {
+  gap: $spacing-sm;
+}
+.gap-2 {
+  gap: $spacing-md;
+}
+.gap-3 {
+  gap: $spacing-lg;
+}
+
+// Width
+.w-100 {
+  width: 100%;
+}
+.max-w-sm {
+  max-width: 480px;
+}
+.max-w-md {
+  max-width: 768px;
+}
+.max-w-lg {
+  max-width: 992px;
+}
+
+// Visibility
+@media (max-width: $breakpoint-md - 1) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: $breakpoint-md) {
+  .hide-desktop {
+    display: none !important;
+  }
+}

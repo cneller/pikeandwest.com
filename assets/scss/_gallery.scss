@@ -1,0 +1,144 @@
+// =========================
+// Gallery/Carousel Section
+// =========================
+
+.venue-gallery {
+  padding: $spacing-3xl 0;
+  text-align: center;
+
+  &__heading {
+    margin-bottom: $spacing-sm;
+  }
+
+  &__subtext {
+    color: $color-text-light;
+    margin-bottom: $spacing-2xl;
+  }
+
+  &__carousel {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__track {
+    display: flex;
+    gap: $spacing-md;
+    transition: transform $transition-slow;
+  }
+
+  &__slide {
+    flex: 0 0 auto;
+    width: 300px;
+
+    @media (min-width: $breakpoint-md) {
+      width: 400px;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform $transition-base;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-xl;
+  }
+
+  &__nav-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba($color-black, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: background-color $transition-fast;
+
+    &--active,
+    &:hover {
+      background-color: $color-gold;
+    }
+  }
+
+  &__arrows {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 $spacing-md;
+    pointer-events: none;
+  }
+
+  &__arrow {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: $shadow-md;
+    transition: all $transition-fast;
+
+    &:hover {
+      background-color: $color-gold;
+      color: $color-white;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+// Lightbox
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: $z-index-lightbox;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($color-black, 0.9);
+
+  &--open {
+    display: flex;
+  }
+
+  &__close {
+    position: absolute;
+    top: $spacing-lg;
+    right: $spacing-lg;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: $color-white;
+    cursor: pointer;
+    font-size: $font-size-2xl;
+  }
+
+  &__image {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+}
