@@ -1,0 +1,18 @@
+baseURL = "https://pikeandwest.com/"
+languageCode = "en-us"
+title = "Pike & West | Germantown Gallery and Event Venue"
+
+[build]
+  writeStats = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5

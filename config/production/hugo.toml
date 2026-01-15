@@ -1,0 +1,4 @@
+baseURL = "https://pikeandwest.com/"
+
+[minify]
+  minifyOutput = true

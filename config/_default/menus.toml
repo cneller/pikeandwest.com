@@ -1,0 +1,14 @@
+[[main]]
+  name = "Contact Us"
+  url = "/contact/"
+  weight = 1
+
+[[main]]
+  name = "Artists"
+  url = "/gallery-application/"
+  weight = 2
+
+[[footer]]
+  name = "Contact Us"
+  url = "/contact/"
+  weight = 1

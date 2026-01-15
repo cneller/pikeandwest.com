@@ -1,0 +1,23 @@
+description = "Pike & West is Germantown's premier art gallery and event venue. Host your wedding, corporate event, birthday, or private party in our elegant space."
+author = "Pike & West"
+
+[contact]
+  phone = "901.206.5575"
+  email = "events@pikeandwest.com"
+  address = "2277 West Street"
+  city = "Germantown"
+  state = "TN"
+  zip = "38138"
+  hours = "Available by appointment only. Call or email to reserve a tour."
+  googleMapsUrl = "https://maps.app.goo.gl/7fNG7K7BEPQKpNzs8"
+
+[social]
+  instagram = "https://www.instagram.com/pikeandwest/"
+  facebook = "https://www.facebook.com/pikeandwest"
+
+[analytics]
+  googleTagManager = "" # Add GTM ID from Webflow
+
+[forms]
+  honeyBookContactEmbed = "" # Add HoneyBook embed URL
+  honeyBookGalleryEmbed = "" # Add HoneyBook embed URL
