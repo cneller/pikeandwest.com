@@ -1,0 +1,69 @@
+{{ define "main" }}
+<section class="contact section">
+  <div class="container">
+    <div class="contact__grid">
+      {{/* Application Form */}}
+      <div class="contact__form-section">
+        <h1>Gallery Application</h1>
+        <div class="form-embed">
+          {{ with .Site.Params.forms.galleryApplicationEmbed }}
+          <iframe
+            src="{{ . }}"
+            title="Gallery Application Form"
+            loading="lazy"
+          ></iframe>
+          {{ else }}
+          <p>
+            Application form coming soon. Please email us at
+            events@pikeandwest.com.
+          </p>
+          {{ end }}
+        </div>
+      </div>
+
+      {{/* Find Us */}}
+      <div class="contact__info-section">
+        <h1>Find Us</h1>
+
+        <div class="contact__map">
+          {{ with .Site.Params.maps.embed }}
+          <iframe
+            src="{{ . }}"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Pike & West Location"
+          ></iframe>
+          {{ end }}
+        </div>
+
+        <div class="contact__details">
+          <div class="contact__detail">
+            <strong>Our Location</strong>
+            <a
+              href="{{ .Site.Params.contact.googleMapsUrl }}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ .Site.Params.contact.address }}<br />
+              {{ .Site.Params.contact.city }} {{ .Site.Params.contact.state }}
+              {{ .Site.Params.contact.zip }}
+            </a>
+          </div>
+
+          <div class="contact__detail">
+            <strong>Hours</strong>
+            <span>{{ .Site.Params.contact.hours }}</span>
+          </div>
+
+          <div class="contact__detail">
+            <strong>Phone</strong>
+            <span>{{ .Site.Params.contact.phone }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
