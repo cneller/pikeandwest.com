@@ -1,0 +1,26 @@
+# Cloudflare Pages Configuration for Pike & West
+# https://developers.cloudflare.com/pages/configuration/wrangler-configuration/
+
+name = "pikeandwest"
+
+# Pages-specific configuration
+pages_build_output_dir = "public"
+
+# Compatibility settings
+compatibility_date = "2025-01-15"
+
+# Build configuration (used when deploying via wrangler pages deploy)
+# Note: These settings are also configurable in the Cloudflare Dashboard
+[build]
+command = "hugo --gc --minify"
+
+[build.environment]
+HUGO_VERSION = "0.154.5"
+
+# Production environment
+[env.production]
+name = "pikeandwest"
+
+# Preview environment (for branch deployments)
+[env.preview]
+name = "pikeandwest-preview"
