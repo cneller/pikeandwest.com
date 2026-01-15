@@ -19,5 +19,6 @@ author = "Pike & West"
   googleTagManager = "" # Add GTM ID from Webflow
 
 [forms]
-  honeyBookContactEmbed = "" # Add HoneyBook embed URL
-  honeyBookGalleryEmbed = "" # Add HoneyBook embed URL
+  contactEmbed = "https://portal.pikeandwest.com/public/inquiry"
+  # HoneyBook widget placement ID (loaded via JavaScript, not iframe)
+  galleryApplicationPlacementId = "65174362ef543a000898bc37"
