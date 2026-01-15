@@ -1,0 +1,86 @@
+// =========================
+// Buttons
+// =========================
+
+.btn {
+  display: inline-block;
+  padding: $spacing-sm $spacing-xl;
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Primary button (gold filled)
+.btn-primary {
+  background-color: $color-gold;
+  color: $color-white;
+  border-color: $color-gold;
+
+  &:hover {
+    background-color: darken($color-gold, 10%);
+    border-color: darken($color-gold, 10%);
+    color: $color-white;
+  }
+}
+
+// Secondary button (cream filled)
+.btn-secondary {
+  background-color: $color-cream;
+  color: $color-black;
+  border-color: $color-black;
+
+  &:hover {
+    background-color: $color-white;
+    color: $color-black;
+  }
+}
+
+// Outline button (gold outline)
+.btn-outline {
+  background-color: transparent;
+  color: $color-gold;
+  border-color: $color-gold;
+
+  &:hover {
+    background-color: $color-gold;
+    color: $color-white;
+  }
+}
+
+// Outline light (for dark backgrounds)
+.btn-outline-light {
+  background-color: transparent;
+  color: $color-cream;
+  border-color: $color-cream;
+
+  &:hover {
+    background-color: $color-cream;
+    color: $color-black;
+  }
+}
+
+// Button sizes
+.btn-sm {
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-xs;
+}
+
+.btn-lg {
+  padding: $spacing-md $spacing-2xl;
+  font-size: $font-size-base;
+}
