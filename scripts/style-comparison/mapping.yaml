@@ -1,0 +1,231 @@
+# Style Comparison Mapping
+# Maps Webflow classes to Hugo classes for computed style extraction
+#
+# Usage: This file is consumed by compare-styles.js to identify matching
+# elements between the Webflow export and Hugo site.
+
+config:
+  webflow_url: "http://localhost:8080"
+  hugo_url: "http://localhost:1313"
+
+  # CSS properties to compare for each category
+  property_sets:
+    typography:
+      - font-family
+      - font-size
+      - font-weight
+      - line-height
+      - letter-spacing
+      - text-transform
+      - color
+    spacing:
+      - padding-top
+      - padding-right
+      - padding-bottom
+      - padding-left
+      - margin-top
+      - margin-right
+      - margin-bottom
+      - margin-left
+    layout:
+      - display
+      - flex-direction
+      - justify-content
+      - align-items
+      - gap
+      - max-width
+      - width
+    visual:
+      - background-color
+      - border
+      - border-radius
+      - box-shadow
+
+pages:
+  # ============================================
+  # HOMEPAGE
+  # ============================================
+  - path: "/"
+    webflow_path: "/index.html"
+    sections:
+      # --- Header/Navigation ---
+      - name: "Header"
+        elements:
+          - role: "header-container"
+            hugo: ".header"
+            webflow: ".navbar1_component"
+            properties: [layout, spacing, visual]
+
+          - role: "logo"
+            hugo: ".header__logo img"
+            webflow: ".navbar1_logo"
+            properties: [layout]
+
+          - role: "nav-button-primary"
+            hugo: ".header__link--primary"
+            webflow: ".navbar-button-gold"
+            properties: [typography, spacing, visual]
+
+          - role: "nav-button-secondary"
+            hugo: ".header__link--outline"
+            webflow: ".navbar-button-gold.is-secondary"
+            properties: [typography, spacing, visual]
+
+      # --- Hero Section ---
+      - name: "Hero"
+        elements:
+          - role: "hero-section"
+            hugo: ".hero"
+            webflow: ".hero-header-section"
+            properties: [layout, spacing]
+
+          - role: "hero-title"
+            hugo: ".hero__title"
+            webflow: ".h1-crm-les-mores"
+            properties: [typography]
+
+          - role: "hero-tagline"
+            hugo: ".hero__tagline"
+            webflow: ".hero-subheader-1"
+            properties: [typography]
+
+          - role: "hero-cta"
+            hugo: ".hero .btn"
+            webflow: ".hero-header-section .button-1-pw-cream"
+            properties: [typography, spacing, visual]
+
+      # --- Gallery Section ---
+      - name: "Gallery"
+        elements:
+          - role: "gallery-section"
+            hugo: ".venue-gallery"
+            webflow: ".section_gallery17"
+            properties: [spacing]
+
+          - role: "gallery-heading"
+            hugo: ".venue-gallery h2"
+            webflow: ".h1-les-mores-blk.is-centered"
+            properties: [typography]
+
+          - role: "gallery-subtext"
+            hugo: ".venue-gallery p"
+            webflow: ".text-size-medium"
+            properties: [typography]
+
+      # --- Events Section ---
+      - name: "Events"
+        elements:
+          - role: "events-section"
+            hugo: ".events"
+            webflow: ".event-wrap"
+            properties: [spacing, visual]
+
+          - role: "events-heading"
+            hugo: ".events__heading"
+            webflow: ".section-header-h2.drk-bkgrnd"
+            properties: [typography]
+
+          - role: "event-label"
+            hugo: ".events__label"
+            webflow: ".heading-3.events"
+            properties: [typography]
+
+          - role: "events-cta"
+            hugo: ".events .btn"
+            webflow: ".event-wrap .button-1-pw-cream"
+            properties: [typography, spacing, visual]
+
+      # --- About Section ---
+      - name: "About"
+        elements:
+          - role: "about-section"
+            hugo: ".about"
+            webflow: ".section.cc-store-home-wrap"
+            properties: [spacing, visual]
+
+          - role: "about-main-heading"
+            hugo: ".about__heading"
+            webflow: ".h1-les-mores-blk"
+            properties: [typography]
+
+          - role: "about-subtitle"
+            hugo: ".about__subtitle"
+            webflow: ".heading-2"
+            properties: [typography]
+
+          - role: "about-text"
+            hugo: ".about__text p"
+            webflow: ".paragraph-light"
+            properties: [typography]
+
+          - role: "about-cta"
+            hugo: ".about .btn"
+            webflow: ".button-1-pw-black"
+            properties: [typography, spacing, visual]
+
+      # --- CTA Banner ---
+      - name: "CTA Banner"
+        elements:
+          - role: "cta-section"
+            hugo: ".cta-banner"
+            webflow: ".section.cc-cta"
+            properties: [spacing, visual]
+
+          - role: "cta-heading"
+            hugo: ".cta-banner__heading"
+            webflow: ".cta-heading"
+            properties: [typography]
+
+          - role: "cta-text"
+            hugo: ".cta-banner__text"
+            webflow: ".paragraph-bigger"
+            properties: [typography]
+
+          - role: "cta-button"
+            hugo: ".cta-banner .btn"
+            webflow: ".cta-wrap .button-1-pw-black"
+            properties: [typography, spacing, visual]
+
+      # --- Footer ---
+      - name: "Footer"
+        elements:
+          - role: "footer-section"
+            hugo: ".footer"
+            webflow: ".section.footer-wrap"
+            properties: [spacing, visual]
+
+          - role: "footer-logo"
+            hugo: ".footer__logo img"
+            webflow: ".footer-logo"
+            properties: [layout]
+
+          - role: "footer-link"
+            hugo: ".footer__link"
+            webflow: ".footer-link.button-1-pw-cream"
+            properties: [typography, spacing, visual]
+
+          - role: "footer-copyright"
+            hugo: ".footer__copyright"
+            webflow: ".footer-copyright"
+            properties: [typography]
+
+  # ============================================
+  # CONTACT PAGE
+  # ============================================
+  - path: "/contact/"
+    webflow_path: "/contact.html"
+    sections:
+      - name: "Contact Form"
+        elements:
+          - role: "page-heading"
+            hugo: "h1"
+            webflow: "h1"
+            properties: [typography]
+
+# CSS Variables from Webflow (for reference)
+webflow_variables:
+  --pw-black: "#434345"
+  --pw-gold: "#aa6e0b"
+  --pw-cream: "#fff7e1"
+  --white: "white"
+  --black: "black"

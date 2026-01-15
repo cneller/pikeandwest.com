@@ -1,0 +1,23 @@
+{
+  "name": "pikeandwest.com",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve:webflow": "npx serve webflow-export -p 8080",
+    "compare:styles": "node scripts/style-comparison/compare-styles.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "backstopjs": "^6.3.25",
+    "serve": "^14.2.0",
+    "yaml": "^2.3.0"
+  }
+}

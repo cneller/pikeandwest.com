@@ -1,53 +1,74 @@
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 {{/* Title */}}
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | Pike & West{{ end }}</title>
+<title>
+  {{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | Pike & West{{ end }}
+</title>
 
 {{/* Meta Description */}}
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+<meta
+  name="description"
+  content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}"
+/>
 
 {{/* Canonical URL */}}
-<link rel="canonical" href="{{ .Permalink }}">
+<link rel="canonical" href="{{ .Permalink }}" />
 
 {{/* Open Graph */}}
-<meta property="og:title" content="{{ .Title }}">
-<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-<meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:site_name" content="{{ .Site.Title }}">
-<meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+<meta property="og:title" content="{{ .Title }}" />
+<meta
+  property="og:description"
+  content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}"
+/>
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta
+  property="og:type"
+  content="{{ if .IsHome }}website{{ else }}article{{ end }}"
+/>
 {{ with .Params.image }}
-<meta property="og:image" content="{{ . | absURL }}">
-{{ end }}
-
-{{/* Twitter Card */}}
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ .Title }}">
-<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:image" content="{{ . | absURL }}" />
+{{ end }} {{/* Twitter Card */}}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ .Title }}" />
+<meta
+  name="twitter:description"
+  content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}"
+/>
 
 {{/* Favicon */}}
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.png" type="image/png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
 {{/* Google Fonts */}}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap"
+  rel="stylesheet"
+/>
 
-{{/* Styles */}}
-{{ $scss := resources.Get "scss/main.scss" }}
-{{ if $scss }}
-  {{ $style := $scss | css.Sass (dict "targetPath" "css/main.css" "outputStyle" "compressed") | fingerprint }}
-  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
-{{ end }}
-
-{{/* Google Tag Manager */}}
-{{ with .Site.Params.analytics.googleTagManager }}
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','{{ . }}');</script>
-{{ end }}
-
-{{/* Structured Data */}}
-{{ partial "structured-data.html" . }}
+{{/* Styles */}} {{ $scss := resources.Get "scss/main.scss" }} {{ if $scss }} {{
+$style := $scss | css.Sass (dict "targetPath" "css/main.css" "outputStyle"
+"compressed") | fingerprint }}
+<link
+  rel="stylesheet"
+  href="{{ $style.RelPermalink }}"
+  integrity="{{ $style.Data.Integrity }}"
+/>
+{{ end }} {{/* Google Tag Manager */}} {{ with
+.Site.Params.analytics.googleTagManager }}
+<script>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', '{{ . }}');
+</script>
+{{ end }} {{/* Structured Data */}} {{ partial "structured-data.html" . }}

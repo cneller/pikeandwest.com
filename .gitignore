@@ -24,3 +24,13 @@ Thumbs.db
 
 # Node (if added later for tooling)
 node_modules/
+
+# Style comparison
+scripts/style-comparison/comparison-report.json
+
+# BackstopJS
+backstop_data/bitmaps_test/
+backstop_data/html_report/
+
+# Playwright
+.playwright-mcp/
