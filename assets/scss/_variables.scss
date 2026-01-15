@@ -1,0 +1,83 @@
+// =========================
+// Pike & West Design Tokens
+// =========================
+
+// Colors
+$color-black: #000000;
+$color-dark-text: #1a1b1f;
+$color-dark-gray: #333333;
+$color-medium-gray: #434345;
+$color-gold: #aa6e0b;
+$color-cream: #fff7e1;
+$color-white: #ffffff;
+
+// Color Aliases
+$color-primary: $color-gold;
+$color-secondary: $color-cream;
+$color-text: $color-dark-text;
+$color-text-light: $color-medium-gray;
+$color-background: $color-white;
+
+// Typography
+$font-primary: 'Oswald', sans-serif;
+$font-secondary: 'Montserrat', sans-serif;
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Font Sizes
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-md: 1.125rem; // 18px
+$font-size-lg: 1.25rem; // 20px
+$font-size-xl: 1.5rem; // 24px
+$font-size-2xl: 2rem; // 32px
+$font-size-3xl: 2.5rem; // 40px
+$font-size-4xl: 3rem; // 48px
+$font-size-5xl: 4rem; // 64px
+
+// Spacing
+$spacing-xs: 0.25rem; // 4px
+$spacing-sm: 0.5rem; // 8px
+$spacing-md: 1rem; // 16px
+$spacing-lg: 1.5rem; // 24px
+$spacing-xl: 2rem; // 32px
+$spacing-2xl: 3rem; // 48px
+$spacing-3xl: 4rem; // 64px
+$spacing-4xl: 6rem; // 96px
+
+// Breakpoints
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Container
+$container-max-width: 1200px;
+$container-padding: $spacing-lg;
+
+// Transitions
+$transition-fast: 150ms ease;
+$transition-base: 300ms ease;
+$transition-slow: 500ms ease;
+
+// Shadows
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+// Border Radius
+$border-radius-sm: 2px;
+$border-radius-md: 4px;
+$border-radius-lg: 8px;
+
+// Z-index
+$z-index-dropdown: 100;
+$z-index-header: 200;
+$z-index-modal: 300;
+$z-index-lightbox: 400;
