@@ -16,7 +16,7 @@ author = "Pike & West"
   facebook = "https://www.facebook.com/pikeandwest"
 
 [analytics]
-  googleTagManager = "" # Add GTM ID from Webflow
+  googleTagManager = "GTM-P8XR8C5S"
 
 [forms]
   contactEmbed = "https://portal.pikeandwest.com/public/inquiry"
