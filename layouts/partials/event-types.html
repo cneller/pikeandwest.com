@@ -1,0 +1,28 @@
+<section class="events section">
+  <div class="container">
+    <h2 class="events__heading">The perfect place for your next...</h2>
+
+    <div class="events__grid">
+      {{ $eventTypes := slice (dict "icon" "icon-wedding-rings.png" "label"
+      "Wedding") (dict "icon" "icon-champagne.png" "label" "Private Party")
+      (dict "icon" "icon-badge.png" "label" "Corporate Party") (dict "icon"
+      "icon-cake.png" "label" "Birthday") (dict "icon" "icon-disco-ball.png"
+      "label" "Dance") (dict "icon" "icon-rattle.png" "label" "Baby Shower") }}
+      {{ range $eventTypes }}
+      <div class="events__item">
+        <div class="events__icon">
+          {{ $icon := resources.Get (printf "images/icons/%s" .icon) }} {{ if
+          $icon }} {{ $resized := $icon.Resize "128x" }}
+          <img src="{{ $resized.RelPermalink }}" alt="{{ .label }} icon" />
+          {{ end }}
+        </div>
+        <span class="events__label">{{ .label }}</span>
+      </div>
+      {{ end }}
+    </div>
+
+    <div class="events__cta">
+      <a href="/contact/" class="btn btn-outline-light">Contact Us</a>
+    </div>
+  </div>
+</section>

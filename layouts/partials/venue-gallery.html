@@ -1,0 +1,76 @@
+<section class="venue-gallery section">
+  <div class="container">
+    <h2 class="venue-gallery__heading">Our Venue</h2>
+    <p class="venue-gallery__subtext">
+      Want to see more? Follow us on Instagram.
+    </p>
+
+    <div
+      class="venue-gallery__carousel"
+      role="region"
+      aria-label="Venue photo gallery"
+    >
+      <div class="venue-gallery__track" id="gallery-track">
+        {{ $images := resources.Match "images/venue/*" }} {{ range $index,
+        $image := $images }} {{ $resized := $image.Resize "600x q85" }}
+        <div class="venue-gallery__slide" data-index="{{ $index }}">
+          <img
+            src="{{ $resized.RelPermalink }}"
+            alt="Pike & West venue photo {{ add $index 1 }}"
+            class="venue-gallery__image"
+            loading="lazy"
+            data-full="{{ $image.RelPermalink }}"
+          />
+        </div>
+        {{ end }}
+      </div>
+
+      <div class="venue-gallery__arrows">
+        <button
+          class="venue-gallery__arrow venue-gallery__arrow--prev"
+          aria-label="Previous slide"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button
+          class="venue-gallery__arrow venue-gallery__arrow--next"
+          aria-label="Next slide"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="venue-gallery__nav" id="gallery-nav">
+        {{ range $index, $_ := $images }}
+        <button
+          class="venue-gallery__nav-btn{{ if eq $index 0 }} venue-gallery__nav-btn--active{{ end }}"
+          aria-label="Go to slide {{ add $index 1 }}"
+          data-index="{{ $index }}"
+        ></button>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{/* Lightbox */}}
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox__close" aria-label="Close lightbox">&times;</button>
+  <img src="" alt="" class="lightbox__image" id="lightbox-image" />
+</div>

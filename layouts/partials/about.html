@@ -1,0 +1,72 @@
+<section class="about section">
+  <div class="container">
+    <h1 class="about__heading">About Us</h1>
+
+    {{/* Who We Are */}}
+    <div class="about__block">
+      <div class="about__content">
+        <h2 class="about__subtitle">Who we are</h2>
+        <div class="about__text">
+          <p>
+            Nestled in the heart of Germantown, Tennessee, Pike & West is an
+            unique art gallery and venue. Our team specializes in creating
+            unforgettable experiences. Established in 2023, we are a
+            family-owned and operated business dedicated to transforming dreams
+            into reality.
+          </p>
+          <p>
+            With over six years of experience in the event industry, our venue
+            coordinator, Eden Neller, and event coordinator, Lyndal Brumley,
+            share a passion for realizing your vision. They are experts at
+            planning and executing every detail, ensuring that your event is
+            everything you've ever imagined.
+          </p>
+        </div>
+        <a href="/contact/" class="btn btn-secondary">Schedule a Tour</a>
+      </div>
+      <div class="about__image">
+        {{ $teamImage := resources.Get "images/about/team-eden-lyndal.jpg" }} {{
+        if $teamImage }} {{ $resized := $teamImage.Resize "800x q85" }}
+        <img
+          src="{{ $resized.RelPermalink }}"
+          alt="Lyndal Brumley and Eden Neller, Pike & West team members"
+          loading="lazy"
+        />
+        {{ end }}
+      </div>
+    </div>
+
+    {{/* What We Do */}}
+    <div class="about__block about__block--reverse">
+      <div class="about__content">
+        <h2 class="about__subtitle">What we do</h2>
+        <div class="about__text">
+          <p>
+            Whether you're planning an art show, an intimate wedding, a
+            milestone celebration, a corporate party, or a social gathering,
+            Pike & West is the perfect space to accommodate your needs. Our
+            modern venue space is a breath of fresh air and includes a dreamy
+            multi-story patio space.
+          </p>
+          <p>
+            We pride ourselves on going above and beyond to provide exceptional
+            service and create a seamless experience for our clients. Our team
+            is committed to ensuring that your event is everything you've ever
+            dreamed of, from the initial consultation to the final farewell.
+          </p>
+        </div>
+        <a href="/contact/" class="btn btn-outline">Contact Us</a>
+      </div>
+      <div class="about__image">
+        {{ $eventImage := resources.Get "images/about/event-party-bw.jpg" }} {{
+        if $eventImage }} {{ $resized := $eventImage.Resize "800x q85" }}
+        <img
+          src="{{ $resized.RelPermalink }}"
+          alt="Guests enjoying an event at Pike & West"
+          loading="lazy"
+        />
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
