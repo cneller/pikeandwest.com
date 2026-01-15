@@ -1,0 +1,18 @@
+{{/* Google Tag Manager (noscript) */}} {{ with
+.Site.Params.analytics.googleTagManager }}
+<noscript
+  ><iframe
+    src="https://www.googletagmanager.com/ns.html?id={{ . }}"
+    height="0"
+    width="0"
+    style="display: none; visibility: hidden"
+  ></iframe
+></noscript>
+{{ end }} {{/* Main JavaScript */}} {{ $js := resources.Get "js/main.js" }} {{
+if $js }} {{ $jsMinified := $js | minify | fingerprint }}
+<script
+  src="{{ $jsMinified.RelPermalink }}"
+  integrity="{{ $jsMinified.Data.Integrity }}"
+  defer
+></script>
+{{ end }}

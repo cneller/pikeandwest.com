@@ -1,0 +1,65 @@
+{{/* LocalBusiness Schema */}}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "Pike & West",
+    "description": "{{ .Site.Params.description }}",
+    "url": "{{ .Site.BaseURL }}",
+    "telephone": "{{ .Site.Params.contact.phone }}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ .Site.Params.contact.address }}",
+      "addressLocality": "{{ .Site.Params.contact.city }}",
+      "addressRegion": "{{ .Site.Params.contact.state }}",
+      "postalCode": "{{ .Site.Params.contact.zip }}",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "35.0868",
+      "longitude": "-89.8100"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
+    },
+    "sameAs": [
+      "{{ .Site.Params.social.instagram }}",
+      "{{ .Site.Params.social.facebook }}"
+    ]
+  }
+</script>
+
+{{/* BreadcrumbList Schema for non-home pages */}} {{ if not .IsHome }}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ .Site.BaseURL }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ .Title }}",
+        "item": "{{ .Permalink }}"
+      }
+    ]
+  }
+</script>
+{{ end }}
