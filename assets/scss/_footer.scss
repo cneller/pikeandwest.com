@@ -19,23 +19,24 @@
   }
 
   &__logo {
-    height: 30px;
+    width: 50px; // Webflow: width 50px (not height)
 
     img {
-      height: 100%;
-      width: auto;
+      width: 100%;
+      height: auto;
     }
   }
 
   &__link {
     font-family: $font-primary;
-    font-size: $font-size-sm;
+    font-size: 14px; // Webflow: 14px
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: $color-white;
+    color: $color-cream; // Webflow: #fff7e1
+    text-decoration: none;
 
     &:hover {
-      color: $color-cream;
+      color: $color-white;
     }
   }
 
@@ -64,7 +65,9 @@
   }
 
   &__copyright {
-    font-size: $font-size-sm;
-    color: $color-cream; // Webflow: cream color for copyright
+    font-size: 11px; // Webflow: 11px (not 14px)
+    color: $color-cream; // Webflow: #fff7e1
+    margin-top: 10px; // Webflow: margin-top 10px
+    text-align: center;
   }
 }
