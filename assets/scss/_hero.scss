@@ -46,12 +46,14 @@
     max-height: 50vh;
   }
 
-  // Mobile portrait (<480px)
+  // Mobile portrait (<480px) - Webflow @media (max-width: 479px)
   @media (max-width: $breakpoint-sm) {
-    display: block; // No grid on mobile portrait
-    min-height: 25vh;
-    max-height: 50vh;
-    height: auto;
+    display: block; // Webflow: display: block (no grid)
+    height: 50vh; // Webflow: height: 50vh at 767px, then auto at 479px
+    min-height: 25vh; // Webflow: min-height: 25vh
+    max-height: 50vh; // Webflow: max-height: 50vh
+    grid-column-gap: 0;
+    grid-row-gap: 0;
   }
 
   // Webflow class: .div-block (hero content container)

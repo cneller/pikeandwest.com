@@ -73,4 +73,24 @@
   &__cta {
     margin-top: $spacing-lg;
   }
+
+  // Mobile landscape responsive (max-width: 767px)
+  @media (max-width: $breakpoint-md) {
+    height: 75vh; // Webflow: .event-wrap-container height: 75vh at 767px
+    max-height: 75vh;
+
+    .events__heading {
+      font-size: 22px; // Webflow: .section-header-h2.drk-bkgrnd.mobile font-size: 22px
+      line-height: 1.5em; // Webflow: line-height: 1.5em
+    }
+
+    .events__grid {
+      grid-template-columns: repeat(3, 1fr); // Webflow: 3 columns at mobile
+      grid-template-rows: 1fr 1fr; // 2 rows
+    }
+
+    .events__label {
+      font-size: 13px; // Webflow: .heading-3.events.mobile font-size: 13px
+    }
+  }
 }

@@ -70,4 +70,48 @@
     margin-top: 10px; // Webflow: margin-top 10px
     text-align: center;
   }
+
+  // Tablet responsive (max-width: 991px)
+  @media (max-width: $breakpoint-lg) {
+    .footer__container {
+      padding-left: 40px; // Webflow: .footer-wrap-1 padding at 991px
+      padding-right: 40px;
+    }
+
+    .footer__copyright {
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  // Mobile landscape responsive (max-width: 767px)
+  @media (max-width: $breakpoint-md) {
+    .footer__container {
+      text-align: center;
+    }
+
+    .footer__link {
+      font-size: 13px; // Webflow: .footer-link.mobile-horizontal font-size: 13px
+    }
+  }
+
+  // Mobile portrait responsive (max-width: 479px)
+  @media (max-width: $breakpoint-sm) {
+    height: auto; // Webflow: .section.footer-wrap.mobile.vertical height: auto
+    flex-direction: column;
+
+    .footer__container {
+      padding-left: 20px; // Webflow: .footer-wrap-1.mobile padding
+      padding-right: 20px;
+    }
+
+    .footer__link {
+      font-size: 10px; // Webflow: .footer-link at 479px
+      line-height: 12px;
+    }
+
+    .footer__copyright {
+      line-height: 12px; // Webflow: .footer-copyright line-height: 12px
+    }
+  }
 }

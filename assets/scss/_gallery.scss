@@ -125,6 +125,36 @@
       opacity: 0.7;
     }
   }
+
+  // Tablet responsive (max-width: 991px)
+  @media (max-width: $breakpoint-lg) {
+    .venue-gallery__arrow {
+      width: 48px; // Webflow: gallery17_arrow 3rem = 48px at 991px
+      height: 48px;
+    }
+  }
+
+  // Mobile landscape responsive (max-width: 767px)
+  @media (max-width: $breakpoint-md) {
+    height: 50vh; // Webflow: .our-venue-slider.mobile height: 50vh
+    margin-bottom: 120px; // Webflow: margin-bottom: 120px at 767px
+    padding-top: 10px; // Webflow: padding-top: 10px
+
+    .venue-gallery__heading {
+      margin-top: 20px; // Webflow: .heading-2.mobile margin-top: 20px
+      margin-bottom: 15px; // Webflow: margin-bottom: 15px
+      font-size: 22px; // Webflow: font-size: 22px
+    }
+
+    .venue-gallery__track {
+      padding-bottom: 48px; // Webflow: 3rem at 767px
+    }
+
+    .venue-gallery__slide {
+      padding-left: 12px; // Webflow: .75rem
+      padding-right: 12px;
+    }
+  }
 }
 
 // Lightbox

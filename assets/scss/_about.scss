@@ -76,4 +76,24 @@
       border-radius: 8px;
     }
   }
+
+  // Tablet responsive (max-width: 991px)
+  @media (max-width: $breakpoint-lg) {
+    .about__block {
+      grid-row-gap: 20px; // Webflow: grid-row-gap: 20px
+      text-align: center;
+      grid-template-columns: 1fr; // Single column at tablet
+    }
+  }
+
+  // Mobile landscape responsive (max-width: 767px)
+  @media (max-width: $breakpoint-md) {
+    margin-left: 15px; // Webflow: section margin-left/right: 15px
+    margin-right: 15px;
+
+    .about__block {
+      grid-column-gap: 0;
+      grid-row-gap: 0; // Webflow: grid-row-gap: 0 at 767px
+    }
+  }
 }

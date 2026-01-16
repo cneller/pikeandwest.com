@@ -95,6 +95,33 @@
   }
 }
 
+// Tablet responsive (max-width: 991px)
+@media (max-width: $breakpoint-lg) {
+  .header {
+    min-height: 4rem; // Webflow: min-height: 4rem (64px) at tablet
+    padding: 25px 30px; // Webflow: .navigation padding at 991px
+  }
+}
+
+// Mobile landscape responsive (max-width: 767px)
+@media (max-width: $breakpoint-md) {
+  .header {
+    min-height: 4rem; // Webflow: navbar1_component min-height: 4rem
+    padding: 20px 30px; // Webflow: .navigation at 767px
+
+    &__logo {
+      padding-left: 0; // Webflow: .logo-link padding-left: 0
+    }
+  }
+}
+
+// Mobile portrait responsive (max-width: 479px)
+@media (max-width: $breakpoint-sm) {
+  .header {
+    padding: 20px; // Webflow: .navigation padding-left/right: 20px
+  }
+}
+
 // Header offset for fixed header (not on homepage where hero goes full-height)
 .has-fixed-header {
   padding-top: $header-height;

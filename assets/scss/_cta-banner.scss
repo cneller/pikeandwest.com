@@ -44,4 +44,27 @@
     color: $color-medium-gray;
     margin-bottom: $spacing-xl;
   }
+
+  // Tablet responsive (max-width: 991px)
+  @media (max-width: $breakpoint-lg) {
+    padding-left: 0; // Webflow: padding-left/right: 0 at 991px
+    padding-right: 0;
+  }
+
+  // Mobile landscape responsive (max-width: 767px)
+  @media (max-width: $breakpoint-md) {
+    padding: 15px; // Webflow: padding: 15px at 767px
+
+    .cta-banner__heading {
+      font-size: 30px; // Webflow: .cta-heading font-size: 30px
+      line-height: 52px; // Webflow: line-height: 52px
+    }
+  }
+
+  // Mobile portrait responsive (max-width: 479px)
+  @media (max-width: $breakpoint-sm) {
+    .cta-banner__heading {
+      line-height: 1.5em; // Webflow: line-height: 1.5em at 479px
+    }
+  }
 }
