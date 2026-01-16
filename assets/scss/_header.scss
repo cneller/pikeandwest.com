@@ -47,21 +47,26 @@
     }
   }
 
-  // Webflow: .navbar-button-gold
+  // Webflow: .navigation-item
   &__link {
     font-family: $font-primary; // Raleway
     font-size: 12px; // Webflow: 12px
-    font-weight: $font-weight-regular;
+    font-weight: $font-weight-medium; // Webflow: 500
     text-transform: uppercase;
-    letter-spacing: 0.1rem; // Webflow: 0.1rem
+    letter-spacing: 0.1em; // Webflow: 0.1em
     line-height: 20px; // Webflow: 20px
-    padding: 0.75rem 1.5625rem; // Webflow: 12px 25px
+    padding: 9px 25px; // Webflow: padding-top/bottom 9px
     border: 1px solid $color-gold;
-    transition: all $transition-fast;
+    transition: color 0.2s; // Webflow: transition color .2s
     text-decoration: none;
 
     &:hover {
       opacity: 0.9;
+      color: $color-gold; // Webflow: color var(--pw-gold)
+    }
+
+    &:active {
+      opacity: 0.8;
     }
 
     // Primary: gold filled
