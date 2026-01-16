@@ -1,0 +1,10 @@
+DirectoryPath: public
+CheckExternal: false
+CheckInternal: true
+CheckMailto: false
+CheckTel: false
+IgnoreURLs:
+  - 'https://maps.google.com'
+  - 'https://www.instagram.com'
+  - 'https://www.facebook.com'
+IgnoreInternalEmptyHash: true

@@ -7,11 +7,11 @@
 
 <section class="hero" style="background-image: url('{{ $heroBg }}');">
   <div class="hero__content">
-    <h1 class="hero__title">{{ $hero.title_line1 }}<br>{{ $hero.title_line2 | safeHTML }}</h1>
+    <h1 class="hero__title">{{ $hero.title_line1 }}<br>{{ $hero.title_line2 }}</h1>
     <div class="hero__tagline tagline">
       {{- range $i, $line := $hero.tagline -}}
         {{- if $i }}<br>{{ end -}}
-        {{ $line | safeHTML }}
+        {{ $line }}
       {{- end -}}
     </div>
     <div class="hero__cta">

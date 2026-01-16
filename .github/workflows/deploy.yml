@@ -1,14 +1,13 @@
 name: Deploy to Cloudflare Pages
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    types: [opened, synchronize]
 
-# Allow only one concurrent deployment per ref
 concurrency:
   group: pages-${{ github.ref }}
   cancel-in-progress: true
@@ -17,11 +16,11 @@ env:
   HUGO_VERSION: '0.154.5'
 
 jobs:
-  build:
+  build-pr:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
@@ -32,29 +31,39 @@ jobs:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
 
+      - name: Cache Hugo modules
+        uses: actions/cache@v4
+        with:
+          path: /tmp/hugo_cache
+          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugomod-
+
       - name: Build
+        env:
+          HUGO_CACHEDIR: /tmp/hugo_cache
         run: hugo --gc --minify
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: hugo-site
+          name: hugo-site-pr
           path: public/
           retention-days: 1
 
-  deploy:
-    needs: build
+  deploy-pr:
+    if: github.event_name == 'pull_request'
+    needs: build-pr
     runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
-    outputs:
-      deployment-url: ${{ steps.deploy.outputs.deployment-url }}
+      pull-requests: write
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: hugo-site
+          name: hugo-site-pr
           path: public/
 
       - name: Deploy to Cloudflare Pages
@@ -65,7 +74,66 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command:
             pages deploy public --project-name=pikeandwest --branch=${{
-            github.head_ref || github.ref_name }}
+            github.head_ref }}
+
+      - name: Comment PR with Preview URL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const deploymentUrl = '${{ steps.deploy.outputs.deployment-url }}';
+            const body = `🚀 **Preview deployed!**\n\n${deploymentUrl}`;
+
+            // Check for existing comment to update
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' && comment.body.includes('Preview deployed')
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                comment_id: botComment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            }
+
+  deploy-production:
+    if: >
+      github.event_name == 'workflow_run' &&
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Download artifact from CI workflow
+        uses: actions/download-artifact@v4
+        with:
+          name: hugo-site
+          path: public/
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy public --project-name=pikeandwest --branch=main
 
       - name: Output deployment URL
         run: echo "Deployed to ${{ steps.deploy.outputs.deployment-url }}"

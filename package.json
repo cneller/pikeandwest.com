@@ -7,7 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo 'No tests configured'",
+    "build": "hugo --gc --minify",
+    "serve": "hugo server -D",
     "serve:webflow": "npx serve webflow-export -p 8080",
     "compare:styles": "node scripts/style-comparison/compare-styles.js"
   },
