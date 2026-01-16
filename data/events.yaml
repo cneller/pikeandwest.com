@@ -1,0 +1,20 @@
+# Event types displayed on homepage grid
+# Each event has an icon filename and display label
+
+heading: "The perfect place for your next..."
+cta_text: "CONTACT US"
+cta_link: "/contact/"
+
+types:
+  - icon: "icon-wedding-rings.png"
+    label: "Wedding"
+  - icon: "icon-champagne.png"
+    label: "Private Party"
+  - icon: "icon-badge.png"
+    label: "Corporate Party"
+  - icon: "icon-cake.png"
+    label: "Birthday"
+  - icon: "icon-disco-ball.png"
+    label: "Dance"
+  - icon: "icon-rattle.png"
+    label: "Baby Shower"
