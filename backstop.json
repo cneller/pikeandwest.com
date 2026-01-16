@@ -17,8 +17,6 @@
       "height": 900
     }
   ],
-  "onBeforeScript": "puppet/onBefore.js",
-  "onReadyScript": "puppet/onReady.js",
   "scenarios": [
     {
       "label": "Homepage - Hero",

@@ -453,4 +453,116 @@ Based on this mapping, update these Hugo SCSS files:
 
 ---
 
+## Visual Regression Test Results (2026-01-16)
+
+BackstopJS visual regression testing was run comparing Hugo (localhost:1313) against the live Webflow site (pikeandwest.com).
+
+### Test Summary
+
+| Scenario                 | Viewport | Mismatch % | Status |
+|--------------------------|----------|------------|--------|
+| Homepage - Hero          | Mobile   | 41.88%     | FAIL   |
+| Homepage - Hero          | Tablet   | 44.83%     | FAIL   |
+| Homepage - Hero          | Desktop  | 45.15%     | FAIL   |
+| Homepage - Full Page     | Mobile   | 41.88%     | FAIL   |
+| Homepage - Full Page     | Tablet   | 44.83%     | FAIL   |
+| Homepage - Full Page     | Desktop  | 45.15%     | FAIL   |
+| Contact Page             | Mobile   | 42.43%     | FAIL   |
+| Contact Page             | Tablet   | 28.33%     | FAIL   |
+| Contact Page             | Desktop  | 26.14%     | FAIL   |
+| Gallery Application Page | Mobile   | 8.33%      | FAIL   |
+| Gallery Application Page | Tablet   | 6.35%      | FAIL   |
+| Gallery Application Page | Desktop  | 6.46%      | FAIL   |
+
+**Result: 0 Passed / 12 Failed**
+
+### Critical Content Discrepancies (Not CSS Issues)
+
+These are content/template issues, not CSS styling issues:
+
+#### 1. Gallery Section - Missing Content
+
+- **Issue:** Hugo gallery section is missing the "OUR VENUE" heading and Instagram subtext
+- **Webflow:** Shows "OUR VENUE" in Le Mores font with "Want to see more? Follow us on Instagram." subtext
+- **Hugo:** Empty heading and subtext areas
+- **Fix Required:** Update `data/` files or `layouts/partials/venue-gallery.html` to include heading content
+
+#### 2. CTA Banner Section - Missing Content
+
+- **Issue:** Hugo CTA banner at bottom of pages has no content
+- **Webflow:** Shows "LET'S CELEBRATE!" heading with disco ball background image and "SCHEDULE A TOUR" button
+- **Hugo:** Empty section with no background image, heading, or button
+- **Fix Required:** Update homepage content or `layouts/partials/cta-banner.html` to include proper content
+
+#### 3. Contact Page - Missing Embedded Form
+
+- **Issue:** Hugo shows empty cream-colored placeholder where contact form should be
+- **Webflow:** Has embedded contact/scheduling form (likely Calendly or similar)
+- **Hugo:** Shows empty `#fff7e1` colored box
+- **Fix Required:** Add form embed code to `layouts/page/contact.html`
+
+#### 4. About Section - Image Order/Content
+
+- **Issue:** Image arrangement differs between Hugo and Webflow
+- **Webflow:** "Who we are" section shows team photo on right, "What we do" shows event photo
+- **Hugo:** Similar layout but may have different image assignments
+- **Fix Required:** Verify image paths in `data/` files or front matter match Webflow content
+
+### CSS/Styling Discrepancies
+
+#### 1. Gallery Carousel Layout
+
+- **Issue:** Gallery carousel shows different number of visible slides
+- **Webflow:** Shows 3+ partial images with offset positioning
+- **Hugo:** Shows fewer images, different spacing
+- **Fix Required:** Adjust `_gallery.scss` carousel width and slide positioning
+
+#### 2. Footer Layout
+
+- **Issue:** Footer has different vertical arrangement
+- **Webflow:** Compact single-row layout with logo, link, social icons
+- **Hugo:** Shows copyright text that Webflow version doesn't prominently display
+- **Fix Required:** Review `_footer.scss` and `layouts/partials/footer.html` structure
+
+#### 3. Page Height Differences
+
+- **Issue:** Dimension differences detected across all viewports
+- **Mobile:** Hugo is 977px taller than Webflow
+- **Tablet:** Hugo is 555px shorter than Webflow
+- **Desktop:** Nearly same height (9px difference)
+- **Fix Required:** Review section heights, especially gallery and about sections
+
+### Dimension Analysis
+
+| Page/Viewport       | Hugo Height | Webflow Height | Difference           |
+|---------------------|-------------|----------------|----------------------|
+| Homepage Mobile     | +977px      | baseline       | Hugo taller          |
+| Homepage Tablet     | -555px      | baseline       | Hugo shorter         |
+| Homepage Desktop    | +9px        | baseline       | Nearly equal         |
+| Contact Mobile      | +53px       | baseline       | Hugo slightly taller |
+| Contact Tablet      | -413px      | baseline       | Hugo shorter         |
+| Contact Desktop     | -218px      | baseline       | Hugo shorter         |
+| Gallery App Mobile  | -1109px     | baseline       | Hugo much shorter    |
+| Gallery App Tablet  | -1021px     | baseline       | Hugo much shorter    |
+| Gallery App Desktop | -818px      | baseline       | Hugo shorter         |
+
+### Priority Fixes
+
+1. **HIGH:** Add gallery section heading content ("OUR VENUE")
+2. **HIGH:** Add CTA banner content ("LET'S CELEBRATE!" with disco ball background)
+3. **HIGH:** Implement contact form embed
+4. **MEDIUM:** Fix gallery carousel slide visibility and spacing
+5. **MEDIUM:** Align about section image placement
+6. **LOW:** Fine-tune footer layout
+
+### Next Steps
+
+1. Update content data files to populate missing section content
+2. Add contact form embed (Calendly or custom form)
+3. Add CTA banner background image and content
+4. Run BackstopJS again after content fixes to isolate pure CSS issues
+
+---
+
 _Document generated from Webflow export on 2025-01-15_
+_Visual regression analysis added on 2026-01-16_
