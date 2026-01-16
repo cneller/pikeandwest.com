@@ -42,11 +42,15 @@
 .btn-secondary {
   background-color: $color-cream; // #fff7e1
   color: $color-medium-gray; // #434345
-  padding: 9px 15px; // Webflow exact padding
+  transition: opacity 0.2s; // Webflow: transition: opacity .2s
 
   &:hover {
-    background-color: $color-white;
-    color: $color-medium-gray;
+    opacity: 0.9;
+  }
+
+  &:active {
+    background-color: $color-medium-gray; // Webflow: var(--pw-black)
+    color: $color-cream; // Webflow: var(--pw-cream)
   }
 }
 
@@ -71,7 +75,6 @@
   background-color: transparent;
   color: $color-cream;
   border: 1.5px solid $color-cream; // Webflow: 1.5px
-  padding: 9px 15px;
 
   &:hover {
     background-color: $color-cream;
