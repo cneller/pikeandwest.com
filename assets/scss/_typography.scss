@@ -2,42 +2,68 @@
 // Typography
 // =========================
 
-// Headings - Webflow exact values
+// Headings - Webflow exact values (pikeandwest.webflow.css lines 69-99)
+
 h1,
 .h1 {
-  font-size: 36px; // Webflow: 36px
-  line-height: 62px; // Webflow: 62px
-  letter-spacing: 0.1em;
+  color: $color-medium-gray; // Webflow: #434345
+  margin-top: 20px;
+  margin-bottom: 15px;
+  font-family: $font-display; // Le Mores Collection Serif
+  font-size: 36px;
+  font-weight: $font-weight-regular; // 400
+  line-height: 62px;
 }
 
 h2,
 .h2 {
-  font-size: 36px; // Webflow: 36px
-  line-height: 50px; // Webflow: 50px
-  letter-spacing: 0.1em;
-  text-align: center; // Webflow default for h2
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: $font-display; // Le Mores Collection Serif
+  font-size: 36px;
+  font-weight: $font-weight-regular; // 400
+  line-height: 50px;
 }
 
 h3,
 .h3 {
-  font-size: 18px; // Webflow: 18px
-  line-height: 46px; // Webflow: 46px
+  color: $color-cream; // Webflow: #fff7e1
   letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: $font-primary; // Raleway
+  font-size: 18px;
+  font-weight: $font-weight-light; // 300
+  line-height: 46px;
 }
 
 h4,
 .h4 {
-  font-size: $font-size-lg;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 24px; // Webflow: 24px
+  font-weight: $font-weight-regular; // 400
+  line-height: 38px;
 }
 
 h5,
 .h5 {
-  font-size: $font-size-md;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 20px; // Webflow: 20px
+  font-weight: $font-weight-medium; // 500
+  line-height: 34px;
 }
 
 h6,
 .h6 {
-  font-size: $font-size-base;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 16px; // Webflow: 16px
+  font-weight: $font-weight-medium; // 500
+  line-height: 28px;
 }
 
 // Body text

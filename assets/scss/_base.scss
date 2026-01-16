@@ -49,28 +49,20 @@ ol {
   list-style: none;
 }
 
-// Display headings (Le Mores Collection Serif)
+// Heading resets - detailed styles in _typography.scss
+// Only reset margin to 0 here; _typography.scss sets specific margins
 h1,
 h2 {
   margin: 0;
   font-family: $font-display;
-  font-weight: $font-weight-regular;
-  line-height: 1.4;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
 }
 
-// UI headings (Raleway)
 h3,
 h4,
 h5,
 h6 {
   margin: 0;
   font-family: $font-primary;
-  font-weight: $font-weight-light;
-  line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
 }
 
 p {
