@@ -3,18 +3,26 @@
 // =========================
 
 .venue-gallery {
-  padding: $spacing-3xl 0;
+  // Webflow .our-venue-slider values
+  height: 90vh;
+  margin-top: 0;
+  margin-bottom: 60px;
+  padding-top: 20px;
   text-align: center;
 
   &__heading {
-    font-family: $font-primary; // Raleway, not $font-display
+    // Webflow .heading-2 values
+    font-family: $font-primary; // Raleway Variablefont Wght
     font-size: 28px;
     font-weight: $font-weight-regular; // 400
-    line-height: 32.2px;
-    letter-spacing: 4.2px;
+    line-height: 1.15em; // 32.2px at 28px
+    letter-spacing: 0.15em; // 4.2px at 28px
+    text-transform: uppercase;
+    white-space: nowrap;
     text-align: center;
     color: $color-medium-gray;
-    margin-bottom: $spacing-sm;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   &__subtext {
