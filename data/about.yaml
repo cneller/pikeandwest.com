@@ -1,0 +1,44 @@
+# About section content for homepage
+# Edit this file to update the about section
+
+heading: "About Us"
+
+blocks:
+  - id: "who-we-are"
+    subtitle: "Who we are"
+    paragraphs:
+      - "Nestled in the heart of Germantown, Tennessee, Pike & West is an unique
+        art gallery and venue. Our team specializes in creating unforgettable
+        experiences. Established in 2023, we are a family-owned and operated
+        business dedicated to transforming dreams into reality."
+      - "With over six years of experience in the event industry, our venue
+        coordinator, Eden Neller, and event coordinator, Lyndal Brumley, share a
+        passion for realizing your vision. They are experts at planning and
+        executing every detail, ensuring that your event is everything you've
+        ever imagined."
+    cta:
+      text: "SCHEDULE A TOUR"
+      link: "/contact/"
+    image:
+      src: "images/about/team-eden-lyndal.jpg"
+      alt: "Lyndal Brumley and Eden Neller, Pike & West team members"
+    reverse: false
+
+  - id: "what-we-do"
+    subtitle: "What we do"
+    paragraphs:
+      - "Whether you're planning an art show, an intimate wedding, a milestone
+        celebration, a corporate party, or a social gathering, Pike & West is
+        the perfect space to accommodate your needs. Our modern venue space is a
+        breath of fresh air and includes a dreamy multi-story patio space."
+      - "We pride ourselves on going above and beyond to provide exceptional
+        service and create a seamless experience for our clients. Our team is
+        committed to ensuring that your event is everything you've ever dreamed
+        of, from the initial consultation to the final farewell."
+    cta:
+      text: "CONTACT US"
+      link: "/contact/"
+    image:
+      src: "images/about/event-party-bw.jpg"
+      alt: "Guests enjoying an event at Pike & West"
+    reverse: true
