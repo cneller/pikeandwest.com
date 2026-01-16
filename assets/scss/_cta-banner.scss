@@ -1,13 +1,22 @@
 // =========================
 // CTA Banner Section
 // =========================
+// Webflow: .section.cc-cta (lines 207-225)
+// Webflow: .cta-heading (lines 504-513)
 
 .cta-banner {
   position: relative;
-  padding: $spacing-4xl 0;
-  text-align: center;
+  height: 50vh;
+  margin-top: 1.25rem; // 20px - Webflow: margin-top: 1.25rem
+  padding-left: 5rem; // 80px - Webflow: padding-left: 5rem
+  padding-right: 5rem; // 80px - Webflow: padding-right: 5rem
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; // Webflow: .cta-wrap text-align: center
+  text-align: center; // Webflow: .cta-wrap text-align: center
   background-size: cover;
-  background-position: center;
+  background-position: 50%; // Webflow: background-position: 50%
   background-repeat: no-repeat;
 
   // NO ::before overlay - Webflow image has white overlay baked in
@@ -16,17 +25,17 @@
     position: relative;
     z-index: 1;
     max-width: 600px;
-    margin: 0 auto;
   }
 
   &__heading {
     font-family: $font-display;
     font-size: 36px;
-    font-weight: $font-weight-regular;
-    line-height: 54px;
+    font-weight: $font-weight-regular; // 400
+    line-height: 1.5em; // 54px at 36px - Webflow uses 1.5em
     color: $color-medium-gray; // #434345
     text-transform: none;
-    margin-bottom: $spacing-md;
+    margin-top: 10px; // Webflow: margin-top: 10px
+    margin-bottom: 15px; // Webflow: margin-bottom: 15px
   }
 
   &__text {
