@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="12" failures="12" errors="12" skipped="0">
+  <testsuite name="BackstopJS" tests="12" failures="12" errors="12" skipped="0">
+    <testcase classname="document" name=" ›› Homepage - Hero">
+      <failure message="Design deviation ›› Homepage - Hero (document) component"/>
+      <error message="Design deviation ›› Homepage - Hero (document) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Homepage - Hero">
+      <failure message="Design deviation ›› Homepage - Hero (document) component"/>
+      <error message="Design deviation ›› Homepage - Hero (document) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Homepage - Hero">
+      <failure message="Design deviation ›› Homepage - Hero (document) component"/>
+      <error message="Design deviation ›› Homepage - Hero (document) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Homepage - Full Page">
+      <failure message="Design deviation ›› Homepage - Full Page (document) component"/>
+      <error message="Design deviation ›› Homepage - Full Page (document) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Homepage - Full Page">
+      <failure message="Design deviation ›› Homepage - Full Page (document) component"/>
+      <error message="Design deviation ›› Homepage - Full Page (document) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Homepage - Full Page">
+      <failure message="Design deviation ›› Homepage - Full Page (document) component"/>
+      <error message="Design deviation ›› Homepage - Full Page (document) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Contact Page">
+      <failure message="Design deviation ›› Contact Page (document) component"/>
+      <error message="Design deviation ›› Contact Page (document) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Contact Page">
+      <failure message="Design deviation ›› Contact Page (document) component"/>
+      <error message="Design deviation ›› Contact Page (document) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Contact Page">
+      <failure message="Design deviation ›› Contact Page (document) component"/>
+      <error message="Design deviation ›› Contact Page (document) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Gallery Application Page">
+      <failure message="Design deviation ›› Gallery Application Page (document) component"/>
+      <error message="Design deviation ›› Gallery Application Page (document) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Gallery Application Page">
+      <failure message="Design deviation ›› Gallery Application Page (document) component"/>
+      <error message="Design deviation ›› Gallery Application Page (document) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Gallery Application Page">
+      <failure message="Design deviation ›› Gallery Application Page (document) component"/>
+      <error message="Design deviation ›› Gallery Application Page (document) component"/>
+    </testcase>
+  </testsuite>
+</testsuites>

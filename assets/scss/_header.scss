@@ -8,22 +8,31 @@
   left: 0;
   right: 0;
   z-index: $z-index-header;
-  background-color: $color-white;
-  padding: $spacing-md 0;
+  background-color: $color-white; // Webflow: white background
+  height: $header-height;
+  min-height: 4.5rem; // Webflow: min-height: 4.5rem (72px)
+  display: flex;
+  align-items: center;
+  padding: 0 5%; // ~71px on 1425px viewport
+
+  // Border bottom like Webflow
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   &__container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
   }
 
   &__logo {
     display: block;
-    height: 40px;
+    width: 175px;
+    height: 52.5px;
 
     img {
-      height: 100%;
-      width: auto;
+      width: 100%;
+      height: auto;
     }
   }
 
@@ -31,46 +40,61 @@
     display: flex;
     align-items: center;
     gap: $spacing-md;
+
+    // Hide nav on mobile (reference design uses hamburger menu)
+    @media (max-width: $breakpoint-sm) {
+      display: none;
+    }
   }
 
+  // Webflow: .navbar-button-gold
   &__link {
-    font-family: $font-primary;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-medium;
+    font-family: $font-primary; // Raleway
+    font-size: 12px; // Webflow: 12px
+    font-weight: $font-weight-regular;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: $spacing-sm $spacing-md;
-    border: 2px solid transparent;
+    letter-spacing: 0.1rem; // Webflow: 0.1rem
+    line-height: 20px; // Webflow: 20px
+    padding: 0.75rem 1.5625rem; // Webflow: 12px 25px
+    border: 1px solid $color-gold;
     transition: all $transition-fast;
+    text-decoration: none;
 
     &:hover {
-      color: $color-gold;
+      opacity: 0.9;
     }
 
+    // Primary: gold filled
     &--primary {
       background-color: $color-gold;
       color: $color-white;
       border-color: $color-gold;
 
       &:hover {
-        background-color: darken($color-gold, 10%);
+        background-color: darken($color-gold, 5%);
         color: $color-white;
       }
     }
 
+    // Secondary/Outline: white with gold border (Webflow: .is-secondary)
     &--outline {
-      border-color: $color-gold;
+      background-color: $color-white;
       color: $color-gold;
+      border: 1px solid $color-gold;
 
       &:hover {
-        background-color: $color-gold;
-        color: $color-white;
+        background-color: $color-cream;
+        color: $color-gold;
       }
     }
   }
 }
 
-// Header offset for fixed header
+// Header offset for fixed header (not on homepage where hero goes full-height)
 .has-fixed-header {
-  padding-top: 80px;
+  padding-top: $header-height;
+
+  &.home {
+    padding-top: 0;
+  }
 }

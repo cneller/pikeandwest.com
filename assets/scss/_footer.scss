@@ -3,21 +3,19 @@
 // =========================
 
 .footer {
-  background-color: $color-white;
-  padding: $spacing-xl 0;
-  border-top: 1px solid rgba($color-black, 0.1);
+  background-color: $color-gold;
+  height: 150px; // Webflow: exact height
+  padding: 20px 0; // Webflow: 20px vertical padding
 
   &__container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: $spacing-md;
     text-align: center;
-
-    @media (min-width: $breakpoint-md) {
-      flex-direction: row;
-      justify-content: space-between;
-    }
+    height: 100%;
+    // Centered vertical stack like Webflow original
   }
 
   &__logo {
@@ -34,10 +32,10 @@
     font-size: $font-size-sm;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: $color-gold;
+    color: $color-white;
 
     &:hover {
-      color: darken($color-gold, 10%);
+      color: $color-cream;
     }
   }
 
@@ -50,23 +48,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    color: $color-gold;
+    width: 25px; // Webflow: 25x25px icons
+    height: 25px;
+    color: $color-white;
     transition: color $transition-fast;
 
     &:hover {
-      color: darken($color-gold, 10%);
+      color: $color-cream;
     }
 
     svg {
-      width: 24px;
-      height: 24px;
+      width: 25px; // Webflow: 25x25px
+      height: 25px;
     }
   }
 
   &__copyright {
     font-size: $font-size-sm;
-    color: $color-text-light;
+    color: $color-cream; // Webflow: cream color for copyright
   }
 }

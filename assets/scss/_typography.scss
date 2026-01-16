@@ -2,35 +2,27 @@
 // Typography
 // =========================
 
-// Headings
+// Headings - Webflow exact values
 h1,
 .h1 {
-  font-size: $font-size-3xl;
-  letter-spacing: 0.15em;
-
-  @media (min-width: $breakpoint-md) {
-    font-size: $font-size-4xl;
-  }
+  font-size: 36px; // Webflow: 36px
+  line-height: 62px; // Webflow: 62px
+  letter-spacing: 0.1em;
 }
 
 h2,
 .h2 {
-  font-size: $font-size-2xl;
-  letter-spacing: 0.12em;
-
-  @media (min-width: $breakpoint-md) {
-    font-size: $font-size-3xl;
-  }
+  font-size: 36px; // Webflow: 36px
+  line-height: 50px; // Webflow: 50px
+  letter-spacing: 0.1em;
+  text-align: center; // Webflow default for h2
 }
 
 h3,
 .h3 {
-  font-size: $font-size-xl;
-  letter-spacing: 0.1em;
-
-  @media (min-width: $breakpoint-md) {
-    font-size: $font-size-2xl;
-  }
+  font-size: 18px; // Webflow: 18px
+  line-height: 46px; // Webflow: 46px
+  letter-spacing: 0.15em;
 }
 
 h4,

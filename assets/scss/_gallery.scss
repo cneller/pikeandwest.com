@@ -7,6 +7,13 @@
   text-align: center;
 
   &__heading {
+    font-family: $font-primary; // Raleway, not $font-display
+    font-size: 28px;
+    font-weight: $font-weight-regular; // 400
+    line-height: 32.2px;
+    letter-spacing: 4.2px;
+    text-align: center;
+    color: $color-medium-gray;
     margin-bottom: $spacing-sm;
   }
 
@@ -24,14 +31,19 @@
     display: flex;
     gap: $spacing-md;
     transition: transform $transition-slow;
+    padding-bottom: 64px; // Webflow: 4rem
   }
 
   &__slide {
     flex: 0 0 auto;
-    width: 300px;
+    width: 85%;
 
     @media (min-width: $breakpoint-md) {
-      width: 400px;
+      width: 45%;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      width: 40%;
     }
   }
 
@@ -41,6 +53,7 @@
     object-fit: cover;
     cursor: pointer;
     transition: transform $transition-base;
+    border-radius: 8px;
 
     &:hover {
       transform: scale(1.02);
@@ -81,27 +94,27 @@
   }
 
   &__arrow {
-    width: 48px;
-    height: 48px;
+    width: 56px; // Was 40px - Webflow uses 56px
+    height: 56px; // Was 40px - Webflow uses 56px
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $color-white;
+    background-color: rgba($color-white, 0.6);
     border: none;
-    border-radius: 50%;
+    border-radius: 100%; // Match Webflow
     cursor: pointer;
     pointer-events: auto;
-    box-shadow: $shadow-md;
     transition: all $transition-fast;
 
     &:hover {
-      background-color: $color-gold;
-      color: $color-white;
+      background-color: rgba($color-white, 0.9);
     }
 
-    svg {
-      width: 24px;
+    svg,
+    img {
+      width: 24px; // Slightly larger for 56px button
       height: 24px;
+      opacity: 0.7;
     }
   }
 }

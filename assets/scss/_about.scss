@@ -3,35 +3,48 @@
 // =========================
 
 .about {
-  padding: $spacing-3xl 0;
+  // Webflow: section margin 30px left/right, padding-top 20px
+  margin: 0 30px;
+  padding-top: 20px;
+  padding-bottom: $spacing-3xl;
 
   &__heading {
     text-align: center;
-    margin-bottom: $spacing-3xl;
+    // Webflow: heading margin-bottom 32px
+    margin-bottom: 32px;
   }
 
   &__block {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $spacing-2xl;
+    // Webflow: column-gap 20px, row-gap 30px
+    column-gap: 20px;
+    row-gap: 30px;
     align-items: center;
-    margin-bottom: $spacing-3xl;
+    // Webflow: first block margin-bottom 80px
+    margin-bottom: 80px;
 
     @media (min-width: $breakpoint-md) {
       grid-template-columns: 1fr 1fr;
     }
 
     &:last-child {
-      margin-bottom: 0;
+      // Webflow: second block margin-bottom 40px
+      margin-bottom: 40px;
     }
 
     &--reverse {
       @media (min-width: $breakpoint-md) {
-        .about__content {
-          order: 2;
-        }
+        grid-template-columns: 1fr 1fr;
+
         .about__image {
-          order: 1;
+          grid-column: 1;
+          grid-row: 1;
+        }
+
+        .about__content {
+          grid-column: 2;
+          grid-row: 1;
         }
       }
     }
@@ -47,7 +60,11 @@
 
   &__text {
     margin-bottom: $spacing-lg;
-    line-height: 1.8;
+    // Webflow .paragraph-light values
+    opacity: 0.6;
+    color: $color-medium-gray;
+    letter-spacing: 0;
+    line-height: 28px;
   }
 
   &__image {
@@ -55,6 +72,7 @@
       width: 100%;
       aspect-ratio: 4/3;
       object-fit: cover;
+      border-radius: 8px;
     }
   }
 }

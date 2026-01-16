@@ -16,11 +16,11 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: $font-secondary;
-  font-size: $font-size-base;
-  font-weight: $font-weight-regular;
-  line-height: 1.6;
-  color: $color-text;
+  font-family: $font-secondary; // Montserrat
+  font-size: $font-size-base; // 16px
+  font-weight: $font-weight-regular; // 400
+  line-height: 28px; // Webflow: 28px
+  color: $color-text; // #1a1b1f
   background-color: $color-background;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -49,18 +49,28 @@ ol {
   list-style: none;
 }
 
+// Display headings (Le Mores Collection Serif)
 h1,
-h2,
+h2 {
+  margin: 0;
+  font-family: $font-display;
+  font-weight: $font-weight-regular;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+// UI headings (Raleway)
 h3,
 h4,
 h5,
 h6 {
   margin: 0;
   font-family: $font-primary;
-  font-weight: $font-weight-medium;
+  font-weight: $font-weight-light;
   line-height: 1.2;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
 }
 
 p {

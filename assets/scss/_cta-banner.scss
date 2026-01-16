@@ -10,34 +10,29 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: rgba($color-black, 0.6);
-  }
+  // NO ::before overlay - Webflow image has white overlay baked in
 
   &__content {
     position: relative;
     z-index: 1;
     max-width: 600px;
     margin: 0 auto;
-    color: $color-white;
   }
 
   &__heading {
-    font-size: $font-size-2xl;
-    color: $color-cream;
+    font-family: $font-display;
+    font-size: 36px;
+    font-weight: $font-weight-regular;
+    line-height: 54px;
+    color: $color-medium-gray; // #434345
+    text-transform: none;
     margin-bottom: $spacing-md;
-
-    @media (min-width: $breakpoint-md) {
-      font-size: $font-size-3xl;
-    }
   }
 
   &__text {
-    font-size: $font-size-md;
+    font-family: $font-secondary;
+    font-size: 16px;
+    color: $color-medium-gray;
     margin-bottom: $spacing-xl;
-    color: $color-cream;
   }
 }

@@ -1,0 +1,81 @@
+{
+  "id": "pike-west-migration",
+  "viewports": [
+    {
+      "label": "mobile",
+      "width": 375,
+      "height": 812
+    },
+    {
+      "label": "tablet",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "label": "desktop",
+      "width": 1440,
+      "height": 900
+    }
+  ],
+  "onBeforeScript": "puppet/onBefore.js",
+  "onReadyScript": "puppet/onReady.js",
+  "scenarios": [
+    {
+      "label": "Homepage - Hero",
+      "url": "http://localhost:1313/",
+      "referenceUrl": "https://pikeandwest.com/",
+      "delay": 2000,
+      "selectors": ["document"],
+      "misMatchThreshold": 0.5,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Homepage - Full Page",
+      "url": "http://localhost:1313/",
+      "referenceUrl": "https://pikeandwest.com/",
+      "delay": 3000,
+      "selectors": ["document"],
+      "fullPage": true,
+      "misMatchThreshold": 0.5,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Contact Page",
+      "url": "http://localhost:1313/contact/",
+      "referenceUrl": "https://pikeandwest.com/contact",
+      "delay": 2000,
+      "selectors": ["document"],
+      "fullPage": true,
+      "misMatchThreshold": 0.5,
+      "requireSameDimensions": false,
+      "hideSelectors": ["iframe"]
+    },
+    {
+      "label": "Gallery Application Page",
+      "url": "http://localhost:1313/gallery-application/",
+      "referenceUrl": "https://pikeandwest.com/gallery-application",
+      "delay": 2000,
+      "selectors": ["document"],
+      "fullPage": true,
+      "misMatchThreshold": 0.5,
+      "requireSameDimensions": false,
+      "hideSelectors": ["iframe"]
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
+    "bitmaps_test": "backstop_data/bitmaps_test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
+  },
+  "report": ["browser", "CI"],
+  "engine": "puppeteer",
+  "engineOptions": {
+    "args": ["--no-sandbox"]
+  },
+  "asyncCaptureLimit": 5,
+  "asyncCompareLimit": 50,
+  "debug": false,
+  "debugWindow": false
+}

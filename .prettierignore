@@ -1,0 +1,3 @@
+# Hugo templates contain Go template syntax that Prettier breaks
+layouts/
+archetypes/

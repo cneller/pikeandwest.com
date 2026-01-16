@@ -19,8 +19,11 @@ $color-text-light: $color-medium-gray;
 $color-background: $color-white;
 
 // Typography
-$font-primary: 'Oswald', sans-serif;
-$font-secondary: 'Montserrat', sans-serif;
+// Le Mores Collection Serif - Display font for headlines (h1, h2)
+// Custom font from Webflow export - loaded via @font-face in _fonts.scss
+$font-display: 'Le Mores Collection Serif', serif;
+$font-primary: 'Raleway', sans-serif; // Used for buttons, nav, h3+
+$font-secondary: 'Montserrat', sans-serif; // Body text
 
 // Font Weights
 $font-weight-light: 300;
@@ -58,8 +61,11 @@ $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
 
 // Container
-$container-max-width: 1200px;
+$container-max-width: 1280px;
 $container-padding: $spacing-lg;
+
+// Header
+$header-height: 72px;
 
 // Transitions
 $transition-fast: 150ms ease;

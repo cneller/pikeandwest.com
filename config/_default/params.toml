@@ -18,6 +18,9 @@ author = "Pike & West"
 [analytics]
   googleTagManager = "GTM-P8XR8C5S"
 
+[maps]
+  embed = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3262.8!2d-89.8!3d35.08!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDA0JzQ4LjAiTiA4OcKwNDgnMDAuMCJX!5e0!3m2!1sen!2sus!4v1"
+
 [forms]
   contactEmbed = "https://portal.pikeandwest.com/public/inquiry"
   # HoneyBook widget placement ID (loaded via JavaScript, not iframe)

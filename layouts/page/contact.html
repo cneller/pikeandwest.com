@@ -1,62 +1,60 @@
-{{ define "main" }}
-<section class="contact section">
+{{ define "main" }} {{/* Contact Form Section */}}
+<section class="contact-form section">
   <div class="container">
-    <div class="contact__grid">
-      {{/* Contact Form */}}
-      <div class="contact__form-section">
-        <h1>Contact Us</h1>
-        <div class="form-embed">
-          {{ with .Site.Params.forms.contactEmbed }}
-          <iframe src="{{ . }}" title="Contact Form" loading="lazy"></iframe>
-          {{ else }}
-          <p>
-            Contact form coming soon. Please call us at {{
-            .Site.Params.contact.phone }}.
-          </p>
-          {{ end }}
-        </div>
+    <h1 class="section-title">CONTACT US</h1>
+    <div class="form-embed">
+      {{ with .Site.Params.forms.contactEmbed }}
+      <iframe src="{{ . }}" title="Contact Form" loading="lazy"></iframe>
+      {{ else }}
+      <p>
+        Contact form coming soon. Please call us at {{
+        .Site.Params.contact.phone }}.
+      </p>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+{{/* Find Us Section */}}
+<section class="find-us section">
+  <div class="container">
+    <h1 class="section-title">FIND US</h1>
+    <div class="find-us__grid">
+      <div class="find-us__map">
+        {{ with .Site.Params.maps.embed }}
+        <iframe
+          src="{{ . }}"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Pike & West Location"
+        ></iframe>
+        {{ end }}
       </div>
 
-      {{/* Find Us */}}
-      <div class="contact__info-section">
-        <h1>Find Us</h1>
-
-        <div class="contact__map">
-          {{ with .Site.Params.maps.embed }}
-          <iframe
-            src="{{ . }}"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Pike & West Location"
-          ></iframe>
-          {{ end }}
+      <div class="find-us__details">
+        <div class="find-us__detail">
+          <strong>OUR LOCATION</strong>
+          <a
+            href="{{ .Site.Params.contact.googleMapsUrl }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ .Site.Params.contact.address }}<br />
+            {{ .Site.Params.contact.city }} {{ .Site.Params.contact.state }} {{
+            .Site.Params.contact.zip }}
+          </a>
         </div>
 
-        <div class="contact__details">
-          <div class="contact__detail">
-            <strong>Our Location</strong>
-            <a
-              href="{{ .Site.Params.contact.googleMapsUrl }}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {{ .Site.Params.contact.address }}<br />
-              {{ .Site.Params.contact.city }} {{ .Site.Params.contact.state }}
-              {{ .Site.Params.contact.zip }}
-            </a>
-          </div>
+        <div class="find-us__detail">
+          <strong>HOURS</strong>
+          <span>{{ .Site.Params.contact.hours }}</span>
+        </div>
 
-          <div class="contact__detail">
-            <strong>Hours</strong>
-            <span>{{ .Site.Params.contact.hours }}</span>
-          </div>
-
-          <div class="contact__detail">
-            <strong>Phone</strong>
-            <span>{{ .Site.Params.contact.phone }}</span>
-          </div>
+        <div class="find-us__detail">
+          <strong>PHONE</strong>
+          <span>{{ .Site.Params.contact.phone }}</span>
         </div>
       </div>
     </div>

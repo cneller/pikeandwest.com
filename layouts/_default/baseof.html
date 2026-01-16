@@ -3,7 +3,7 @@
 <head>
   {{- partial "head.html" . -}}
 </head>
-<body class="has-fixed-header">
+<body class="has-fixed-header{{ if .IsHome }} home{{ end }}">
   {{- partial "header.html" . -}}
 
   <main>

@@ -6,17 +6,12 @@
 
 <section class="hero" style="background-image: url('{{ $heroBg }}');">
   <div class="hero__content">
-    <h1 class="hero__title">
-      <span>Germantown's Premier</span>
-      <span class="highlight">ART GALLERY & VENUE</span>
-    </h1>
-    <div class="hero__tagline tagline">
-      <p>ART AND LIFE.</p>
-      <p>LIFE AND ART.</p>
-      <p>LIFE AS ART.</p>
-    </div>
+    {{/* Webflow structure: single h1 with <br> for line break */}}
+    <h1 class="hero__title">Germantown's Premier<br>ART&nbsp;GALLERY&nbsp;&amp; VENUE</h1>
+    {{/* Webflow structure: uses <br> between lines, not separate <p> tags */}}
+    <div class="hero__tagline tagline">ART AND&nbsp;LIFE.<br>LIFE&nbsp;AND&nbsp;ART.<br>LIFE AS&nbsp;ART.</div>
     <div class="hero__cta">
-      <a href="/contact/" class="btn btn-secondary">Schedule a Tour</a>
+      <a href="/contact/" class="btn btn-secondary">SCHEDULE A TOUR</a>
     </div>
   </div>
 </section>

@@ -2,35 +2,57 @@
 // Contact Page
 // =========================
 
-.contact {
+// Section title (centered, uppercase)
+.section-title {
+  font-family: $font-display;
+  font-size: 32px;
+  font-weight: $font-weight-regular;
+  text-transform: uppercase;
+  letter-spacing: 3.2px;
+  text-align: center;
+  margin-bottom: $spacing-xl;
+  color: $color-black;
+}
+
+// Contact Form Section
+.contact-form {
+  padding: $spacing-3xl 0;
+
+  .form-embed {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: $color-cream;
+
+    iframe {
+      width: 100%;
+      min-height: 500px;
+      border: 0;
+    }
+  }
+}
+
+// Find Us Section
+.find-us {
   padding: $spacing-3xl 0;
 
   &__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $spacing-3xl;
+    gap: $spacing-xl;
 
     @media (min-width: $breakpoint-md) {
       grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  &__form-section {
-    h1 {
-      margin-bottom: $spacing-xl;
-    }
-  }
-
-  &__info-section {
-    h1 {
-      margin-bottom: $spacing-xl;
+      gap: $spacing-3xl;
     }
   }
 
   &__map {
     width: 100%;
     height: 300px;
-    margin-bottom: $spacing-xl;
+
+    @media (min-width: $breakpoint-md) {
+      height: 350px;
+    }
 
     iframe {
       width: 100%;
@@ -43,15 +65,27 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-lg;
+    justify-content: center;
   }
 
   &__detail {
     strong {
       display: block;
       font-family: $font-primary;
+      font-size: 14px;
+      font-weight: $font-weight-regular;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 1.4px;
       margin-bottom: $spacing-xs;
+      color: $color-medium-gray;
+    }
+
+    span,
+    a {
+      font-family: $font-secondary;
+      font-size: 16px;
+      line-height: 1.6;
+      color: $color-black;
     }
 
     a {
