@@ -1,0 +1,10 @@
+# Venue gallery section content for homepage
+# Edit this file to update the venue gallery section
+
+heading: "OUR VENUE"
+subtext: "Want to see more? Follow us on Instagram."
+# Images are auto-loaded from assets/images/venue/
+# To control order or add captions, list them explicitly:
+# images:
+#   - src: "images/venue/photo1.jpg"
+#     alt: "Description of photo 1"
