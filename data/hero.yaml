@@ -1,0 +1,13 @@
+# Hero section content for homepage
+# Edit this file to update the hero section
+
+title_line1: "Germantown's Premier"
+title_line2: "ART GALLERY & VENUE"
+tagline:
+  - "ART AND LIFE."
+  - "LIFE AND ART."
+  - "LIFE AS ART."
+cta:
+  text: "SCHEDULE A TOUR"
+  link: "/contact/"
+background_image: "images/hero/venue-exterior.jpg"
