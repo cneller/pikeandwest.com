@@ -35,7 +35,7 @@
     }
   }
 
-  // Hamburger menu button - phones only (479px and below)
+  // Hamburger menu button - mobile (767px and below)
   &__hamburger {
     display: none; // Hidden by default
     flex-direction: column;
@@ -48,8 +48,8 @@
     border: none;
     cursor: pointer;
 
-    @media (max-width: $breakpoint-sm) {
-      display: flex; // Show only on phones (479px and below)
+    @media (max-width: $breakpoint-md) {
+      display: flex; // Show on mobile (767px and below)
     }
   }
 
@@ -82,8 +82,8 @@
     gap: $spacing-md;
 
     // Mobile nav - hidden by default, shown when hamburger is open
-    // Phones only (479px and below)
-    @media (max-width: $breakpoint-sm) {
+    // Mobile (767px and below)
+    @media (max-width: $breakpoint-md) {
       display: none;
       position: absolute;
       top: 100%;
