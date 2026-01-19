@@ -21,7 +21,11 @@
       {{ end }}
     </a>
 
-    <a href="/contact/" class="footer__link">Contact Us</a>
+    <div class="footer__links">
+      {{ range .Site.Menus.footer }}
+      <a href="{{ .URL }}" class="footer__link">{{ .Name }}</a>
+      {{ end }}
+    </div>
 
     <div class="footer__social">
       {{ with .Site.Params.social.instagram }}

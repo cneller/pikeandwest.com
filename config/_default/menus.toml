@@ -1,3 +1,7 @@
+# Main Navigation
+# "Contact Us" is primary (gold filled), others are outline style
+# Weight determines order: lower = higher priority
+
 [[main]]
   name = "Contact Us"
   url = "/contact/"
@@ -8,7 +12,19 @@
   url = "/gallery-application/"
   weight = 2
 
+[[main]]
+  name = "Blog"
+  url = "/blog/"
+  weight = 3
+
+# Footer Navigation
+
 [[footer]]
   name = "Contact Us"
   url = "/contact/"
   weight = 1
+
+[[footer]]
+  name = "Blog"
+  url = "/blog/"
+  weight = 2

@@ -40,6 +40,11 @@
     }
   }
 
+  &__links {
+    display: flex;
+    gap: $spacing-lg;
+  }
+
   &__social {
     display: flex;
     gap: $spacing-md;
