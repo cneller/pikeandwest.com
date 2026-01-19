@@ -1,0 +1,40 @@
+{{ define "main" }}
+{{- $about := site.Data.about -}}
+
+{{/* Page Header */}}
+<section class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">{{ $about.heading }}</h1>
+  </div>
+</section>
+
+{{/* About Blocks */}}
+<section class="about section">
+  <div class="container">
+    {{ range $about.blocks }}
+    <div class="about__block{{ if .reverse }} about__block--reverse{{ end }}">
+      <div class="about__content">
+        <h2 class="about__subtitle">{{ .subtitle }}</h2>
+        <div class="about__text">
+          {{ range .paragraphs }}
+          <p>{{ . }}</p>
+          {{ end }}
+        </div>
+        <a href="{{ .cta.link }}" class="btn btn-dark">{{ .cta.text }}</a>
+      </div>
+      <div class="about__image">
+        {{ $img := resources.Get .image.src }}
+        {{ if $img }}
+          {{ $resized := $img.Resize "800x q85" }}
+          <img
+            src="{{ $resized.RelPermalink }}"
+            alt="{{ .image.alt }}"
+            loading="lazy"
+          />
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

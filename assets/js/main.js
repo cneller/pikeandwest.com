@@ -2,9 +2,32 @@
 // ============================
 
 document.addEventListener('DOMContentLoaded', function () {
+  initMobileNav();
   initGalleryCarousel();
   initLightbox();
 });
+
+// Mobile Navigation
+function initMobileNav() {
+  const hamburger = document.querySelector('.header__hamburger');
+  const nav = document.querySelector('.header__nav');
+
+  if (!hamburger || !nav) return;
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isOpen);
+    nav.classList.toggle('is-open', !isOpen);
+  });
+
+  // Close menu when clicking a link
+  nav.querySelectorAll('.header__link').forEach((link) => {
+    link.addEventListener('click', () => {
+      hamburger.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('is-open');
+    });
+  });
+}
 
 // Gallery Carousel
 function initGalleryCarousel() {

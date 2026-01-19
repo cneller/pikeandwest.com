@@ -3,17 +3,16 @@
 // =========================
 
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  // Webflow navbar is NOT fixed - it scrolls with the page
+  position: relative;
   z-index: $z-index-header;
   background-color: $color-white; // Webflow: white background
-  height: $header-height;
+  height: auto; // Webflow: height: auto
   min-height: 4.5rem; // Webflow: min-height: 4.5rem (72px)
+  width: 100%; // Webflow: width: 100%
   display: flex;
   align-items: center;
-  padding: 0 5%; // ~71px on 1425px viewport
+  padding: 0 5%; // Webflow: padding-left/right: 5%
 
   // Border bottom like Webflow
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -36,14 +35,68 @@
     }
   }
 
+  // Hamburger menu button - phones only
+  &__hamburger {
+    display: none; // Hidden by default
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    @media (max-width: $breakpoint-sm) {
+      display: flex; // Show only on phones
+    }
+  }
+
+  &__hamburger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: $color-black;
+    transition:
+      transform 0.3s,
+      opacity 0.3s;
+  }
+
+  // Open state for hamburger
+  &__hamburger[aria-expanded='true'] {
+    .header__hamburger-line:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .header__hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .header__hamburger-line:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+
   &__nav {
     display: flex;
     align-items: center;
     gap: $spacing-md;
 
-    // Hide nav on mobile (reference design uses hamburger menu)
+    // Mobile nav - hidden by default, shown when hamburger is open
     @media (max-width: $breakpoint-sm) {
       display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background-color: $color-white;
+      padding: 20px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      gap: $spacing-sm;
+
+      &.is-open {
+        display: flex;
+      }
     }
   }
 

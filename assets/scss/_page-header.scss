@@ -1,0 +1,22 @@
+// Page Header Styles
+// Used for subpage headers (About, Contact, etc.)
+
+.page-header {
+  background-color: $color-black;
+  padding: $spacing-3xl 0;
+  text-align: center;
+
+  &__title {
+    color: $color-white;
+    font-family: $font-primary;
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin: 0;
+    text-transform: uppercase;
+
+    @media (min-width: 768px) {
+      font-size: 3rem;
+    }
+  }
+}

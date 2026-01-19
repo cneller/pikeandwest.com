@@ -6,8 +6,8 @@
 .hero {
   position: relative;
   z-index: 1;
-  // Push hero below fixed header (Webflow has relative header, Hugo has fixed)
-  margin-top: $header-height;
+  // No margin-top needed - header overlays hero like Webflow
+  // (Webflow header scrolls with page, not fixed)
 
   // Desktop: Webflow exact values
   height: 75vh;
@@ -24,9 +24,9 @@
   grid-row-gap: 0;
   align-content: start;
 
-  // Background
+  // Background - centered like Webflow (50% 50%)
   background-size: cover;
-  background-position: 50% 50%;
+  background-position: 50%;
   background-repeat: no-repeat;
 
   // Tablet breakpoint (768px - 991px)
@@ -58,8 +58,8 @@
 
   // Webflow class: .div-block (hero content container)
   &__content {
-    // Webflow: margin-top: 60px; padding-left: 60px;
-    margin-top: 60px;
+    // Webflow computed at 1280px: margin-top: 0px; padding-left: 60px;
+    margin-top: 0;
     margin-left: auto;
     padding-top: 0;
     padding-left: 60px;
@@ -99,12 +99,28 @@
 // Webflow class: .hero-subheader-1
 .tagline {
   font-family: $font-secondary; // Webflow: Montserrat
-  font-size: 22px; // Webflow: 22px
+  font-size: 18px; // Webflow: 18px with .desktop class (default is 22px)
   font-weight: $font-weight-regular; // Webflow: 400
-  line-height: 33px; // Webflow: 33px (1.5 × 22px)
-  letter-spacing: 3.3px; // Webflow: 3.3px (0.15em at 22px)
+  line-height: 1.5; // Webflow: line-height: 1.5
+  letter-spacing: 0.15em; // Webflow: 0.15em
   text-transform: uppercase;
   color: $color-cream;
   margin-top: 15px; // Webflow: margin-top: 15px
-  // Webflow uses <br> for line breaks, no paragraph styling needed
+
+  // Responsive sizes from Webflow
+  @media (min-width: 1280px) {
+    font-size: 24px; // Webflow: 24px at 1280px+
+  }
+
+  @media (max-width: $breakpoint-lg) {
+    font-size: 13px; // Webflow: 13px at tablet (991px)
+  }
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 16px; // Webflow: 16px at mobile landscape (767px)
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: 12px; // Webflow: 12px at mobile portrait (479px)
+  }
 }
