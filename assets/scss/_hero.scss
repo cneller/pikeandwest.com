@@ -68,12 +68,7 @@
 
     @media (max-width: $breakpoint-md) {
       padding: 40px 24px;
-      margin-top: 40px;
-    }
-
-    // Hero content hidden on mobile portrait (Webflow: .mobile.hidden)
-    @media (max-width: $breakpoint-sm) {
-      display: none;
+      margin-top: 0; // Reduced from 40px - content should sit higher on mobile
     }
   }
 
