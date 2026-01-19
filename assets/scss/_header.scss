@@ -3,8 +3,9 @@
 // =========================
 
 .header {
-  // Webflow navbar is NOT fixed - it scrolls with the page
-  position: relative;
+  position: sticky;
+  top: 0;
+  left: 0;
   z-index: $z-index-header;
   background-color: $color-white; // Webflow: white background
   height: auto; // Webflow: height: auto
@@ -173,14 +174,5 @@
 @media (max-width: $breakpoint-sm) {
   .header {
     padding: 0 20px; // Webflow: navbar1_component has no vertical padding
-  }
-}
-
-// Header offset for fixed header (not on homepage where hero goes full-height)
-.has-fixed-header {
-  padding-top: $header-height;
-
-  &.home {
-    padding-top: 0;
   }
 }
