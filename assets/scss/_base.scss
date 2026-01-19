@@ -26,6 +26,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+// Main content - no offset needed with sticky header
+main {
+  // padding-top removed - sticky header stays in document flow
+}
+
 img {
   max-width: 100%;
   height: auto;
