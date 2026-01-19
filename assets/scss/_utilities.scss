@@ -110,13 +110,15 @@
 }
 
 // Visibility
-@media (max-width: $breakpoint-md - 1) {
+// Mobile: 767px and below (matches Webflow mobile landscape breakpoint)
+@media (max-width: $breakpoint-md) {
   .hide-mobile {
     display: none !important;
   }
 }
 
-@media (min-width: $breakpoint-md) {
+// Desktop: 768px and above
+@media (min-width: $breakpoint-md + 1) {
   .hide-desktop {
     display: none !important;
   }

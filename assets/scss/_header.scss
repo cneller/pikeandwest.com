@@ -35,7 +35,7 @@
     }
   }
 
-  // Hamburger menu button - phones only
+  // Hamburger menu button - phones only (479px and below)
   &__hamburger {
     display: none; // Hidden by default
     flex-direction: column;
@@ -49,7 +49,7 @@
     cursor: pointer;
 
     @media (max-width: $breakpoint-sm) {
-      display: flex; // Show only on phones
+      display: flex; // Show only on phones (479px and below)
     }
   }
 
@@ -82,6 +82,7 @@
     gap: $spacing-md;
 
     // Mobile nav - hidden by default, shown when hamburger is open
+    // Phones only (479px and below)
     @media (max-width: $breakpoint-sm) {
       display: none;
       position: absolute;
@@ -152,7 +153,7 @@
 @media (max-width: $breakpoint-lg) {
   .header {
     min-height: 4rem; // Webflow: min-height: 4rem (64px) at tablet
-    padding: 25px 30px; // Webflow: .navigation padding at 991px
+    padding: 0 30px; // Webflow: navbar1_component has no vertical padding
   }
 }
 
@@ -160,7 +161,7 @@
 @media (max-width: $breakpoint-md) {
   .header {
     min-height: 4rem; // Webflow: navbar1_component min-height: 4rem
-    padding: 20px 30px; // Webflow: .navigation at 767px
+    padding: 0 30px; // Webflow: navbar1_component has no vertical padding
 
     &__logo {
       padding-left: 0; // Webflow: .logo-link padding-left: 0
@@ -171,7 +172,7 @@
 // Mobile portrait responsive (max-width: 479px)
 @media (max-width: $breakpoint-sm) {
   .header {
-    padding: 20px; // Webflow: .navigation padding-left/right: 20px
+    padding: 0 20px; // Webflow: navbar1_component has no vertical padding
   }
 }
 

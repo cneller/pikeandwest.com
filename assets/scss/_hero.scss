@@ -46,7 +46,7 @@
     max-height: 50vh;
   }
 
-  // Mobile portrait (<480px) - Webflow @media (max-width: 479px)
+  // Mobile portrait - Webflow @media (max-width: 479px)
   @media (max-width: $breakpoint-sm) {
     display: block; // Webflow: display: block (no grid)
     height: 50vh; // Webflow: height: 50vh at 767px, then auto at 479px
@@ -108,7 +108,7 @@
   margin-top: 15px; // Webflow: margin-top: 15px
 
   // Responsive sizes from Webflow
-  @media (min-width: 1280px) {
+  @media (min-width: $breakpoint-xl) {
     font-size: 24px; // Webflow: 24px at 1280px+
   }
 

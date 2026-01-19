@@ -62,6 +62,69 @@ $spacing: (
 );
 ```
 
+### Responsive Breakpoints
+
+Breakpoints are aligned exactly with Webflow export values:
+
+| Variable          | Value  | Webflow Query       | Description      |
+|-------------------|--------|---------------------|------------------|
+| `$breakpoint-sm`  | 479px  | `max-width: 479px`  | Mobile portrait  |
+| `$breakpoint-md`  | 767px  | `max-width: 767px`  | Mobile landscape |
+| `$breakpoint-lg`  | 991px  | `max-width: 991px`  | Tablet           |
+| `$breakpoint-xl`  | 1280px | `min-width: 1280px` | Large desktop    |
+| `$breakpoint-2xl` | 1920px | `min-width: 1920px` | Ultra-wide       |
+
+**Usage patterns:**
+
+```scss
+// Mobile-first (min-width) - styles apply at breakpoint and above
+@media (min-width: $breakpoint-xl) { /* 1280px+ */ }
+
+// Desktop-first (max-width) - styles apply at breakpoint and below
+@media (max-width: $breakpoint-lg) { /* 991px and below */ }
+
+// For min-width at standard breakpoints, add 1px
+@media (min-width: $breakpoint-md + 1) { /* 768px+ */ }
+```
+
+**Header behavior:**
+
+- Full nav buttons: 480px and above (tablets, desktops)
+- Hamburger menu: 479px and below (phones only)
+
+## Webflow Reference
+
+The original Webflow site export is preserved for reference during migration:
+
+### Webflow Export Directory
+
+```text
+webflow-export/
+├── index.html              # Homepage markup
+├── contact.html            # Contact page
+├── gallery-application.html
+├── css/
+│   ├── pikeandwest.webflow.css  # Main styles (inspect for exact values)
+│   └── webflow.css              # Webflow framework styles
+├── fonts/                  # Custom fonts (Le Mores Collection)
+├── images/                 # Original images at full resolution
+└── js/                     # Webflow interactions
+```
+
+### Analysis Documents
+
+- **[CSS Mapping](docs/webflow-to-hugo-css-mapping.md)** - Webflow class → Hugo SCSS mapping
+- **[Site Analysis](docs/site-analysis/current-site-documentation.md)** - Original site documentation
+- **[Homepage Style Sync](docs/plans/2026-01-16-homepage-style-sync.md)** - Section-by-section sync plan
+- **[SCSS Audit](docs/plans/2026-01-16-webflow-scss-audit-alignment.md)** - Breakpoint and style alignment
+
+### Workflow for Style Matching
+
+1. Open `webflow-export/css/pikeandwest.webflow.css` to find exact values
+2. Search for Webflow class name (e.g., `.hero-header-section`)
+3. Note computed values at each breakpoint (991px, 767px, 479px)
+4. Compare with Hugo SCSS and adjust to match
+
 ## Site Structure
 
 ### Current Pages (Webflow)
@@ -289,7 +352,7 @@ contact:
 ### Visual Regression
 
 - Compare screenshots of Hugo build vs live Webflow site
-- Test at breakpoints: 320px, 768px, 1024px, 1440px
+- Test at Webflow breakpoints: 375px (mobile), 768px (tablet), 992px (desktop), 1280px (large), 1920px (ultra-wide)
 - Verify all hover states and animations
 
 ### Performance Targets
