@@ -6,8 +6,6 @@
 .hero {
   position: relative;
   z-index: 1;
-  // No margin-top needed - header overlays hero like Webflow
-  // (Webflow header scrolls with page, not fixed)
 
   // Desktop: Webflow exact values
   height: 75vh;
