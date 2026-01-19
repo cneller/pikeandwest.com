@@ -1,14 +1,26 @@
 {{ define "main" }}
-{{/* Page Header */}}
-<section class="page-header">
-  <div class="container">
-    <h1 class="page-header__title">{{ .Title }}</h1>
-    <div class="page-header__meta">
+{{/* Blog Hero - Use post's featured image or fallback to venue image */}}
+{{ $heroImage := "" }}
+{{ with .Params.image }}
+  {{ $heroImage = resources.Get . }}
+{{ end }}
+{{ if not $heroImage }}
+  {{ $heroImage = resources.Get "images/venue/venue-06-soft-seating.jpg" }}
+{{ end }}
+{{ $heroBg := "" }}
+{{ if $heroImage }}
+  {{ $heroBg = ($heroImage.Resize "1920x q85").RelPermalink }}
+{{ end }}
+
+<section class="blog-hero" style="background-image: url('{{ $heroBg }}');">
+  <div class="blog-hero__content">
+    <h1 class="blog-hero__title">{{ .Title }}</h1>
+    <div class="blog-hero__meta">
       <time datetime="{{ .Date.Format "2006-01-02" }}">
         {{ .Date.Format "January 2, 2006" }}
       </time>
       {{ with .Params.author }}
-      <span class="page-header__author">by {{ . }}</span>
+      <span class="blog-hero__author">by {{ . }}</span>
       {{ end }}
     </div>
   </div>
@@ -17,19 +29,6 @@
 {{/* Blog Content */}}
 <article class="blog-post section">
   <div class="container">
-    {{ with .Params.image }}
-    {{ $img := resources.Get . }}
-    {{ if $img }}
-    {{ $resized := $img.Resize "1200x q85" }}
-    <figure class="blog-post__featured-image">
-      <img
-        src="{{ $resized.RelPermalink }}"
-        alt="{{ $.Params.image_alt | default $.Title }}"
-      />
-    </figure>
-    {{ end }}
-    {{ end }}
-
     <div class="blog-post__content prose">
       {{ .Content }}
     </div>
