@@ -1,8 +1,14 @@
 {{ define "main" }}
-{{/* Page Header */}}
-<section class="page-header">
-  <div class="container">
-    <h1 class="page-header__title">{{ .Title }}</h1>
+{{/* Blog Hero */}}
+{{ $heroImage := resources.Get "images/venue/venue-06-soft-seating.jpg" }}
+{{ $heroBg := "" }}
+{{ if $heroImage }}
+  {{ $heroBg = ($heroImage.Resize "1920x q85").RelPermalink }}
+{{ end }}
+
+<section class="blog-hero" style="background-image: url('{{ $heroBg }}');">
+  <div class="blog-hero__content">
+    <h1 class="blog-hero__title">{{ .Title }}</h1>
   </div>
 </section>
 
