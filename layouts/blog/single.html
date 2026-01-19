@@ -1,0 +1,56 @@
+{{ define "main" }}
+{{/* Page Header */}}
+<section class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">{{ .Title }}</h1>
+    <div class="page-header__meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date.Format "January 2, 2006" }}
+      </time>
+      {{ with .Params.author }}
+      <span class="page-header__author">by {{ . }}</span>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+{{/* Blog Content */}}
+<article class="blog-post section">
+  <div class="container">
+    {{ with .Params.image }}
+    {{ $img := resources.Get . }}
+    {{ if $img }}
+    {{ $resized := $img.Resize "1200x q85" }}
+    <figure class="blog-post__featured-image">
+      <img
+        src="{{ $resized.RelPermalink }}"
+        alt="{{ $.Params.image_alt | default $.Title }}"
+      />
+    </figure>
+    {{ end }}
+    {{ end }}
+
+    <div class="blog-post__content prose">
+      {{ .Content }}
+    </div>
+
+    {{/* Post Navigation */}}
+    <nav class="blog-post__nav">
+      {{ with .PrevInSection }}
+      <a href="{{ .Permalink }}" class="blog-post__nav-link blog-post__nav-link--prev">
+        <span class="blog-post__nav-label">Previous</span>
+        <span class="blog-post__nav-title">{{ .Title }}</span>
+      </a>
+      {{ end }}
+      {{ with .NextInSection }}
+      <a href="{{ .Permalink }}" class="blog-post__nav-link blog-post__nav-link--next">
+        <span class="blog-post__nav-label">Next</span>
+        <span class="blog-post__nav-title">{{ .Title }}</span>
+      </a>
+      {{ end }}
+    </nav>
+
+    <a href="/blog/" class="btn btn-outline">Back to Blog</a>
+  </div>
+</article>
+{{ end }}
