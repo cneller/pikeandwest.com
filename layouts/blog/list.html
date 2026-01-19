@@ -1,0 +1,50 @@
+{{ define "main" }}
+{{/* Page Header */}}
+<section class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">{{ .Title }}</h1>
+  </div>
+</section>
+
+{{/* Blog List */}}
+<section class="blog-list section">
+  <div class="container">
+    {{ if .Pages }}
+    <div class="blog-list__grid">
+      {{ range .Pages.ByDate.Reverse }}
+      <article class="blog-card">
+        {{ with .Params.image }}
+        {{ $img := resources.Get . }}
+        {{ if $img }}
+        {{ $resized := $img.Resize "600x400 q85" }}
+        <a href="{{ $.Permalink }}" class="blog-card__image-link">
+          <img
+            src="{{ $resized.RelPermalink }}"
+            alt="{{ $.Params.image_alt | default $.Title }}"
+            class="blog-card__image"
+            loading="lazy"
+          />
+        </a>
+        {{ end }}
+        {{ end }}
+        <div class="blog-card__content">
+          <time class="blog-card__date" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format "January 2, 2006" }}
+          </time>
+          <h2 class="blog-card__title">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h2>
+          <p class="blog-card__excerpt">
+            {{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 150 }}{{ end }}
+          </p>
+          <a href="{{ .Permalink }}" class="blog-card__link">Read More</a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    {{ else }}
+    <p class="blog-list__empty">No blog posts yet. Check back soon!</p>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
