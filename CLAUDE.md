@@ -89,8 +89,8 @@ Breakpoints are aligned exactly with Webflow export values:
 
 **Header behavior:**
 
-- Full nav buttons: 480px and above (tablets, desktops)
-- Hamburger menu: 479px and below (phones only)
+- Full nav buttons: 768px and above (tablets, desktops)
+- Hamburger menu: 767px and below (mobile)
 
 ## Webflow Reference
 
