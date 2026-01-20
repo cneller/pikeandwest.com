@@ -36,7 +36,8 @@
     }
   }
 
-  // Hamburger menu button - mobile (767px and below)
+  // Hamburger menu button - tablet and below (991px and below)
+  // Webflow: hamburger appears at 991px breakpoint
   // Standard size: 30x24px touch target, 24x3px bars
   // Option 7: hover spread + staggered timing + elastic ease + gold color
   &__hamburger {
@@ -51,7 +52,7 @@
     // 3D flip: perspective creates depth for child transforms
     perspective: 200px;
 
-    @media (max-width: $breakpoint-md) {
+    @media (max-width: $breakpoint-lg) {
       display: block;
     }
   }
@@ -163,8 +164,8 @@
     gap: $spacing-md;
 
     // Mobile nav - hidden by default, shown when hamburger is open
-    // Mobile (767px and below)
-    @media (max-width: $breakpoint-md) {
+    // Tablet and below (991px and below) - Webflow breakpoint
+    @media (max-width: $breakpoint-lg) {
       // Use flex always, control visibility with other properties
       display: flex;
       position: absolute;
