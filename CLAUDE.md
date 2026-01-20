@@ -25,27 +25,36 @@
 
 ### Color Palette
 
-| Color   | Hex       | Usage                        |
-|---------|-----------|------------------------------|
-| Black   | `#000000` | Primary text, headers, logo  |
-| Gold    | `#C9A227` | Accents, buttons, highlights |
-| Cream   | `#FFFDD0` | Backgrounds, cards           |
-| Vanilla | `#F3E5AB` | Secondary backgrounds        |
-| White   | `#FFFFFF` | Base background              |
+> **Verified via Webflow MCP extraction on 2026-01-20**
+
+| Color    | Hex       | CSS Variable | Usage                        |
+|----------|-----------|--------------|------------------------------|
+| PW Black | `#434345` | --pw-black   | Primary text, headers        |
+| PW Gold  | `#aa6e0b` | --pw-gold    | Accents, buttons, highlights |
+| PW Cream | `#fff7e1` | --pw-cream   | Backgrounds, cards           |
+| White    | `white`   | --white      | Base background              |
+| Black    | `black`   | --black      | Pure black accents           |
 
 ### Typography
 
+> **Verified via Webflow MCP extraction on 2026-01-20**
+
 ```scss
-// Primary Font - Headlines & Navigation
-$font-primary: 'Oswald', sans-serif;
-$font-weights-primary: (400, 500, 700);
+// Primary Font - Headlines (Adobe Fonts / Typekit)
+$font-headline: 'le-mores-collection', serif;
+// Typekit Kit ID: jxr6fkv
 
-// Secondary Font - Body Text
-$font-secondary: 'Montserrat', sans-serif;
-$font-weights-secondary: (300, 400, 500, 600);
+// Secondary Font - Body Text (Google Fonts)
+$font-body: 'Montserrat', sans-serif;
+$font-weights-body: (300, 400, 500, 600);
 
-// Google Fonts Import
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Oswald:wght@400;500;700&display=swap');
+// Tertiary Font - Navigation/Buttons (Google Fonts)
+$font-nav: 'Oswald', sans-serif;
+$font-weights-nav: (200, 300, 400, 500, 600, 700);
+
+// Font Loading
+// 1. Adobe Fonts (Typekit): <script src="https://use.typekit.net/jxr6fkv.js"></script>
+// 2. Google Fonts via WebFont.js for Montserrat + Oswald
 ```
 
 ### Spacing Scale
@@ -113,6 +122,8 @@ webflow-export/
 
 ### Analysis Documents
 
+- **[Next Steps](docs/next-steps.md)** - Current project status and upcoming work (keep updated)
+- **[Analytics Strategy](docs/analytics/README.md)** - GTM/GA4 configuration and cross-domain tracking
 - **[CSS Mapping](docs/webflow-to-hugo-css-mapping.md)** - Webflow class → Hugo SCSS mapping
 - **[Site Analysis](docs/site-analysis/current-site-documentation.md)** - Original site documentation
 - **[Homepage Style Sync](docs/plans/2026-01-16-homepage-style-sync.md)** - Section-by-section sync plan
@@ -415,6 +426,18 @@ hugo --templateMetrics --templateMetricsHints
 # Create new content
 hugo new content/page-name.md
 ```
+
+## Project Status & Next Steps
+
+**Current project status and upcoming work is tracked in [docs/next-steps.md](docs/next-steps.md).**
+
+**IMPORTANT:** Keep `docs/next-steps.md` up to date:
+
+- Update the "Current Status" table when project phases change
+- Move completed tasks from checklists to the Changelog
+- Add new tasks discovered during development
+- Update "Last Updated" date when making changes
+- Link to relevant documentation for new features
 
 ## Resources
 
