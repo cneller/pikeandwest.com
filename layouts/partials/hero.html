@@ -10,7 +10,7 @@
 {{- /* Process foreground image (wider, for <img> element) */ -}}
 {{- $fgImage := resources.Get $hero.foreground_image -}}
 
-<section class="hero" style="background-image: url('{{ $bgUrl }}');">
+<section class="hero hero-animate" style="background-image: url('{{ $bgUrl }}');">
   {{- /* Foreground image - hidden by default, visible on mobile breakpoints */ -}}
   {{- if $fgImage -}}
   <img

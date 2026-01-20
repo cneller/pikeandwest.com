@@ -5,13 +5,14 @@
 .events {
   height: 50vh;
   max-height: 50vh;
+  margin: 0; // Webflow: no vertical margin - section flows directly after gallery
+  padding: 0 5%; // Side padding only
   background-color: $color-medium-gray;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 5%; // Side padding only
   overflow: hidden;
 
   &__heading {

@@ -3,11 +3,10 @@
 // =========================
 
 .venue-gallery {
-  // Webflow .our-venue-slider values
-  height: 90vh;
-  margin-top: 0;
-  margin-bottom: 60px;
-  padding-top: 20px;
+  // Webflow: .section_gallery17 + .padding-section-large
+  overflow: hidden; // Webflow: section_gallery17 overflow: hidden
+  padding-top: 1.75rem; // Webflow: 28px
+  padding-bottom: 1.75rem; // Webflow: 28px
   text-align: center;
 
   &__heading {
@@ -137,6 +136,9 @@
 
   // Tablet responsive (max-width: 991px)
   @media (max-width: $breakpoint-lg) {
+    padding-top: 6rem; // Webflow: 96px at 991px
+    padding-bottom: 6rem;
+
     .venue-gallery__arrow {
       width: 48px; // Webflow: gallery17_arrow 3rem = 48px at 991px
       height: 48px;
@@ -145,9 +147,8 @@
 
   // Mobile landscape responsive (max-width: 767px)
   @media (max-width: $breakpoint-md) {
-    height: 50vh; // Webflow: .our-venue-slider.mobile height: 50vh
-    margin-bottom: 120px; // Webflow: margin-bottom: 120px at 767px
-    padding-top: 10px; // Webflow: padding-top: 10px
+    padding-top: 4rem; // Webflow: 64px at 767px
+    padding-bottom: 4rem;
 
     .venue-gallery__heading {
       margin-top: 20px; // Webflow: .heading-2.mobile margin-top: 20px

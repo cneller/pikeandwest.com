@@ -7,14 +7,16 @@
 .cta-banner {
   position: relative;
   height: 50vh;
-  margin-top: 1.25rem; // 20px - Webflow: margin-top: 1.25rem
+  margin: 0; // Webflow: no margin on .section.cc-cta
+  padding-top: 0;
+  padding-bottom: 0;
   padding-left: 5rem; // 80px - Webflow: padding-left: 5rem
   padding-right: 5rem; // 80px - Webflow: padding-right: 5rem
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; // Webflow: .cta-wrap text-align: center
-  text-align: center; // Webflow: .cta-wrap text-align: center
+  align-items: center;
+  text-align: center;
   background-size: cover;
   background-position: 50%; // Webflow: background-position: 50%
   background-repeat: no-repeat;

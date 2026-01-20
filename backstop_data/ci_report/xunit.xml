@@ -1,17 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites tests="12" failures="12" errors="12" skipped="0">
-  <testsuite name="BackstopJS" tests="12" failures="12" errors="12" skipped="0">
-    <testcase classname="document" name=" ›› Homepage - Hero">
-      <failure message="Design deviation ›› Homepage - Hero (document) component"/>
-      <error message="Design deviation ›› Homepage - Hero (document) component"/>
+<testsuites tests="28" failures="28" errors="28" skipped="0">
+  <testsuite name="BackstopJS" tests="28" failures="28" errors="28" skipped="0">
+    <testcase classname=".hero" name=" ›› Section - Hero">
+      <failure message="Design deviation ›› Section - Hero (.hero) component"/>
+      <error message="Design deviation ›› Section - Hero (.hero) component"/>
     </testcase>
-    <testcase classname="document" name=" ›› Homepage - Hero">
-      <failure message="Design deviation ›› Homepage - Hero (document) component"/>
-      <error message="Design deviation ›› Homepage - Hero (document) component"/>
+    <testcase classname=".hero" name=" ›› Section - Hero">
+      <failure message="Design deviation ›› Section - Hero (.hero) component"/>
+      <error message="Design deviation ›› Section - Hero (.hero) component"/>
     </testcase>
-    <testcase classname="document" name=" ›› Homepage - Hero">
-      <failure message="Design deviation ›› Homepage - Hero (document) component"/>
-      <error message="Design deviation ›› Homepage - Hero (document) component"/>
+    <testcase classname=".hero" name=" ›› Section - Hero">
+      <failure message="Design deviation ›› Section - Hero (.hero) component"/>
+      <error message="Design deviation ›› Section - Hero (.hero) component"/>
+    </testcase>
+    <testcase classname=".hero" name=" ›› Section - Hero">
+      <failure message="Design deviation ›› Section - Hero (.hero) component"/>
+      <error message="Design deviation ›› Section - Hero (.hero) component"/>
+    </testcase>
+    <testcase classname=".venue-gallery" name=" ›› Section - Our Venue Gallery">
+      <failure message="Design deviation ›› Section - Our Venue Gallery (.venue-gallery) component"/>
+      <error message="Design deviation ›› Section - Our Venue Gallery (.venue-gallery) component"/>
+    </testcase>
+    <testcase classname=".venue-gallery" name=" ›› Section - Our Venue Gallery">
+      <failure message="Design deviation ›› Section - Our Venue Gallery (.venue-gallery) component"/>
+      <error message="Design deviation ›› Section - Our Venue Gallery (.venue-gallery) component"/>
+    </testcase>
+    <testcase classname=".venue-gallery" name=" ›› Section - Our Venue Gallery">
+      <failure message="Design deviation ›› Section - Our Venue Gallery (.venue-gallery) component"/>
+      <error message="Design deviation ›› Section - Our Venue Gallery (.venue-gallery) component"/>
+    </testcase>
+    <testcase classname=".venue-gallery" name=" ›› Section - Our Venue Gallery">
+      <failure message="Design deviation ›› Section - Our Venue Gallery (.venue-gallery) component"/>
+      <error message="Design deviation ›› Section - Our Venue Gallery (.venue-gallery) component"/>
+    </testcase>
+    <testcase classname=".event-types" name=" ›› Section - Event Types">
+      <failure message="Design deviation ›› Section - Event Types (.event-types) component"/>
+      <error message="Design deviation ›› Section - Event Types (.event-types) component"/>
+    </testcase>
+    <testcase classname=".event-types" name=" ›› Section - Event Types">
+      <failure message="Design deviation ›› Section - Event Types (.event-types) component"/>
+      <error message="Design deviation ›› Section - Event Types (.event-types) component"/>
+    </testcase>
+    <testcase classname=".event-types" name=" ›› Section - Event Types">
+      <failure message="Design deviation ›› Section - Event Types (.event-types) component"/>
+      <error message="Design deviation ›› Section - Event Types (.event-types) component"/>
+    </testcase>
+    <testcase classname=".event-types" name=" ›› Section - Event Types">
+      <failure message="Design deviation ›› Section - Event Types (.event-types) component"/>
+      <error message="Design deviation ›› Section - Event Types (.event-types) component"/>
+    </testcase>
+    <testcase classname=".about" name=" ›› Section - About">
+      <failure message="Design deviation ›› Section - About (.about) component"/>
+      <error message="Design deviation ›› Section - About (.about) component"/>
+    </testcase>
+    <testcase classname=".about" name=" ›› Section - About">
+      <failure message="Design deviation ›› Section - About (.about) component"/>
+      <error message="Design deviation ›› Section - About (.about) component"/>
+    </testcase>
+    <testcase classname=".about" name=" ›› Section - About">
+      <failure message="Design deviation ›› Section - About (.about) component"/>
+      <error message="Design deviation ›› Section - About (.about) component"/>
+    </testcase>
+    <testcase classname=".about" name=" ›› Section - About">
+      <failure message="Design deviation ›› Section - About (.about) component"/>
+      <error message="Design deviation ›› Section - About (.about) component"/>
+    </testcase>
+    <testcase classname=".cta-banner" name=" ›› Section - CTA Banner">
+      <failure message="Design deviation ›› Section - CTA Banner (.cta-banner) component"/>
+      <error message="Design deviation ›› Section - CTA Banner (.cta-banner) component"/>
+    </testcase>
+    <testcase classname=".cta-banner" name=" ›› Section - CTA Banner">
+      <failure message="Design deviation ›› Section - CTA Banner (.cta-banner) component"/>
+      <error message="Design deviation ›› Section - CTA Banner (.cta-banner) component"/>
+    </testcase>
+    <testcase classname=".cta-banner" name=" ›› Section - CTA Banner">
+      <failure message="Design deviation ›› Section - CTA Banner (.cta-banner) component"/>
+      <error message="Design deviation ›› Section - CTA Banner (.cta-banner) component"/>
+    </testcase>
+    <testcase classname=".cta-banner" name=" ›› Section - CTA Banner">
+      <failure message="Design deviation ›› Section - CTA Banner (.cta-banner) component"/>
+      <error message="Design deviation ›› Section - CTA Banner (.cta-banner) component"/>
+    </testcase>
+    <testcase classname="footer" name=" ›› Section - Footer">
+      <failure message="Design deviation ›› Section - Footer (footer) component"/>
+      <error message="Design deviation ›› Section - Footer (footer) component"/>
+    </testcase>
+    <testcase classname="footer" name=" ›› Section - Footer">
+      <failure message="Design deviation ›› Section - Footer (footer) component"/>
+      <error message="Design deviation ›› Section - Footer (footer) component"/>
+    </testcase>
+    <testcase classname="footer" name=" ›› Section - Footer">
+      <failure message="Design deviation ›› Section - Footer (footer) component"/>
+      <error message="Design deviation ›› Section - Footer (footer) component"/>
+    </testcase>
+    <testcase classname="footer" name=" ›› Section - Footer">
+      <failure message="Design deviation ›› Section - Footer (footer) component"/>
+      <error message="Design deviation ›› Section - Footer (footer) component"/>
     </testcase>
     <testcase classname="document" name=" ›› Homepage - Full Page">
       <failure message="Design deviation ›› Homepage - Full Page (document) component"/>
@@ -25,29 +109,9 @@
       <failure message="Design deviation ›› Homepage - Full Page (document) component"/>
       <error message="Design deviation ›› Homepage - Full Page (document) component"/>
     </testcase>
-    <testcase classname="document" name=" ›› Contact Page">
-      <failure message="Design deviation ›› Contact Page (document) component"/>
-      <error message="Design deviation ›› Contact Page (document) component"/>
-    </testcase>
-    <testcase classname="document" name=" ›› Contact Page">
-      <failure message="Design deviation ›› Contact Page (document) component"/>
-      <error message="Design deviation ›› Contact Page (document) component"/>
-    </testcase>
-    <testcase classname="document" name=" ›› Contact Page">
-      <failure message="Design deviation ›› Contact Page (document) component"/>
-      <error message="Design deviation ›› Contact Page (document) component"/>
-    </testcase>
-    <testcase classname="document" name=" ›› Gallery Application Page">
-      <failure message="Design deviation ›› Gallery Application Page (document) component"/>
-      <error message="Design deviation ›› Gallery Application Page (document) component"/>
-    </testcase>
-    <testcase classname="document" name=" ›› Gallery Application Page">
-      <failure message="Design deviation ›› Gallery Application Page (document) component"/>
-      <error message="Design deviation ›› Gallery Application Page (document) component"/>
-    </testcase>
-    <testcase classname="document" name=" ›› Gallery Application Page">
-      <failure message="Design deviation ›› Gallery Application Page (document) component"/>
-      <error message="Design deviation ›› Gallery Application Page (document) component"/>
+    <testcase classname="document" name=" ›› Homepage - Full Page">
+      <failure message="Design deviation ›› Homepage - Full Page (document) component"/>
+      <error message="Design deviation ›› Homepage - Full Page (document) component"/>
     </testcase>
   </testsuite>
 </testsuites>

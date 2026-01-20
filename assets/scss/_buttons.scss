@@ -17,12 +17,22 @@
   border-radius: 0;
   cursor: pointer;
   margin-top: 20px; // Webflow default
+
+  // Micro-animation: gentle lift + shadow on hover
   transition:
-    background-color 0.2s,
-    color 0.2s; // Webflow transition
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.2s ease,
+    color 0.2s ease;
 
   &:hover {
-    opacity: 1; // Webflow doesn't use opacity
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   }
 }
 
@@ -34,6 +44,7 @@
   &:hover {
     background-color: darken($color-gold, 5%);
     color: $color-white;
+    box-shadow: 0 2px 10px rgba($color-gold, 0.25);
   }
 }
 
@@ -42,15 +53,14 @@
 .btn-secondary {
   background-color: $color-cream; // #fff7e1
   color: $color-medium-gray; // #434345
-  transition: opacity 0.2s; // Webflow: transition: opacity .2s
 
   &:hover {
-    opacity: 0.9;
+    background-color: darken($color-cream, 3%);
   }
 
   &:active {
-    background-color: $color-medium-gray; // Webflow: var(--pw-black)
-    color: $color-cream; // Webflow: var(--pw-cream)
+    background-color: $color-medium-gray;
+    color: $color-cream;
   }
 }
 
@@ -58,10 +68,10 @@
 .btn-dark {
   background-color: $color-medium-gray; // #434345
   color: $color-cream;
-  padding: 9px 16px;
 
   &:hover {
-    color: $color-cream; // Webflow hover
+    background-color: lighten($color-medium-gray, 5%);
+    color: $color-cream;
   }
 
   &:active {
@@ -77,6 +87,11 @@
   border: 1.5px solid $color-cream; // Webflow: 1.5px
 
   &:hover {
+    background-color: rgba($color-cream, 0.1);
+    box-shadow: 0 2px 8px rgba($color-cream, 0.15);
+  }
+
+  &:active {
     background-color: $color-cream;
     color: $color-medium-gray;
   }
@@ -93,4 +108,19 @@
   padding: 12px 24px;
   font-size: 18px;
   letter-spacing: 2.7px;
+}
+
+// Accessibility: Reduce motion for users who prefer it
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+
+    &:hover,
+    &:active {
+      transform: none;
+      box-shadow: none;
+    }
+  }
 }

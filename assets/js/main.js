@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initMobileNav();
   initGalleryCarousel();
   initLightbox();
+  initScrollAnimations();
 });
 
 // Mobile Navigation
@@ -201,4 +202,39 @@ function initLightbox() {
       closeLightbox();
     }
   });
+}
+
+// Scroll Animations (Fade-in on scroll)
+function initScrollAnimations() {
+  const fadeElements = document.querySelectorAll('.fade-in-up');
+
+  if (fadeElements.length === 0) return;
+
+  // Check if user prefers reduced motion
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
+  if (prefersReducedMotion) {
+    // Show all elements immediately for users who prefer reduced motion
+    fadeElements.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observerOptions = {
+    root: null, // viewport
+    rootMargin: '0px 0px -50px 0px', // Trigger slightly before fully in view
+    threshold: 0.1, // 10% visible
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target); // Only animate once
+      }
+    });
+  }, observerOptions);
+
+  fadeElements.forEach((el) => observer.observe(el));
 }
