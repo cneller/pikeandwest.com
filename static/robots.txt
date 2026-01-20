@@ -1,0 +1,15 @@
+# robots.txt for Pike & West
+# https://pikeandwest.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://pikeandwest.com/sitemap.xml
+
+# Crawl-delay for polite crawling (optional)
+Crawl-delay: 1
+
+# Disallow admin or staging paths if any exist
+Disallow: /admin/
+Disallow: /staging/
