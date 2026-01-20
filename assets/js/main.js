@@ -120,12 +120,16 @@ function initLightbox() {
   const lightboxImage = document.getElementById('lightbox-image');
   const lightboxSourceWebp = document.getElementById('lightbox-source-webp');
   const closeBtn = lightbox?.querySelector('.lightbox__close');
+  const galleryTrack = document.getElementById('gallery-track');
 
   if (!lightbox || !lightboxImage) return;
 
-  // Open lightbox on image click
-  document.querySelectorAll('.venue-gallery__image').forEach((img) => {
-    img.addEventListener('click', () => {
+  // Use event delegation for better INP - single listener instead of many
+  if (galleryTrack) {
+    galleryTrack.addEventListener('click', (e) => {
+      const img = e.target.closest('.venue-gallery__image');
+      if (!img) return;
+
       const fullSrc = img.dataset.full || img.src;
       const fullSrcWebp = img.dataset.fullWebp || '';
 
@@ -143,7 +147,7 @@ function initLightbox() {
       // Focus management for accessibility
       closeBtn?.focus();
     });
-  });
+  }
 
   // Close lightbox
   function closeLightbox() {

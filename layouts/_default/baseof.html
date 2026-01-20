@@ -6,7 +6,8 @@
 </head>
 <body{{ if .IsHome }} class="home"{{ end }}>
   {{- partial "gtm-body.html" . -}}
-  {{- partial "header.html" . -}}
+  {{- /* Header cached - doesn't change per page */ -}}
+  {{- partialCached "header.html" . -}}
 
   <main>
     {{- block "main" . }}{{- end }}
@@ -16,7 +17,8 @@
   {{- if not $isContactPage -}}
     {{- partial "cta-banner.html" . -}}
   {{- end -}}
-  {{- partial "footer.html" . -}}
+  {{- /* Footer cached - doesn't change per page */ -}}
+  {{- partialCached "footer.html" . -}}
 
   {{- partial "scripts.html" . -}}
 </body>

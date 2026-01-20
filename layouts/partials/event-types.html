@@ -6,11 +6,18 @@
       {{ range site.Data.events.types }}
       <div class="events__item">
         <div class="events__icon">
-          {{ $icon := resources.Get (printf "images/icons/%s" .icon) }}
-          {{ if $icon }}
-            {{ $resized := $icon.Resize "128x" }}
-            <img src="{{ $resized.RelPermalink }}" alt="{{ .label }} icon" />
-          {{ end }}
+          {{- $icon := resources.Get (printf "images/icons/%s" .icon) -}}
+          {{- if $icon -}}
+            {{- $resized := $icon.Resize "128x" -}}
+            <img
+              src="{{ $resized.RelPermalink }}"
+              alt="{{ .label }} icon"
+              width="{{ $resized.Width }}"
+              height="{{ $resized.Height }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {{- end -}}
         </div>
         <span class="events__label">{{ .label }}</span>
       </div>

@@ -86,6 +86,8 @@
     srcset="{{ delimit $fallbackSrcset ", " }}"
     sizes="{{ $sizes }}"
     alt="{{ $alt }}"
+    width="{{ $image.Width }}"
+    height="{{ $image.Height }}"
     {{- if $class }} class="{{ $class }}"{{ end }}
     loading="{{ $loading }}"
     {{- if $fetchpriority }} fetchpriority="{{ $fetchpriority }}"{{ end }}

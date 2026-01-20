@@ -25,6 +25,8 @@
               src="{{ $thumbJpg.RelPermalink }}"
               alt="Pike & West venue photo {{ add $index 1 }}"
               class="venue-gallery__image"
+              width="{{ $thumbJpg.Width }}"
+              height="{{ $thumbJpg.Height }}"
               loading="lazy"
               decoding="async"
               data-full="{{ $fullJpg.RelPermalink }}"
