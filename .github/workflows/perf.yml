@@ -67,6 +67,10 @@ jobs:
           - { name: 'Blog', path: '/blog/' }
           - { name: 'Contact', path: '/contact/' }
           - { name: 'Gallery', path: '/gallery-application/' }
+          # Blog posts - backdated content series
+          - { name: 'Blog-BabyShower', path: '/blog/fall-baby-shower-inspiration/' }
+          - { name: 'Blog-Anniversary', path: '/blog/holiday-anniversary-celebrations/' }
+          - { name: 'Blog-Birthday', path: '/blog/milestone-birthday-new-year/' }
     steps:
       - name: Download config
         uses: actions/download-artifact@v4
