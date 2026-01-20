@@ -51,13 +51,16 @@
     color: $color-cream;
     margin: 0;
     text-transform: uppercase;
+    text-wrap: balance;
 
     @media (min-width: $breakpoint-xl) {
       font-size: 3rem;
     }
 
     @media (max-width: $breakpoint-md) {
-      font-size: 2rem;
+      font-size: 1.75rem;
+      max-width: 90%;
+      margin: 0 auto;
     }
   }
 

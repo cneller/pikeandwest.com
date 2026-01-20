@@ -6,8 +6,8 @@ draft: false
 author: "Pike & West"
 categories: ["News"]
 tags: ["announcement", "welcome"]
-image: ""
-image_alt: ""
+image: "images/venue/venue-01-interior.jpeg"
+image_alt: "Pike & West venue interior with elegant lighting and sophisticated decor"
 ---
 
 We're excited to launch the Pike & West blog! This is where we'll share:

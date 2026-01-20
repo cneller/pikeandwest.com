@@ -18,9 +18,10 @@
     {{ if .Pages }}
     <div class="blog-list__grid">
       {{ range .Pages.ByDate.Reverse }}
+      {{ $page := . }}
       <article class="blog-card">
         {{/* Stretched link overlay - makes entire card clickable */}}
-        <a href="{{ .Permalink }}" class="blog-card__link-overlay" aria-label="Read {{ .Title }}"></a>
+        <a href="{{ $page.RelPermalink }}" class="blog-card__link-overlay" aria-label="Read {{ $page.Title }}"></a>
         {{ with .Params.image }}
         {{ $img := resources.Get . }}
         {{ if $img }}
@@ -28,7 +29,7 @@
         <div class="blog-card__image-wrapper">
           <img
             src="{{ $resized.RelPermalink }}"
-            alt="{{ $.Params.image_alt | default $.Title }}"
+            alt="{{ $page.Params.image_alt | default $page.Title }}"
             class="blog-card__image"
             loading="lazy"
           />
@@ -36,6 +37,9 @@
         {{ end }}
         {{ end }}
         <div class="blog-card__content">
+          {{ with index .Params.categories 0 }}
+          <span class="blog-card__category">{{ . }}</span>
+          {{ end }}
           <time class="blog-card__date" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ .Date.Format "January 2, 2006" }}
           </time>
