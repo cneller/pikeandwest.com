@@ -1,0 +1,6 @@
+# Cloudflare Pages deployment credentials
+# Copy this file to .envrc and fill in your values
+# Run `direnv allow` after creating .envrc
+
+export CLOUDFLARE_ACCOUNT_ID="your-account-id-here"
+export CLOUDFLARE_API_TOKEN="your-api-token-here"

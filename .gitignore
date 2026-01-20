@@ -21,6 +21,7 @@ Thumbs.db
 .env
 .env.local
 .env*.local
+.envrc
 
 # Node (if added later for tooling)
 node_modules/
