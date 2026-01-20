@@ -239,6 +239,7 @@ img {
   &__content {
     position: relative;
     z-index: 1;
+    grid-column: 1;
     margin-top: 60px;
     margin-left: auto;
     padding-left: 60px;
