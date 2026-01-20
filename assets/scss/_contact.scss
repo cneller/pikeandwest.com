@@ -18,16 +18,31 @@
 // Contact Form Section
 .contact-form {
   padding: $spacing-3xl 0;
+  margin-top: 37px; // Webflow: margin-top: 37px
 
   .form-embed {
+    width: 75%; // Webflow: width: 75%
     max-width: 600px;
-    margin: 0 auto;
-    background-color: $color-cream;
+    margin: 20px auto; // Webflow: margin: 20px auto
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #eee; // Webflow: border: 1px #eee
 
     iframe {
       width: 100%;
       min-height: 500px;
       border: 0;
+      display: flex;
+      flex-grow: 1;
+    }
+
+    // Mobile: full width and viewport height
+    @media (max-width: $breakpoint-md) {
+      width: 100%;
+      min-height: 100vh; // Webflow: min-height: 100vh on mobile
+      margin-top: 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
     }
   }
 }

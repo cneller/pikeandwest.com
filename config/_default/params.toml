@@ -8,7 +8,7 @@ author = "Pike & West"
   city = "Germantown"
   state = "TN"
   zip = "38138"
-  hours = "Available by appointment only. Call or email to reserve a tour."
+  hours = "Available by appointment only.<br>Call or email to reserve a tour."
   googleMapsUrl = "https://maps.app.goo.gl/7fNG7K7BEPQKpNzs8"
 
 [social]
