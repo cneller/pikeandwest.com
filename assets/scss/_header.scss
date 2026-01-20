@@ -138,10 +138,11 @@
     }
   }
 
-  // Hover on open state - subtle pulse
+  // Hover on open state - lines grow slightly
   &__hamburger[aria-expanded='true']:hover .header__hamburger-inner {
     &::before,
     &::after {
+      width: 26px;
       background-color: darken($color-gold, 8%);
     }
   }
