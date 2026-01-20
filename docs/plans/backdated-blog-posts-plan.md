@@ -355,22 +355,22 @@ keywords:
 
 ### Pre-Writing
 
-- [ ] Review existing blog posts for consistent tone and style
-- [ ] Gather available venue images for each post
-- [ ] Confirm image paths exist in assets
+- [x] Review existing blog posts for consistent tone and style
+- [x] Gather available venue images for each post
+- [x] Confirm image paths exist in assets
 
 ### Content Creation
 
-- [ ] **Post 1**: Write fall baby shower content (1,200-1,500 words)
-- [ ] **Post 2**: Write holiday anniversary content (1,200-1,500 words)
-- [ ] **Post 3**: Write milestone birthday content (1,200-1,500 words)
+- [x] **Post 1**: Write fall baby shower content (~1,330 words)
+- [x] **Post 2**: Write holiday anniversary content (~1,580 words)
+- [x] **Post 3**: Write milestone birthday content (~1,940 words)
 
 ### Technical Setup
 
-- [ ] Create files with correct front matter and backdated timestamps
-- [ ] Place in `/content/blog/` directory
-- [ ] Set `draft: false` for all posts
-- [ ] Verify images exist and paths are correct
+- [x] Create files with correct front matter and backdated timestamps
+- [x] Place in `/content/blog/` directory
+- [x] Set `draft: false` for all posts
+- [x] Verify images exist and paths are correct
 
 ### Quality Checks
 
@@ -381,9 +381,14 @@ keywords:
 
 ### Publishing
 
-- [ ] Commit all three posts
-- [ ] Push to feature branch
-- [ ] Verify build succeeds
+- [x] Commit all three posts
+- [x] Push to feature branch
+- [x] Verify build succeeds
+
+### Post-Implementation
+
+- [x] Add blog posts to Lighthouse performance testing matrix
+- [x] Update next-steps.md with blog progress
 
 ---
 
