@@ -81,22 +81,22 @@
       border-radius: 1px;
     }
 
-    // Top bar: moves first on hover, elastic snap on X
+    // Top bar: squeeze first (0.15s), then rotate (after 0.15s delay)
     &::before {
       top: -8px;
       transition:
         top 0.15s ease,
-        transform 0.25s 0.1s cubic-bezier(0.68, -0.55, 0.32, 1.6),
+        transform 0.3s 0.12s cubic-bezier(0.68, -0.6, 0.32, 1.6),
         background-color 0.25s ease,
         width 0.2s ease;
     }
 
-    // Bottom bar: follows top, elastic snap on X
+    // Bottom bar: squeeze with stagger (0.05s), then rotate (after 0.14s delay)
     &::after {
       bottom: -8px;
       transition:
         bottom 0.15s 0.05s ease,
-        transform 0.25s 0.12s cubic-bezier(0.68, -0.55, 0.32, 1.6),
+        transform 0.3s 0.14s cubic-bezier(0.68, -0.6, 0.32, 1.6),
         background-color 0.25s ease,
         width 0.2s ease;
     }
