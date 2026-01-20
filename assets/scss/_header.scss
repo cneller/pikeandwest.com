@@ -48,6 +48,8 @@
     background: none;
     border: none;
     cursor: pointer;
+    // 3D flip: perspective creates depth for child transforms
+    perspective: 200px;
 
     @media (max-width: $breakpoint-md) {
       display: block;
