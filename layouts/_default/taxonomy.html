@@ -1,0 +1,37 @@
+{{/*
+  Purpose: Display list of all terms in a taxonomy (e.g., all categories or all tags)
+  Context: Taxonomy page (e.g., /categories/, /tags/)
+  Usage: Automatically used by Hugo for taxonomy list pages
+*/}}
+{{ define "main" }}
+{{/* Taxonomy Hero - matches blog styling */}}
+{{ $heroImage := resources.Get "images/venue/venue-06-soft-seating.jpg" }}
+{{ $heroBg := "" }}
+{{ if $heroImage }}
+  {{ $heroBg = ($heroImage.Resize "1920x q85").RelPermalink }}
+{{ end }}
+
+<section class="blog-hero" style="background-image: url('{{ $heroBg }}');">
+  <div class="blog-hero__content">
+    <h1 class="blog-hero__title">{{ .Title }}</h1>
+  </div>
+</section>
+
+{{/* Taxonomy Terms List */}}
+<section class="taxonomy-list section">
+  <div class="container">
+    {{ if .Pages }}
+    <div class="taxonomy-list__grid">
+      {{ range .Pages.ByTitle }}
+      <a href="{{ .RelPermalink }}" class="taxonomy-card">
+        <h2 class="taxonomy-card__title">{{ .Title }}</h2>
+        <span class="taxonomy-card__count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}post{{ else }}posts{{ end }}</span>
+      </a>
+      {{ end }}
+    </div>
+    {{ else }}
+    <p class="taxonomy-list__empty">No {{ .Title | lower }} found.</p>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
