@@ -2,8 +2,8 @@ baseURL = "https://pikeandwest.com/"
 languageCode = "en-us"
 title = "Pike & West | Germantown Gallery and Event Venue"
 
-# Enable robots.txt generation
-enableRobotsTXT = true
+# Disable Hugo's robots.txt generation - using static/robots.txt instead
+enableRobotsTXT = false
 
 [build]
   writeStats = true

@@ -1,7 +1,7 @@
 ---
-title: "Creating the Perfect Fall Baby Shower at Pike & West"
+title: "Creating the Perfect Fall Baby Shower in 2026"
 description: "Discover elegant autumn baby shower ideas featuring trending themes like honey-inspired decor and eco-friendly touches that celebrate the mom-to-be in sophisticated style."
-date: 2025-10-14T10:23:00-05:00
+date: 2026-01-20T10:00:00-05:00
 draft: false
 author: "Pike & West"
 categories: ["Baby Showers"]
@@ -25,7 +25,7 @@ Fall offers the best of everything for event planning. The weather is comfortabl
 
 Beyond the aesthetics, fall timing often works well practically. Many expectant mothers due in late fall or early winter find that an October or early November shower hits the sweet spot—typically around 28-34 weeks—giving them time to prepare nurseries while still feeling comfortable enough to enjoy the celebration.
 
-## Trending Fall Themes for 2025
+## Trending Fall Themes for 2026
 
 This year's baby shower trends lean toward intentional, personalized celebrations rather than generic party packages. Here are themes that feel fresh and work beautifully with fall's natural aesthetic.
 
@@ -98,21 +98,25 @@ Skip the awkward games that make guests uncomfortable. Instead, focus on meaning
 A well-planned baby shower takes about six to eight weeks to pull together comfortably. Here's a general timeline:
 
 **6-8 Weeks Before**
+
 - Book your venue
 - Set the guest list with the parents-to-be
 - Choose your theme and color palette
 
 **4-6 Weeks Before**
+
 - Send invitations (digital or print)
 - Book catering and any rentals
 - Order custom items like banners or personalized favors
 
 **2 Weeks Before**
+
 - Confirm final guest count with venue and caterer
 - Plan your timeline for the day
 - Finalize any activities or games
 
 **Day Before**
+
 - Prep any DIY decorations
 - Confirm delivery times
 - Charge camera batteries
