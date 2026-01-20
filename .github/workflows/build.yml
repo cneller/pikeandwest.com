@@ -1,0 +1,67 @@
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: 'Name for the build artifact'
+        required: false
+        default: 'hugo-site'
+        type: string
+      artifact-retention-days:
+        description: 'Number of days to retain artifact'
+        required: false
+        default: 1
+        type: number
+      include-perf-config:
+        description: 'Include Lighthouse config in artifact'
+        required: false
+        default: true
+        type: boolean
+
+env:
+  HUGO_VERSION: '0.154.5'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/hugo_cache
+          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugomod-
+
+      - name: Build
+        env:
+          HUGO_CACHEDIR: /tmp/hugo_cache
+        run: hugo --gc --minify
+
+      - name: Include perf config
+        if: inputs.include-perf-config
+        run: cp lighthouserc.json public/
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: public/
+          retention-days: ${{ inputs.artifact-retention-days }}
+          compression-level: 0
