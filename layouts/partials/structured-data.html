@@ -1,66 +1,152 @@
-{{/* LocalBusiness Schema */}}
+{{/* Organization Schema - appears on all pages */}}
 <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "EventVenue",
-    "name": "Pike & West",
-    "description": "{{ .Site.Params.description }}",
-    "url": "{{ .Site.BaseURL }}",
-    "telephone": "{{ .Site.Params.contact.phone }}",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "{{ .Site.Params.contact.address }}",
-      "addressLocality": "{{ .Site.Params.contact.city }}",
-      "addressRegion": "{{ .Site.Params.contact.state }}",
-      "postalCode": "{{ .Site.Params.contact.zip }}",
-      "addressCountry": "US"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "35.0868",
-      "longitude": "-89.8100"
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "opens": "00:00",
-      "closes": "23:59"
-    },
-    "sameAs": [
-      "{{ .Site.Params.social.instagram }}",
-      "{{ .Site.Params.social.facebook }}"
-    ]
-  }
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Pike & West",
+  "url": "{{ .Site.BaseURL }}",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "{{ "images/logo/pike-west-logo-horizontal.png" | absURL }}",
+    "width": 600,
+    "height": 60
+  },
+  "description": "{{ .Site.Params.description }}",
+  "telephone": "{{ .Site.Params.contact.phone }}",
+  "email": "{{ .Site.Params.contact.email }}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ .Site.Params.contact.address }}",
+    "addressLocality": "{{ .Site.Params.contact.city }}",
+    "addressRegion": "{{ .Site.Params.contact.state }}",
+    "postalCode": "{{ .Site.Params.contact.zip }}",
+    "addressCountry": "US"
+  },
+  "sameAs": [
+    "{{ .Site.Params.social.instagram }}",
+    "{{ .Site.Params.social.facebook }}"
+  ]
+}
 </script>
 
-{{/* BreadcrumbList Schema for non-home pages */}} {{ if not .IsHome }}
+{{/* EventVenue Schema - Local Business */}}
 <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "{{ .Site.BaseURL }}"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "{{ .Title }}",
-        "item": "{{ .Permalink }}"
-      }
-    ]
+{
+  "@context": "https://schema.org",
+  "@type": "EventVenue",
+  "name": "Pike & West",
+  "description": "{{ .Site.Params.description }}",
+  "url": "{{ .Site.BaseURL }}",
+  "telephone": "{{ .Site.Params.contact.phone }}",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ .Site.Params.contact.address }}",
+    "addressLocality": "{{ .Site.Params.contact.city }}",
+    "addressRegion": "{{ .Site.Params.contact.state }}",
+    "postalCode": "{{ .Site.Params.contact.zip }}",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "35.0868",
+    "longitude": "-89.8100"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "sameAs": [
+    "{{ .Site.Params.social.instagram }}",
+    "{{ .Site.Params.social.facebook }}"
+  ],
+  "image": [
+    "{{ "images/venue/pike-west-exterior.jpg" | absURL }}",
+    "{{ "images/venue/pike-west-gallery.jpg" | absURL }}"
+  ],
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Art Gallery",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Event Space",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Wedding Venue",
+      "value": true
+    }
+  ]
+}
+</script>
+
+{{/* WebSite Schema with SearchAction - Homepage only */}}
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ .Site.Title }}",
+  "url": "{{ .Site.BaseURL }}",
+  "description": "{{ .Site.Params.description }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Pike & West"
   }
+}
+</script>
+{{ end }}
+
+{{/* BreadcrumbList Schema for non-home pages */}}
+{{ if not .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ .Site.BaseURL }}"
+    }
+    {{- if .Parent }}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ .Parent.Title }}",
+      "item": "{{ .Parent.Permalink }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ .Title }}",
+      "item": "{{ .Permalink }}"
+    }
+    {{- else }}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ .Title }}",
+      "item": "{{ .Permalink }}"
+    }
+    {{- end }}
+  ]
+}
 </script>
 {{ end }}
 
@@ -76,23 +162,56 @@
   "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
   "author": {
     "@type": "Organization",
-    "name": "{{ .Params.author | default "Pike & West" }}"
+    "name": "{{ .Params.author | default "Pike & West" }}",
+    "url": "{{ .Site.BaseURL }}"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Pike & West",
     "logo": {
       "@type": "ImageObject",
-      "url": "{{ "images/logo/pike-west-logo-horizontal.png" | absURL }}"
+      "url": "{{ "images/logo/pike-west-logo-horizontal.png" | absURL }}",
+      "width": 600,
+      "height": 60
     }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "{{ .Permalink }}"
   }
-  {{ with .Params.image }}
-  ,"image": "{{ . | absURL }}"
-  {{ end }}
+  {{- with .Params.image }}
+  ,"image": {
+    "@type": "ImageObject",
+    "url": "{{ . | absURL }}",
+    "caption": "{{ $.Params.image_alt | default $.Title }}"
+  }
+  {{- end }}
+  {{- with .Params.tags }}
+  ,"keywords": "{{ delimit . ", " }}"
+  {{- end }}
+}
+</script>
+{{ end }}
+
+{{/* FAQPage Schema - for pages with FAQ content */}}
+{{ if .Params.faq }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{- $lastIndex := sub (len .Params.faq) 1 -}}
+    {{- range $index, $item := .Params.faq }}
+    {
+      "@type": "Question",
+      "name": "{{ $item.question }}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ $item.answer }}"
+      }
+    }{{ if ne $index $lastIndex }},{{ end }}
+    {{- end }}
+  ]
 }
 </script>
 {{ end }}
