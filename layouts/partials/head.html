@@ -90,28 +90,93 @@
 <link rel="icon" href="/favicon.png" type="image/png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-{{/* DNS Prefetch and Preconnect for Performance */}}
-<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-<link rel="dns-prefetch" href="https://www.google-analytics.com" />
+{{/* ============================================
+    PERFORMANCE OPTIMIZATIONS
+    ============================================ */}}
+
+{{/* 1. Resource Hints - Preconnect to external origins */}}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://www.googletagmanager.com" />
+<link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-{{/* Google Fonts */}}
+{{/* 2. Preload Critical Fonts (WOFF2 - self-hosted, subset for display) */}}
 <link
-  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap"
+  rel="preload"
+  href="/fonts/Le-Mores-Collection-Serif-subset.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Raleway-VariableFont_wght.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+{{/* 3. Preload LCP Image (Hero) - only on homepage */}}
+{{- if .IsHome -}}
+  {{- $hero := site.Data.hero -}}
+  {{- if $hero.foreground_image -}}
+    {{- $fgImage := resources.Get $hero.foreground_image -}}
+    {{- if $fgImage -}}
+      {{- $webp1080 := $fgImage.Resize "1080x webp q85" -}}
+      {{- $webp1600 := $fgImage.Resize "1600x webp q85" -}}
+      {{- $webp1920 := $fgImage.Resize "1920x webp q85" -}}
+<link
+  rel="preload"
+  href="{{ $webp1920.RelPermalink }}"
+  as="image"
+  type="image/webp"
+  imagesrcset="{{ $webp1080.RelPermalink }} 1080w, {{ $webp1600.RelPermalink }} 1600w, {{ $webp1920.RelPermalink }} 1920w"
+  imagesizes="100vw"
+/>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 4. Google Fonts (Montserrat only - Raleway is self-hosted) */}}
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
   rel="stylesheet"
 />
 
-{{/* Styles */}}
-{{ $scss := resources.Get "scss/main.scss" }}
-{{ if $scss }}
-{{ $style := $scss | css.Sass (dict "targetPath" "css/main.css" "outputStyle" "compressed") | fingerprint }}
+{{/* 5. Critical CSS - Inlined for faster FCP */}}
+{{- $criticalScss := resources.Get "scss/critical.scss" -}}
+{{- if $criticalScss -}}
+  {{- $criticalStyle := $criticalScss | toCSS (dict "outputStyle" "compressed") -}}
+<style>{{ $criticalStyle.Content | safeCSS }}</style>
+{{- end -}}
+
+{{/* 6. Main Stylesheet - Async loaded */}}
+{{- $scss := resources.Get "scss/main.scss" -}}
+{{- if $scss -}}
+  {{- $style := $scss | toCSS (dict "targetPath" "css/main.css" "outputStyle" "compressed") | fingerprint -}}
+{{/* Preload with high priority, then apply as stylesheet */}}
 <link
-  rel="stylesheet"
+  rel="preload"
   href="{{ $style.RelPermalink }}"
-  integrity="{{ $style.Data.Integrity }}"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
 />
-{{ end }}
+<noscript>
+  <link
+    rel="stylesheet"
+    href="{{ $style.RelPermalink }}"
+    integrity="{{ $style.Data.Integrity }}"
+  />
+</noscript>
+{{- end -}}
+
+{{/* 7. Speculation Rules - Instant page navigation (Chromium 109+) */}}
+{{- partial "speculation-rules.html" . -}}
+
+{{/* 8. Fallback prefetch for non-Chromium browsers */}}
+{{- if .IsHome -}}
+<link rel="prefetch" href="/contact/" />
+{{- end -}}
 
 {{/* Structured Data */}}
 {{ partial "structured-data.html" . }}

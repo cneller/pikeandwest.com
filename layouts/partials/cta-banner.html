@@ -1,11 +1,24 @@
 {{- $cta := site.Data.cta_banner -}}
 {{- $bgImage := resources.Get $cta.background_image -}}
-{{- $bgUrl := "" -}}
+{{- $bgUrlJpg := "" -}}
+{{- $bgUrlWebp := "" -}}
 {{- if $bgImage -}}
-  {{- $bgUrl = ($bgImage.Resize "1920x q80").RelPermalink -}}
+  {{- $bgUrlJpg = ($bgImage.Resize "1920x jpg q80").RelPermalink -}}
+  {{- $bgUrlWebp = ($bgImage.Resize "1920x webp q80").RelPermalink -}}
 {{- end -}}
 
-<section class="cta-banner" style="background-image: url('{{ $bgUrl }}');">
+<section class="cta-banner">
+  {{- /* WebP background with JPEG fallback */ -}}
+  <style>
+    .cta-banner {
+      background-image: url('{{ $bgUrlJpg }}');
+    }
+    @supports (background-image: url('test.webp')) {
+      .cta-banner {
+        background-image: url('{{ $bgUrlWebp }}');
+      }
+    }
+  </style>
   <div class="cta-banner__content fade-in-up">
     <h2 class="cta-banner__heading">{{ $cta.heading }}</h2>
     <p class="cta-banner__text">{{ $cta.text }}</p>

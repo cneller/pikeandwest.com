@@ -2,6 +2,39 @@
 // Utility Classes
 // =========================
 
+// =========================
+// Content Visibility (Performance)
+// Skip rendering off-screen content until needed
+// Baseline available: September 2025
+// =========================
+
+// Below-fold sections - defer rendering
+.venue-gallery,
+.events,
+.about,
+.cta-banner {
+  // Skip rendering until close to viewport
+  content-visibility: auto;
+  // Estimated heights to prevent layout shift
+  // Uses 'auto' to remember actual size after first render
+  contain-intrinsic-size: auto 600px;
+}
+
+// Footer is smaller
+.footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+}
+
+// Lightbox - hidden by default, skip entirely
+.lightbox {
+  content-visibility: hidden;
+
+  &--open {
+    content-visibility: visible;
+  }
+}
+
 // Margins
 .mt-0 {
   margin-top: 0;

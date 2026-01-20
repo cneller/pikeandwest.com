@@ -1,0 +1,42 @@
+{{/*
+  Speculation Rules for Instant Page Navigation
+
+  Purpose: Prefetch/prerender likely navigation targets for faster transitions
+  Browser Support: Chromium-based (Chrome 109+, Edge, Opera)
+  Falls back gracefully - non-supporting browsers ignore the script
+
+  Strategy:
+  - Prefetch: All same-origin links on hover (moderate eagerness)
+  - Prerender: High-probability targets like /contact/ (conservative)
+
+  Reference: https://developer.chrome.com/docs/web-platform/prerender-pages
+*/}}
+
+<script type="speculationrules">
+{
+  "prefetch": [
+    {
+      "where": {
+        "and": [
+          { "href_matches": "/*" },
+          { "not": { "href_matches": "/blog/*" } },
+          { "not": { "selector_matches": "[download]" } },
+          { "not": { "selector_matches": "[target=_blank]" } }
+        ]
+      },
+      "eagerness": "moderate"
+    }
+  ],
+  "prerender": [
+    {
+      "where": {
+        "or": [
+          { "href_matches": "/contact/" },
+          { "href_matches": "/contact" }
+        ]
+      },
+      "eagerness": "moderate"
+    }
+  ]
+}
+</script>

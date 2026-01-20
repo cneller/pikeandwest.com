@@ -16,15 +16,22 @@
         <a href="{{ .cta.link }}" class="btn btn-dark">{{ .cta.text }}</a>
       </div>
       <div class="about__image">
-        {{ $img := resources.Get .image.src }}
-        {{ if $img }}
-          {{ $resized := $img.Resize "800x q85" }}
-          <img
-            src="{{ $resized.RelPermalink }}"
-            alt="{{ .image.alt }}"
-            loading="lazy"
-          />
-        {{ end }}
+        {{- $img := resources.Get .image.src -}}
+        {{- if $img -}}
+          {{- $resizedJpg := $img.Resize "800x jpg q85" -}}
+          {{- $resizedWebp := $img.Resize "800x webp q85" -}}
+          <picture>
+            <source type="image/webp" srcset="{{ $resizedWebp.RelPermalink }}">
+            <img
+              src="{{ $resizedJpg.RelPermalink }}"
+              alt="{{ .image.alt }}"
+              width="{{ $resizedJpg.Width }}"
+              height="{{ $resizedJpg.Height }}"
+              loading="lazy"
+              decoding="async"
+            >
+          </picture>
+        {{- end -}}
       </div>
     </div>
     {{ end }}

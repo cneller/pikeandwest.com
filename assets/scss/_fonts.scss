@@ -1,28 +1,41 @@
 // =========================
 // Font Face Declarations
+// Optimized with WOFF2 (primary) + TTF (fallback)
 // =========================
 
 // Le Mores Collection Serif - Display font for headlines
+// Subset WOFF2: 17KB (vs 27KB full, 109KB TTF) - 84% smaller than original
+// Contains: A-Z, a-z, 0-9, common punctuation
 @font-face {
   font-family: 'Le Mores Collection Serif';
-  src: url('/fonts/Le-Mores-Collection-Serif.ttf') format('truetype');
+  src:
+    url('/fonts/Le-Mores-Collection-Serif-subset.woff2') format('woff2'),
+    url('/fonts/Le-Mores-Collection-Serif.woff2') format('woff2'),
+    url('/fonts/Le-Mores-Collection-Serif.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 // Raleway Variable Font - Buttons, navigation, UI
+// WOFF2: 127KB (vs 311KB TTF) - 59% smaller
 @font-face {
   font-family: 'Raleway';
-  src: url('/fonts/Raleway-VariableFont_wght.ttf') format('truetype');
+  src:
+    url('/fonts/Raleway-VariableFont_wght.woff2') format('woff2'),
+    url('/fonts/Raleway-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
+// Raleway Italic Variable Font
+// WOFF2: 132KB (vs 306KB TTF) - 57% smaller
 @font-face {
   font-family: 'Raleway';
-  src: url('/fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+  src:
+    url('/fonts/Raleway-Italic-VariableFont_wght.woff2') format('woff2'),
+    url('/fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;

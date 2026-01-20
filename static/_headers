@@ -1,0 +1,30 @@
+# HTTP Cache Headers for Static Assets
+# For Cloudflare Pages / Netlify
+
+# Fingerprinted assets (CSS, JS) - immutable, cache for 1 year
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts - cache for 1 year
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# Images - cache for 1 month (they may be updated)
+/images/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+# HTML pages - short cache with revalidation
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Security headers
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
