@@ -117,19 +117,19 @@
 
   // ===== BREAKPOINT: 767px (Mobile Landscape) =====
   @media (max-width: $breakpoint-md) {
-    height: 50vh;
+    display: block; // Remove grid
+    height: auto;
     min-height: 25vh;
-    max-height: 50vh;
-    grid-template-rows: 0.5fr 0.5fr;
-    grid-template-columns: 0.5fr 0.5fr;
+    max-height: none;
+    background-image: none; // Hide CSS background, use <img> instead
 
     // Show foreground image, hide content
     &__image {
       display: block;
-      object-fit: fill;
-      min-height: 25vh;
-      max-height: 50vh;
-      overflow: hidden;
+      position: relative;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
     }
 
     &__content {
@@ -139,17 +139,18 @@
 
   // ===== BREAKPOINT: 479px (Mobile Portrait) =====
   @media (max-width: $breakpoint-sm) {
-    display: block; // No grid
-    height: 50vh;
+    display: block;
+    height: auto;
     min-height: 25vh;
-    max-height: 50vh;
+    max-height: none;
+    background-image: none;
 
     &__image {
       display: block;
+      position: relative;
+      width: 100%;
+      height: auto;
       object-fit: cover;
-      flex: 0 auto;
-      align-self: flex-start;
-      overflow: hidden;
     }
 
     &__content {
