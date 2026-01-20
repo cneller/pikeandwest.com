@@ -81,22 +81,22 @@
       border-radius: 1px;
     }
 
-    // Top bar: moves first on hover (no delay)
+    // Top bar: moves first on hover, elastic snap on X
     &::before {
       top: -8px;
       transition:
         top 0.15s ease,
-        transform 0.2s 0.12s cubic-bezier(0.68, -0.3, 0.32, 1.3),
+        transform 0.25s 0.1s cubic-bezier(0.68, -0.55, 0.32, 1.6),
         background-color 0.25s ease,
         width 0.2s ease;
     }
 
-    // Bottom bar: follows top with 50ms delay on hover
+    // Bottom bar: follows top, elastic snap on X
     &::after {
       bottom: -8px;
       transition:
         bottom 0.15s 0.05s ease,
-        transform 0.2s 0.15s cubic-bezier(0.68, -0.3, 0.32, 1.3),
+        transform 0.25s 0.12s cubic-bezier(0.68, -0.55, 0.32, 1.6),
         background-color 0.25s ease,
         width 0.2s ease;
     }
