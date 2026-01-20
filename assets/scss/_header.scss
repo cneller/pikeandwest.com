@@ -126,11 +126,13 @@
     }
   }
 
-  // Open state - animate to X with gold color
+  // Open state - animate to X with gold color + 3D flip
   &__hamburger[aria-expanded='true'] {
     .header__hamburger-inner {
       // Hide middle bar only (not the whole element)
       background-color: transparent;
+      // 3D flip on Y-axis while transforming to X
+      transform: translate(-50%, -50%) rotateY(180deg);
 
       &::before {
         top: 0;
