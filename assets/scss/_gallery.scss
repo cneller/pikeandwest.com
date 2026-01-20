@@ -12,11 +12,11 @@
 
   &__heading {
     // Webflow .heading-2 values
-    font-family: $font-primary; // Raleway Variablefont Wght
+    font-family: $font-display; // Le Mores Collection Serif (Webflow .h1-les-mores-blk)
     font-size: 28px;
     font-weight: $font-weight-regular; // 400
     line-height: 1.15em; // 32.2px at 28px
-    letter-spacing: 0.15em; // 4.2px at 28px
+    letter-spacing: 0.1em; // Webflow .h1-les-mores-blk value
     text-transform: uppercase;
     white-space: nowrap;
     text-align: center;
@@ -55,16 +55,25 @@
     }
   }
 
+  &__slide {
+    overflow: hidden; // Contain the zoom effect
+    border-radius: 8px;
+  }
+
   &__image {
     width: 100%;
     aspect-ratio: 4/3;
     object-fit: cover;
     cursor: pointer;
-    transition: transform $transition-base;
     border-radius: 8px;
+    // Enhanced micro-animation: smooth zoom + brightness lift
+    transition:
+      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      filter 0.4s ease;
 
     &:hover {
-      transform: scale(1.02);
+      transform: scale(1.04);
+      filter: brightness(1.06);
     }
   }
 

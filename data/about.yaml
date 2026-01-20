@@ -1,7 +1,7 @@
 # About section content for homepage
 # Edit this file to update the about section
 
-heading: "About Us"
+heading: "ABOUT US"
 
 blocks:
   - id: "who-we-are"
