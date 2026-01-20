@@ -41,6 +41,7 @@
     display: none; // Hidden by default
     flex-direction: column;
     justify-content: center;
+    align-items: stretch; // Ensure lines stretch to full width
     gap: 5px;
     width: 30px;
     height: 30px;
@@ -56,9 +57,10 @@
 
   &__hamburger-line {
     display: block;
-    width: 100%;
+    width: 30px; // Explicit width matches parent
     height: 2px;
     background-color: $color-black;
+    flex-shrink: 0; // Prevent flex shrinking
     transition:
       transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
       opacity 0.2s ease-out;

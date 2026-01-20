@@ -121,7 +121,7 @@
     height: auto;
     min-height: 25vh;
     max-height: none;
-    background-image: none; // Hide CSS background, use <img> instead
+    background-image: none !important; // Override inline style, use <img> instead
 
     // Show foreground image, hide content
     &__image {
@@ -143,7 +143,7 @@
     height: auto;
     min-height: 25vh;
     max-height: none;
-    background-image: none;
+    background-image: none !important;
 
     &__image {
       display: block;
