@@ -4,6 +4,7 @@
       "numberOfRuns": 3,
       "settings": {
         "preset": "desktop",
+        "formFactor": "desktop",
         "throttling": {
           "cpuSlowdownMultiplier": 1
         }
