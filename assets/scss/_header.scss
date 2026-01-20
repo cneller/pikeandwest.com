@@ -102,11 +102,9 @@
     }
   }
 
-  // Hover state - spread + glow + middle shrink (anticipation)
+  // Hover state - spread + glow (anticipation)
   // Only applies when menu is closed (not in X state)
   &__hamburger:not([aria-expanded='true']):hover .header__hamburger-inner {
-    // Middle bar shrinks, hinting it will disappear
-    width: 18px;
     // Subtle glow matching line color
     filter: drop-shadow(0 0 1px rgba($color-medium-gray, 0.4));
 
