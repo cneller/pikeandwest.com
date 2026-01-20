@@ -82,11 +82,15 @@
   &__details {
     display: flex;
     flex-direction: column;
-    gap: $spacing-lg;
+    gap: 0; // Webflow uses margin-bottom on children instead
     justify-content: center;
+    padding-left: 20px; // Webflow: padding-left: 20px
   }
 
   &__detail {
+    margin-bottom: 30px; // Webflow: margin-bottom: 30px (instead of gap)
+    overflow: hidden; // Webflow: overflow: hidden
+
     strong {
       display: block;
       font-family: $font-primary; // Raleway (matches Webflow)
