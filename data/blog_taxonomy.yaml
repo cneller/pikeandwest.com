@@ -1,0 +1,40 @@
+# Blog Taxonomy Reference
+# Use these predefined categories and tags for consistency across posts.
+# Sitepins editors can reference this file when creating new posts.
+
+categories:
+  - News
+  - Weddings
+  - Corporate Events
+  - Planning Tips
+  - Behind the Scenes
+
+tags:
+  # General
+  - announcement
+  - welcome
+  - venue updates
+
+  # Event Types
+  - weddings
+  - corporate
+  - parties
+  - celebrations
+
+  # Planning
+  - planning tips
+  - event planning
+  - venue tips
+  - checklist
+
+  # Seasonal
+  - spring
+  - summer
+  - fall
+  - winter
+  - holidays
+
+  # Location
+  - germantown
+  - memphis
+  - tennessee

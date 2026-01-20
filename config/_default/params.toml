@@ -14,6 +14,10 @@ author = "Pike & West"
 [social]
   instagram = "https://www.instagram.com/pikeandwest/"
   facebook = "https://www.facebook.com/pikeandwest"
+  twitter = "pikeandwest"
+
+# Default Open Graph image (used when pages don't specify their own)
+defaultOgImage = "/images/og-default.jpg"
 
 [analytics]
   googleTagManager = "GTM-P8XR8C5S"

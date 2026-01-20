@@ -121,12 +121,12 @@ hugo --templateMetrics
 
 ### Content (Priority: Medium)
 
-| Task                     | Status      | Notes                                          |
-|--------------------------|-------------|------------------------------------------------|
-| Blog section             | Implemented | First post created, needs more content         |
-| Gallery application page | Basic       | May need form improvements                     |
-| Team/About section       | Complete    | Consider adding more team photos               |
-| Event type pages         | Planned     | Individual pages for weddings, corporate, etc. |
+| Task                     | Status      | Notes                                                    |
+|--------------------------|-------------|----------------------------------------------------------|
+| Blog section             | Active      | 5 posts published (2 current + 3 backdated Oct-Dec 2025) |
+| Gallery application page | Basic       | May need form improvements                               |
+| Team/About section       | Complete    | Consider adding more team photos                         |
+| Event type pages         | Planned     | Individual pages for weddings, corporate, etc.           |
 
 ### Technical Debt (Priority: Low)
 
@@ -175,3 +175,5 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 | 2026-01-20 | Added marketing strategy documentation suite                 |
 | 2026-01-20 | Added pre-commit docs check hook for documentation reminders |
 | 2026-01-20 | SCSS visual parity refinements across all sections           |
+| 2026-01-20 | Added 3 backdated blog posts (Oct-Dec 2025) targeting Baby Shower, Anniversary, Birthday personas |
+| 2026-01-20 | Added blog posts to Lighthouse performance testing matrix    |

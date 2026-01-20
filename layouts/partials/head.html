@@ -12,8 +12,28 @@
   content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}"
 />
 
-{{/* Canonical URL */}}
-<link rel="canonical" href="{{ .Permalink }}" />
+{{/* Robots Meta Tag - supports page-level noindex/nofollow via front matter */}}
+{{- $robotsContent := "index, follow" -}}
+{{- if .Params.noindex -}}
+  {{- $robotsContent = "noindex, follow" -}}
+{{- end -}}
+{{- if .Params.nofollow -}}
+  {{- if .Params.noindex -}}
+    {{- $robotsContent = "noindex, nofollow" -}}
+  {{- else -}}
+    {{- $robotsContent = "index, nofollow" -}}
+  {{- end -}}
+{{- end -}}
+{{/* Override for non-production environments */}}
+{{- if ne (getenv "HUGO_ENV") "production" -}}
+  {{- if ne hugo.Environment "production" -}}
+    {{- $robotsContent = "noindex, nofollow" -}}
+  {{- end -}}
+{{- end -}}
+<meta name="robots" content="{{ $robotsContent }}" />
+
+{{/* Canonical URL - supports custom canonical via front matter */}}
+<link rel="canonical" href="{{ with .Params.canonical }}{{ . }}{{ else }}{{ .Permalink }}{{ end }}" />
 
 {{/* Open Graph */}}
 <meta property="og:title" content="{{ .Title }}" />
@@ -23,21 +43,48 @@
 />
 <meta property="og:url" content="{{ .Permalink }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:locale" content="en_US" />
 <meta
   property="og:type"
-  content="{{ if .IsHome }}website{{ else }}article{{ end }}"
+  content="{{ if .IsHome }}website{{ else if eq .Section "blog" }}article{{ else }}website{{ end }}"
 />
-{{ with .Params.image }}
+{{- with .Params.image }}
 <meta property="og:image" content="{{ . | absURL }}" />
-{{ end }}
+<meta property="og:image:alt" content="{{ $.Params.image_alt | default $.Title }}" />
+{{- else with .Site.Params.defaultOgImage }}
+<meta property="og:image" content="{{ . | absURL }}" />
+<meta property="og:image:alt" content="{{ $.Site.Title }}" />
+{{- end }}
+
+{{/* Article-specific Open Graph tags */}}
+{{- if eq .Section "blog" }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" />
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}" />
+<meta property="article:author" content="{{ .Params.author | default .Site.Params.author }}" />
+{{- range .Params.tags }}
+<meta property="article:tag" content="{{ . }}" />
+{{- end }}
+{{- end }}
 
 {{/* Twitter Card */}}
 <meta name="twitter:card" content="summary_large_image" />
+{{- with .Site.Params.social.twitter }}
+<meta name="twitter:site" content="@{{ . }}" />
+{{- end }}
+{{- with .Params.author_twitter }}
+<meta name="twitter:creator" content="@{{ . }}" />
+{{- else with .Site.Params.social.twitter }}
+<meta name="twitter:creator" content="@{{ . }}" />
+{{- end }}
 <meta name="twitter:title" content="{{ .Title }}" />
 <meta
   name="twitter:description"
   content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}"
 />
+{{- with .Params.image }}
+<meta name="twitter:image" content="{{ . | absURL }}" />
+<meta name="twitter:image:alt" content="{{ $.Params.image_alt | default $.Title }}" />
+{{- end }}
 
 {{/* Favicon */}}
 <link rel="icon" href="/favicon.png" type="image/png" />
