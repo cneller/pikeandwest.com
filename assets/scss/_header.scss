@@ -74,7 +74,8 @@
     &::after {
       content: '';
       position: absolute;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 24px;
       height: 2px;
       background-color: $color-medium-gray;
@@ -102,17 +103,21 @@
     }
   }
 
-  // Hover state - spread + glow (anticipation)
+  // Hover state - spread + glow + grow (anticipation)
   // Only applies when menu is closed (not in X state)
   &__hamburger:not([aria-expanded='true']):hover .header__hamburger-inner {
+    // All lines grow slightly
+    width: 27px;
     // Subtle glow matching line color
     filter: drop-shadow(0 0 1px rgba($color-medium-gray, 0.4));
 
     &::before {
       top: -9px;
+      width: 27px;
     }
     &::after {
       bottom: -9px;
+      width: 27px;
     }
   }
 
@@ -124,13 +129,13 @@
 
       &::before {
         top: 0;
-        transform: rotate(45deg);
+        transform: translateX(-50%) rotate(45deg);
         background-color: $color-gold; // Brand accent on open
       }
 
       &::after {
         bottom: 0;
-        transform: rotate(-45deg);
+        transform: translateX(-50%) rotate(-45deg);
         background-color: $color-gold; // Brand accent on open
       }
     }
