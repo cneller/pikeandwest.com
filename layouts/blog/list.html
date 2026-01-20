@@ -21,7 +21,7 @@
       {{ $page := . }}
       <article class="blog-card">
         {{/* Stretched link overlay - makes entire card clickable */}}
-        <a href="{{ $page.Permalink }}" class="blog-card__link-overlay" aria-label="Read {{ $page.Title }}"></a>
+        <a href="{{ $page.RelPermalink }}" class="blog-card__link-overlay" aria-label="Read {{ $page.Title }}"></a>
         {{ with .Params.image }}
         {{ $img := resources.Get . }}
         {{ if $img }}
