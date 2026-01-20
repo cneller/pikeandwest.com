@@ -1,19 +1,22 @@
 // =========================
 // Hero Section
 // =========================
-// Webflow class: .hero-header-section
+// Matches Webflow .hero-header-section implementation
+// Uses dual-image strategy:
+// - CSS background-image (taller 1920x1080) for desktop
+// - <img> element (wider 1920x800) visible on mobile breakpoints
 
 .hero {
   position: relative;
   z-index: 1;
 
-  // Desktop: Picture element approach with responsive crops
+  // ===== Desktop Default (Webflow base styles) =====
+  // Height matches Webflow exactly
   height: 75vh;
-  min-height: 400px;
+  min-height: 50vh;
   max-height: 81vh;
-  overflow: hidden; // Contain the image
 
-  // Grid structure from Webflow (desktop)
+  // Grid layout from Webflow
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 3fr 1fr;
@@ -23,112 +26,172 @@
   grid-row-gap: 0;
   align-content: start;
 
-  // White background for any gaps (matches page background)
-  background-color: white;
+  // Background image (taller image, 1920x1080)
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
 
-  // Picture/img element positioning (replaces background-image)
-  &__bg {
+  // ===== Foreground Image Element =====
+  // Hidden by default on desktop, shown on mobile
+  &__image {
+    display: none;
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
+    object-fit: cover;
+    z-index: 0;
   }
 
-  // Tablet breakpoint (768px - 991px)
-  @media (max-width: $breakpoint-lg) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr; // Single row at tablet
-    grid-auto-rows: 0.25fr;
-    min-height: 50vh;
-    max-height: 81vh;
-  }
-
-  // Mobile landscape (480px - 767px)
-  @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    min-height: 25vh;
-    max-height: 50vh;
-  }
-
-  // Mobile portrait - Webflow @media (max-width: 479px)
-  @media (max-width: $breakpoint-sm) {
-    display: block; // Webflow: display: block (no grid)
-    height: 50vh; // Webflow: height: 50vh at 767px, then auto at 479px
-    min-height: 25vh; // Webflow: min-height: 25vh
-    max-height: 50vh; // Webflow: max-height: 50vh
-    grid-column-gap: 0;
-    grid-row-gap: 0;
-  }
-
-  // Webflow class: .div-block (hero content container)
+  // ===== Content Block =====
+  // Webflow: .div-block
   &__content {
-    // Webflow computed at 1280px: margin-top: 0px; padding-left: 60px;
-    margin-top: 0;
+    position: relative;
+    z-index: 1;
+    margin-top: 60px;
     margin-left: auto;
     padding-top: 0;
     padding-left: 60px;
     padding-right: 0;
     color: $color-cream;
-
-    @media (max-width: $breakpoint-md) {
-      padding: 40px 24px;
-      margin-top: 0; // Reduced from 40px - content should sit higher on mobile
-    }
   }
 
-  // Webflow class: .h1-crm-les-mores
+  // ===== Title =====
+  // Webflow: .h1-crm-les-mores
   &__title {
     font-family: $font-display;
-    font-size: 32px; // Webflow: 32px
+    font-size: 32px;
     font-weight: $font-weight-regular;
-    line-height: 40px; // Webflow: 40px (1.25em)
-    letter-spacing: 3.2px; // Webflow: 3.2px (0.1em)
-    margin-top: 40px; // Webflow: margin-top: 40px
+    line-height: 1.25em;
+    letter-spacing: 0.1em;
+    margin-top: 40px;
     margin-bottom: 0;
     color: $color-cream;
-    // Webflow uses <br> for line breaks, no special span styling needed
   }
 
   &__cta {
-    margin-top: 20px; // Webflow: button margin-top: 20px
+    margin-top: 20px;
+  }
+
+  // ===== BREAKPOINT: 1920px+ (Ultra-wide) =====
+  @media (min-width: $breakpoint-2xl) {
+    height: auto;
+    grid-template-rows: 0.5fr 0.5fr;
+    grid-auto-rows: 0.25fr;
+    justify-items: start;
+
+    &__image {
+      object-fit: fill;
+    }
+
+    &__content {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-top: 100px;
+      margin-left: 50px;
+      padding-top: 0;
+      padding-left: 60px;
+      display: flex;
+    }
+
+    &__title {
+      font-size: 60px;
+    }
+  }
+
+  // ===== BREAKPOINT: 991px (Tablet) =====
+  @media (max-width: $breakpoint-lg) {
+    grid-template-rows: 1fr;
+    grid-auto-rows: 0.25fr;
+
+    &__image {
+      object-fit: cover;
+    }
+
+    &__content {
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  // ===== BREAKPOINT: 767px (Mobile Landscape) =====
+  @media (max-width: $breakpoint-md) {
+    height: 50vh;
+    min-height: 25vh;
+    max-height: 50vh;
+    grid-template-rows: 0.5fr 0.5fr;
+    grid-template-columns: 0.5fr 0.5fr;
+
+    // Show foreground image, hide content
+    &__image {
+      display: block;
+      object-fit: fill;
+      min-height: 25vh;
+      max-height: 50vh;
+      overflow: hidden;
+    }
+
+    &__content {
+      display: none;
+    }
+  }
+
+  // ===== BREAKPOINT: 479px (Mobile Portrait) =====
+  @media (max-width: $breakpoint-sm) {
+    display: block; // No grid
+    height: 50vh;
+    min-height: 25vh;
+    max-height: 50vh;
+
+    &__image {
+      display: block;
+      object-fit: cover;
+      flex: 0 auto;
+      align-self: flex-start;
+      overflow: hidden;
+    }
+
+    &__content {
+      display: none;
+    }
   }
 }
 
-// Tagline section
-// Webflow class: .hero-subheader-1
+// ===== Tagline =====
+// Webflow: .hero-subheader-1
 .tagline {
-  font-family: $font-secondary; // Webflow: Montserrat
-  font-size: 18px; // Webflow: 18px with .desktop class (default is 22px)
-  font-weight: $font-weight-regular; // Webflow: 400
-  line-height: 1.5; // Webflow: line-height: 1.5
-  letter-spacing: 0.15em; // Webflow: 0.15em
+  font-family: $font-secondary;
+  font-size: 22px;
+  font-weight: $font-weight-regular;
+  line-height: 1.5;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: $color-cream;
-  margin-top: 15px; // Webflow: margin-top: 15px
+  margin-top: 15px;
 
-  // Responsive sizes from Webflow
-  @media (min-width: $breakpoint-xl) {
-    font-size: 24px; // Webflow: 24px at 1280px+
+  // Desktop modifier (Webflow: .hero-subheader-1.desktop)
+  .hero & {
+    font-size: 18px;
   }
 
+  // 1920px+
+  @media (min-width: $breakpoint-2xl) {
+    font-size: 24px;
+  }
+
+  // 991px (Tablet)
   @media (max-width: $breakpoint-lg) {
-    font-size: 13px; // Webflow: 13px at tablet (991px)
+    font-size: 13px;
   }
 
+  // 767px (Mobile Landscape)
   @media (max-width: $breakpoint-md) {
-    font-size: 16px; // Webflow: 16px at mobile landscape (767px)
+    font-size: 16px;
   }
 
+  // 479px (Mobile Portrait)
   @media (max-width: $breakpoint-sm) {
-    font-size: 12px; // Webflow: 12px at mobile portrait (479px)
+    font-size: 12px;
   }
 }
