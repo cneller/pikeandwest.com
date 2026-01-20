@@ -14,18 +14,49 @@ function initMobileNav() {
 
   if (!hamburger || !nav) return;
 
-  hamburger.addEventListener('click', () => {
+  function closeMenu() {
+    hamburger.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('is-open');
+  }
+
+  function openMenu() {
+    hamburger.setAttribute('aria-expanded', 'true');
+    nav.classList.add('is-open');
+  }
+
+  function toggleMenu() {
     const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
-    hamburger.setAttribute('aria-expanded', !isOpen);
-    nav.classList.toggle('is-open', !isOpen);
-  });
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  hamburger.addEventListener('click', toggleMenu);
 
   // Close menu when clicking a link
   nav.querySelectorAll('.header__link').forEach((link) => {
-    link.addEventListener('click', () => {
-      hamburger.setAttribute('aria-expanded', 'false');
-      nav.classList.remove('is-open');
-    });
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+    if (isOpen && !nav.contains(e.target) && !hamburger.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  // Close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (
+      e.key === 'Escape' &&
+      hamburger.getAttribute('aria-expanded') === 'true'
+    ) {
+      closeMenu();
+      hamburger.focus(); // Return focus to hamburger for accessibility
+    }
   });
 }
 
