@@ -10,47 +10,16 @@ concurrency:
   group: pages-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  HUGO_VERSION: '0.154.5'
-
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: ${{ env.HUGO_VERSION }}
-          extended: true
-
-      - name: Cache Hugo modules
-        uses: actions/cache@v4
-        with:
-          path: /tmp/hugo_cache
-          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-hugomod-
-
-      - name: Build
-        env:
-          HUGO_CACHEDIR: /tmp/hugo_cache
-        run: hugo --gc --minify
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: hugo-site
-          path: public/
-          retention-days: 1
+    name: Build Hugo site
+    uses: ./.github/workflows/build.yml
 
   deploy:
+    name: Deploy to Cloudflare Pages
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       contents: read
       deployments: write
@@ -125,8 +94,10 @@ jobs:
       deployment-url: ${{ steps.deploy.outputs.deployment-url }}
 
   lighthouse:
+    name: Lighthouse - ${{ matrix.page.name }}
     needs: deploy
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       pull-requests: write
     strategy:
@@ -139,7 +110,8 @@ jobs:
           - { name: 'Contact', path: '/contact/' }
           - { name: 'Gallery Application', path: '/gallery-application/' }
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Run Lighthouse
         id: lighthouse
@@ -165,9 +137,11 @@ jobs:
           retention-days: 30
 
   lighthouse-summary:
+    name: Post Lighthouse summary
     needs: [deploy, lighthouse]
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    timeout-minutes: 2
     permissions:
       pull-requests: write
     steps:
