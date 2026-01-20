@@ -1,38 +1,80 @@
-{"entries": [{
-  "timestamp": "2026-01-20T17:14:50.961Z",
-  "url": "https://6581f8cf.pikeandwest.pages.dev",
-  "avgPerformance": 89,
-  "allPassed": false,
-  "pages": {
-    "About": {
-      "performance": 0.95,
-      "accessibility": 0.94,
-      "best-practices": 1,
-      "seo": 0.61
+{
+  "entries": [
+    {
+      "timestamp": "2026-01-20T17:14:50.961Z",
+      "url": "https://6581f8cf.pikeandwest.pages.dev",
+      "avgPerformance": 89,
+      "allPassed": false,
+      "pages": {
+        "About": {
+          "performance": 0.95,
+          "accessibility": 0.94,
+          "best-practices": 1,
+          "seo": 0.61
+        },
+        "Blog": {
+          "performance": 0.88,
+          "accessibility": 0.94,
+          "best-practices": 1,
+          "seo": 0.61
+        },
+        "Contact": {
+          "performance": 0.85,
+          "accessibility": 0.94,
+          "best-practices": 0.78,
+          "seo": 0.61
+        },
+        "Gallery": {
+          "performance": 0.96,
+          "accessibility": 0.9,
+          "best-practices": 0.96,
+          "seo": 0.61
+        },
+        "Home": {
+          "performance": 0.81,
+          "accessibility": 0.91,
+          "best-practices": 1,
+          "seo": 0.61
+        }
+      }
     },
-    "Blog": {
-      "performance": 0.88,
-      "accessibility": 0.94,
-      "best-practices": 1,
-      "seo": 0.61
-    },
-    "Contact": {
-      "performance": 0.85,
-      "accessibility": 0.94,
-      "best-practices": 0.78,
-      "seo": 0.61
-    },
-    "Gallery": {
-      "performance": 0.96,
-      "accessibility": 0.9,
-      "best-practices": 0.96,
-      "seo": 0.61
-    },
-    "Home": {
-      "performance": 0.81,
-      "accessibility": 0.91,
-      "best-practices": 1,
-      "seo": 0.61
+    {
+      "timestamp": "2026-01-20T20:15:17.625Z",
+      "url": "https://1a208dae.pikeandwest.pages.dev",
+      "avgPerformance": 88,
+      "allPassed": false,
+      "pages": {
+        "About": {
+          "performance": 0.92,
+          "accessibility": 0.94,
+          "best-practices": 1,
+          "seo": 0.61
+        },
+        "Blog": {
+          "performance": 0.86,
+          "accessibility": 0.94,
+          "best-practices": 1,
+          "seo": 0.61
+        },
+        "Contact": {
+          "performance": 0.83,
+          "accessibility": 0.94,
+          "best-practices": 0.78,
+          "seo": 0.61
+        },
+        "Gallery": {
+          "performance": 0.95,
+          "accessibility": 0.9,
+          "best-practices": 0.96,
+          "seo": 0.61
+        },
+        "Home": {
+          "performance": 0.83,
+          "accessibility": 0.91,
+          "best-practices": 1,
+          "seo": 0.61
+        }
+      }
     }
-  }
-}]}
+  ]
+}
