@@ -35,6 +35,11 @@
     letter-spacing: 0.1em;
     color: $color-cream; // Webflow: #fff7e1
     text-decoration: none;
+    // Touch-friendly padding for 44px minimum touch target
+    padding: 12px 16px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
 
     &:hover {
       color: $color-white;
@@ -55,8 +60,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25px; // Webflow: 25x25px icons
-    height: 25px;
+    // Touch target padding while keeping icon at 25px visual size
+    min-width: 44px; // WCAG 2.5.5: 44px minimum touch target
+    min-height: 44px;
     color: $color-white;
     transition: color $transition-fast;
 
@@ -64,8 +70,9 @@
       color: $color-cream;
     }
 
+    img,
     svg {
-      width: 25px; // Webflow: 25x25px
+      width: 25px; // Webflow: 25x25px visual size
       height: 25px;
     }
   }
@@ -107,17 +114,31 @@
     flex-direction: column;
 
     .footer__container {
-      padding-left: 20px; // Webflow: .footer-wrap-1.mobile padding
-      padding-right: 20px;
+      padding-left: 10px; // Webflow: .footer-wrap-1.mobile.vertical padding
+      padding-right: 10px;
+      gap: 10px; // Webflow: grid-row-gap: 10px
+    }
+
+    .footer__links {
+      flex-direction: column;
+      gap: 10px;
     }
 
     .footer__link {
       font-size: 10px; // Webflow: .footer-link at 479px
       line-height: 12px;
+      // Maintain touch target with reduced padding
+      padding: 8px 12px;
+      min-height: 44px;
+    }
+
+    .footer__social {
+      gap: 10px;
     }
 
     .footer__copyright {
-      line-height: 12px; // Webflow: .footer-copyright line-height: 12px
+      font-size: 8px; // Webflow: .footer-copyright.mobile.vertical font-size: 8px
+      line-height: 12px;
     }
   }
 }

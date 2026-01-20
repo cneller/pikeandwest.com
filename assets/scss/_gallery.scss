@@ -79,13 +79,13 @@
   &__nav {
     display: flex;
     justify-content: center;
-    gap: $spacing-sm;
-    margin-top: $spacing-xl;
+    gap: 6px; // Webflow: 3px margin on each side = 6px gap
+    margin-top: 0; // Removed $spacing-xl (32px) - track padding-bottom provides spacing
   }
 
   &__nav-btn {
-    width: 12px;
-    height: 12px;
+    width: 8px; // Webflow: 1em at 0.5rem font-size = 8px
+    height: 8px;
     border-radius: 50%;
     background-color: rgba($color-black, 0.2);
     border: none;

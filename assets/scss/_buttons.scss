@@ -110,6 +110,14 @@
   letter-spacing: 2.7px;
 }
 
+// Mobile touch target optimization (WCAG 2.5.5: 44x44px minimum)
+@media (max-width: 767px) {
+  .btn {
+    min-height: 44px;
+    padding: 12px 20px; // Increased padding for touch
+  }
+}
+
 // Accessibility: Reduce motion for users who prefer it
 @media (prefers-reduced-motion: reduce) {
   .btn {

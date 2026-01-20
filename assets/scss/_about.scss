@@ -122,10 +122,30 @@
     align-items: center;
     display: flex;
 
+    .about__heading {
+      font-size: 24px; // Webflow: .section-heading font-size: 24px at 479px
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+
     .about__subtitle {
       margin-top: 15px; // Webflow: .heading-2.mobile.vertical
       margin-bottom: 10px;
       font-size: 15px;
+    }
+
+    .about__text {
+      font-size: 13px; // Webflow: .paragraph-light font-size: 13px at 479px
+      line-height: 1.5em; // Webflow: line-height: 1.5em (~19.5px at 13px)
+      text-align: center;
+
+      p {
+        margin-bottom: 1em; // Proportional paragraph spacing
+      }
+    }
+
+    .about__content {
+      padding-bottom: 30px; // Webflow: .home-section-wrap.mobile.vertical padding-bottom
     }
   }
 }

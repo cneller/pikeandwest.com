@@ -157,7 +157,7 @@
     height: 50vh;
     min-height: 25vh;
     max-height: 50vh;
-    padding-top: 10px;
+    padding-top: 15px;
     background-position: calc(50% - 80px) 70%; // Shift down to show door below text
 
     // Hide the <img> element - Webflow uses background-image at mobile
@@ -171,18 +171,18 @@
       align-items: center;
       text-align: center;
       margin: 0;
-      padding: 10px;
+      padding: 20px 16px; // Increased from 10px for breathing room
     }
 
     &__title {
       font-size: 16px;
       margin-top: 0;
-      margin-bottom: 5px;
+      margin-bottom: 12px; // Increased from 5px for visual hierarchy
       text-align: center;
     }
 
     &__cta {
-      margin-top: 10px;
+      margin-top: 16px; // Increased from 10px for visual separation
     }
   }
 }

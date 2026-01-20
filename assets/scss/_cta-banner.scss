@@ -61,6 +61,11 @@
       font-size: 30px; // Webflow: .cta-heading font-size: 30px
       line-height: 52px; // Webflow: line-height: 52px
     }
+
+    .cta-banner__text {
+      font-size: 16px; // Webflow: .paragraph-bigger font-size: 16px at 767px
+      line-height: 28px; // Webflow: line-height: 28px
+    }
   }
 
   // Mobile portrait responsive (max-width: 479px)
