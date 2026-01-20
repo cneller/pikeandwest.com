@@ -21,12 +21,24 @@
   background-position: 50%; // Webflow: background-position: 50%
   background-repeat: no-repeat;
 
-  // NO ::before overlay - Webflow image has white overlay baked in
+  // Semi-transparent cream overlay for improved text contrast
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba($color-cream, 0.6); // PW Cream at 60% opacity
+    z-index: 0;
+  }
 
   &__content {
     position: relative;
     z-index: 1;
     max-width: 600px;
+    // Backdrop filter for additional contrast on content area
+    backdrop-filter: brightness(1.2) blur(2px);
+    -webkit-backdrop-filter: brightness(1.2) blur(2px); // Safari support
+    padding: 2rem;
+    border-radius: 4px;
   }
 
   &__heading {
