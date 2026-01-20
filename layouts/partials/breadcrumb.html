@@ -1,0 +1,39 @@
+{{/*
+  Purpose: Render accessible breadcrumb navigation
+  Context: Page context (.)
+  Usage: {{ partial "breadcrumb.html" . }}
+*/}}
+
+{{- $items := slice (dict "name" "Home" "url" "/") -}}
+
+{{- /* Add section (e.g., Blog) */ -}}
+{{- if .Section -}}
+  {{- $sectionTitle := .Section | humanize | title -}}
+  {{- if eq .Kind "section" -}}
+    {{- /* On section list page: section is current (non-linked) */ -}}
+    {{- $items = $items | append (dict "name" $sectionTitle "url" "") -}}
+  {{- else -}}
+    {{- /* On single page: section is linked, then add current page */ -}}
+    {{- $items = $items | append (dict "name" $sectionTitle "url" (printf "/%s/" .Section)) -}}
+    {{- $items = $items | append (dict "name" .Title "url" "") -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Only render if we have more than just Home */ -}}
+{{- if gt (len $items) 1 -}}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb__list">
+      {{- range $index, $item := $items -}}
+        <li class="breadcrumb__item">
+          {{- if $item.url -}}
+            <a href="{{ $item.url }}" class="breadcrumb__link">{{ $item.name }}</a>
+          {{- else -}}
+            <span class="breadcrumb__current" aria-current="page">{{ $item.name }}</span>
+          {{- end -}}
+        </li>
+      {{- end -}}
+    </ol>
+  </div>
+</nav>
+{{- end -}}

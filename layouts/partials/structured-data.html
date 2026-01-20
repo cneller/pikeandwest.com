@@ -111,8 +111,8 @@
 </script>
 {{ end }}
 
-{{/* BreadcrumbList Schema for non-home pages */}}
-{{ if not .IsHome }}
+{{/* BreadcrumbList Schema for non-home, non-blog pages (blog uses breadcrumb-schema.html) */}}
+{{ if and (not .IsHome) (ne .Section "blog") }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
