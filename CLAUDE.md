@@ -99,7 +99,47 @@ Breakpoints are aligned exactly with Webflow export values:
 **Header behavior:**
 
 - Full nav buttons: 768px and above (tablets, desktops)
-- Hamburger menu: 767px and below (mobile)
+- Hamburger menu: 991px and below (tablet/mobile)
+
+## Architecture Decisions
+
+Key decisions made during development. Full details in `docs/architecture/decisions/`.
+
+| Decision             | Choice             | Rationale                                                                                                                                        |
+|----------------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| Header positioning   | `position: sticky` | Eliminates padding/margin offset hacks ([ADR-001](docs/architecture/decisions/ADR-001-sticky-header.md))                                         |
+| Hamburger animation  | 3D Y-axis flip     | Luxury brand feel; elastic easing `cubic-bezier(0.68, -0.6, 0.32, 1.6)` ([ADR-002](docs/architecture/decisions/ADR-002-hamburger-animations.md)) |
+| Hamburger breakpoint | 991px              | Webflow alignment; nav buttons visible on tablets ([ADR-004](docs/architecture/decisions/ADR-004-responsive-breakpoints.md))                     |
+| Hero height          | 75vh/65vh/60vh     | Shows content peek below fold; Webflow parity ([ADR-003](docs/architecture/decisions/ADR-003-hero-layout.md))                                    |
+| Breakpoints          | Webflow-aligned    | 479/767/991/1280/1920px for pixel-perfect parity ([ADR-004](docs/architecture/decisions/ADR-004-responsive-breakpoints.md))                      |
+
+## Implementation Patterns
+
+Quick reference for common patterns. Full details in `docs/architecture/patterns/`.
+
+### 3D CSS Animation
+
+```scss
+.container { perspective: 200px; }
+.child {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+.child.open { transform: rotateY(180deg); }
+```
+
+### Sticky Header
+
+```scss
+.header {
+  position: sticky;
+  top: 0;
+  z-index: $z-index-header;
+}
+// No offset hacks needed on content
+```
+
+See also: [Animation Patterns](docs/architecture/patterns/animation-patterns.md) | [SCSS Organization](docs/architecture/patterns/scss-organization.md)
 
 ## Webflow Reference
 
@@ -126,8 +166,8 @@ webflow-export/
 - **[Analytics Strategy](docs/analytics/README.md)** - GTM/GA4 configuration and cross-domain tracking
 - **[CSS Mapping](docs/webflow-to-hugo-css-mapping.md)** - Webflow class → Hugo SCSS mapping
 - **[Site Analysis](docs/site-analysis/current-site-documentation.md)** - Original site documentation
-- **[Homepage Style Sync](docs/plans/2026-01-16-homepage-style-sync.md)** - Section-by-section sync plan
-- **[SCSS Audit](docs/plans/2026-01-16-webflow-scss-audit-alignment.md)** - Breakpoint and style alignment
+- **[Architecture Decisions](docs/architecture/decisions/)** - ADRs for key technical decisions
+- **[Implementation Patterns](docs/architecture/patterns/)** - Reusable code patterns
 
 ### Workflow for Style Matching
 
@@ -438,6 +478,28 @@ hugo new content/page-name.md
 - Add new tasks discovered during development
 - Update "Last Updated" date when making changes
 - Link to relevant documentation for new features
+
+## Architecture Documentation Maintenance
+
+**When to create a new ADR** (`docs/architecture/decisions/ADR-XXX-*.md`):
+
+- Making a significant technical decision (positioning, animation approach, breakpoints)
+- Choosing between multiple valid approaches
+- Decisions that future developers might question "why did we do it this way?"
+- Changes that affect multiple files or components
+
+**When to update Implementation Patterns** (`docs/architecture/patterns/`):
+
+- Discovering a reusable code pattern worth preserving
+- Refining an existing pattern based on learnings
+- Adding new animation techniques, SCSS conventions, or Hugo template patterns
+
+**When to update CLAUDE.md Architecture Decisions table**:
+
+- After creating any new ADR, add a row summarizing the decision
+- Keep the table as a quick-reference index to full ADRs
+
+**ADR Naming Convention:** `ADR-XXX-short-description.md` (e.g., `ADR-005-gallery-carousel.md`)
 
 ## Resources
 
