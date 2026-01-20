@@ -1,5 +1,7 @@
 # Hero section content for homepage
-# Edit this file to update the hero section
+# Uses dual-image strategy from Webflow:
+# - background_image: Taller image (1920x1080) for CSS background
+# - foreground_image: Wider image (1920x800) for <img> element on mobile
 
 title_line1: "Germantown's Premier"
 title_line2: "ART GALLERY & VENUE"
@@ -10,4 +12,14 @@ tagline:
 cta:
   text: "SCHEDULE A TOUR"
   link: "/contact/"
-background_image: "images/hero/venue-exterior.jpg"
+
+# Background image (taller, 1920x1080) - used as CSS background-image
+background_image: "images/hero/venue-exterior-tall.jpg"
+
+# Foreground image (wider, 1920x800) - used as <img> element on mobile breakpoints
+foreground_image: "images/hero/venue-exterior.jpg"
+
+# Alt text for accessibility
+image_alt:
+  "Outside of Pike & West venue. A white brick, carriage house style building
+  with black roof."
