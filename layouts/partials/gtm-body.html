@@ -1,0 +1,16 @@
+{{/* layouts/partials/gtm-body.html */}}
+{{/*
+  Purpose: Google Tag Manager noscript fallback for <body>
+  Context: Called from baseof.html immediately after opening <body> tag
+  Usage: {{ partial "gtm-body.html" . }}
+
+  This provides tracking for users with JavaScript disabled.
+*/}}
+{{ if hugo.IsProduction }}
+{{ with site.Params.analytics.googleTagManager }}
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ . }}"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+{{ end }}
+{{ end }}
