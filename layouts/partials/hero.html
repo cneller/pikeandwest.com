@@ -1,11 +1,34 @@
 {{- $hero := site.Data.hero -}}
 {{- $heroImage := resources.Get $hero.background_image -}}
-{{- $heroBg := "" -}}
+
+{{- /* Generate responsive image crops for different breakpoints */ -}}
+{{- $imgDesktop := "" -}}
+{{- $imgTablet := "" -}}
+{{- $imgMobile := "" -}}
+
 {{- if $heroImage -}}
-  {{- $heroBg = ($heroImage.Resize "1920x q85").RelPermalink -}}
+  {{- /* Desktop: Full width, original aspect ratio (2.4:1) */ -}}
+  {{- $imgDesktop = ($heroImage.Resize "1920x q85") -}}
+
+  {{- /* Tablet: 16:9 crop centered - taller relative to width */ -}}
+  {{- $imgTablet = ($heroImage.Fill "1200x675 Center q85") -}}
+
+  {{- /* Mobile: 4:3 crop centered - even taller for portrait screens */ -}}
+  {{- $imgMobile = ($heroImage.Fill "800x600 Center q85") -}}
 {{- end -}}
 
-<section class="hero" style="background-image: url('{{ $heroBg }}');">
+<section class="hero">
+  <picture class="hero__bg">
+    {{- if $imgMobile -}}
+    <source media="(max-width: 767px)" srcset="{{ $imgMobile.RelPermalink }}">
+    {{- end -}}
+    {{- if $imgTablet -}}
+    <source media="(max-width: 991px)" srcset="{{ $imgTablet.RelPermalink }}">
+    {{- end -}}
+    {{- if $imgDesktop -}}
+    <img src="{{ $imgDesktop.RelPermalink }}" alt="Outside of Pike & West venue - a white brick carriage house style building" loading="eager">
+    {{- end -}}
+  </picture>
   <div class="hero__content">
     <h1 class="hero__title">{{ $hero.title_line1 }}<br>{{ $hero.title_line2 }}</h1>
     <div class="hero__tagline tagline">

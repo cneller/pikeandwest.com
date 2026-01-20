@@ -187,14 +187,14 @@ Hugo SCSS files have limited 1920px-specific styles. Most were not migrated.
 }
 ```
 
-### Discrepancy: Hamburger Menu Trigger Point
+### Difference: Hamburger Menu Trigger Point
 
 | System  | Hamburger Appears At |
 |---------|----------------------|
 | Webflow | 991px (tablet)       |
 | Hugo    | 767px (mobile)       |
 
-**CRITICAL FINDING:** Hugo shows hamburger at 767px, but Webflow shows it at 991px.
+**INTENTIONAL DEVIATION:** Hugo shows hamburger at 767px, while Webflow shows it at 991px. This is an intentional design decision - Hugo displays full navigation buttons on tablet viewports (768px-991px) rather than the hamburger menu. This provides a better UX on tablets where screen space permits full navigation.
 
 **Evidence from Webflow CSS (line 2703):**
 
@@ -204,43 +204,46 @@ Hugo SCSS files have limited 1920px-specific styles. Most were not migrated.
 }
 ```
 
-**Hugo SCSS (\_header.scss):**
+**Hugo SCSS (\_header.scss) - Intentionally different:**
 
 ```scss
-@media (max-width: $breakpoint-md) { // 767px
-  display: flex; // Show hamburger
+@media (max-width: $breakpoint-md) { // 767px - keeps full nav visible on tablets
+  display: flex; // Show hamburger only on mobile
 }
 ```
 
-## 5. Recommended SCSS Fixes
+## 5. Hamburger Menu Animation
 
-### 5.1 Fix Header Hamburger Breakpoint (HIGH PRIORITY)
-
-Change hamburger visibility from 767px to 991px to match Webflow:
+The Webflow site includes a smooth open/close animation for the hamburger menu via Webflow Interactions. Consider implementing a similar CSS transition in Hugo:
 
 ```scss
-// _header.scss - Change hamburger breakpoint
-&__hamburger {
-  display: none;
-  // ... other styles
-
-  @media (max-width: $breakpoint-lg) { // Changed from $breakpoint-md
-    display: flex; // Show on tablet and below (991px)
-  }
-}
-
+// _header.scss - Add hamburger animation
 &__nav {
-  display: flex;
-  // ... other styles
+  // ... existing styles
 
-  @media (max-width: $breakpoint-lg) { // Changed from $breakpoint-md
-    display: none;
-    // ... mobile nav styles
+  @media (max-width: $breakpoint-md) {
+    // Mobile nav styles
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(-100%);
+    opacity: 0;
+
+    &.is-open {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
+}
+
+&__hamburger-line {
+  transition: transform 0.3s ease, opacity 0.2s ease;
+
+  // Add transform styles for X animation when open
 }
 ```
 
-### 5.2 Add 1920px Ultra-wide Styles (LOW PRIORITY)
+## 6. Recommended SCSS Fixes
+
+### 6.1 Add 1920px Ultra-wide Styles (LOW PRIORITY)
 
 Create new partial or add to existing files:
 
@@ -272,7 +275,7 @@ Create new partial or add to existing files:
 }
 ```
 
-### 5.3 Document Breakpoint Usage Pattern (BEST PRACTICE)
+### 6.2 Document Breakpoint Usage Pattern (BEST PRACTICE)
 
 Add comment block to `_variables.scss`:
 
@@ -295,29 +298,27 @@ Add comment block to `_variables.scss`:
 //   @media (min-width: $breakpoint-md + 1) and (max-width: $breakpoint-lg) { }
 ```
 
-## 6. Summary
+## 7. Summary
 
 ### Alignment Status
 
-| Component          | Status     | Notes                              |
-|--------------------|------------|------------------------------------|
-| Breakpoint values  | ALIGNED    | All 5 breakpoints match exactly    |
-| Media query syntax | COMPATIBLE | Minor difference (no `screen and`) |
-| Header behavior    | MISALIGNED | Hamburger at 767px vs 991px        |
-| Hero grid          | ALIGNED    | Equivalent ratios                  |
-| Footer             | ALIGNED    | All breakpoints match              |
-| Ultra-wide styles  | INCOMPLETE | Some 1920px styles not migrated    |
+| Component          | Status          | Notes                                    |
+|--------------------|-----------------|------------------------------------------|
+| Breakpoint values  | ALIGNED         | All 5 breakpoints match exactly          |
+| Media query syntax | COMPATIBLE      | Minor difference (no `screen and`)       |
+| Header behavior    | **INTENTIONAL** | Hamburger at 767px (not 991px) by design |
+| Hero grid          | ALIGNED         | Equivalent ratios                        |
+| Footer             | ALIGNED         | All breakpoints match                    |
+| Ultra-wide styles  | INCOMPLETE      | Some 1920px styles not migrated          |
 
 ### Priority Fixes
 
-1. **HIGH:** Fix hamburger menu breakpoint from 767px to 991px
-2. **MEDIUM:** Visual test hero grid at each breakpoint
-3. **LOW:** Add missing 1920px ultra-wide styles
+1. **MEDIUM:** Visual test hero grid at each breakpoint
+2. **LOW:** Add missing 1920px ultra-wide styles
 
 ### Files Requiring Changes
 
-| File                                 | Change Required          |
-|--------------------------------------|--------------------------|
-| `/assets/scss/_header.scss`          | Hamburger breakpoint fix |
-| `/assets/scss/_variables.scss`       | Add usage documentation  |
-| `/assets/scss/_hero.scss` (optional) | Add 1920px styles        |
+| File                                 | Change Required         |
+|--------------------------------------|-------------------------|
+| `/assets/scss/_variables.scss`       | Add usage documentation |
+| `/assets/scss/_hero.scss` (optional) | Add 1920px styles       |

@@ -7,38 +7,22 @@
 
 The Hugo implementation is well-aligned with the Webflow source in most areas. The primary gaps requiring attention are:
 
-1. **HIGH PRIORITY:** Header hamburger menu breakpoint (767px vs 991px)
-2. **HIGH PRIORITY:** Missing Oswald font
-3. **MEDIUM:** Ultra-wide (1920px+) responsive styles incomplete
-4. **LOW:** Minor typography variant classes not ported
+1. **HIGH PRIORITY:** Missing Oswald font
+2. **MEDIUM:** Ultra-wide (1920px+) responsive styles incomplete
+3. **LOW:** Minor typography variant classes not ported
 
 ## Gap Categories
 
 ### 1. Responsive Breakpoints
 
-| Issue                    | Webflow | Hugo    | Priority | File           |
-|--------------------------|---------|---------|----------|----------------|
-| Hamburger menu trigger   | 991px   | 767px   | **HIGH** | `_header.scss` |
-| Nav font-size at 1920px+ | 16px    | 12px    | MEDIUM   | `_header.scss` |
-| Logo width at 1920px+    | 20%/25% | Not set | LOW      | `_header.scss` |
-| Hero title at 1920px+    | 60px    | Not set | LOW      | `_hero.scss`   |
+| Issue                    | Webflow | Hugo    | Status          | File           |
+|--------------------------|---------|---------|-----------------|----------------|
+| Hamburger menu trigger   | 991px   | 767px   | **INTENTIONAL** | `_header.scss` |
+| Nav font-size at 1920px+ | 16px    | 12px    | MEDIUM          | `_header.scss` |
+| Logo width at 1920px+    | 20%/25% | Not set | LOW             | `_header.scss` |
+| Hero title at 1920px+    | 60px    | Not set | LOW             | `_hero.scss`   |
 
-**Fix Required:**
-
-```scss
-// _header.scss - Change hamburger breakpoint
-&__hamburger {
-  @media (max-width: $breakpoint-lg) { // Changed from $breakpoint-md
-    display: flex;
-  }
-}
-
-&__nav {
-  @media (max-width: $breakpoint-lg) { // Changed from $breakpoint-md
-    display: none;
-  }
-}
-```
+> **Note:** The hamburger menu breakpoint at 767px (vs Webflow's 991px) is an intentional design decision. Hugo shows full nav buttons on tablet viewports (768px-991px) where Webflow shows hamburger. This is preferred behavior.
 
 ### 2. Typography
 
@@ -101,33 +85,29 @@ $font-accent: 'Oswald', sans-serif;
 
 ### High Priority (Do First)
 
-1. **Fix hamburger breakpoint** - Change from `$breakpoint-md` (767px) to `$breakpoint-lg` (991px)
-   - File: `assets/scss/_header.scss`
-   - Lines: ~52-54, ~103-110
-
-2. **Add Oswald font** - Replace Playfair Display in Google Fonts URL
+1. **Add Oswald font** - Replace Playfair Display in Google Fonts URL
    - File: `layouts/partials/head.html`
    - Line: ~48
 
-3. **Add $font-accent variable** - For Oswald usage
+2. **Add $font-accent variable** - For Oswald usage
    - File: `assets/scss/_variables.scss`
    - Line: ~25
 
 ### Medium Priority
 
-4. **Add ultra-wide nav styling** - 16px font at 1920px+
+1. **Add ultra-wide nav styling** - 16px font at 1920px+
    - File: `assets/scss/_header.scss`
    - Add media query for `$breakpoint-2xl`
 
-5. **Add paragraph variant classes** - `.paragraph-tiny`, `.paragraph-light`
+2. **Add paragraph variant classes** - `.paragraph-tiny`, `.paragraph-light`
    - File: `assets/scss/_typography.scss`
    - Add after line 80
 
 ### Low Priority
 
-6. **Expand Montserrat weights** (if needed for specific content)
-7. **Add hero ultra-wide styles** (60px title at 1920px+)
-8. **Verify all venue images migrated**
+1. **Expand Montserrat weights** (if needed for specific content)
+2. **Add hero ultra-wide styles** (60px title at 1920px+)
+3. **Verify all venue images migrated**
 
 ## Audit Report Locations
 
@@ -136,6 +116,7 @@ $font-accent: 'Oswald', sans-serif;
 | SCSS Variables | `docs/audits/2026-01-20-scss-variables-audit.md` |
 | Breakpoints    | `docs/audits/2026-01-20-breakpoints-audit.md`    |
 | Typography     | `docs/audits/2026-01-20-typography-audit.md`     |
+| Homepage       | `docs/audits/2026-01-20-homepage-audit.md`       |
 
 ## Webflow MCP Extraction Files
 
@@ -148,6 +129,35 @@ $font-accent: 'Oswald', sans-serif;
 | Homepage Elements  | `webflow-mcp-analysis/elements/homepage-raw.json`  |
 | Asset Inventory    | `webflow-mcp-analysis/assets/inventory.md`         |
 | Custom Code        | `webflow-mcp-analysis/custom-code/`                |
+
+## Hamburger Menu Animation
+
+The Webflow site includes a smooth open/close animation for the hamburger menu via Webflow Interactions. Consider implementing a similar CSS transition in Hugo:
+
+```scss
+// _header.scss - Add hamburger animation
+&__nav {
+  // ... existing styles
+
+  @media (max-width: $breakpoint-md) {
+    // Mobile nav styles
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(-100%);
+    opacity: 0;
+
+    &.is-open {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+&__hamburger-line {
+  transition: transform 0.3s ease, opacity 0.2s ease;
+
+  // Add transform styles for X animation when open
+}
+```
 
 ## Next Steps
 

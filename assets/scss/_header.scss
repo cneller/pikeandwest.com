@@ -99,6 +99,12 @@
       &.is-open {
         display: flex;
       }
+
+      // Full-width buttons in mobile menu
+      .header__link {
+        width: 100%;
+        text-align: center;
+      }
     }
   }
 
