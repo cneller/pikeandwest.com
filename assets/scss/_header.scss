@@ -64,11 +64,11 @@
     background-color: $color-medium-gray;
     border-radius: 1px;
     transform: translate(-50%, -50%);
-    // Middle bar fades out on open + rotation on hover
+    // Middle bar fades out on open + glow on hover
     transition:
       background-color 0.15s ease,
-      transform 0.2s ease,
-      width 0.2s ease;
+      width 0.2s ease,
+      filter 0.2s ease;
 
     &::before,
     &::after {
@@ -102,10 +102,13 @@
     }
   }
 
-  // Hover state - bars spread + slight rotation (anticipation)
-  &__hamburger:hover .header__hamburger-inner {
-    // Subtle rotation hints at upcoming animation
-    transform: translate(-50%, -50%) rotate(3deg);
+  // Hover state - spread + glow + middle shrink (anticipation)
+  // Only applies when menu is closed (not in X state)
+  &__hamburger:not([aria-expanded='true']):hover .header__hamburger-inner {
+    // Middle bar shrinks, hinting it will disappear
+    width: 18px;
+    // Subtle glow matching line color
+    filter: drop-shadow(0 0 1px rgba($color-medium-gray, 0.4));
 
     &::before {
       top: -9px;
