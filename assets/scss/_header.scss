@@ -64,8 +64,11 @@
     background-color: $color-medium-gray;
     border-radius: 1px;
     transform: translate(-50%, -50%);
-    // Middle bar fades out on open
-    transition: background-color 0.15s ease;
+    // Middle bar fades out on open + rotation on hover
+    transition:
+      background-color 0.15s ease,
+      transform 0.2s ease,
+      width 0.2s ease;
 
     &::before,
     &::after {
@@ -99,8 +102,11 @@
     }
   }
 
-  // Hover state - bars spread apart slightly (anticipation)
+  // Hover state - bars spread + slight rotation (anticipation)
   &__hamburger:hover .header__hamburger-inner {
+    // Subtle rotation hints at upcoming animation
+    transform: translate(-50%, -50%) rotate(3deg);
+
     &::before {
       top: -9px;
     }
