@@ -66,11 +66,14 @@
     background-color: $color-medium-gray;
     border-radius: 1px;
     transform: translate(-50%, -50%);
-    // Middle bar fades out on open + glow on hover
+    // 3D flip: preserve-3d allows children to exist in 3D space
+    transform-style: preserve-3d;
+    // Middle bar fades out on open + glow on hover + 3D flip
     transition:
       background-color 0.15s ease,
       width 0.2s ease,
-      filter 0.2s ease;
+      filter 0.2s ease,
+      transform 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
 
     &::before,
     &::after {
