@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Deploy
 
 on:
   push:
@@ -46,11 +46,11 @@ concurrency:
 
 jobs:
   build:
-    name: Build Hugo site
+    name: Build
     uses: ./.github/workflows/build.yml
 
   deploy:
-    name: Deploy to Cloudflare Pages
+    name: Deploy
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -59,7 +59,7 @@ jobs:
       deployments: write
       pull-requests: write
     steps:
-      - name: Download artifact
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: hugo-site
@@ -68,7 +68,7 @@ jobs:
       - name: Install Wrangler
         run: npm install -g wrangler
 
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy
         id: deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -85,7 +85,7 @@ jobs:
           URL=$(echo "$OUTPUT" | grep -oE 'https://[a-z0-9-]+\.pikeandwest\.pages\.dev' | head -1)
           echo "deployment-url=$URL" >> $GITHUB_OUTPUT
 
-      - name: Comment PR with Preview URL
+      - name: Comment PR
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
@@ -120,15 +120,15 @@ jobs:
               });
             }
 
-      - name: Output deployment URL
+      - name: Log URL
         if: github.event_name == 'push'
         run: echo "Deployed to ${{ steps.deploy.outputs.deployment-url }}"
 
     outputs:
       deployment-url: ${{ steps.deploy.outputs.deployment-url }}
 
-  lighthouse:
-    name: Lighthouse - ${{ matrix.page.name }}
+  perf:
+    name: Perf - ${{ matrix.page.name }}
     needs: deploy
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -138,16 +138,16 @@ jobs:
       fail-fast: false
       matrix:
         page:
-          - { name: 'Homepage', path: '/' }
+          - { name: 'Home', path: '/' }
           - { name: 'About', path: '/about/' }
           - { name: 'Blog', path: '/blog/' }
           - { name: 'Contact', path: '/contact/' }
-          - { name: 'Gallery Application', path: '/gallery-application/' }
+          - { name: 'Gallery', path: '/gallery-application/' }
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run Lighthouse
+      - name: Audit
         id: lighthouse
         uses: treosh/lighthouse-ci-action@v12
         with:
@@ -157,36 +157,36 @@ jobs:
           temporaryPublicStorage: true
           runs: 3
 
-      - name: Save results
+      - name: Save
         run: |
           mkdir -p lighthouse-results
           echo '${{ steps.lighthouse.outputs.manifest }}' > lighthouse-results/${{ matrix.page.name }}.json
           echo '${{ steps.lighthouse.outputs.links }}' > lighthouse-results/${{ matrix.page.name }}-links.json
 
-      - name: Upload results
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: lighthouse-${{ matrix.page.name }}
+          name: perf-${{ matrix.page.name }}
           path: lighthouse-results/
           retention-days: 30
 
-  lighthouse-summary:
-    name: Post Lighthouse summary
-    needs: [deploy, lighthouse]
+  perf-summary:
+    name: Perf Summary
+    needs: [deploy, perf]
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 2
     permissions:
       pull-requests: write
     steps:
-      - name: Download all Lighthouse results
+      - name: Download
         uses: actions/download-artifact@v4
         with:
-          pattern: lighthouse-*
+          pattern: perf-*
           path: lighthouse-results/
           merge-multiple: true
 
-      - name: Generate summary comment
+      - name: Post Summary
         uses: actions/github-script@v7
         with:
           script: |

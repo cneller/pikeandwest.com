@@ -46,25 +46,25 @@ concurrency:
 
 jobs:
   build:
-    name: Build Hugo site
+    name: Build
     uses: ./.github/workflows/build.yml
 
   validate:
-    name: Validate HTML
+    name: Validate
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download artifact
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: hugo-site
           path: public/
 
-      - name: Validate HTML
+      - name: Validate
         uses: wjdp/htmltest-action@master
         with:
           path: public
