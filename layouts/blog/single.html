@@ -24,14 +24,13 @@
       {{ end }}
     </div>
   </div>
+  {{/* Breadcrumb Navigation - overlaid at bottom of hero */}}
+  {{ partial "breadcrumb.html" (dict "Page" . "heroOverlay" true) }}
 </section>
 
 {{/* Blog Content */}}
 <article class="blog-post section">
   <div class="container">
-    {{/* Breadcrumb Navigation - inside container to align with content */}}
-    {{ partial "breadcrumb.html" (dict "Page" . "noContainer" true) }}
-
     <div class="blog-post__content prose">
       {{ .Content }}
     </div>

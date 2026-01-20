@@ -44,4 +44,54 @@
   &__current {
     color: $color-text; // Slightly darker for current page
   }
+
+  // =========================
+  // Hero Overlay Variant
+  // =========================
+  // Positioned at bottom of hero with light text on dark gradient
+
+  &--hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3; // Above hero overlays
+    padding: $spacing-md 0 $spacing-lg;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: $font-size-xs;
+
+    .breadcrumb__list {
+      justify-content: center;
+    }
+
+    .breadcrumb__item {
+      // Use chevron separator for elegance
+      &:not(:last-child)::after {
+        content: '›';
+        margin-left: $spacing-sm;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1.1em;
+      }
+    }
+
+    .breadcrumb__link {
+      color: rgba(255, 255, 255, 0.85);
+
+      &:hover {
+        color: $color-gold;
+      }
+    }
+
+    .breadcrumb__current {
+      color: $color-cream;
+    }
+
+    // Mobile: slightly smaller padding
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-sm 0 $spacing-md;
+      font-size: 11px;
+    }
+  }
 }

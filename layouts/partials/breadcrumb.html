@@ -1,16 +1,23 @@
 {{/*
   Purpose: Render accessible breadcrumb navigation
-  Context: Page context (.) or dict with "Page" and optional "noContainer"
+  Context: Page context (.) or dict with options
+  Options:
+    - Page: the page context (required if using dict)
+    - noContainer: omit the container wrapper (default: false)
+    - heroOverlay: style for overlay on hero image (default: false)
   Usage:
     {{ partial "breadcrumb.html" . }}
     {{ partial "breadcrumb.html" (dict "Page" . "noContainer" true) }}
+    {{ partial "breadcrumb.html" (dict "Page" . "heroOverlay" true) }}
 */}}
 
 {{- $page := . -}}
 {{- $noContainer := false -}}
+{{- $heroOverlay := false -}}
 {{- if reflect.IsMap . -}}
   {{- $page = .Page -}}
   {{- $noContainer = .noContainer | default false -}}
+  {{- $heroOverlay = .heroOverlay | default false -}}
 {{- end -}}
 
 {{- $items := slice (dict "name" "Home" "url" "/") -}}
@@ -30,7 +37,7 @@
 
 {{- /* Only render if we have more than just Home */ -}}
 {{- if gt (len $items) 1 -}}
-<nav class="breadcrumb" aria-label="Breadcrumb">
+<nav class="breadcrumb{{ if $heroOverlay }} breadcrumb--hero-overlay{{ end }}" aria-label="Breadcrumb">
   {{- if not $noContainer -}}<div class="container">{{- end -}}
     <ol class="breadcrumb__list">
       {{- range $index, $item := $items -}}
