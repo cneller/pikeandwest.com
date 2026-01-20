@@ -198,3 +198,14 @@
     padding: 0 20px; // Webflow: navbar1_component has no vertical padding
   }
 }
+
+// Accessibility: Reduce motion for users who prefer it
+@media (prefers-reduced-motion: reduce) {
+  .header__nav {
+    transition: none;
+  }
+
+  .header__hamburger-line {
+    transition: none;
+  }
+}
