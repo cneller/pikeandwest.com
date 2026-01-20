@@ -31,14 +31,18 @@
 // Blog Card
 .blog-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background: $color-white;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
   overflow: hidden;
-  transition: box-shadow $transition-base;
+  transition: box-shadow $transition-base, transform 0.2s ease;
   cursor: pointer;
 
   &:hover {
     box-shadow: $shadow-lg;
+    transform: translateY(-4px);
   }
 
   // Stretched link - makes entire card clickable
@@ -74,6 +78,9 @@
   }
 
   &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: $spacing-lg;
   }
 
@@ -81,7 +88,22 @@
     display: block;
     font-family: $font-secondary;
     font-size: $font-size-sm;
-    color: $color-text-light;
+    font-weight: $font-weight-medium;
+    color: $color-gold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__category {
+    display: inline-block;
+    font-family: $font-secondary;
+    font-size: 0.7rem;
+    font-weight: $font-weight-semibold;
+    color: $color-white;
+    background: $color-gold;
+    padding: 0.2em 0.6em;
+    border-radius: 2px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: $spacing-sm;
@@ -105,11 +127,17 @@
   }
 
   &__excerpt {
+    flex: 1;
     font-family: $font-secondary;
     font-size: $font-size-base;
     color: $color-text-light;
     line-height: 1.6;
     margin: 0 0 $spacing-md;
+    // Limit to 3 lines with ellipsis
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__link {
@@ -130,6 +158,7 @@
 // Blog Post (Single)
 .blog-post {
   padding: $spacing-3xl 0;
+  margin-bottom: $spacing-2xl; // Extra space before CTA banner
 
   .container {
     max-width: 800px;
@@ -214,15 +243,24 @@
     margin: $spacing-3xl 0 $spacing-xl;
     padding-top: $spacing-xl;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+    }
   }
 
   &__nav-link {
     flex: 1;
     text-decoration: none;
     color: $color-text;
+    padding: $spacing-md $spacing-lg;
+    background: $color-cream;
+    border-radius: 4px;
+    transition: background $transition-base, transform 0.2s ease;
 
     &:hover {
-      color: $color-gold;
+      background: darken($color-cream, 5%);
+      transform: translateY(-2px);
     }
 
     &--prev {
@@ -237,10 +275,10 @@
   &__nav-label {
     display: block;
     font-family: $font-secondary;
-    font-size: $font-size-sm;
-    color: $color-text-light;
+    font-size: $font-size-xs;
+    color: $color-gold;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
     margin-bottom: $spacing-xs;
   }
 
@@ -249,5 +287,19 @@
     font-family: $font-primary;
     font-size: $font-size-base;
     font-weight: $font-weight-medium;
+    line-height: 1.4;
+  }
+
+  // Back to blog button styling
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-md;
+    border-width: 2px;
+
+    &::before {
+      content: '←';
+    }
   }
 }

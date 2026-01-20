@@ -37,6 +37,9 @@
         {{ end }}
         {{ end }}
         <div class="blog-card__content">
+          {{ with index .Params.categories 0 }}
+          <span class="blog-card__category">{{ . }}</span>
+          {{ end }}
           <time class="blog-card__date" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ .Date.Format "January 2, 2006" }}
           </time>
