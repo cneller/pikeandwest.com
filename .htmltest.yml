@@ -7,4 +7,6 @@ IgnoreURLs:
   - 'https://maps.google.com'
   - 'https://www.instagram.com'
   - 'https://www.facebook.com'
+IgnoreAltMissing: false
+IgnoreAltEmpty: true
 IgnoreInternalEmptyHash: true
