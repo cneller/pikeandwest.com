@@ -7,12 +7,15 @@ This document tracks the current project state and upcoming work. Keep this file
 
 ## Current Status
 
-| Area               | Status   | Notes                                    |
-|--------------------|----------|------------------------------------------|
-| Hugo Site          | Complete | All pages migrated from Webflow          |
-| Staging Deployment | Active   | beta.pikeandwest.com on Cloudflare Pages |
-| GTM/GA4 Analytics  | Verified | Tracking active, cross-domain configured |
-| Production Domain  | Pending  | <www.pikeandwest.com> still on Webflow     |
+| Area               | Status   | Notes                                          |
+|--------------------|----------|------------------------------------------------|
+| Hugo Site          | Complete | All pages migrated from Webflow                |
+| Staging Deployment | Active   | beta.pikeandwest.com on Cloudflare Pages       |
+| GTM/GA4 Analytics  | Verified | Tracking active, cross-domain configured       |
+| Production Domain  | Pending  | <www.pikeandwest.com> still on Webflow         |
+| Architecture Docs  | Complete | ADRs and patterns in docs/architecture/        |
+| Marketing Strategy | Complete | Comprehensive docs in docs/marketing-strategy/ |
+| Claude Hooks       | Active   | Pre-commit docs check hook enabled             |
 
 ## Immediate Tasks (Blocked)
 
@@ -150,6 +153,9 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 - [Cross-Domain Tracking Verification](./cross-domain-tracking-verification.md)
 - [CSS Mapping](./webflow-to-hugo-css-mapping.md)
 - [Site Analysis](./site-analysis/current-site-documentation.md)
+- [Architecture Decisions](./architecture/decisions/) - ADRs for key technical choices
+- [Implementation Patterns](./architecture/patterns/) - Reusable code patterns
+- [Marketing Strategy](./marketing-strategy/README.md) - Comprehensive marketing docs
 
 ### External Resources
 
@@ -160,8 +166,12 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 ## Changelog
 
-| Date       | Change                                             |
-|------------|----------------------------------------------------|
-| 2026-01-20 | Initial creation with analytics verification tasks |
-| 2026-01-20 | Added beta subdomain deployment status             |
-| 2026-01-20 | Added future enhancements from web research        |
+| Date       | Change                                                       |
+|------------|--------------------------------------------------------------|
+| 2026-01-20 | Initial creation with analytics verification tasks           |
+| 2026-01-20 | Added beta subdomain deployment status                       |
+| 2026-01-20 | Added future enhancements from web research                  |
+| 2026-01-20 | Added architecture docs (4 ADRs, 2 pattern docs)             |
+| 2026-01-20 | Added marketing strategy documentation suite                 |
+| 2026-01-20 | Added pre-commit docs check hook for documentation reminders |
+| 2026-01-20 | SCSS visual parity refinements across all sections           |
