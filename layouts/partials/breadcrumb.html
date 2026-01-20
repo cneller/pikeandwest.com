@@ -1,28 +1,37 @@
 {{/*
   Purpose: Render accessible breadcrumb navigation
-  Context: Page context (.)
-  Usage: {{ partial "breadcrumb.html" . }}
+  Context: Page context (.) or dict with "Page" and optional "noContainer"
+  Usage:
+    {{ partial "breadcrumb.html" . }}
+    {{ partial "breadcrumb.html" (dict "Page" . "noContainer" true) }}
 */}}
+
+{{- $page := . -}}
+{{- $noContainer := false -}}
+{{- if reflect.IsMap . -}}
+  {{- $page = .Page -}}
+  {{- $noContainer = .noContainer | default false -}}
+{{- end -}}
 
 {{- $items := slice (dict "name" "Home" "url" "/") -}}
 
 {{- /* Add section (e.g., Blog) */ -}}
-{{- if .Section -}}
-  {{- $sectionTitle := .Section | humanize | title -}}
-  {{- if eq .Kind "section" -}}
+{{- if $page.Section -}}
+  {{- $sectionTitle := $page.Section | humanize | title -}}
+  {{- if eq $page.Kind "section" -}}
     {{- /* On section list page: section is current (non-linked) */ -}}
     {{- $items = $items | append (dict "name" $sectionTitle "url" "") -}}
   {{- else -}}
     {{- /* On single page: section is linked, then add current page */ -}}
-    {{- $items = $items | append (dict "name" $sectionTitle "url" (printf "/%s/" .Section)) -}}
-    {{- $items = $items | append (dict "name" .Title "url" "") -}}
+    {{- $items = $items | append (dict "name" $sectionTitle "url" (printf "/%s/" $page.Section)) -}}
+    {{- $items = $items | append (dict "name" $page.Title "url" "") -}}
   {{- end -}}
 {{- end -}}
 
 {{- /* Only render if we have more than just Home */ -}}
 {{- if gt (len $items) 1 -}}
 <nav class="breadcrumb" aria-label="Breadcrumb">
-  <div class="container">
+  {{- if not $noContainer -}}<div class="container">{{- end -}}
     <ol class="breadcrumb__list">
       {{- range $index, $item := $items -}}
         <li class="breadcrumb__item">
@@ -34,6 +43,6 @@
         </li>
       {{- end -}}
     </ol>
-  </div>
+  {{- if not $noContainer -}}</div>{{- end -}}
 </nav>
 {{- end -}}
