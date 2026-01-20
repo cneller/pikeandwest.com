@@ -39,3 +39,6 @@ backstop_data/html_report/
 
 # Claude Code local settings (user-specific overrides)
 .claude/settings.local.json
+
+# Git worktrees
+.worktrees/
