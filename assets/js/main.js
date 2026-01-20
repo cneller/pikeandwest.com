@@ -58,6 +58,24 @@ function initMobileNav() {
       hamburger.focus(); // Return focus to hamburger for accessibility
     }
   });
+
+  // Close menu when viewport expands past mobile breakpoint
+  const mobileBreakpoint = window.matchMedia('(max-width: 767px)');
+
+  function handleBreakpointChange(e) {
+    // If we crossed INTO desktop (breakpoint no longer matches)
+    if (!e.matches) {
+      closeMenu();
+    }
+  }
+
+  // Modern browsers
+  if (mobileBreakpoint.addEventListener) {
+    mobileBreakpoint.addEventListener('change', handleBreakpointChange);
+  } else {
+    // Legacy Safari (iOS < 14)
+    mobileBreakpoint.addListener(handleBreakpointChange);
+  }
 }
 
 // Gallery Carousel
