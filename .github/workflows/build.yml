@@ -13,6 +13,11 @@ on:
         required: false
         default: 1
         type: number
+      include-perf-config:
+        description: 'Include Lighthouse config in artifact'
+        required: false
+        default: true
+        type: boolean
 
 env:
   HUGO_VERSION: '0.154.5'
@@ -49,9 +54,14 @@ jobs:
           HUGO_CACHEDIR: /tmp/hugo_cache
         run: hugo --gc --minify
 
+      - name: Include perf config
+        if: inputs.include-perf-config
+        run: cp lighthouserc.json public/
+
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.artifact-name }}
           path: public/
           retention-days: ${{ inputs.artifact-retention-days }}
+          compression-level: 0
