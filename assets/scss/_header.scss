@@ -85,19 +85,35 @@
     // Mobile nav - hidden by default, shown when hamburger is open
     // Mobile (767px and below)
     @media (max-width: $breakpoint-md) {
-      display: none;
+      // Use flex always, control visibility with other properties
+      display: flex;
       position: absolute;
       top: 100%;
       left: 0;
       right: 0;
       flex-direction: column;
       background-color: $color-white;
-      padding: 20px;
+      padding: 0 20px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       gap: $spacing-sm;
 
+      // Animation properties - closed state
+      max-height: 0;
+      opacity: 0;
+      visibility: hidden;
+      overflow: hidden;
+      transition:
+        max-height 0.3s ease-out,
+        opacity 0.3s ease-out,
+        visibility 0.3s ease-out,
+        padding 0.3s ease-out;
+
       &.is-open {
-        display: flex;
+        // Open state
+        max-height: 300px; // Enough for menu items
+        opacity: 1;
+        visibility: visible;
+        padding: 20px;
       }
 
       // Full-width buttons in mobile menu
