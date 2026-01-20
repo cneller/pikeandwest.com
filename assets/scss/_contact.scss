@@ -26,23 +26,57 @@
     margin: 20px auto; // Webflow: margin: 20px auto
     padding: 0;
     overflow: hidden;
-    border: 1px solid #eee; // Webflow: border: 1px #eee
+    // No border - seamless integration with page
+    border: none;
+    // Flex container to allow iframe to grow
+    display: flex;
+    flex-direction: column;
 
     iframe {
       width: 100%;
-      min-height: 500px;
+      // HoneyBook inquiry form with 9 fields + large textarea + submit + reCAPTCHA notice
+      // Tested heights: 800px cuts at guests, 1100px cuts at date, 1400px cuts at textarea
+      // Need ~1600px to show full form including submit button and legal text
+      min-height: 1600px;
+      height: auto;
       border: 0;
-      display: flex;
-      flex-grow: 1;
+      // Flex-grow allows iframe to fill container
+      flex: 1;
+      // Ensure no internal scrollbars display
+      display: block;
     }
 
-    // Mobile: full width and viewport height
+    // Tablet: slightly taller to accommodate form layout changes
+    @media (max-width: $breakpoint-lg) {
+      width: 85%;
+      max-width: none;
+
+      iframe {
+        min-height: 1650px;
+      }
+    }
+
+    // Mobile landscape: full width, fields stack differently
     @media (max-width: $breakpoint-md) {
       width: 100%;
-      min-height: 100vh; // Webflow: min-height: 100vh on mobile
       margin-top: 1.25rem;
       margin-bottom: 1.25rem;
-      display: flex;
+
+      iframe {
+        // Mobile forms expand vertically due to fully stacked fields
+        min-height: 1750px;
+      }
+    }
+
+    // Mobile portrait: extra height for fully stacked single-column layout
+    @media (max-width: $breakpoint-sm) {
+      padding: 0;
+
+      iframe {
+        // HoneyBook forms on small mobile need maximum height
+        // Single-column layout with all fields stacked requires ~2000px
+        min-height: 2100px;
+      }
     }
   }
 }

@@ -12,7 +12,10 @@
     {{- block "main" . }}{{- end }}
   </main>
 
-  {{- partial "cta-banner.html" . -}}
+  {{- $isContactPage := and .File (eq .File.BaseFileName "contact") -}}
+  {{- if not $isContactPage -}}
+    {{- partial "cta-banner.html" . -}}
+  {{- end -}}
   {{- partial "footer.html" . -}}
 
   {{- partial "scripts.html" . -}}
