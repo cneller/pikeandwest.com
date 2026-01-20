@@ -3,8 +3,42 @@ name: CI
 on:
   push:
     branches: [main]
+    paths:
+      # Hugo site source files
+      - 'content/**'
+      - 'layouts/**'
+      - 'assets/**'
+      - 'static/**'
+      - 'config/**'
+      - 'data/**'
+      - 'archetypes/**'
+      - 'hugo.toml'
+      - 'go.mod'
+      - 'go.sum'
+      # CI/build configuration
+      - 'lighthouserc.json'
+      - '.htmltest.yml'
+      # Workflow files (to test workflow changes)
+      - '.github/workflows/**'
   pull_request:
     branches: [main]
+    paths:
+      # Hugo site source files
+      - 'content/**'
+      - 'layouts/**'
+      - 'assets/**'
+      - 'static/**'
+      - 'config/**'
+      - 'data/**'
+      - 'archetypes/**'
+      - 'hugo.toml'
+      - 'go.mod'
+      - 'go.sum'
+      # CI/build configuration
+      - 'lighthouserc.json'
+      - '.htmltest.yml'
+      # Workflow files (to test workflow changes)
+      - '.github/workflows/**'
 
 concurrency:
   group: ci-${{ github.ref }}
