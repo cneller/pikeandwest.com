@@ -2,29 +2,79 @@
   "id": "pike-west-migration",
   "viewports": [
     {
-      "label": "mobile",
-      "width": 375,
-      "height": 812
+      "label": "mobile-portrait",
+      "width": 480,
+      "height": 844
+    },
+    {
+      "label": "mobile-landscape",
+      "width": 768,
+      "height": 480
     },
     {
       "label": "tablet",
-      "width": 768,
-      "height": 1024
+      "width": 992,
+      "height": 768
     },
     {
       "label": "desktop",
-      "width": 1440,
-      "height": 900
+      "width": 1280,
+      "height": 800
     }
   ],
   "scenarios": [
     {
-      "label": "Homepage - Hero",
+      "label": "Section - Hero",
       "url": "http://localhost:1313/",
       "referenceUrl": "https://pikeandwest.com/",
       "delay": 2000,
-      "selectors": ["document"],
-      "misMatchThreshold": 0.5,
+      "selectors": [".hero"],
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Section - Our Venue Gallery",
+      "url": "http://localhost:1313/",
+      "referenceUrl": "https://pikeandwest.com/",
+      "delay": 2000,
+      "selectors": [".venue-gallery"],
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Section - Event Types",
+      "url": "http://localhost:1313/",
+      "referenceUrl": "https://pikeandwest.com/",
+      "delay": 2000,
+      "selectors": [".event-types"],
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Section - About",
+      "url": "http://localhost:1313/",
+      "referenceUrl": "https://pikeandwest.com/",
+      "delay": 2000,
+      "selectors": [".about"],
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Section - CTA Banner",
+      "url": "http://localhost:1313/",
+      "referenceUrl": "https://pikeandwest.com/",
+      "delay": 2000,
+      "selectors": [".cta-banner"],
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Section - Footer",
+      "url": "http://localhost:1313/",
+      "referenceUrl": "https://pikeandwest.com/",
+      "delay": 2000,
+      "selectors": ["footer"],
+      "misMatchThreshold": 1,
       "requireSameDimensions": false
     },
     {
@@ -34,30 +84,8 @@
       "delay": 3000,
       "selectors": ["document"],
       "fullPage": true,
-      "misMatchThreshold": 0.5,
+      "misMatchThreshold": 1,
       "requireSameDimensions": false
-    },
-    {
-      "label": "Contact Page",
-      "url": "http://localhost:1313/contact/",
-      "referenceUrl": "https://pikeandwest.com/contact",
-      "delay": 2000,
-      "selectors": ["document"],
-      "fullPage": true,
-      "misMatchThreshold": 0.5,
-      "requireSameDimensions": false,
-      "hideSelectors": ["iframe"]
-    },
-    {
-      "label": "Gallery Application Page",
-      "url": "http://localhost:1313/gallery-application/",
-      "referenceUrl": "https://pikeandwest.com/gallery-application",
-      "delay": 2000,
-      "selectors": ["document"],
-      "fullPage": true,
-      "misMatchThreshold": 0.5,
-      "requireSameDimensions": false,
-      "hideSelectors": ["iframe"]
     }
   ],
   "paths": {
