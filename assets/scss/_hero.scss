@@ -51,7 +51,7 @@
     margin-top: 60px;
     margin-left: 0;
     padding-top: 0;
-    padding-left: 5%; // Match header padding to align under logo
+    padding-left: 5vw; // Match header's 5% padding (viewport-relative)
     padding-right: 0;
     color: $color-cream;
   }
@@ -91,7 +91,7 @@
       margin-top: 100px;
       margin-left: 0;
       padding-top: 0;
-      padding-left: 5%; // Match header padding to align under logo
+      padding-left: 5vw; // Match header's 5% padding (viewport-relative)
       display: flex;
     }
 
