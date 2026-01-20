@@ -272,7 +272,7 @@ draft: false
 author: "Pike & West"
 categories: ["Birthdays"]
 tags: ["milestone birthday", "birthday party", "new year", "celebration planning", "50th birthday", "adult birthday party"]
-image: "images/venue/venue-02-interior.jpeg"
+image: "images/venue/venue-02-foyer.png"
 image_alt: "Sophisticated Pike & West art gallery venue in Germantown Tennessee with elegant lighting perfect for milestone birthday celebrations"
 keywords:
   - milestone birthday venue Memphis
@@ -375,8 +375,9 @@ keywords:
 ### Quality Checks
 
 - [ ] Run `hugo server` to verify posts render correctly
-- [ ] Check post dates appear in correct chronological order
-- [ ] Verify all internal links work (especially CTAs to /contact/)
+- [x] Check post dates appear in correct chronological order (Oct 14 < Nov 8 < Dec 19 < Jan 19 < Jan 20)
+- [x] Verify all internal links work (CTAs to /contact/ confirmed)
+- [x] Verify image paths exist in assets (all 3 images confirmed)
 - [ ] Test responsive layout at mobile/tablet/desktop
 
 ### Publishing
