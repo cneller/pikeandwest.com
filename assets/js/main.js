@@ -1,9 +1,10 @@
 // Pike & West Theme JavaScript
 // ============================
+// Optimized for CSS Scroll-Snap gallery
 
 document.addEventListener('DOMContentLoaded', function () {
   initMobileNav();
-  initGalleryCarousel();
+  initGalleryScrollButtons();
   initLightbox();
   initScrollAnimations();
 });
@@ -56,7 +57,7 @@ function initMobileNav() {
       hamburger.getAttribute('aria-expanded') === 'true'
     ) {
       closeMenu();
-      hamburger.focus(); // Return focus to hamburger for accessibility
+      hamburger.focus();
     }
   });
 
@@ -64,13 +65,11 @@ function initMobileNav() {
   const mobileBreakpoint = window.matchMedia('(max-width: 767px)');
 
   function handleBreakpointChange(e) {
-    // If we crossed INTO desktop (breakpoint no longer matches)
     if (!e.matches) {
       closeMenu();
     }
   }
 
-  // Modern browsers
   if (mobileBreakpoint.addEventListener) {
     mobileBreakpoint.addEventListener('change', handleBreakpointChange);
   } else {
@@ -79,92 +78,47 @@ function initMobileNav() {
   }
 }
 
-// Gallery Carousel
-function initGalleryCarousel() {
+// Gallery Scroll Buttons (for CSS scroll-snap gallery)
+function initGalleryScrollButtons() {
   const track = document.getElementById('gallery-track');
-  const nav = document.getElementById('gallery-nav');
-
-  if (!track || !nav) return;
-
-  const slides = track.querySelectorAll('.venue-gallery__slide');
-  const navBtns = nav.querySelectorAll('.venue-gallery__nav-btn');
   const prevBtn = document.querySelector('.venue-gallery__arrow--prev');
   const nextBtn = document.querySelector('.venue-gallery__arrow--next');
 
-  if (slides.length === 0) return;
+  if (!track || (!prevBtn && !nextBtn)) return;
 
-  let currentIndex = 0;
-  const slideWidth = slides[0].offsetWidth + 16; // Width + gap
-  const visibleSlides = Math.floor(
-    track.parentElement.offsetWidth / slideWidth
-  );
-  const maxIndex = Math.max(0, slides.length - visibleSlides);
+  // Get slide width for scroll amount
+  function getScrollAmount() {
+    const slide = track.querySelector('.venue-gallery__slide');
+    if (!slide) return 300;
+    const style = getComputedStyle(track);
+    const gap = parseInt(style.gap) || 16;
+    return slide.offsetWidth + gap;
+  }
 
-  function goToSlide(index) {
-    currentIndex = Math.max(0, Math.min(index, maxIndex));
-    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-
-    // Update nav buttons
-    navBtns.forEach((btn, i) => {
-      btn.classList.toggle(
-        'venue-gallery__nav-btn--active',
-        i === currentIndex
-      );
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({
+        left: -getScrollAmount(),
+        behavior: 'smooth',
+      });
     });
   }
 
-  // Nav button clicks
-  navBtns.forEach((btn, i) => {
-    btn.addEventListener('click', () => goToSlide(i));
-  });
-
-  // Arrow clicks
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-  }
   if (nextBtn) {
-    nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
-  }
-
-  // Touch/swipe support
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  track.addEventListener(
-    'touchstart',
-    (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    },
-    { passive: true }
-  );
-
-  track.addEventListener(
-    'touchend',
-    (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    },
-    { passive: true }
-  );
-
-  function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
-
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0) {
-        goToSlide(currentIndex + 1);
-      } else {
-        goToSlide(currentIndex - 1);
-      }
-    }
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({
+        left: getScrollAmount(),
+        behavior: 'smooth',
+      });
+    });
   }
 }
 
-// Lightbox
+// Lightbox with WebP support
 function initLightbox() {
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightbox-image');
+  const lightboxSourceWebp = document.getElementById('lightbox-source-webp');
   const closeBtn = lightbox?.querySelector('.lightbox__close');
 
   if (!lightbox || !lightboxImage) return;
@@ -173,11 +127,21 @@ function initLightbox() {
   document.querySelectorAll('.venue-gallery__image').forEach((img) => {
     img.addEventListener('click', () => {
       const fullSrc = img.dataset.full || img.src;
+      const fullSrcWebp = img.dataset.fullWebp || '';
+
+      // Set WebP source if available
+      if (lightboxSourceWebp && fullSrcWebp) {
+        lightboxSourceWebp.srcset = fullSrcWebp;
+      }
+
       lightboxImage.src = fullSrc;
       lightboxImage.alt = img.alt;
       lightbox.classList.add('lightbox--open');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+
+      // Focus management for accessibility
+      closeBtn?.focus();
     });
   });
 
@@ -186,7 +150,11 @@ function initLightbox() {
     lightbox.classList.remove('lightbox--open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    lightboxImage.src = '';
+    lightboxImage.src =
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    if (lightboxSourceWebp) {
+      lightboxSourceWebp.srcset = '';
+    }
   }
 
   closeBtn?.addEventListener('click', closeLightbox);
@@ -216,22 +184,21 @@ function initScrollAnimations() {
   ).matches;
 
   if (prefersReducedMotion) {
-    // Show all elements immediately for users who prefer reduced motion
     fadeElements.forEach((el) => el.classList.add('is-visible'));
     return;
   }
 
   const observerOptions = {
-    root: null, // viewport
-    rootMargin: '0px 0px -50px 0px', // Trigger slightly before fully in view
-    threshold: 0.1, // 10% visible
+    root: null,
+    rootMargin: '0px 0px -50px 0px',
+    threshold: 0.1,
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target); // Only animate once
+        observer.unobserve(entry.target);
       }
     });
   }, observerOptions);

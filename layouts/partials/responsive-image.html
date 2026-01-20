@@ -1,0 +1,95 @@
+{{/*
+  Responsive Image Partial with WebP Support
+
+  Purpose: Generate responsive images with WebP format and JPEG fallback
+
+  Parameters (passed as dict):
+    - image: Hugo image resource (required)
+    - alt: Alt text for the image (required)
+    - sizes: Sizes attribute for responsive images (default: "100vw")
+    - widths: Array of widths to generate (default: [400, 600, 800, 1200, 1600])
+    - class: CSS class for the img element (optional)
+    - loading: "lazy" or "eager" (default: "lazy")
+    - fetchpriority: "high", "low", or "auto" (optional, for LCP images)
+    - quality: Image quality 1-100 (default: 85)
+
+  Usage:
+    {{ partial "responsive-image.html" (dict
+      "image" $myImage
+      "alt" "Description"
+      "sizes" "(max-width: 768px) 100vw, 50vw"
+      "class" "my-image-class"
+      "loading" "eager"
+      "fetchpriority" "high"
+    ) }}
+*/}}
+
+{{- $image := .image -}}
+{{- $alt := .alt | default "" -}}
+{{- $sizes := .sizes | default "100vw" -}}
+{{- $widths := .widths | default (slice 400 600 800 1200 1600) -}}
+{{- $class := .class | default "" -}}
+{{- $loading := .loading | default "lazy" -}}
+{{- $fetchpriority := .fetchpriority -}}
+{{- $quality := .quality | default 85 -}}
+
+{{- if $image -}}
+  {{- /* Generate WebP srcset */ -}}
+  {{- $webpSrcset := slice -}}
+  {{- range $width := $widths -}}
+    {{- if ge $image.Width $width -}}
+      {{- $resized := $image.Resize (printf "%dx webp q%d" $width $quality) -}}
+      {{- $webpSrcset = $webpSrcset | append (printf "%s %dw" $resized.RelPermalink $width) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- /* Add original width if larger than all specified widths */ -}}
+  {{- $maxWidth := index $widths (sub (len $widths) 1) -}}
+  {{- if gt $image.Width $maxWidth -}}
+    {{- $resized := $image.Resize (printf "%dx webp q%d" $image.Width $quality) -}}
+    {{- $webpSrcset = $webpSrcset | append (printf "%s %dw" $resized.RelPermalink $image.Width) -}}
+  {{- end -}}
+
+  {{- /* Generate JPEG/PNG srcset (fallback) */ -}}
+  {{- $fallbackSrcset := slice -}}
+  {{- $fallbackFormat := "jpg" -}}
+  {{- if eq $image.MediaType.SubType "png" -}}
+    {{- $fallbackFormat = "png" -}}
+  {{- end -}}
+  {{- range $width := $widths -}}
+    {{- if ge $image.Width $width -}}
+      {{- $resized := $image.Resize (printf "%dx %s q%d" $width $fallbackFormat $quality) -}}
+      {{- $fallbackSrcset = $fallbackSrcset | append (printf "%s %dw" $resized.RelPermalink $width) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if gt $image.Width $maxWidth -}}
+    {{- $resized := $image.Resize (printf "%dx %s q%d" $image.Width $fallbackFormat $quality) -}}
+    {{- $fallbackSrcset = $fallbackSrcset | append (printf "%s %dw" $resized.RelPermalink $image.Width) -}}
+  {{- end -}}
+
+  {{- /* Generate fallback src (medium size) */ -}}
+  {{- $fallbackWidth := 800 -}}
+  {{- if lt $image.Width 800 -}}
+    {{- $fallbackWidth = $image.Width -}}
+  {{- end -}}
+  {{- $fallbackSrc := ($image.Resize (printf "%dx %s q%d" $fallbackWidth $fallbackFormat $quality)).RelPermalink -}}
+
+<picture>
+  {{- if gt (len $webpSrcset) 0 }}
+  <source
+    type="image/webp"
+    srcset="{{ delimit $webpSrcset ", " }}"
+    sizes="{{ $sizes }}"
+  >
+  {{- end }}
+  <img
+    src="{{ $fallbackSrc }}"
+    srcset="{{ delimit $fallbackSrcset ", " }}"
+    sizes="{{ $sizes }}"
+    alt="{{ $alt }}"
+    {{- if $class }} class="{{ $class }}"{{ end }}
+    loading="{{ $loading }}"
+    {{- if $fetchpriority }} fetchpriority="{{ $fetchpriority }}"{{ end }}
+    decoding="async"
+  >
+</picture>
+{{- end -}}

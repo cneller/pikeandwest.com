@@ -1,5 +1,6 @@
 // =========================
 // Gallery/Carousel Section
+// CSS Scroll-Snap Implementation
 // =========================
 
 .venue-gallery {
@@ -31,31 +32,53 @@
 
   &__carousel {
     position: relative;
-    overflow: hidden;
   }
 
+  // CSS Scroll-Snap Track
   &__track {
     display: flex;
     gap: $spacing-md;
-    transition: transform $transition-slow;
+    padding: 0 $spacing-md;
     padding-bottom: 64px; // Webflow: 4rem
+    margin: 0;
+    list-style: none;
+
+    // CSS Scroll-Snap properties
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; // Smooth momentum scrolling on iOS
+
+    // Hide scrollbar but keep functionality
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE/Edge
+    &::-webkit-scrollbar {
+      display: none; // Chrome/Safari/Opera
+    }
+
+    // Respect reduced motion preference
+    @media (prefers-reduced-motion: reduce) {
+      scroll-behavior: auto;
+    }
   }
 
   &__slide {
     flex: 0 0 auto;
     width: 85%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always; // Prevent skipping slides on fast swipe
 
-    @media (min-width: $breakpoint-md) {
+    @media (min-width: $breakpoint-md + 1) {
       width: 45%;
     }
 
-    @media (min-width: $breakpoint-lg) {
+    @media (min-width: $breakpoint-lg + 1) {
       width: 40%;
     }
-  }
 
-  &__slide {
-    overflow: hidden; // Contain the zoom effect
+    // Contain the zoom effect
+    overflow: hidden;
     border-radius: 8px;
   }
 
@@ -65,6 +88,8 @@
     object-fit: cover;
     cursor: pointer;
     border-radius: 8px;
+    // GPU-accelerated transform for smooth animations
+    will-change: transform;
     // Enhanced micro-animation: smooth zoom + brightness lift
     transition:
       transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
@@ -74,39 +99,26 @@
       transform: scale(1.04);
       filter: brightness(1.06);
     }
-  }
 
-  &__nav {
-    display: flex;
-    justify-content: center;
-    gap: 6px; // Webflow: 3px margin on each side = 6px gap
-    margin-top: 0; // Removed $spacing-xl (32px) - track padding-bottom provides spacing
-  }
-
-  &__nav-btn {
-    width: 8px; // Webflow: 1em at 0.5rem font-size = 8px
-    height: 8px;
-    border-radius: 50%;
-    background-color: rgba($color-black, 0.2);
-    border: none;
-    cursor: pointer;
-    transition: background-color $transition-fast;
-
-    &--active,
-    &:hover {
-      background-color: $color-gold;
+    // Disable hover effects on touch devices for better performance
+    @media (hover: none) {
+      &:hover {
+        transform: none;
+        filter: none;
+      }
     }
   }
 
   &__arrows {
     position: absolute;
-    top: 50%;
+    top: calc(50% - 32px); // Center on image area (accounting for padding-bottom)
     transform: translateY(-50%);
     width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 0 $spacing-md;
     pointer-events: none;
+    z-index: 10;
   }
 
   &__arrow {
@@ -121,9 +133,16 @@
     cursor: pointer;
     pointer-events: auto;
     transition: all $transition-fast;
+    // GPU acceleration
+    will-change: background-color;
 
     &:hover {
       background-color: rgba($color-white, 0.9);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-gold;
+      outline-offset: 2px;
     }
 
     svg,
@@ -158,11 +177,23 @@
 
     .venue-gallery__track {
       padding-bottom: 48px; // Webflow: 3rem at 767px
+      gap: $spacing-sm;
     }
 
     .venue-gallery__slide {
       padding-left: 12px; // Webflow: .75rem
       padding-right: 12px;
+    }
+
+    // Smaller arrows on mobile
+    .venue-gallery__arrow {
+      width: 40px;
+      height: 40px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }
@@ -195,6 +226,22 @@
     color: $color-white;
     cursor: pointer;
     font-size: $font-size-2xl;
+    transition: transform $transition-fast;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-gold;
+      outline-offset: 2px;
+    }
+  }
+
+  &__picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__image {

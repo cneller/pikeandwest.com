@@ -1,30 +1,59 @@
 {{- $hero := site.Data.hero -}}
 
-{{- /* Process background image (taller, for CSS) */ -}}
+{{- /* Process background image with WebP */ -}}
 {{- $bgImage := resources.Get $hero.background_image -}}
-{{- $bgUrl := "" -}}
+{{- $bgUrlJpg := "" -}}
+{{- $bgUrlWebp := "" -}}
 {{- if $bgImage -}}
-  {{- $bgUrl = ($bgImage.Resize "1920x q85").RelPermalink -}}
+  {{- $bgUrlJpg = ($bgImage.Resize "1920x jpg q85").RelPermalink -}}
+  {{- $bgUrlWebp = ($bgImage.Resize "1920x webp q85").RelPermalink -}}
 {{- end -}}
 
-{{- /* Process foreground image (wider, for <img> element) */ -}}
+{{- /* Process foreground image */ -}}
 {{- $fgImage := resources.Get $hero.foreground_image -}}
 
-<section class="hero hero-animate" style="background-image: url('{{ $bgUrl }}');">
-  {{- /* Foreground image - hidden by default, visible on mobile breakpoints */ -}}
+<section class="hero hero-animate">
+  {{- /* CSS custom properties for WebP background with fallback */ -}}
+  <style>
+    .hero {
+      background-image: url('{{ $bgUrlJpg }}');
+    }
+    @supports (background-image: url('test.webp')) {
+      .hero {
+        background-image: url('{{ $bgUrlWebp }}');
+      }
+    }
+  </style>
+
+  {{- /* Foreground image with WebP and responsive srcset */ -}}
   {{- if $fgImage -}}
-  <img
-    class="hero__image"
-    src="{{ ($fgImage.Resize "1920x q85").RelPermalink }}"
-    srcset="{{ ($fgImage.Resize "500x q85").RelPermalink }} 500w,
-            {{ ($fgImage.Resize "800x q85").RelPermalink }} 800w,
-            {{ ($fgImage.Resize "1080x q85").RelPermalink }} 1080w,
-            {{ ($fgImage.Resize "1600x q85").RelPermalink }} 1600w,
-            {{ ($fgImage.Resize "1920x q85").RelPermalink }} 1920w"
-    sizes="100vw"
-    alt="{{ $hero.image_alt }}"
-    loading="eager"
-  >
+    {{- /* Generate WebP srcset */ -}}
+    {{- $webpSrcset := slice -}}
+    {{- $jpgSrcset := slice -}}
+    {{- $widths := slice 500 800 1080 1600 1920 -}}
+    {{- range $w := $widths -}}
+      {{- $webp := $fgImage.Resize (printf "%dx webp q85" $w) -}}
+      {{- $jpg := $fgImage.Resize (printf "%dx jpg q85" $w) -}}
+      {{- $webpSrcset = $webpSrcset | append (printf "%s %dw" $webp.RelPermalink $w) -}}
+      {{- $jpgSrcset = $jpgSrcset | append (printf "%s %dw" $jpg.RelPermalink $w) -}}
+    {{- end -}}
+  <picture class="hero__picture">
+    <source
+      type="image/webp"
+      srcset="{{ delimit $webpSrcset ", " }}"
+      sizes="100vw"
+    >
+    <img
+      class="hero__image"
+      src="{{ ($fgImage.Resize "1920x jpg q85").RelPermalink }}"
+      srcset="{{ delimit $jpgSrcset ", " }}"
+      sizes="100vw"
+      alt="{{ $hero.image_alt }}"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    >
+  </picture>
   {{- end -}}
 
   {{- /* Content block */ -}}
