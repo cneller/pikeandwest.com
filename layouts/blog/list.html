@@ -19,31 +19,31 @@
     <div class="blog-list__grid">
       {{ range .Pages.ByDate.Reverse }}
       <article class="blog-card">
+        {{/* Stretched link overlay - makes entire card clickable */}}
+        <a href="{{ .Permalink }}" class="blog-card__link-overlay" aria-label="Read {{ .Title }}"></a>
         {{ with .Params.image }}
         {{ $img := resources.Get . }}
         {{ if $img }}
         {{ $resized := $img.Resize "600x400 q85" }}
-        <a href="{{ .Permalink }}" class="blog-card__image-link">
+        <div class="blog-card__image-wrapper">
           <img
             src="{{ $resized.RelPermalink }}"
-            alt="{{ .Params.image_alt | default .Title }}"
+            alt="{{ $.Params.image_alt | default $.Title }}"
             class="blog-card__image"
             loading="lazy"
           />
-        </a>
+        </div>
         {{ end }}
         {{ end }}
         <div class="blog-card__content">
           <time class="blog-card__date" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ .Date.Format "January 2, 2006" }}
           </time>
-          <h2 class="blog-card__title">
-            <a href="{{ .Permalink }}">{{ .Title }}</a>
-          </h2>
+          <h2 class="blog-card__title">{{ .Title }}</h2>
           <p class="blog-card__excerpt">
             {{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 150 }}{{ end }}
           </p>
-          <a href="{{ .Permalink }}" class="blog-card__link">Read More</a>
+          <span class="blog-card__link">Read More</span>
         </div>
       </article>
       {{ end }}

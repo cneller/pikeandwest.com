@@ -30,16 +30,34 @@
 
 // Blog Card
 .blog-card {
+  position: relative;
   background: $color-white;
   border: 1px solid rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: box-shadow $transition-base;
+  cursor: pointer;
 
   &:hover {
     box-shadow: $shadow-lg;
   }
 
-  &__image-link {
+  // Stretched link - makes entire card clickable
+  &__link-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+
+    // Accessible focus state
+    &:focus {
+      outline: 2px solid $color-gold;
+      outline-offset: 2px;
+    }
+  }
+
+  &__image-wrapper {
     display: block;
     overflow: hidden;
   }
