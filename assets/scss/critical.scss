@@ -5,9 +5,11 @@
 // Contains only essential styles for initial render
 
 // Font-face declarations (essential for text rendering)
+// Subset version: 17KB vs 27KB full
 @font-face {
   font-family: 'Le Mores Collection Serif';
   src:
+    url('/fonts/Le-Mores-Collection-Serif-subset.woff2') format('woff2'),
     url('/fonts/Le-Mores-Collection-Serif.woff2') format('woff2'),
     url('/fonts/Le-Mores-Collection-Serif.ttf') format('truetype');
   font-weight: 400;

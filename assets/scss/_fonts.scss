@@ -4,10 +4,12 @@
 // =========================
 
 // Le Mores Collection Serif - Display font for headlines
-// WOFF2: 27KB (vs 109KB TTF) - 75% smaller
+// Subset WOFF2: 17KB (vs 27KB full, 109KB TTF) - 84% smaller than original
+// Contains: A-Z, a-z, 0-9, common punctuation
 @font-face {
   font-family: 'Le Mores Collection Serif';
   src:
+    url('/fonts/Le-Mores-Collection-Serif-subset.woff2') format('woff2'),
     url('/fonts/Le-Mores-Collection-Serif.woff2') format('woff2'),
     url('/fonts/Le-Mores-Collection-Serif.ttf') format('truetype');
   font-weight: 400;

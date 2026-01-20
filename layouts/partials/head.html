@@ -53,10 +53,10 @@
 <link rel="preconnect" href="https://www.googletagmanager.com" />
 <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-{{/* 2. Preload Critical Fonts (WOFF2 - self-hosted) */}}
+{{/* 2. Preload Critical Fonts (WOFF2 - self-hosted, subset for display) */}}
 <link
   rel="preload"
-  href="/fonts/Le-Mores-Collection-Serif.woff2"
+  href="/fonts/Le-Mores-Collection-Serif-subset.woff2"
   as="font"
   type="font/woff2"
   crossorigin
@@ -122,7 +122,10 @@
 </noscript>
 {{- end -}}
 
-{{/* 7. Prefetch likely next pages (homepage only) */}}
+{{/* 7. Speculation Rules - Instant page navigation (Chromium 109+) */}}
+{{- partial "speculation-rules.html" . -}}
+
+{{/* 8. Fallback prefetch for non-Chromium browsers */}}
 {{- if .IsHome -}}
 <link rel="prefetch" href="/contact/" />
 {{- end -}}
