@@ -241,6 +241,9 @@ jobs:
               pages: scores
             }, null, 2));
 
+            // Save summary for PR comment
+            fs.writeFileSync('summary.md', summary);
+
             return summary;
 
       - name: Upload scores
@@ -256,7 +259,12 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const summary = fs.readFileSync(process.env.GITHUB_STEP_SUMMARY, 'utf8');
+            const body = fs.readFileSync('summary.md', 'utf8');
+
+            if (!body || body.trim() === '') {
+              console.log('No summary content, skipping PR comment');
+              return;
+            }
 
             const { data: comments } = await github.rest.issues.listComments({
               issue_number: context.issue.number,
@@ -267,8 +275,6 @@ jobs:
             const botComment = comments.find(comment =>
               comment.user.type === 'Bot' && comment.body.includes('Lighthouse Report')
             );
-
-            const body = summary;
 
             if (botComment) {
               await github.rest.issues.updateComment({
