@@ -17,6 +17,16 @@ on:
         required: false
         default: 'hugo-site'
         type: string
+      is-main-branch:
+        description: 'Whether this is running on the main branch (for badge updates)'
+        required: false
+        default: false
+        type: boolean
+      pr-number:
+        description: 'Pull request number (for PR comments and labels)'
+        required: false
+        default: 0
+        type: number
   workflow_dispatch:
     inputs:
       deployment-url:
@@ -258,7 +268,7 @@ jobs:
           retention-days: 90
 
       - name: Comment on PR
-        if: github.event_name == 'pull_request'
+        if: inputs.pr-number > 0
         uses: actions/github-script@v7
         with:
           script: |
@@ -270,8 +280,10 @@ jobs:
               return;
             }
 
+            const prNumber = ${{ inputs.pr-number }};
+
             const { data: comments } = await github.rest.issues.listComments({
-              issue_number: context.issue.number,
+              issue_number: prNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
@@ -289,7 +301,7 @@ jobs:
               });
             } else {
               await github.rest.issues.createComment({
-                issue_number: context.issue.number,
+                issue_number: prNumber,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: body
@@ -299,7 +311,7 @@ jobs:
   label:
     name: Label PR
     needs: summary
-    if: github.event_name == 'pull_request' && needs.summary.outputs.has-regression == 'true'
+    if: inputs.pr-number > 0 && needs.summary.outputs.has-regression == 'true'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -309,7 +321,7 @@ jobs:
         with:
           script: |
             await github.rest.issues.addLabels({
-              issue_number: context.issue.number,
+              issue_number: ${{ inputs.pr-number }},
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: ['perf-regression']
@@ -318,7 +330,7 @@ jobs:
   badge:
     name: Update Badge
     needs: summary
-    if: github.ref == 'refs/heads/main'
+    if: inputs.is-main-branch
     runs-on: ubuntu-latest
     permissions:
       contents: write
