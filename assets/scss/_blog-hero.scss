@@ -31,35 +31,33 @@
     min-height: 250px;
   }
 
-  // Mobile - anchor content to bottom to prevent title overflow at top
+  // Mobile - let hero expand to fit content naturally
   @media (max-width: $breakpoint-md) {
     height: auto; // Let content determine height
-    min-height: 220px; // Slightly increased for longer titles
-    max-height: 280px; // Cap maximum height
-    align-items: flex-end; // Anchor content to bottom
+    min-height: 200px; // Minimum for short titles
+    // No max-height - hero expands to fit long titles
   }
 
-  // Mobile portrait - ensure enough space for multi-line titles
+  // Mobile portrait - slightly smaller font handles long titles
   @media (max-width: $breakpoint-sm) {
-    min-height: 200px;
-    max-height: 260px;
+    min-height: 180px;
   }
 
   &__content {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: $spacing-lg;
+    padding: $spacing-xl $spacing-lg; // Generous vertical padding
 
-    // Mobile - add bottom padding when content is bottom-anchored
+    // Mobile - adequate padding for content
     @media (max-width: $breakpoint-md) {
-      padding: $spacing-lg $spacing-md $spacing-xl; // More bottom padding
+      padding: $spacing-lg $spacing-md;
       width: 100%;
     }
 
     // Mobile portrait
     @media (max-width: $breakpoint-sm) {
-      padding: $spacing-md $spacing-sm $spacing-lg;
+      padding: $spacing-md;
     }
   }
 
@@ -78,9 +76,15 @@
     }
 
     @media (max-width: $breakpoint-md) {
-      font-size: 1.75rem;
+      font-size: 1.5rem; // Smaller for long titles
+      letter-spacing: 0.05em; // Tighter spacing on mobile
       max-width: 90%;
       margin: 0 auto;
+    }
+
+    // Even smaller on narrow screens
+    @media (max-width: $breakpoint-sm) {
+      font-size: 1.35rem;
     }
   }
 
