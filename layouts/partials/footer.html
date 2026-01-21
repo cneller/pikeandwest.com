@@ -1,13 +1,11 @@
 {{/*
-  Footer Partial - Compact SEO-Optimized Layout (Option C)
+  Footer Partial - Horizontal Luxury Layout (Option C)
 
-  Purpose: Site-wide footer with prominent contact info, organized navigation,
-           and legal links. Optimized for SEO with internal linking.
+  Purpose: Site-wide footer with balanced 3-column layout for desktop,
+           stacked layout for mobile. Optimized for SEO with internal linking.
 
   Structure:
-  - Top: Logo + Tagline (centered)
-  - Contact: Address, phone, social (prominent, centered)
-  - Navigation: 2-column grid (Events + Explore)
+  - Main row: Logo/tagline (left) | Nav columns (center) | Contact (right)
   - Bottom: Copyright + Legal links
 
   Context: . = Site
@@ -15,94 +13,97 @@
 */}}
 
 <footer class="footer" role="contentinfo">
-  {{/* Brand Section: Logo & Tagline */}}
-  <div class="footer__brand">
-    <a href="/" class="footer__logo" aria-label="Pike & West Home">
-      {{ $logo := resources.Get "images/logo/pike-west-logomark.png" }}
-      {{ if $logo }}
-        {{ $resized := $logo.Resize "80x" }}
-        <img
-          src="{{ $resized.RelPermalink }}"
-          alt="Pike & West"
-          width="40"
-          height="40"
-          loading="lazy"
-        />
-      {{ else }}
-        <span class="footer__logo-text">P&W</span>
-      {{ end }}
-    </a>
-    <p class="footer__tagline">Art and Life. Life and Art. Life as Art.</p>
-  </div>
-
-  {{/* Contact Section: Address, Phone, Social */}}
-  <div class="footer__contact">
-    {{ with .Site.Params.contact }}
-    <address class="footer__contact-info">
-      <a href="{{ $.Site.Params.contact.googleMapsUrl }}" target="_blank" rel="noopener noreferrer" class="footer__contact-address">
-        {{ .address }} · {{ .city }}, {{ .state }} {{ .zip }}
+  {{/* Main Content Row: 3-column layout on desktop */}}
+  <div class="footer__main">
+    {{/* LEFT: Brand Section (Logo & Tagline) */}}
+    <div class="footer__brand">
+      <a href="/" class="footer__logo" aria-label="Pike & West Home">
+        {{ $logo := resources.Get "images/logo/pike-west-logomark.png" }}
+        {{ if $logo }}
+          {{ $resized := $logo.Resize "112x" }}
+          <img
+            src="{{ $resized.RelPermalink }}"
+            alt="Pike & West"
+            width="56"
+            height="56"
+            loading="lazy"
+          />
+        {{ else }}
+          <span class="footer__logo-text">P&W</span>
+        {{ end }}
       </a>
-      <a href="tel:+1{{ replace .phone "." "" }}" class="footer__contact-phone">
-        {{ .phone }}
-      </a>
-    </address>
-    {{ end }}
-    <div class="footer__social">
-      {{ with .Site.Params.social.instagram }}
-      <a
-        href="{{ . }}"
-        class="footer__social-link"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Follow us on Instagram"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
-          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-        </svg>
-      </a>
-      {{ end }}
-      {{ with .Site.Params.social.facebook }}
-      <a
-        href="{{ . }}"
-        class="footer__social-link"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Follow us on Facebook"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
-          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-        </svg>
-      </a>
-      {{ end }}
+      <p class="footer__tagline">Art and Life.<br>Life and Art.<br>Life as Art.</p>
     </div>
-  </div>
 
-  {{/* Navigation Section: 2-column grid */}}
-  <div class="footer__nav">
-    <div class="footer__nav-grid">
-      {{/* Column 1: Events */}}
-      <nav class="footer__column" aria-labelledby="footer-events-heading">
-        <h3 id="footer-events-heading" class="footer__heading">Events</h3>
-        <ul class="footer__list">
-          {{ range .Site.Menus.footer_events }}
-          <li>
-            <a href="{{ .URL }}" class="footer__link">{{ .Name }}</a>
-          </li>
-          {{ end }}
-        </ul>
-      </nav>
+    {{/* CENTER: Navigation Section (2-column grid) */}}
+    <div class="footer__nav">
+      <div class="footer__nav-grid">
+        {{/* Column 1: Events */}}
+        <nav class="footer__column" aria-labelledby="footer-events-heading">
+          <h3 id="footer-events-heading" class="footer__heading">Events</h3>
+          <ul class="footer__list">
+            {{ range .Site.Menus.footer_events }}
+            <li>
+              <a href="{{ .URL }}" class="footer__link">{{ .Name }}</a>
+            </li>
+            {{ end }}
+          </ul>
+        </nav>
 
-      {{/* Column 2: Explore */}}
-      <nav class="footer__column" aria-labelledby="footer-explore-heading">
-        <h3 id="footer-explore-heading" class="footer__heading">Explore</h3>
-        <ul class="footer__list">
-          {{ range .Site.Menus.footer_explore }}
-          <li>
-            <a href="{{ .URL }}" class="footer__link">{{ .Name }}</a>
-          </li>
-          {{ end }}
-        </ul>
-      </nav>
+        {{/* Column 2: Explore */}}
+        <nav class="footer__column" aria-labelledby="footer-explore-heading">
+          <h3 id="footer-explore-heading" class="footer__heading">Explore</h3>
+          <ul class="footer__list">
+            {{ range .Site.Menus.footer_explore }}
+            <li>
+              <a href="{{ .URL }}" class="footer__link">{{ .Name }}</a>
+            </li>
+            {{ end }}
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    {{/* RIGHT: Contact Section (Address, Phone, Social) */}}
+    <div class="footer__contact">
+      {{ with .Site.Params.contact }}
+      <address class="footer__contact-info">
+        <a href="{{ $.Site.Params.contact.googleMapsUrl }}" target="_blank" rel="noopener noreferrer" class="footer__contact-address">
+          {{ .address }}<br>{{ .city }}, {{ .state }} {{ .zip }}
+        </a>
+        <a href="tel:+1{{ replace .phone "." "" }}" class="footer__contact-phone">
+          {{ .phone }}
+        </a>
+      </address>
+      {{ end }}
+      <div class="footer__social">
+        {{ with .Site.Params.social.instagram }}
+        <a
+          href="{{ . }}"
+          class="footer__social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow us on Instagram"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        {{ end }}
+        {{ with .Site.Params.social.facebook }}
+        <a
+          href="{{ . }}"
+          class="footer__social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow us on Facebook"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+        {{ end }}
+      </div>
     </div>
   </div>
 

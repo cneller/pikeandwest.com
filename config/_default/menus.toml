@@ -52,9 +52,9 @@
   url = "/events/dance-events/"
   weight = 6
 
-# Footer: Explore Column (Venue + Connect combined)
+# Footer: Explore Column (priority order)
 [[footer_explore]]
-  name = "About Pike & West"
+  name = "About"
   url = "/about/"
   weight = 1
 
@@ -64,12 +64,12 @@
   weight = 2
 
 [[footer_explore]]
-  name = "Artist Application"
+  name = "Artist"
   url = "/gallery-application/"
   weight = 3
 
 [[footer_explore]]
-  name = "Contact Us"
+  name = "Contact"
   url = "/contact/"
   weight = 4
 

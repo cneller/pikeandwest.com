@@ -9,21 +9,16 @@
   position: relative;
   z-index: 1;
 
-  // ===== Desktop Default (Webflow base styles) =====
-  // Height matches Webflow exactly
+  // ===== Desktop Default =====
   height: 75vh;
   min-height: 50vh;
   max-height: 81vh;
 
-  // Grid layout from Webflow
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3fr 1fr;
-  grid-auto-rows: minmax(0, 0.4fr);
-  grid-auto-columns: 1fr;
-  grid-column-gap: 0;
-  grid-row-gap: 0;
-  align-content: start;
+  // Flexbox for vertical centering, content stays left
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 
   // Background image (taller image, 1920x1080)
   background-size: cover;
@@ -43,18 +38,16 @@
   }
 
   // ===== Content Block =====
-  // Webflow: .div-block
   // Aligned under the logo (header uses padding: 0 5%)
   &__content {
     position: relative;
     z-index: 1;
-    grid-column: 1;
-    margin-top: 60px;
-    margin-left: 0;
-    padding-top: 0;
-    padding-left: 5vw; // Match header's 5% padding (viewport-relative)
-    padding-right: 0;
+    max-width: 600px;
+    margin-left: 5%;
+    margin-right: auto;
+    padding: 0;
     color: $color-cream;
+    text-align: left;
   }
 
   // ===== Title =====
@@ -76,24 +69,8 @@
 
   // ===== BREAKPOINT: 1920px+ (Ultra-wide) =====
   @media (min-width: $breakpoint-2xl) {
-    height: auto;
-    grid-template-rows: 0.5fr 0.5fr;
-    grid-auto-rows: 0.25fr;
-    justify-items: start;
-
     &__image {
       object-fit: fill;
-    }
-
-    &__content {
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      margin-top: 100px;
-      margin-left: 0;
-      padding-top: 0;
-      padding-left: 5vw; // Match header's 5% padding (viewport-relative)
-      display: flex;
     }
 
     &__title {
@@ -103,16 +80,8 @@
 
   // ===== BREAKPOINT: 991px (Tablet) =====
   @media (max-width: $breakpoint-lg) {
-    grid-template-rows: 1fr;
-    grid-auto-rows: 0.25fr;
-
     &__image {
       object-fit: cover;
-    }
-
-    &__content {
-      margin-top: 0;
-      padding-top: 0;
     }
   }
 

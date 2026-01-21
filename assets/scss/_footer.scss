@@ -1,15 +1,14 @@
 // =========================
-// Footer - Compact SEO-Optimized Layout (Option C)
+// Footer - Horizontal Luxury Layout (Option C)
 // =========================
 // Structure:
-// - Brand section (logo + tagline) - centered at top
-// - Contact section (address, phone, social) - prominent, centered
-// - Navigation section (2-column grid: Events + Explore)
+// - Main row: Logo/tagline (left) | Nav columns (center) | Contact (right)
 // - Bottom bar (copyright + legal)
 //
 // Responsive behavior:
-// - Desktop (992px+): Wider nav grid with more spacing
-// - Tablet & Mobile: Compact 2-column nav grid
+// - Desktop (992px+): 3-column horizontal layout
+// - Tablet (768-991px): Stacked with centered sections
+// - Mobile (<768px): Single column stacked
 //
 // Using minmax(0, 1fr) to prevent grid blowout from long text
 // Reference: https://css-tricks.com/preventing-a-grid-blowout/
@@ -20,25 +19,47 @@
   margin: 0;
 
   // =========================
-  // Brand Section (Logo + Tagline)
+  // Main Content Row (Desktop: 3-column layout)
+  // =========================
+  &__main {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: $spacing-2xl;
+    padding: $spacing-2xl 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    @media (max-width: $breakpoint-lg) {
+      grid-template-columns: 1fr;
+      gap: $spacing-xl;
+      text-align: center;
+      padding: $spacing-xl $spacing-lg;
+    }
+  }
+
+  // =========================
+  // Brand Section (Logo + Tagline) - LEFT
   // =========================
   &__brand {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: $spacing-xl $spacing-lg $spacing-md;
-    text-align: center;
+    align-items: flex-start;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+      order: 1;
+    }
   }
 
   &__logo {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $spacing-sm;
 
     img {
-      width: 40px;
+      width: 48px;
       height: auto;
     }
   }
@@ -57,26 +78,36 @@
     color: $color-cream;
     margin: 0;
     letter-spacing: 0.02em;
+    line-height: 1.4;
   }
 
   // =========================
-  // Contact Section (Address, Phone, Social)
+  // Contact Section (Address, Phone, Social) - RIGHT
   // =========================
   &__contact {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: $spacing-md $spacing-lg $spacing-lg;
-    text-align: center;
+    align-items: flex-end;
+    text-align: right;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+      text-align: center;
+      order: 2;
+    }
   }
 
   &__contact-info {
     font-style: normal;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     gap: $spacing-xs;
     margin-bottom: $spacing-sm;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+    }
   }
 
   &__contact-address {
@@ -126,7 +157,9 @@
     border-radius: 50%;
     background-color: rgba($color-cream, 0.1);
     color: $color-cream;
-    transition: background-color $transition-fast, color $transition-fast;
+    transition:
+      background-color $transition-fast,
+      color $transition-fast;
     flex-shrink: 0;
 
     &:hover,
@@ -142,19 +175,28 @@
   }
 
   // =========================
-  // Navigation Section (2-column grid)
+  // Navigation Section (CENTER - 2 columns)
   // =========================
   &__nav {
-    padding: $spacing-lg $spacing-lg;
-    background-color: darken($color-gold, 3%);
+    @media (max-width: $breakpoint-lg) {
+      order: 3;
+      width: 100%;
+    }
   }
 
   &__nav-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: $spacing-lg $spacing-2xl;
-    max-width: 600px;
-    margin: 0 auto;
+    grid-template-columns: repeat(2, minmax(0, auto));
+    gap: $spacing-md $spacing-3xl;
+
+    @media (max-width: $breakpoint-lg) {
+      justify-content: center;
+      gap: $spacing-lg $spacing-3xl;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      gap: $spacing-md $spacing-xl;
+    }
   }
 
   // =========================
@@ -166,6 +208,10 @@
     min-width: 0;
     overflow-wrap: break-word;
     word-wrap: break-word;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+    }
   }
 
   &__heading {
@@ -185,6 +231,10 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-xs;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+    }
   }
 
   // =========================
@@ -212,7 +262,7 @@
   // Bottom Bar
   // =========================
   &__bottom {
-    background-color: darken($color-gold, 8%);
+    background-color: darken($color-gold, 5%);
     padding: $spacing-md $spacing-lg;
     display: flex;
     justify-content: center;
@@ -257,16 +307,13 @@
   // Responsive: Mobile Landscape (max-width: 767px)
   // =========================
   @media (max-width: $breakpoint-md) {
-    &__brand {
-      padding: $spacing-lg $spacing-md $spacing-sm;
+    &__main {
+      padding: $spacing-lg $spacing-md;
+      gap: $spacing-lg;
     }
 
     &__tagline {
       font-size: $font-size-base;
-    }
-
-    &__contact {
-      padding: $spacing-sm $spacing-md $spacing-md;
     }
 
     &__contact-address {
@@ -285,14 +332,6 @@
         width: 16px;
         height: 16px;
       }
-    }
-
-    &__nav {
-      padding: $spacing-md;
-    }
-
-    &__nav-grid {
-      gap: $spacing-md $spacing-lg;
     }
 
     &__heading {
@@ -324,20 +363,17 @@
   // Responsive: Mobile Portrait (max-width: 479px)
   // =========================
   @media (max-width: $breakpoint-sm) {
-    &__brand {
-      padding: $spacing-md $spacing-sm $spacing-xs;
+    &__main {
+      padding: $spacing-md $spacing-sm;
+      gap: $spacing-md;
     }
 
     &__logo img {
-      width: 32px;
+      width: 36px;
     }
 
     &__tagline {
       font-size: $font-size-sm;
-    }
-
-    &__contact {
-      padding: $spacing-xs $spacing-sm $spacing-sm;
     }
 
     &__contact-address {
@@ -362,12 +398,8 @@
       }
     }
 
-    &__nav {
-      padding: $spacing-sm;
-    }
-
     &__nav-grid {
-      gap: $spacing-sm $spacing-md;
+      gap: $spacing-sm $spacing-lg;
     }
 
     &__heading {
@@ -386,7 +418,7 @@
     }
 
     &__bottom {
-      padding: $spacing-xs;
+      padding: $spacing-xs $spacing-sm;
     }
 
     &__copyright,
@@ -403,13 +435,20 @@
   // Large Desktop Enhancement (min-width: 1280px)
   // =========================
   @media (min-width: $breakpoint-xl) {
-    &__nav-grid {
-      max-width: 700px;
-      gap: $spacing-xl $spacing-3xl;
+    &__main {
+      padding: $spacing-3xl 5%;
+    }
+
+    &__logo img {
+      width: 56px;
     }
 
     &__tagline {
       font-size: $font-size-lg;
+    }
+
+    &__nav-grid {
+      gap: $spacing-lg $spacing-3xl;
     }
   }
 }
