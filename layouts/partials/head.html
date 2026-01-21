@@ -137,6 +137,26 @@
   {{- end -}}
 {{- end -}}
 
+{{/* 3b. Preload LCP Image for Blog Posts */}}
+{{- if eq .Section "blog" -}}
+  {{- $heroImage := "" -}}
+  {{- with .Params.image -}}
+    {{- $heroImage = resources.Get . -}}
+  {{- end -}}
+  {{- if not $heroImage -}}
+    {{- $heroImage = resources.Get "images/venue/venue-06-soft-seating.jpg" -}}
+  {{- end -}}
+  {{- if $heroImage -}}
+    {{- $webp := $heroImage.Resize "1920x webp q85" -}}
+<link
+  rel="preload"
+  href="{{ $webp.RelPermalink }}"
+  as="image"
+  type="image/webp"
+/>
+  {{- end -}}
+{{- end -}}
+
 {{/* 4. Google Fonts (Montserrat only - Raleway is self-hosted) */}}
 {{/* Async loading pattern: media="print" switches to "all" after load */}}
 <link
