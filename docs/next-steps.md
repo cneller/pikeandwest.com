@@ -16,30 +16,42 @@ This document tracks the current project state and upcoming work. Keep this file
 | Architecture Docs  | Complete | ADRs and patterns in docs/architecture/        |
 | Marketing Strategy | Complete | Comprehensive docs in docs/marketing-strategy/ |
 | Claude Hooks       | Active   | Pre-commit docs check hook enabled             |
-| Footer Redesign    | Complete | Multi-column SEO layout with event type links  |
-| Event Type Pages   | Complete | 6 landing pages for SEO (/events/*)            |
+| Footer Redesign    | In PR    | PR #15 - needs Lighthouse fixes before merge   |
+| Event Type Pages   | Complete | 6 landing pages for SEO (/events/\*)           |
 
 ## Top Priority
 
-### Hero Text Alignment
+### PR #15 Lighthouse Issues (Footer Redesign)
 
-**Issue:** The hero text and CTA button are not aligned with the Pike & West logo. Currently too far to the left.
+**Branch:** `claude/redesign-footer-seo-nXNY6`
+**Preview:** <https://425145d4.pikeandwest.pages.dev>
 
-**Context:**
+**Fixed Issues:**
 
-- Header uses `padding: 0 5%` for horizontal padding
-- Hero uses CSS Grid with `grid-template-columns: 1fr 1fr`
-- Current fix (`padding-left: 5vw`) is insufficient
-- The hero content should start at the same horizontal position as the logo
+- [x] Hero text alignment - Now left-aligned under logo and vertically centered
+- [x] SEO 69 on previews - FALSE POSITIVE (Cloudflare adds `x-robots-tag: noindex` to preview URLs; production is 100%)
+- [x] Render blocking fonts - Google Fonts now loads asynchronously
+- [x] Critical CSS mismatch - Synced `critical.scss` with `_hero.scss` flexbox layout
 
-**Files to investigate:**
+**Remaining performance issues:**
 
-- `assets/scss/_header.scss` - Logo positioning
-- `assets/scss/_hero.scss` - Hero content alignment (line 54, 94)
-- `layouts/partials/header.html` - Header structure
-- `layouts/partials/hero.html` - Hero structure
+| Issue          | Pages           | Current | Target |
+|----------------|-----------------|---------|--------|
+| Performance    | Blog index      | 55      | 80+    |
+| Performance    | Blog-Birthday   | 71      | 80+    |
+| Performance    | Blog-BabyShower | 75      | 80+    |
+| Performance    | Contact         | 79      | 80+    |
+| Best Practices | Contact         | 78      | 90+    |
 
-**Approach:** Compare computed pixel positions of logo vs hero content in DevTools at various viewport widths to determine correct offset.
+**Tasks:**
+
+- [x] Investigate SEO score drop - FALSE POSITIVE (is-preview workflow conditional added)
+- [x] Fix Home page render blocking (async fonts, critical CSS sync)
+- [ ] Fix Blog index performance (55) - likely image optimization
+- [ ] Fix Blog-Birthday performance (71)
+- [ ] Fix Blog-BabyShower performance (75)
+- [ ] Fix Contact performance (79) and best practices (78)
+- [ ] Re-run Lighthouse and verify all scores meet targets
 
 ---
 
@@ -147,14 +159,14 @@ hugo --templateMetrics
 
 ### Content (Priority: Medium)
 
-| Task                     | Status   | Notes                                                    |
-|--------------------------|----------|----------------------------------------------------------|
-| Blog section             | Active   | 5 posts published (2 current + 3 backdated Oct-Dec 2025) |
-| Gallery application page | Basic    | May need form improvements                               |
-| Team/About section       | Complete | Consider adding more team photos                         |
+| Task                     | Status   | Notes                                                               |
+|--------------------------|----------|---------------------------------------------------------------------|
+| Blog section             | Active   | 5 posts published (2 current + 3 backdated Oct-Dec 2025)            |
+| Gallery application page | Basic    | May need form improvements                                          |
+| Team/About section       | Complete | Consider adding more team photos                                    |
 | Event type pages         | Complete | 6 pages: weddings, corporate, birthday, baby shower, private, dance |
-| Privacy Policy           | Complete | /privacy/ - basic policy page                            |
-| Accessibility Statement  | Complete | /accessibility/ - basic statement page                   |
+| Privacy Policy           | Complete | /privacy/ - basic policy page                                       |
+| Accessibility Statement  | Complete | /accessibility/ - basic statement page                              |
 
 ### Technical Debt (Priority: Low)
 
@@ -200,15 +212,16 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 **Implementation:**
 
-| Component | Description |
-|-----------|-------------|
+| Component     | Description                                        |
+|---------------|----------------------------------------------------|
 | Footer Layout | 4-column grid: Celebrate, Connect, Venue, Visit Us |
-| Event Pages | 6 new landing pages under `/events/` |
-| Schema Markup | LocalBusiness structured data for local SEO |
-| Legal Pages | Privacy Policy and Accessibility Statement |
-| Mobile Layout | 2-column grid maintained down to 320px |
+| Event Pages   | 6 new landing pages under `/events/`               |
+| Schema Markup | LocalBusiness structured data for local SEO        |
+| Legal Pages   | Privacy Policy and Accessibility Statement         |
+| Mobile Layout | 2-column grid maintained down to 320px             |
 
 **Files Created:**
+
 - `content/events/*.md` - 6 event type landing pages
 - `content/privacy.md` - Privacy policy
 - `content/accessibility.md` - Accessibility statement
@@ -218,12 +231,14 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 - `assets/scss/_events-list.scss` - Events list styling
 
 **Files Modified:**
+
 - `layouts/partials/footer.html` - Complete redesign with multi-column layout
 - `assets/scss/_footer.scss` - Responsive 2-column grid (mobile), 4-column (desktop)
 - `config/_default/menus.toml` - Footer navigation sections added
 - `layouts/_default/baseof.html` - Schema partial included
 
 **Mobile Responsive Strategy:**
+
 - Desktop (992px+): 4 columns
 - Tablet & Mobile: 2 columns (using `minmax(0, 1fr)` to prevent grid blowout)
 - Text overflow handled with `overflow-wrap: break-word`
@@ -236,6 +251,10 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-21 | Fixed hero positioning (left-align, vertical center) - flexbox layout                             |
+| 2026-01-21 | Resolved SEO 69 false positive - Cloudflare noindex on previews, added is-preview workflow input  |
+| 2026-01-21 | Performance: async Google Fonts loading, synced critical.scss with \_hero.scss                    |
+| 2026-01-21 | Added Lighthouse troubleshooting docs to CLAUDE.md                                                |
 | 2026-01-21 | Footer redesign with multi-column SEO layout and 6 event landing pages                            |
 | 2026-01-21 | Added Privacy Policy and Accessibility Statement pages                                            |
 | 2026-01-21 | Mobile footer changed from single-column to 2-column grid                                         |
