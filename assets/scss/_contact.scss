@@ -21,71 +21,29 @@
   margin-top: 37px; // Webflow: margin-top: 37px
 
   .form-embed {
-    width: 75%; // Webflow: width: 75%
-    max-width: 600px;
-    margin: 20px auto; // Webflow: margin: 20px auto
+    // Container centers the iframe at each breakpoint
+    margin: 20px auto;
     padding: 0;
     overflow: hidden;
-    // No border - seamless integration with page
     border: none;
-    // Flex container to allow iframe to grow
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     // Prevent CLS from iframe content affecting layout
     contain: layout;
-    // Reserve space for iframe to prevent layout shift
-    aspect-ratio: 600 / 1600;
 
+    // Desktop: Two-column form layout (> 991px)
     iframe {
-      width: 100%;
-      // HoneyBook inquiry form with 9 fields + large textarea + submit + reCAPTCHA notice
-      // Tested heights: 800px cuts at guests, 1100px cuts at date, 1400px cuts at textarea
-      // Need ~1600px to show full form including submit button and legal text
-      min-height: 1600px;
-      height: auto;
+      width: 840px;
+      height: 960px;
       border: 0;
-      // Flex-grow allows iframe to fill container
-      flex: 1;
-      // Ensure no internal scrollbars display
       display: block;
     }
 
-    // Tablet: slightly taller to accommodate form layout changes
+    // Tablet and below (≤ 991px): Single-column when hamburger appears
     @media (max-width: $breakpoint-lg) {
-      width: 85%;
-      max-width: none;
-
       iframe {
-        min-height: 1650px;
-      }
-    }
-
-    // Mobile landscape: full width, fields stack differently
-    @media (max-width: $breakpoint-md) {
-      width: 100%;
-      margin-top: 1.25rem;
-      margin-bottom: 1.25rem;
-      // Remove aspect-ratio constraint on mobile - prevents truncation
-      aspect-ratio: unset;
-
-      iframe {
-        // Mobile forms expand vertically due to fully stacked fields
-        min-height: 1750px;
-      }
-    }
-
-    // Mobile portrait: extra height for fully stacked single-column layout
-    @media (max-width: $breakpoint-sm) {
-      padding: 0;
-      // Remove aspect-ratio constraint on mobile - let container grow to fit iframe
-      // The aspect-ratio (600/1600) constrains height to ~1109px at 416px width,
-      // but the form needs 2100px. This was cutting off the submit button.
-      aspect-ratio: unset;
-
-      iframe {
-        // HoneyBook forms on small mobile need maximum height
-        // Single-column layout with all fields stacked requires ~2000px
-        min-height: 2100px;
+        width: 300px;
+        height: 1600px;
       }
     }
   }

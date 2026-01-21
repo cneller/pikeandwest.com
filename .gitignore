@@ -37,6 +37,10 @@ backstop_data/html_report/
 # Playwright
 .playwright-mcp/
 
+# Lighthouse CI
+.lighthouse/
+.lighthouseci/
+
 # Claude Code local settings (user-specific overrides)
 .claude/settings.local.json
 
