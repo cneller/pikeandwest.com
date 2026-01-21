@@ -138,10 +138,19 @@
 {{- end -}}
 
 {{/* 4. Google Fonts (Montserrat only - Raleway is self-hosted) */}}
+{{/* Async loading pattern: media="print" switches to "all" after load */}}
 <link
   href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
   rel="stylesheet"
+  media="print"
+  onload="this.media='all'"
 />
+<noscript>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+</noscript>
 
 {{/* 5. Critical CSS - Inlined for faster FCP */}}
 {{- $criticalScss := resources.Get "scss/critical.scss" -}}

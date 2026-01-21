@@ -421,6 +421,50 @@ contact:
 | Largest Contentful Paint | < 2.5s  |
 | Total Page Size          | < 500KB |
 
+### Lighthouse CI & Troubleshooting
+
+Lighthouse runs automatically on PRs via GitHub Actions. Each page is tested separately.
+
+**Quick check PR scores:**
+
+```bash
+# View all checks for a PR (shows pass/fail status)
+gh pr checks <PR_NUMBER>
+
+# Example output shows Performance / Home, Performance / Blog, etc.
+```
+
+**Find detailed Lighthouse reports:**
+
+```bash
+# Get the run ID from pr checks, then view logs
+gh run view <RUN_ID> --log | grep -A 50 "Lighthouse"
+
+# Look for lines like:
+# "Open the report at https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/..."
+```
+
+**Report URLs are in the format:**
+`https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/<timestamp>-<id>.report.html`
+
+**Common SEO issues to check in reports:**
+
+- Missing meta descriptions
+- Images without alt text
+- Tap targets too small (mobile)
+- Links not crawlable
+- robots.txt blocking
+
+**Configuration:** See `lighthouserc.json` for assertion thresholds and tested URLs.
+
+**Cloudflare Pages preview vs production:**
+
+- Preview deployments have `x-robots-tag: noindex` header (Cloudflare protection)
+- This causes `is-crawlable` audit to fail on PRs (69% SEO score)
+- Production deployments don't have this header (100% SEO score)
+- The workflow passes `is-preview: true` for PRs, which sets `LHCI_ASSERT__ASSERTIONS__IS_CRAWLABLE=off`
+- Production runs keep the check enabled to catch real crawlability issues
+
 ### Browser Support
 
 - Chrome (last 2 versions)
