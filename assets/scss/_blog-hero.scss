@@ -1,109 +1,18 @@
 // =========================
 // Blog Hero Section
 // =========================
-// Simplified hero for blog pages, inspired by homepage hero
+// Extends page-hero with blog-specific meta (date, author)
 
 .blog-hero {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40vh;
-  min-height: 300px;
-  max-height: 500px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  overflow: hidden; // Prevent title from extending past hero boundaries
+  @extend .page-hero;
 
-  // Dark overlay for text readability
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
-  }
-
-  // Bottom gradient for breadcrumb contrast
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 40%;
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.5) 0%,
-      transparent 100%
-    );
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  // Tablet
-  @media (max-width: $breakpoint-lg) {
-    height: 35vh;
-    min-height: 250px;
-  }
-
-  // Mobile - let hero expand to fit content naturally
-  @media (max-width: $breakpoint-md) {
-    height: auto; // Let content determine height
-    min-height: 200px; // Minimum for short titles
-    // No max-height - hero expands to fit long titles
-  }
-
-  // Mobile portrait - slightly smaller font handles long titles
-  @media (max-width: $breakpoint-sm) {
-    min-height: 180px;
-  }
-
+  // Blog-specific: meta information below title
   &__content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: $spacing-xl $spacing-lg; // Generous vertical padding
-
-    // Mobile - adequate padding for content
-    @media (max-width: $breakpoint-md) {
-      padding: $spacing-lg $spacing-md;
-      width: 100%;
-    }
-
-    // Mobile portrait
-    @media (max-width: $breakpoint-sm) {
-      padding: $spacing-md;
-    }
+    @extend .page-hero__content;
   }
 
   &__title {
-    font-family: $font-display;
-    font-size: 2.5rem;
-    font-weight: $font-weight-regular;
-    line-height: 1.15;
-    letter-spacing: 0.1em;
-    color: $color-cream;
-    margin: 0;
-    text-transform: uppercase;
-    text-wrap: balance;
-
-    @media (min-width: $breakpoint-xl) {
-      font-size: 3rem;
-    }
-
-    @media (max-width: $breakpoint-md) {
-      font-size: 1.5rem; // Smaller for long titles
-      letter-spacing: 0.05em; // Tighter spacing on mobile
-      max-width: 90%;
-      margin: 0 auto;
-    }
-
-    // Even smaller on narrow screens
-    @media (max-width: $breakpoint-sm) {
-      font-size: 1.35rem;
-    }
+    @extend .page-hero__title;
   }
 
   &__meta {
