@@ -1,0 +1,179 @@
+// =========================
+// Breadcrumb Navigation
+// =========================
+// Accessible breadcrumb with minimal luxury aesthetic
+
+.breadcrumb {
+  padding: $spacing-md 0;
+  font-family: $font-secondary; // Montserrat
+  font-size: $font-size-sm; // 14px
+  color: $color-text-light; // #434345
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-sm;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    // Separator via CSS pseudo-element (not announced by screen readers)
+    &:not(:last-child)::after {
+      content: '/';
+      margin-left: $spacing-sm;
+      color: rgba($color-text-light, 0.5);
+    }
+  }
+
+  &__link {
+    color: $color-text-light;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-gold; // PW Gold accent on hover
+    }
+  }
+
+  &__current {
+    color: $color-text; // Slightly darker for current page
+  }
+
+  // =========================
+  // Hero Overlay Variant
+  // =========================
+  // Positioned at bottom of hero with light text on dark gradient
+
+  &--hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3; // Above hero overlays
+    padding: $spacing-md 0 $spacing-lg;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: $font-size-xs;
+
+    .breadcrumb__list {
+      justify-content: center;
+    }
+
+    .breadcrumb__item {
+      // Use chevron separator for elegance
+      &:not(:last-child)::after {
+        content: '›';
+        margin-left: $spacing-sm;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1.1em;
+      }
+    }
+
+    .breadcrumb__link {
+      color: rgba(255, 255, 255, 0.85);
+
+      &:hover {
+        color: $color-gold;
+      }
+    }
+
+    .breadcrumb__current {
+      color: $color-cream;
+    }
+
+    // Mobile: slightly smaller padding
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-sm 0 $spacing-md;
+      font-size: 11px;
+    }
+  }
+
+  // =========================
+  // Accent Bar Variant
+  // =========================
+  // Minimal gold accent line above breadcrumb text with cream background band
+
+  &--accent-bar {
+    position: relative;
+    padding: $spacing-lg 0 $spacing-md;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: $font-size-xs;
+
+    // Full-width cream background band
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      // Extend beyond container to viewport edges
+      left: calc(-50vw + 50%);
+      right: calc(-50vw + 50%);
+      background-color: $color-cream;
+      z-index: -1;
+    }
+
+    // Gold accent line above the breadcrumb list
+    .breadcrumb__list {
+      position: relative;
+      padding-top: $spacing-md;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background-color: $color-gold;
+      }
+    }
+
+    .breadcrumb__item {
+      // Use chevron separator
+      &:not(:last-child)::after {
+        content: '›';
+        margin-left: $spacing-sm;
+        color: rgba($color-text-light, 0.4);
+        font-size: 1.1em;
+      }
+    }
+
+    .breadcrumb__link {
+      color: $color-text-light;
+
+      &:hover {
+        color: $color-gold;
+      }
+    }
+
+    .breadcrumb__current {
+      color: $color-text;
+      font-weight: $font-weight-medium;
+    }
+
+    // Narrow content alignment (for blog posts)
+    &.breadcrumb--narrow {
+      .container {
+        max-width: 800px;
+      }
+    }
+
+    // Mobile: adjust spacing
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-md 0 $spacing-sm;
+      font-size: 11px;
+
+      .breadcrumb__list::before {
+        width: 30px;
+      }
+    }
+  }
+}

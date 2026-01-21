@@ -112,7 +112,7 @@
   }
 
   &__title {
-    font-family: $font-primary;
+    font-family: $font-display;
     font-size: $font-size-xl;
     font-weight: $font-weight-medium;
     margin: 0 0 $spacing-sm;
@@ -182,7 +182,7 @@
     color: $color-text;
 
     h2 {
-      font-family: $font-primary;
+      font-family: $font-display;
       font-size: $font-size-2xl;
       font-weight: $font-weight-medium;
       margin: $spacing-2xl 0 $spacing-md;
@@ -190,7 +190,7 @@
     }
 
     h3 {
-      font-family: $font-primary;
+      font-family: $font-display;
       font-size: $font-size-xl;
       font-weight: $font-weight-medium;
       margin: $spacing-xl 0 $spacing-md;
@@ -201,10 +201,32 @@
       margin: 0 0 $spacing-lg;
     }
 
-    ul,
+    ul {
+      margin: 0 0 $spacing-lg;
+      padding-left: $spacing-xl;
+      list-style-type: disc;
+
+      ul {
+        list-style-type: circle;
+
+        ul {
+          list-style-type: square;
+        }
+      }
+    }
+
     ol {
       margin: 0 0 $spacing-lg;
       padding-left: $spacing-xl;
+      list-style-type: decimal;
+
+      ol {
+        list-style-type: lower-alpha;
+
+        ol {
+          list-style-type: lower-roman;
+        }
+      }
     }
 
     li {
@@ -234,6 +256,75 @@
 
       &:hover {
         text-decoration: underline;
+      }
+    }
+
+    // Text emphasis
+    strong,
+    b {
+      font-weight: $font-weight-semibold;
+    }
+
+    em,
+    i {
+      font-style: italic;
+    }
+
+    mark {
+      background-color: rgba($color-gold, 0.2);
+      padding: 0.1em 0.2em;
+    }
+
+    // Inline code
+    code {
+      font-family:
+        'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.875em;
+      background-color: rgba(0, 0, 0, 0.05);
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+    }
+
+    // Code blocks
+    pre {
+      margin: $spacing-lg 0;
+      padding: $spacing-md;
+      background-color: #1a1b1f;
+      color: #f8f8f2;
+      border-radius: $border-radius-md;
+      overflow-x: auto;
+
+      code {
+        background: none;
+        padding: 0;
+        font-size: $font-size-sm;
+        color: inherit;
+      }
+    }
+
+    // Horizontal rule
+    hr {
+      margin: $spacing-2xl 0;
+      border: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    // Tables
+    table {
+      width: 100%;
+      margin: $spacing-lg 0;
+      border-collapse: collapse;
+
+      th,
+      td {
+        padding: $spacing-sm $spacing-md;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        text-align: left;
+      }
+
+      th {
+        background-color: $color-cream;
+        font-weight: $font-weight-semibold;
       }
     }
   }

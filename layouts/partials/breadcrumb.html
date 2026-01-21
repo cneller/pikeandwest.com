@@ -1,0 +1,63 @@
+{{/*
+  Purpose: Render accessible breadcrumb navigation
+  Context: Page context (.) or dict with options
+  Options:
+    - Page: the page context (required if using dict)
+    - noContainer: omit the container wrapper (default: false)
+    - heroOverlay: style for overlay on hero image (default: false)
+    - accentBar: style with gold accent line above (default: false)
+    - narrowContent: align with narrower content width (default: false)
+  Usage:
+    {{ partial "breadcrumb.html" . }}
+    {{ partial "breadcrumb.html" (dict "Page" . "noContainer" true) }}
+    {{ partial "breadcrumb.html" (dict "Page" . "heroOverlay" true) }}
+    {{ partial "breadcrumb.html" (dict "Page" . "accentBar" true) }}
+    {{ partial "breadcrumb.html" (dict "Page" . "accentBar" true "narrowContent" true) }}
+*/}}
+
+{{- $page := . -}}
+{{- $noContainer := false -}}
+{{- $heroOverlay := false -}}
+{{- $accentBar := false -}}
+{{- $narrowContent := false -}}
+{{- if reflect.IsMap . -}}
+  {{- $page = .Page -}}
+  {{- $noContainer = .noContainer | default false -}}
+  {{- $heroOverlay = .heroOverlay | default false -}}
+  {{- $accentBar = .accentBar | default false -}}
+  {{- $narrowContent = .narrowContent | default false -}}
+{{- end -}}
+
+{{- $items := slice (dict "name" "Home" "url" "/") -}}
+
+{{- /* Add section (e.g., Blog) */ -}}
+{{- if $page.Section -}}
+  {{- $sectionTitle := $page.Section | humanize | title -}}
+  {{- if eq $page.Kind "section" -}}
+    {{- /* On section list page: section is current (non-linked) */ -}}
+    {{- $items = $items | append (dict "name" $sectionTitle "url" "") -}}
+  {{- else -}}
+    {{- /* On single page: section is linked, then add current page */ -}}
+    {{- $items = $items | append (dict "name" $sectionTitle "url" (printf "/%s/" $page.Section)) -}}
+    {{- $items = $items | append (dict "name" $page.Title "url" "") -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Only render if we have more than just Home */ -}}
+{{- if gt (len $items) 1 -}}
+<nav class="breadcrumb{{ if $heroOverlay }} breadcrumb--hero-overlay{{ end }}{{ if $accentBar }} breadcrumb--accent-bar{{ end }}{{ if $narrowContent }} breadcrumb--narrow{{ end }}" aria-label="Breadcrumb">
+  {{- if not $noContainer -}}<div class="container">{{- end -}}
+    <ol class="breadcrumb__list">
+      {{- range $index, $item := $items -}}
+        <li class="breadcrumb__item">
+          {{- if $item.url -}}
+            <a href="{{ $item.url }}" class="breadcrumb__link">{{ $item.name }}</a>
+          {{- else -}}
+            <span class="breadcrumb__current" aria-current="page">{{ $item.name }}</span>
+          {{- end -}}
+        </li>
+      {{- end -}}
+    </ol>
+  {{- if not $noContainer -}}</div>{{- end -}}
+</nav>
+{{- end -}}
