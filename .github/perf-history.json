@@ -579,6 +579,62 @@
           "seo": 0.69
         }
       }
+    },
+    {
+      "timestamp": "2026-01-21T23:08:37.095Z",
+      "url": "https://582e50df.pikeandwest.pages.dev",
+      "avgPerformance": 90,
+      "allPassed": false,
+      "pages": {
+        "About": {
+          "performance": 0.94,
+          "accessibility": 0.96,
+          "best-practices": 1,
+          "seo": 0.69
+        },
+        "Blog-Anniversary": {
+          "performance": 1,
+          "accessibility": 0.96,
+          "best-practices": 1,
+          "seo": 0.69
+        },
+        "Blog-BabyShower": {
+          "performance": 0.97,
+          "accessibility": 0.96,
+          "best-practices": 1,
+          "seo": 0.69
+        },
+        "Blog-Birthday": {
+          "performance": 0.97,
+          "accessibility": 0.96,
+          "best-practices": 1,
+          "seo": 0.69
+        },
+        "Blog": {
+          "performance": 0.94,
+          "accessibility": 0.96,
+          "best-practices": 1,
+          "seo": 0.69
+        },
+        "Contact": {
+          "performance": 0.77,
+          "accessibility": 0.96,
+          "best-practices": 0.78,
+          "seo": 0.69
+        },
+        "Gallery": {
+          "performance": 0.68,
+          "accessibility": 0.92,
+          "best-practices": 0.96,
+          "seo": 0.69
+        },
+        "Home": {
+          "performance": 0.95,
+          "accessibility": 0.96,
+          "best-practices": 1,
+          "seo": 0.69
+        }
+      }
     }
   ]
 }
