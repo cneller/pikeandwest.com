@@ -1,6 +1,6 @@
 # Pike & West - Next Steps
 
-> **Last Updated:** 2026-01-20
+> **Last Updated:** 2026-01-21
 > **Current Phase:** Pre-Launch Testing on beta.pikeandwest.com
 
 This document tracks the current project state and upcoming work. Keep this file updated as tasks are completed or priorities change.
@@ -16,6 +16,8 @@ This document tracks the current project state and upcoming work. Keep this file
 | Architecture Docs  | Complete | ADRs and patterns in docs/architecture/        |
 | Marketing Strategy | Complete | Comprehensive docs in docs/marketing-strategy/ |
 | Claude Hooks       | Active   | Pre-commit docs check hook enabled             |
+| Footer Redesign    | Complete | Multi-column SEO layout with event type links  |
+| Event Type Pages   | Complete | 6 landing pages for SEO (/events/*)            |
 
 ## Top Priority
 
@@ -150,7 +152,9 @@ hugo --templateMetrics
 | Blog section             | Active   | 5 posts published (2 current + 3 backdated Oct-Dec 2025) |
 | Gallery application page | Basic    | May need form improvements                               |
 | Team/About section       | Complete | Consider adding more team photos                         |
-| Event type pages         | Planned  | Individual pages for weddings, corporate, etc.           |
+| Event type pages         | Complete | 6 pages: weddings, corporate, birthday, baby shower, private, dance |
+| Privacy Policy           | Complete | /privacy/ - basic policy page                            |
+| Accessibility Statement  | Complete | /accessibility/ - basic statement page                   |
 
 ### Technical Debt (Priority: Low)
 
@@ -188,10 +192,53 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 - [GTM & GA4 Guide (The Gray Company)](https://thegray.company/blog/cross-domain-tracking-guide)
 - [Server-Side Tagging Guide](https://usercentrics.com/guides/smarter-tagging-with-google-tag-manager/cross-domain-tracking/)
 
+## Recently Completed
+
+### Footer Redesign (2026-01-21)
+
+**Goal:** Redesign footer for better SEO through internal linking to event-specific pages.
+
+**Implementation:**
+
+| Component | Description |
+|-----------|-------------|
+| Footer Layout | 4-column grid: Celebrate, Connect, Venue, Visit Us |
+| Event Pages | 6 new landing pages under `/events/` |
+| Schema Markup | LocalBusiness structured data for local SEO |
+| Legal Pages | Privacy Policy and Accessibility Statement |
+| Mobile Layout | 2-column grid maintained down to 320px |
+
+**Files Created:**
+- `content/events/*.md` - 6 event type landing pages
+- `content/privacy.md` - Privacy policy
+- `content/accessibility.md` - Accessibility statement
+- `layouts/events/list.html` - Events section list template
+- `layouts/events/single.html` - Individual event page template
+- `layouts/partials/schema-local-business.html` - LocalBusiness schema
+- `assets/scss/_events-list.scss` - Events list styling
+
+**Files Modified:**
+- `layouts/partials/footer.html` - Complete redesign with multi-column layout
+- `assets/scss/_footer.scss` - Responsive 2-column grid (mobile), 4-column (desktop)
+- `config/_default/menus.toml` - Footer navigation sections added
+- `layouts/_default/baseof.html` - Schema partial included
+
+**Mobile Responsive Strategy:**
+- Desktop (992px+): 4 columns
+- Tablet & Mobile: 2 columns (using `minmax(0, 1fr)` to prevent grid blowout)
+- Text overflow handled with `overflow-wrap: break-word`
+
+**Branch:** `claude/redesign-footer-seo-nXNY6`
+
+---
+
 ## Changelog
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-21 | Footer redesign with multi-column SEO layout and 6 event landing pages                            |
+| 2026-01-21 | Added Privacy Policy and Accessibility Statement pages                                            |
+| 2026-01-21 | Mobile footer changed from single-column to 2-column grid                                         |
 | 2026-01-20 | Initial creation with analytics verification tasks                                                |
 | 2026-01-20 | Added beta subdomain deployment status                                                            |
 | 2026-01-20 | Added future enhancements from web research                                                       |
