@@ -65,6 +65,8 @@
       width: 100%;
       margin-top: 1.25rem;
       margin-bottom: 1.25rem;
+      // Remove aspect-ratio constraint on mobile - prevents truncation
+      aspect-ratio: unset;
 
       iframe {
         // Mobile forms expand vertically due to fully stacked fields
@@ -75,6 +77,10 @@
     // Mobile portrait: extra height for fully stacked single-column layout
     @media (max-width: $breakpoint-sm) {
       padding: 0;
+      // Remove aspect-ratio constraint on mobile - let container grow to fit iframe
+      // The aspect-ratio (600/1600) constrains height to ~1109px at 416px width,
+      // but the form needs 2100px. This was cutting off the submit button.
+      aspect-ratio: unset;
 
       iframe {
         // HoneyBook forms on small mobile need maximum height
