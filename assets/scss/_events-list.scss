@@ -27,7 +27,9 @@
     background-color: $color-cream;
     text-align: center;
     text-decoration: none;
-    transition: transform $transition-fast, box-shadow $transition-fast;
+    transition:
+      transform $transition-fast,
+      box-shadow $transition-fast;
 
     &:hover {
       transform: translateY(-4px);
@@ -118,47 +120,13 @@
   padding: $spacing-3xl 0;
 
   &__content {
-    max-width: 800px;
-    margin: 0 auto;
+    @include content-base;
 
-    h2 {
-      font-family: $font-display;
-      font-size: $font-size-2xl;
-      color: $color-text;
-      margin: $spacing-2xl 0 $spacing-md;
-
-      &:first-child {
-        margin-top: 0;
-      }
-    }
-
+    // Event-specific: h3 uses primary font (not display)
     h3 {
       font-family: $font-primary;
       font-size: $font-size-lg;
       font-weight: $font-weight-semibold;
-      color: $color-text;
-      margin: $spacing-xl 0 $spacing-sm;
-    }
-
-    p {
-      font-family: $font-secondary;
-      font-size: $font-size-base;
-      line-height: 1.7;
-      color: $color-text-light;
-      margin: 0 0 $spacing-md;
-    }
-
-    ul {
-      margin: 0 0 $spacing-md;
-      padding-left: $spacing-lg;
-
-      li {
-        font-family: $font-secondary;
-        font-size: $font-size-base;
-        line-height: 1.7;
-        color: $color-text-light;
-        margin-bottom: $spacing-xs;
-      }
     }
   }
 
