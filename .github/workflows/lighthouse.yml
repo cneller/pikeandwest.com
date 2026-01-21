@@ -2,7 +2,7 @@ name: Lighthouse
 
 on:
   workflow_run:
-    workflows: [Deploy]
+    workflows: [CI]
     types: [completed]
   workflow_dispatch:
     inputs:
