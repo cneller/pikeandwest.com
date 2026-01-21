@@ -1,0 +1,110 @@
+// =========================
+// Shared Content Base
+// =========================
+// Common typography and spacing for content pages (blog, events)
+// Provides consistent reading experience across content types
+
+@mixin content-base {
+  max-width: 800px;
+  margin: 0 auto;
+
+  // Headings
+  h2 {
+    font-family: $font-display;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-medium;
+    color: $color-text;
+    margin: $spacing-2xl 0 $spacing-md;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h3 {
+    font-family: $font-display;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-medium;
+    color: $color-text;
+    margin: $spacing-xl 0 $spacing-md;
+  }
+
+  // Paragraphs
+  p {
+    font-family: $font-secondary;
+    font-size: $font-size-base;
+    line-height: 1.7;
+    color: $color-text;
+    margin: 0 0 $spacing-md;
+  }
+
+  // Lists - consistent styling
+  ul,
+  ol {
+    margin: 0 0 $spacing-lg;
+    padding-left: $spacing-xl;
+    font-family: $font-secondary;
+    font-size: $font-size-base;
+    line-height: 1.7;
+    color: $color-text;
+
+    li {
+      margin-bottom: $spacing-sm;
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+
+    ul {
+      list-style-type: circle;
+
+      ul {
+        list-style-type: square;
+      }
+    }
+  }
+
+  ol {
+    list-style-type: decimal;
+
+    ol {
+      list-style-type: lower-alpha;
+
+      ol {
+        list-style-type: lower-roman;
+      }
+    }
+  }
+
+  // Links
+  a {
+    color: $color-gold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Text emphasis
+  strong,
+  b {
+    font-weight: $font-weight-semibold;
+  }
+
+  em,
+  i {
+    font-style: italic;
+  }
+
+  // Responsive: Mobile
+  @media (max-width: $breakpoint-md) {
+    h2 {
+      font-size: $font-size-xl;
+    }
+
+    h3 {
+      font-size: $font-size-lg;
+    }
+  }
+}
