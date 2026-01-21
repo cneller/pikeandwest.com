@@ -8,8 +8,10 @@
 //
 // Responsive behavior:
 // - Desktop (992px+): 4 columns
-// - Tablet (768-991px): 2x2 grid
-// - Mobile (<768px): single column, stacked
+// - Tablet & Mobile: 2x2 grid (maintains 2 columns down to 320px)
+//
+// Using minmax(0, 1fr) to prevent grid blowout from long text
+// Reference: https://css-tricks.com/preventing-a-grid-blowout/
 
 .footer {
   background-color: $color-gold;
@@ -69,7 +71,8 @@
   // =========================
   &__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    // Use minmax(0, 1fr) to prevent grid blowout from long content
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: $spacing-2xl;
     max-width: 1100px;
     margin: 0 auto;
@@ -81,6 +84,10 @@
   &__column {
     display: flex;
     flex-direction: column;
+    // Prevent text overflow
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
   &__heading {
@@ -116,6 +123,9 @@
     transition: color $transition-fast;
     padding: $spacing-xs 0;
     display: inline-block;
+    // Prevent long links from breaking layout
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 
     &:hover,
     &:focus {
@@ -130,6 +140,8 @@
     // Phone link styling
     &--phone {
       font-weight: $font-weight-medium;
+      // Phone numbers should not wrap
+      white-space: nowrap;
     }
   }
 
@@ -152,6 +164,8 @@
     background-color: rgba($color-cream, 0.1);
     color: $color-cream;
     transition: background-color $transition-fast, color $transition-fast;
+    // Prevent shrinking
+    flex-shrink: 0;
 
     &:hover,
     &:focus {
@@ -227,10 +241,11 @@
 
   // =========================
   // Responsive: Tablet (max-width: 991px)
+  // 2x2 grid layout
   // =========================
   @media (max-width: $breakpoint-lg) {
     &__grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: $spacing-xl $spacing-2xl;
     }
 
@@ -241,6 +256,7 @@
 
   // =========================
   // Responsive: Mobile Landscape (max-width: 767px)
+  // Keep 2-column grid, reduce spacing
   // =========================
   @media (max-width: $breakpoint-md) {
     &__brand {
@@ -251,32 +267,44 @@
       font-size: $font-size-base;
     }
 
-    &__grid {
-      grid-template-columns: 1fr;
-      gap: $spacing-xl;
-      text-align: center;
+    &__container {
+      padding: $spacing-lg $spacing-md;
     }
 
-    &__column {
-      align-items: center;
+    &__grid {
+      // Keep 2 columns on mobile - prevents tall single-column stack
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: $spacing-lg $spacing-md;
     }
 
     &__heading {
-      display: inline-block;
-      border-bottom: none;
-      padding-bottom: 0;
+      font-size: 11px;
+      margin-bottom: $spacing-sm;
+      padding-bottom: $spacing-xs;
+    }
+
+    &__link {
+      font-size: $font-size-xs;
+      padding: 3px 0; // Tighter padding on mobile
     }
 
     &__list {
-      align-items: center;
+      gap: 2px;
     }
 
     &__social {
-      justify-content: center;
+      margin-top: $spacing-sm;
+      gap: $spacing-xs;
     }
 
-    &__address {
-      text-align: center;
+    &__social-link {
+      width: 32px;
+      height: 32px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
     }
 
     &__bottom-container {
@@ -292,10 +320,11 @@
 
   // =========================
   // Responsive: Mobile Portrait (max-width: 479px)
+  // Tightest 2-column layout
   // =========================
   @media (max-width: $breakpoint-sm) {
     &__brand {
-      padding: $spacing-lg $spacing-sm $spacing-md;
+      padding: $spacing-md $spacing-sm;
     }
 
     &__logo img {
@@ -307,25 +336,55 @@
     }
 
     &__container {
-      padding: $spacing-lg $spacing-sm;
+      padding: $spacing-md $spacing-sm;
     }
 
     &__grid {
-      gap: $spacing-lg;
+      // Keep 2 columns even on smallest screens
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: $spacing-md $spacing-sm;
     }
 
     &__heading {
-      font-size: 11px;
-      margin-bottom: $spacing-sm;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      margin-bottom: $spacing-xs;
+      padding-bottom: 2px;
+      // Keep underline for visual separation
+      border-bottom: 1px solid rgba($color-cream, 0.2);
     }
 
     &__link {
-      font-size: $font-size-xs;
-      padding: $spacing-xs 0;
+      font-size: 11px;
+      padding: 2px 0;
+      line-height: 1.4;
+    }
+
+    &__list {
+      gap: 1px;
+    }
+
+    &__social {
+      margin-top: $spacing-xs;
+    }
+
+    &__social-link {
+      width: 28px;
+      height: 28px;
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &__address-line,
+    &__phone {
+      margin-bottom: $spacing-xs;
     }
 
     &__bottom {
-      padding: $spacing-sm;
+      padding: $spacing-sm $spacing-xs;
     }
 
     &__copyright,
