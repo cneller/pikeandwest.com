@@ -54,9 +54,26 @@ jobs:
             ${{ runner.os }}-hugomod-
 
       - name: Build site
+        id: hugo
         env:
           HUGO_CACHEDIR: /tmp/hugo_cache
-        run: hugo --gc --minify
+        run: |
+          echo "::group::Hugo Build"
+          hugo --gc --minify 2>&1 | tee hugo-output.txt
+          echo "::endgroup::"
+
+          # Extract stats for summary
+          PAGES=$(grep -oP 'Pages\s+\|\s+\K\d+' hugo-output.txt || echo "?")
+          STATIC=$(grep -oP 'Static files\s+\|\s+\K\d+' hugo-output.txt || echo "?")
+          TOTAL_MS=$(grep -oP 'Total in \K\d+' hugo-output.txt || echo "?")
+
+          echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Pages | $PAGES |" >> $GITHUB_STEP_SUMMARY
+          echo "| Static files | $STATIC |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build time | ${TOTAL_MS}ms |" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -169,8 +186,16 @@ jobs:
               });
             }
 
-      - name: Log deployment URL
-        run: echo "Deployed to ${{ steps.deploy.outputs.url }}"
+      - name: Write summary
+        run: |
+          echo "## Deploy Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| **URL** | ${{ steps.deploy.outputs.url }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Branch** | \`${{ github.head_ref || github.ref_name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Commit** | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Event** | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
 
     outputs:
       url: ${{ steps.deploy.outputs.url }}
