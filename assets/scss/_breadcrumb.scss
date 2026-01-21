@@ -94,4 +94,86 @@
       font-size: 11px;
     }
   }
+
+  // =========================
+  // Accent Bar Variant
+  // =========================
+  // Minimal gold accent line above breadcrumb text with cream background band
+
+  &--accent-bar {
+    position: relative;
+    padding: $spacing-lg 0 $spacing-md;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: $font-size-xs;
+
+    // Full-width cream background band
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      // Extend beyond container to viewport edges
+      left: calc(-50vw + 50%);
+      right: calc(-50vw + 50%);
+      background-color: $color-cream;
+      z-index: -1;
+    }
+
+    // Gold accent line above the breadcrumb list
+    .breadcrumb__list {
+      position: relative;
+      padding-top: $spacing-md;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background-color: $color-gold;
+      }
+    }
+
+    .breadcrumb__item {
+      // Use chevron separator
+      &:not(:last-child)::after {
+        content: '›';
+        margin-left: $spacing-sm;
+        color: rgba($color-text-light, 0.4);
+        font-size: 1.1em;
+      }
+    }
+
+    .breadcrumb__link {
+      color: $color-text-light;
+
+      &:hover {
+        color: $color-gold;
+      }
+    }
+
+    .breadcrumb__current {
+      color: $color-text;
+      font-weight: $font-weight-medium;
+    }
+
+    // Narrow content alignment (for blog posts)
+    &.breadcrumb--narrow {
+      .container {
+        max-width: 800px;
+      }
+    }
+
+    // Mobile: adjust spacing
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-md 0 $spacing-sm;
+      font-size: 11px;
+
+      .breadcrumb__list::before {
+        width: 30px;
+      }
+    }
+  }
 }

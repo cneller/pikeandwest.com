@@ -24,9 +24,10 @@
       {{ end }}
     </div>
   </div>
-  {{/* Breadcrumb Navigation - overlaid at bottom of hero */}}
-  {{ partial "breadcrumb.html" (dict "Page" . "heroOverlay" true) }}
 </section>
+
+{{/* Breadcrumb Navigation - flush with hero, aligned with narrow content */}}
+{{ partial "breadcrumb.html" (dict "Page" . "accentBar" true "narrowContent" true) }}
 
 {{/* Blog Content */}}
 <article class="blog-post section">

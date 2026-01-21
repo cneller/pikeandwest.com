@@ -5,19 +5,27 @@
     - Page: the page context (required if using dict)
     - noContainer: omit the container wrapper (default: false)
     - heroOverlay: style for overlay on hero image (default: false)
+    - accentBar: style with gold accent line above (default: false)
+    - narrowContent: align with narrower content width (default: false)
   Usage:
     {{ partial "breadcrumb.html" . }}
     {{ partial "breadcrumb.html" (dict "Page" . "noContainer" true) }}
     {{ partial "breadcrumb.html" (dict "Page" . "heroOverlay" true) }}
+    {{ partial "breadcrumb.html" (dict "Page" . "accentBar" true) }}
+    {{ partial "breadcrumb.html" (dict "Page" . "accentBar" true "narrowContent" true) }}
 */}}
 
 {{- $page := . -}}
 {{- $noContainer := false -}}
 {{- $heroOverlay := false -}}
+{{- $accentBar := false -}}
+{{- $narrowContent := false -}}
 {{- if reflect.IsMap . -}}
   {{- $page = .Page -}}
   {{- $noContainer = .noContainer | default false -}}
   {{- $heroOverlay = .heroOverlay | default false -}}
+  {{- $accentBar = .accentBar | default false -}}
+  {{- $narrowContent = .narrowContent | default false -}}
 {{- end -}}
 
 {{- $items := slice (dict "name" "Home" "url" "/") -}}
@@ -37,7 +45,7 @@
 
 {{- /* Only render if we have more than just Home */ -}}
 {{- if gt (len $items) 1 -}}
-<nav class="breadcrumb{{ if $heroOverlay }} breadcrumb--hero-overlay{{ end }}" aria-label="Breadcrumb">
+<nav class="breadcrumb{{ if $heroOverlay }} breadcrumb--hero-overlay{{ end }}{{ if $accentBar }} breadcrumb--accent-bar{{ end }}{{ if $narrowContent }} breadcrumb--narrow{{ end }}" aria-label="Breadcrumb">
   {{- if not $noContainer -}}<div class="container">{{- end -}}
     <ol class="breadcrumb__list">
       {{- range $index, $item := $items -}}
