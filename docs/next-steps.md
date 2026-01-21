@@ -252,6 +252,14 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-21 | Added hero images to event pages with front matter support (`image`, `image_alt`)                 |
+| 2026-01-21 | Created shared `_page-hero.scss` styles, refactored blog-hero to extend it (-91 lines)            |
+| 2026-01-21 | Added Front Matter CMS configuration (`frontmatter.json`) for VS Code sidebar editing             |
+| 2026-01-21 | Created event archetype for new event pages                                                       |
+| 2026-01-21 | Created shared `_content-base.scss` mixin for consistent content typography                       |
+| 2026-01-21 | Refactored blog and event pages to use content-base mixin (-94 lines total)                       |
+| 2026-01-21 | Fixed event page text color (`$color-text` instead of `$color-text-light`)                        |
+| 2026-01-21 | Added breadcrumb navigation to event single and list pages                                        |
 | 2026-01-21 | Fixed hero positioning (left-align, vertical center) - flexbox layout                             |
 | 2026-01-21 | Resolved SEO 69 false positive - Cloudflare noindex on previews, added is-preview workflow input  |
 | 2026-01-21 | Performance: async Google Fonts loading, synced critical.scss with \_hero.scss                    |
