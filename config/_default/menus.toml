@@ -17,14 +17,80 @@
   url = "/blog/"
   weight = 3
 
+# =========================
 # Footer Navigation
+# =========================
 
-[[footer]]
+# Footer: Celebrate Column (Event Types)
+[[footer_events]]
+  name = "Weddings"
+  url = "/events/weddings/"
+  weight = 1
+
+[[footer_events]]
+  name = "Corporate Events"
+  url = "/events/corporate-events/"
+  weight = 2
+
+[[footer_events]]
+  name = "Birthday Parties"
+  url = "/events/birthday-parties/"
+  weight = 3
+
+[[footer_events]]
+  name = "Baby Showers"
+  url = "/events/baby-showers/"
+  weight = 4
+
+[[footer_events]]
+  name = "Private Parties"
+  url = "/events/private-parties/"
+  weight = 5
+
+[[footer_events]]
+  name = "Dance Events"
+  url = "/events/dance-events/"
+  weight = 6
+
+# Footer: Connect Column
+[[footer_connect]]
   name = "Contact Us"
   url = "/contact/"
   weight = 1
 
-[[footer]]
+[[footer_connect]]
+  name = "Schedule a Tour"
+  url = "/contact/"
+  weight = 2
+
+[[footer_connect]]
   name = "Blog"
   url = "/blog/"
+  weight = 3
+
+# Footer: Venue Column
+[[footer_venue]]
+  name = "About Pike & West"
+  url = "/about/"
+  weight = 1
+
+[[footer_venue]]
+  name = "Gallery"
+  url = "/#gallery"
+  weight = 2
+
+[[footer_venue]]
+  name = "Artist Application"
+  url = "/gallery-application/"
+  weight = 3
+
+# Footer: Legal (bottom bar)
+[[footer_legal]]
+  name = "Privacy Policy"
+  url = "/privacy/"
+  weight = 1
+
+[[footer_legal]]
+  name = "Accessibility"
+  url = "/accessibility/"
   weight = 2

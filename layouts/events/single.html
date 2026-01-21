@@ -1,0 +1,31 @@
+{{ define "main" }}
+{{/*
+  Single Event Page Template
+
+  Purpose: Displays individual event type pages (weddings, birthdays, etc.)
+  with consistent styling and a clear CTA.
+
+  Context: . = Page (event content page)
+*/}}
+
+{{/* Page Header */}}
+<section class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">{{ .Title }}</h1>
+  </div>
+</section>
+
+{{/* Event Content */}}
+<article class="event-page section">
+  <div class="container">
+    <div class="event-page__content content">
+      {{ .Content }}
+    </div>
+
+    {{/* CTA Section */}}
+    <div class="event-page__cta">
+      <a href="/contact/" class="btn btn-primary">Schedule a Tour</a>
+    </div>
+  </div>
+</article>
+{{ end }}

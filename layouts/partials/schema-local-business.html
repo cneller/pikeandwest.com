@@ -1,0 +1,88 @@
+{{/*
+  LocalBusiness Schema Markup
+
+  Purpose: Provides structured data for search engines to better understand
+           Pike & West as a local business/event venue. Helps with:
+           - Local SEO and Google Maps visibility
+           - Rich snippets in search results
+           - Voice search optimization
+
+  Schema Types Used:
+  - EventVenue (primary)
+  - LocalBusiness (parent)
+
+  Context: . = Site
+  Usage: {{ partial "schema-local-business.html" . }}
+*/}}
+
+{{ with .Site.Params.contact }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EventVenue",
+  "@id": "{{ $.Site.BaseURL }}#venue",
+  "name": "Pike & West",
+  "description": "{{ $.Site.Params.description }}",
+  "url": "{{ $.Site.BaseURL }}",
+  "telephone": "+1-{{ replace .phone "." "-" }}",
+  "email": "{{ .email }}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ .address }}",
+    "addressLocality": "{{ .city }}",
+    "addressRegion": "{{ .state }}",
+    "postalCode": "{{ .zip }}",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "35.0868",
+    "longitude": "-89.8100"
+  },
+  "image": [
+    "{{ "images/og-default.jpg" | absURL }}"
+  ],
+  "priceRange": "$$$",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "description": "Available by appointment only"
+  },
+  "sameAs": [
+    {{ with $.Site.Params.social.instagram }}"{{ . }}"{{ end }}{{ with $.Site.Params.social.facebook }},
+    "{{ . }}"{{ end }}
+  ],
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Art Gallery",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Climate Control",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Parking",
+      "value": true
+    }
+  ],
+  "potentialAction": {
+    "@type": "ReserveAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "{{ "contact/" | absURL }}",
+      "actionPlatform": [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform"
+      ]
+    },
+    "result": {
+      "@type": "Reservation",
+      "name": "Event Venue Reservation"
+    }
+  }
+}
+</script>
+{{ end }}

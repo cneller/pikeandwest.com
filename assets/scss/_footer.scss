@@ -1,144 +1,354 @@
 // =========================
-// Footer
+// Footer - Multi-Column SEO-Optimized Layout
 // =========================
+// Structure:
+// - Brand section (logo + tagline) - centered at top
+// - 4-column grid (Celebrate, Connect, Venue, Visit Us)
+// - Bottom bar (copyright + legal links)
+//
+// Responsive behavior:
+// - Desktop (992px+): 4 columns
+// - Tablet (768-991px): 2x2 grid
+// - Mobile (<768px): single column, stacked
 
 .footer {
   background-color: $color-gold;
-  height: 150px; // Webflow: exact height
-  margin: 0; // Webflow: no margin on .section.footer-wrap
-  padding: 20px 0; // Webflow: 20px vertical padding
+  padding: 0;
+  margin: 0;
 
-  &__container {
+  // =========================
+  // Brand Section (Logo + Tagline)
+  // =========================
+  &__brand {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: $spacing-md;
+    padding: $spacing-2xl $spacing-lg $spacing-xl;
     text-align: center;
-    height: 100%;
-    // Centered vertical stack like Webflow original
+    border-bottom: 1px solid rgba($color-cream, 0.2);
   }
 
   &__logo {
-    width: 50px; // Webflow: width 50px (not height)
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $spacing-sm;
 
     img {
-      width: 100%;
+      width: 40px;
       height: auto;
     }
   }
 
-  &__link {
+  &__logo-text {
     font-family: $font-primary;
-    font-size: 14px; // Webflow: 14px
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: $color-cream; // Webflow: #fff7e1
-    text-decoration: none;
-    // Touch-friendly padding for 44px minimum touch target
-    padding: 12px 16px;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
+    font-size: 1.25rem;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.15em;
+    color: $color-cream;
+  }
 
-    &:hover {
+  &__tagline {
+    font-family: $font-display;
+    font-size: $font-size-md;
+    color: $color-cream;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  // =========================
+  // Main Container
+  // =========================
+  &__container {
+    padding: $spacing-2xl $spacing-lg;
+  }
+
+  // =========================
+  // 4-Column Grid
+  // =========================
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-2xl;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  // =========================
+  // Individual Columns
+  // =========================
+  &__column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__heading {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: $color-cream;
+    margin: 0 0 $spacing-md;
+    padding-bottom: $spacing-sm;
+    border-bottom: 1px solid rgba($color-cream, 0.3);
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  // =========================
+  // Links
+  // =========================
+  &__link {
+    font-family: $font-secondary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-regular;
+    color: $color-cream;
+    text-decoration: none;
+    transition: color $transition-fast;
+    padding: $spacing-xs 0;
+    display: inline-block;
+
+    &:hover,
+    &:focus {
       color: $color-white;
+    }
+
+    // Address link styling
+    &--address {
+      line-height: 1.5;
+    }
+
+    // Phone link styling
+    &--phone {
+      font-weight: $font-weight-medium;
     }
   }
 
-  &__links {
-    display: flex;
-    gap: $spacing-lg;
-  }
-
+  // =========================
+  // Social Icons
+  // =========================
   &__social {
     display: flex;
-    gap: $spacing-md;
+    gap: $spacing-sm;
+    margin-top: $spacing-md;
   }
 
   &__social-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    // Touch target padding while keeping icon at 25px visual size
-    min-width: 44px; // WCAG 2.5.5: 44px minimum touch target
-    min-height: 44px;
-    color: $color-white;
-    transition: color $transition-fast;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba($color-cream, 0.1);
+    color: $color-cream;
+    transition: background-color $transition-fast, color $transition-fast;
 
-    &:hover {
-      color: $color-cream;
+    &:hover,
+    &:focus {
+      background-color: rgba($color-cream, 0.2);
+      color: $color-white;
     }
 
-    img,
     svg {
-      width: 25px; // Webflow: 25x25px visual size
-      height: 25px;
+      width: 18px;
+      height: 18px;
     }
+  }
+
+  // =========================
+  // Address (Contact Column)
+  // =========================
+  &__address {
+    font-style: normal; // Override default italic
+  }
+
+  &__address-line,
+  &__phone {
+    margin: 0 0 $spacing-sm;
+  }
+
+  // =========================
+  // Bottom Bar
+  // =========================
+  &__bottom {
+    background-color: darken($color-gold, 8%);
+    padding: $spacing-md $spacing-lg;
+  }
+
+  &__bottom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
   }
 
   &__copyright {
-    font-size: 11px; // Webflow: 11px (not 14px)
-    color: $color-cream; // Webflow: #fff7e1
-    margin-top: 10px; // Webflow: margin-top 10px
-    text-align: center;
+    font-family: $font-secondary;
+    font-size: $font-size-xs;
+    color: rgba($color-cream, 0.8);
+    margin: 0;
   }
 
-  // Tablet responsive (max-width: 991px)
+  &__legal {
+    display: flex;
+  }
+
+  &__legal-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: $spacing-lg;
+  }
+
+  &__legal-link {
+    font-family: $font-secondary;
+    font-size: $font-size-xs;
+    color: rgba($color-cream, 0.8);
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover,
+    &:focus {
+      color: $color-white;
+    }
+  }
+
+  // =========================
+  // Responsive: Tablet (max-width: 991px)
+  // =========================
   @media (max-width: $breakpoint-lg) {
-    .footer__container {
-      padding-left: 40px; // Webflow: .footer-wrap-1 padding at 991px
-      padding-right: 40px;
+    &__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-xl $spacing-2xl;
     }
 
-    .footer__copyright {
-      text-align: center;
-      width: 100%;
+    &__container {
+      padding: $spacing-xl $spacing-lg;
     }
   }
 
-  // Mobile landscape responsive (max-width: 767px)
+  // =========================
+  // Responsive: Mobile Landscape (max-width: 767px)
+  // =========================
   @media (max-width: $breakpoint-md) {
-    .footer__container {
+    &__brand {
+      padding: $spacing-xl $spacing-md $spacing-lg;
+    }
+
+    &__tagline {
+      font-size: $font-size-base;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: $spacing-xl;
       text-align: center;
     }
 
-    .footer__link {
-      font-size: 13px; // Webflow: .footer-link.mobile-horizontal font-size: 13px
+    &__column {
+      align-items: center;
+    }
+
+    &__heading {
+      display: inline-block;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    &__list {
+      align-items: center;
+    }
+
+    &__social {
+      justify-content: center;
+    }
+
+    &__address {
+      text-align: center;
+    }
+
+    &__bottom-container {
+      flex-direction: column;
+      gap: $spacing-sm;
+      text-align: center;
+    }
+
+    &__legal-list {
+      gap: $spacing-md;
     }
   }
 
-  // Mobile portrait responsive (max-width: 479px)
+  // =========================
+  // Responsive: Mobile Portrait (max-width: 479px)
+  // =========================
   @media (max-width: $breakpoint-sm) {
-    height: auto; // Webflow: .section.footer-wrap.mobile.vertical height: auto
-    flex-direction: column;
-
-    .footer__container {
-      padding-left: 10px; // Webflow: .footer-wrap-1.mobile.vertical padding
-      padding-right: 10px;
-      gap: 10px; // Webflow: grid-row-gap: 10px
+    &__brand {
+      padding: $spacing-lg $spacing-sm $spacing-md;
     }
 
-    .footer__links {
-      flex-direction: column;
-      gap: 10px;
+    &__logo img {
+      width: 32px;
     }
 
-    .footer__link {
-      font-size: 10px; // Webflow: .footer-link at 479px
-      line-height: 12px;
-      // Maintain touch target with reduced padding
-      padding: 8px 12px;
-      min-height: 44px;
+    &__tagline {
+      font-size: $font-size-sm;
     }
 
-    .footer__social {
-      gap: 10px;
+    &__container {
+      padding: $spacing-lg $spacing-sm;
     }
 
-    .footer__copyright {
-      font-size: 8px; // Webflow: .footer-copyright.mobile.vertical font-size: 8px
-      line-height: 12px;
+    &__grid {
+      gap: $spacing-lg;
+    }
+
+    &__heading {
+      font-size: 11px;
+      margin-bottom: $spacing-sm;
+    }
+
+    &__link {
+      font-size: $font-size-xs;
+      padding: $spacing-xs 0;
+    }
+
+    &__bottom {
+      padding: $spacing-sm;
+    }
+
+    &__copyright,
+    &__legal-link {
+      font-size: 10px;
+    }
+
+    &__legal-list {
+      gap: $spacing-sm;
+    }
+  }
+
+  // =========================
+  // Large Desktop Enhancement (min-width: 1280px)
+  // =========================
+  @media (min-width: $breakpoint-xl) {
+    &__grid {
+      max-width: 1200px;
+      gap: $spacing-3xl;
+    }
+
+    &__tagline {
+      font-size: $font-size-lg;
     }
   }
 }
