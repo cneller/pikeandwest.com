@@ -1,0 +1,12 @@
+{
+  "content": "content",
+  "media": "assets/images",
+  "public": "static",
+  "code": "layouts",
+  "configs": [
+    "config",
+    "data"
+  ],
+  "custom-commit": false,
+  "arrangement": []
+}
