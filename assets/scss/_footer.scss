@@ -26,9 +26,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: $spacing-2xl $spacing-lg $spacing-xl;
+    padding: $spacing-xl $spacing-lg $spacing-lg;
     text-align: center;
-    border-bottom: 1px solid rgba($color-cream, 0.2);
   }
 
   &__logo {
@@ -97,9 +96,7 @@
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: $color-cream;
-    margin: 0 0 $spacing-md;
-    padding-bottom: $spacing-sm;
-    border-bottom: 1px solid rgba($color-cream, 0.3);
+    margin: 0 0 $spacing-sm;
   }
 
   &__list {
@@ -279,8 +276,7 @@
 
     &__heading {
       font-size: 11px;
-      margin-bottom: $spacing-sm;
-      padding-bottom: $spacing-xs;
+      margin-bottom: $spacing-xs;
     }
 
     &__link {
@@ -349,9 +345,6 @@
       font-size: 10px;
       letter-spacing: 0.1em;
       margin-bottom: $spacing-xs;
-      padding-bottom: 2px;
-      // Keep underline for visual separation
-      border-bottom: 1px solid rgba($color-cream, 0.2);
     }
 
     &__link {
