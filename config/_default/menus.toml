@@ -76,7 +76,7 @@
 
 [[footer_venue]]
   name = "Gallery"
-  url = "/#gallery"
+  url = "/"
   weight = 2
 
 [[footer_venue]]
