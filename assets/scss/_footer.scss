@@ -1,14 +1,15 @@
 // =========================
-// Footer - Multi-Column SEO-Optimized Layout
+// Footer - Compact SEO-Optimized Layout (Option C)
 // =========================
 // Structure:
 // - Brand section (logo + tagline) - centered at top
-// - 4-column grid (Celebrate, Connect, Venue, Visit Us)
-// - Bottom bar (copyright + legal links)
+// - Contact section (address, phone, social) - prominent, centered
+// - Navigation section (2-column grid: Events + Explore)
+// - Bottom bar (copyright + legal)
 //
 // Responsive behavior:
-// - Desktop (992px+): 4 columns
-// - Tablet & Mobile: 2x2 grid (maintains 2 columns down to 320px)
+// - Desktop (992px+): Wider nav grid with more spacing
+// - Tablet & Mobile: Compact 2-column nav grid
 //
 // Using minmax(0, 1fr) to prevent grid blowout from long text
 // Reference: https://css-tricks.com/preventing-a-grid-blowout/
@@ -26,7 +27,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: $spacing-xl $spacing-lg $spacing-lg;
+    padding: $spacing-xl $spacing-lg $spacing-md;
     text-align: center;
   }
 
@@ -34,7 +35,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: $spacing-sm;
+    margin-bottom: $spacing-xs;
 
     img {
       width: 40px;
@@ -59,21 +60,100 @@
   }
 
   // =========================
-  // Main Container
+  // Contact Section (Address, Phone, Social)
   // =========================
-  &__container {
-    padding: $spacing-2xl $spacing-lg;
+  &__contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $spacing-md $spacing-lg $spacing-lg;
+    text-align: center;
+  }
+
+  &__contact-info {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__contact-address {
+    font-family: $font-secondary;
+    font-size: $font-size-sm;
+    color: $color-cream;
+    text-decoration: none;
+    transition: color $transition-fast;
+    line-height: 1.5;
+
+    &:hover,
+    &:focus {
+      color: $color-white;
+    }
+  }
+
+  &__contact-phone {
+    font-family: $font-secondary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: $color-cream;
+    text-decoration: none;
+    transition: color $transition-fast;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus {
+      color: $color-white;
+    }
   }
 
   // =========================
-  // 4-Column Grid
+  // Social Icons
   // =========================
-  &__grid {
+  &__social {
+    display: flex;
+    gap: $spacing-sm;
+    margin-top: $spacing-xs;
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba($color-cream, 0.1);
+    color: $color-cream;
+    transition: background-color $transition-fast, color $transition-fast;
+    flex-shrink: 0;
+
+    &:hover,
+    &:focus {
+      background-color: rgba($color-cream, 0.2);
+      color: $color-white;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  // =========================
+  // Navigation Section (2-column grid)
+  // =========================
+  &__nav {
+    padding: $spacing-lg $spacing-lg;
+    background-color: darken($color-gold, 3%);
+  }
+
+  &__nav-grid {
     display: grid;
-    // Use minmax(0, 1fr) to prevent grid blowout from long content
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: $spacing-2xl;
-    max-width: 1100px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $spacing-lg $spacing-2xl;
+    max-width: 600px;
     margin: 0 auto;
   }
 
@@ -83,7 +163,6 @@
   &__column {
     display: flex;
     flex-direction: column;
-    // Prevent text overflow
     min-width: 0;
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -120,7 +199,6 @@
     transition: color $transition-fast;
     padding: $spacing-xs 0;
     display: inline-block;
-    // Prevent long links from breaking layout
     overflow-wrap: break-word;
     word-wrap: break-word;
 
@@ -128,64 +206,6 @@
     &:focus {
       color: $color-white;
     }
-
-    // Address link styling
-    &--address {
-      line-height: 1.5;
-    }
-
-    // Phone link styling
-    &--phone {
-      font-weight: $font-weight-medium;
-      // Phone numbers should not wrap
-      white-space: nowrap;
-    }
-  }
-
-  // =========================
-  // Social Icons
-  // =========================
-  &__social {
-    display: flex;
-    gap: $spacing-sm;
-    margin-top: $spacing-md;
-  }
-
-  &__social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: rgba($color-cream, 0.1);
-    color: $color-cream;
-    transition: background-color $transition-fast, color $transition-fast;
-    // Prevent shrinking
-    flex-shrink: 0;
-
-    &:hover,
-    &:focus {
-      background-color: rgba($color-cream, 0.2);
-      color: $color-white;
-    }
-
-    svg {
-      width: 18px;
-      height: 18px;
-    }
-  }
-
-  // =========================
-  // Address (Contact Column)
-  // =========================
-  &__address {
-    font-style: normal; // Override default italic
-  }
-
-  &__address-line,
-  &__phone {
-    margin: 0 0 $spacing-sm;
   }
 
   // =========================
@@ -194,14 +214,11 @@
   &__bottom {
     background-color: darken($color-gold, 8%);
     padding: $spacing-md $spacing-lg;
-  }
-
-  &__bottom-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    max-width: 1100px;
-    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: $spacing-sm $spacing-lg;
   }
 
   &__copyright {
@@ -237,60 +254,27 @@
   }
 
   // =========================
-  // Responsive: Tablet (max-width: 991px)
-  // 2x2 grid layout
-  // =========================
-  @media (max-width: $breakpoint-lg) {
-    &__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: $spacing-xl $spacing-2xl;
-    }
-
-    &__container {
-      padding: $spacing-xl $spacing-lg;
-    }
-  }
-
-  // =========================
   // Responsive: Mobile Landscape (max-width: 767px)
-  // Keep 2-column grid, reduce spacing
   // =========================
   @media (max-width: $breakpoint-md) {
     &__brand {
-      padding: $spacing-xl $spacing-md $spacing-lg;
+      padding: $spacing-lg $spacing-md $spacing-sm;
     }
 
     &__tagline {
       font-size: $font-size-base;
     }
 
-    &__container {
-      padding: $spacing-lg $spacing-md;
+    &__contact {
+      padding: $spacing-sm $spacing-md $spacing-md;
     }
 
-    &__grid {
-      // Keep 2 columns on mobile - prevents tall single-column stack
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: $spacing-lg $spacing-md;
-    }
-
-    &__heading {
-      font-size: 11px;
-      margin-bottom: $spacing-xs;
-    }
-
-    &__link {
+    &__contact-address {
       font-size: $font-size-xs;
-      padding: 3px 0; // Tighter padding on mobile
     }
 
-    &__list {
-      gap: 2px;
-    }
-
-    &__social {
-      margin-top: $spacing-sm;
-      gap: $spacing-xs;
+    &__contact-phone {
+      font-size: $font-size-sm;
     }
 
     &__social-link {
@@ -303,10 +287,32 @@
       }
     }
 
-    &__bottom-container {
+    &__nav {
+      padding: $spacing-md;
+    }
+
+    &__nav-grid {
+      gap: $spacing-md $spacing-lg;
+    }
+
+    &__heading {
+      font-size: 11px;
+      margin-bottom: $spacing-xs;
+    }
+
+    &__link {
+      font-size: $font-size-xs;
+      padding: 3px 0;
+    }
+
+    &__list {
+      gap: 2px;
+    }
+
+    &__bottom {
+      padding: $spacing-sm $spacing-md;
       flex-direction: column;
-      gap: $spacing-sm;
-      text-align: center;
+      gap: $spacing-xs;
     }
 
     &__legal-list {
@@ -316,11 +322,10 @@
 
   // =========================
   // Responsive: Mobile Portrait (max-width: 479px)
-  // Tightest 2-column layout
   // =========================
   @media (max-width: $breakpoint-sm) {
     &__brand {
-      padding: $spacing-md $spacing-sm;
+      padding: $spacing-md $spacing-sm $spacing-xs;
     }
 
     &__logo img {
@@ -331,34 +336,20 @@
       font-size: $font-size-sm;
     }
 
-    &__container {
-      padding: $spacing-md $spacing-sm;
+    &__contact {
+      padding: $spacing-xs $spacing-sm $spacing-sm;
     }
 
-    &__grid {
-      // Keep 2 columns even on smallest screens
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: $spacing-md $spacing-sm;
-    }
-
-    &__heading {
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      margin-bottom: $spacing-xs;
-    }
-
-    &__link {
+    &__contact-address {
       font-size: 11px;
-      padding: 2px 0;
-      line-height: 1.4;
     }
 
-    &__list {
-      gap: 1px;
+    &__contact-phone {
+      font-size: $font-size-xs;
     }
 
     &__social {
-      margin-top: $spacing-xs;
+      gap: $spacing-xs;
     }
 
     &__social-link {
@@ -371,13 +362,31 @@
       }
     }
 
-    &__address-line,
-    &__phone {
-      margin-bottom: $spacing-xs;
+    &__nav {
+      padding: $spacing-sm;
+    }
+
+    &__nav-grid {
+      gap: $spacing-sm $spacing-md;
+    }
+
+    &__heading {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    &__link {
+      font-size: 11px;
+      padding: 2px 0;
+      line-height: 1.4;
+    }
+
+    &__list {
+      gap: 1px;
     }
 
     &__bottom {
-      padding: $spacing-sm $spacing-xs;
+      padding: $spacing-xs;
     }
 
     &__copyright,
@@ -394,9 +403,9 @@
   // Large Desktop Enhancement (min-width: 1280px)
   // =========================
   @media (min-width: $breakpoint-xl) {
-    &__grid {
-      max-width: 1200px;
-      gap: $spacing-3xl;
+    &__nav-grid {
+      max-width: 700px;
+      gap: $spacing-xl $spacing-3xl;
     }
 
     &__tagline {

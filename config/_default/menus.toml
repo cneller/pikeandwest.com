@@ -52,37 +52,31 @@
   url = "/events/dance-events/"
   weight = 6
 
-# Footer: Connect Column
-[[footer_connect]]
-  name = "Contact Us"
-  url = "/contact/"
-  weight = 1
-
-[[footer_connect]]
-  name = "Schedule a Tour"
-  url = "/contact/"
-  weight = 2
-
-[[footer_connect]]
-  name = "Blog"
-  url = "/blog/"
-  weight = 3
-
-# Footer: Venue Column
-[[footer_venue]]
+# Footer: Explore Column (Venue + Connect combined)
+[[footer_explore]]
   name = "About Pike & West"
   url = "/about/"
   weight = 1
 
-[[footer_venue]]
+[[footer_explore]]
   name = "Gallery"
   url = "/"
   weight = 2
 
-[[footer_venue]]
+[[footer_explore]]
   name = "Artist Application"
   url = "/gallery-application/"
   weight = 3
+
+[[footer_explore]]
+  name = "Contact Us"
+  url = "/contact/"
+  weight = 4
+
+[[footer_explore]]
+  name = "Blog"
+  url = "/blog/"
+  weight = 5
 
 # Footer: Legal (bottom bar)
 [[footer_legal]]
