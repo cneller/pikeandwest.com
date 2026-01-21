@@ -44,13 +44,15 @@
 
   // ===== Content Block =====
   // Webflow: .div-block
+  // Aligned under the logo (header uses padding: 0 5%)
   &__content {
     position: relative;
     z-index: 1;
+    grid-column: 1;
     margin-top: 60px;
-    margin-left: auto;
+    margin-left: 0;
     padding-top: 0;
-    padding-left: 60px;
+    padding-left: 5vw; // Match header's 5% padding (viewport-relative)
     padding-right: 0;
     color: $color-cream;
   }
@@ -88,9 +90,9 @@
       justify-content: flex-start;
       align-items: flex-start;
       margin-top: 100px;
-      margin-left: 50px;
+      margin-left: 0;
       padding-top: 0;
-      padding-left: 60px;
+      padding-left: 5vw; // Match header's 5% padding (viewport-relative)
       display: flex;
     }
 

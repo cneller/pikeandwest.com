@@ -17,6 +17,30 @@ This document tracks the current project state and upcoming work. Keep this file
 | Marketing Strategy | Complete | Comprehensive docs in docs/marketing-strategy/ |
 | Claude Hooks       | Active   | Pre-commit docs check hook enabled             |
 
+## Top Priority
+
+### Hero Text Alignment
+
+**Issue:** The hero text and CTA button are not aligned with the Pike & West logo. Currently too far to the left.
+
+**Context:**
+
+- Header uses `padding: 0 5%` for horizontal padding
+- Hero uses CSS Grid with `grid-template-columns: 1fr 1fr`
+- Current fix (`padding-left: 5vw`) is insufficient
+- The hero content should start at the same horizontal position as the logo
+
+**Files to investigate:**
+
+- `assets/scss/_header.scss` - Logo positioning
+- `assets/scss/_hero.scss` - Hero content alignment (line 54, 94)
+- `layouts/partials/header.html` - Header structure
+- `layouts/partials/hero.html` - Hero structure
+
+**Approach:** Compare computed pixel positions of logo vs hero content in DevTools at various viewport widths to determine correct offset.
+
+---
+
 ## Immediate Tasks (Blocked)
 
 These tasks are waiting on external dependencies:
@@ -178,3 +202,5 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 | 2026-01-20 | Added 3 backdated blog posts (Oct-Dec 2025) targeting Baby Shower, Anniversary, Birthday personas |
 | 2026-01-20 | Added blog posts to Lighthouse performance testing matrix                                         |
 | 2026-01-20 | Added accessible breadcrumb navigation to blog pages with JSON-LD schema                          |
+| 2026-01-20 | SEO audit fixes merged (keywords, titles, og_image, expanded blog content)                        |
+| 2026-01-20 | Added hero text alignment as top priority (still too far left from logo)                          |

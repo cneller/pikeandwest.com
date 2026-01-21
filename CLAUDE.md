@@ -2,6 +2,12 @@
 
 > Converting pikeandwest.com from Webflow to Hugo while preserving the elegant, luxury aesthetic.
 
+**See [README.md](README.md) for quick start, badges, and contributor overview.**
+
+This document contains detailed development guidelines, design system specifications, and AI assistant context for working on this project.
+
+---
+
 ## Project Overview
 
 **Current State:** Webflow-hosted event venue website
