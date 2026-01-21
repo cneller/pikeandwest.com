@@ -1,0 +1,42 @@
+{{/*
+  Purpose: Generate JSON-LD BreadcrumbList schema for SEO
+  Context: Page context (.)
+  Usage: {{ partial "breadcrumb-schema.html" . }}
+*/}}
+
+{{- $items := slice (dict "name" "Home" "url" (absURL "/")) -}}
+
+{{- /* Add section (e.g., Blog) */ -}}
+{{- if .Section -}}
+  {{- $sectionTitle := .Section | humanize | title -}}
+  {{- if eq .Kind "section" -}}
+    {{- /* On section list page: section is current (no URL per schema convention) */ -}}
+    {{- $items = $items | append (dict "name" $sectionTitle "url" "") -}}
+  {{- else -}}
+    {{- /* On single page: section is linked, then add current page */ -}}
+    {{- $sectionUrl := printf "/%s/" .Section | absURL -}}
+    {{- $items = $items | append (dict "name" $sectionTitle "url" $sectionUrl) -}}
+    {{- $items = $items | append (dict "name" .Title "url" "") -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Only render if we have more than just Home */ -}}
+{{- if gt (len $items) 1 -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{- range $index, $item := $items -}}
+    {
+      "@type": "ListItem",
+      "position": {{ add $index 1 }}{{ if $item.url }},
+      "name": "{{ $item.name }}",
+      "item": "{{ $item.url }}"{{ else }},
+      "name": "{{ $item.name }}"{{ end }}
+    }{{ if ne $index (sub (len $items) 1) }},{{ end }}
+    {{- end -}}
+  ]
+}
+</script>
+{{- end -}}

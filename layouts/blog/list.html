@@ -12,6 +12,9 @@
   </div>
 </section>
 
+{{/* Breadcrumb Navigation - flush with hero */}}
+{{ partial "breadcrumb.html" (dict "Page" . "accentBar" true) }}
+
 {{/* Blog List */}}
 <section class="blog-list section">
   <div class="container">

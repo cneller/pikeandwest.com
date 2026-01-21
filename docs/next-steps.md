@@ -267,5 +267,6 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 | 2026-01-20 | SCSS visual parity refinements across all sections                                                |
 | 2026-01-20 | Added 3 backdated blog posts (Oct-Dec 2025) targeting Baby Shower, Anniversary, Birthday personas |
 | 2026-01-20 | Added blog posts to Lighthouse performance testing matrix                                         |
+| 2026-01-20 | Added accessible breadcrumb navigation to blog pages with JSON-LD schema                          |
 | 2026-01-20 | SEO audit fixes merged (keywords, titles, og_image, expanded blog content)                        |
 | 2026-01-20 | Added hero text alignment as top priority (still too far left from logo)                          |
