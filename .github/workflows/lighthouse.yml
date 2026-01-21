@@ -1,0 +1,378 @@
+name: Lighthouse
+
+on:
+  workflow_run:
+    workflows: [Deploy]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'URL to test (e.g., https://pikeandwest.com)'
+        required: true
+        type: string
+
+concurrency:
+  group: lighthouse-${{ github.event.workflow_run.head_branch || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prepare:
+    name: Prepare
+    if:
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      url: ${{ steps.get-url.outputs.url }}
+      is-preview: ${{ steps.get-url.outputs.is-preview }}
+      run-count: ${{ steps.get-url.outputs.run-count }}
+    steps:
+      - name: Get deployment URL
+        id: get-url
+        uses: actions/github-script@v7
+        with:
+          script: |
+            if (context.eventName === 'workflow_dispatch') {
+              core.setOutput('url', '${{ inputs.url }}');
+              core.setOutput('is-preview', 'false');
+              core.setOutput('run-count', '3');
+              return;
+            }
+
+            // Get the deployment URL from the triggering workflow
+            const runId = context.payload.workflow_run.id;
+            const jobs = await github.rest.actions.listJobsForWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            });
+
+            // Find the deploy job and extract URL from logs
+            const deployJob = jobs.data.jobs.find(j => j.name === 'Deploy');
+            if (!deployJob) {
+              core.setFailed('Could not find Deploy job');
+              return;
+            }
+
+            // Get artifacts from the workflow run
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            });
+
+            // For now, construct URL from branch name
+            const branch = context.payload.workflow_run.head_branch;
+            const isMain = branch === 'main';
+            const url = isMain
+              ? 'https://pikeandwest.com'
+              : `https://${branch.replace(/[^a-z0-9-]/gi, '-')}.pikeandwest.pages.dev`;
+
+            core.setOutput('url', url);
+            core.setOutput('is-preview', isMain ? 'false' : 'true');
+            core.setOutput('run-count', isMain ? '3' : '1');
+
+  health-check:
+    name: Health Check
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Wait for site
+        run: |
+          URL="${{ needs.prepare.outputs.url }}"
+          echo "Checking $URL..."
+          for i in {1..12}; do
+            if curl -sf "$URL" > /dev/null; then
+              echo "Site is up!"
+              exit 0
+            fi
+            echo "Attempt $i/12 failed, waiting 5s..."
+            sleep 5
+          done
+          echo "Site failed to respond after 60s"
+          exit 1
+
+  audit:
+    name: ${{ matrix.page.name }}
+    needs: [prepare, health-check]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        page:
+          - { name: 'Home', path: '/' }
+          - { name: 'About', path: '/about/' }
+          - { name: 'Blog', path: '/blog/' }
+          - { name: 'Contact', path: '/contact/' }
+          - { name: 'Gallery', path: '/gallery-application/' }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: lighthouserc.json
+
+      - name: Run Lighthouse
+        id: lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        env:
+          LHCI_BUILD_CONTEXT__CURRENT_HASH:
+            ${{ github.event.workflow_run.head_sha || github.sha }}
+          LHCI_ASSERT__ASSERTIONS__IS_CRAWLABLE:
+            ${{ needs.prepare.outputs.is-preview == 'true' && 'off' || '' }}
+        with:
+          urls: ${{ needs.prepare.outputs.url }}${{ matrix.page.path }}
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: ${{ needs.prepare.outputs.run-count }}
+          artifactName: lighthouse-${{ matrix.page.name }}
+
+      - name: Save results
+        run: |
+          mkdir -p results
+          echo '${{ steps.lighthouse.outputs.manifest }}' > results/${{ matrix.page.name }}.json
+          echo '${{ steps.lighthouse.outputs.links }}' > results/${{ matrix.page.name }}-links.json
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-${{ matrix.page.name }}
+          path: results/
+          retention-days: 30
+
+  summary:
+    name: Summary
+    needs: [prepare, audit]
+    if: always() && needs.prepare.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Download results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: lighthouse-*
+          path: results/
+          merge-multiple: true
+
+      - name: Generate summary
+        id: analyze
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const resultsDir = 'results';
+            if (!fs.existsSync(resultsDir)) {
+              console.log('No results directory found');
+              return;
+            }
+
+            const files = fs.readdirSync(resultsDir).filter(f => f.endsWith('.json') && !f.includes('-links'));
+
+            let rows = [];
+            let totalPerf = 0;
+            let pageCount = 0;
+
+            for (const file of files) {
+              const pageName = file.replace('.json', '');
+              const content = fs.readFileSync(path.join(resultsDir, file), 'utf8');
+
+              if (!content || content.trim() === '' || content.trim() === 'undefined') {
+                rows.push(`| ${pageName} | N/A | N/A | N/A | N/A |`);
+                continue;
+              }
+
+              let manifest;
+              try {
+                manifest = JSON.parse(content);
+              } catch (e) {
+                rows.push(`| ${pageName} | Error | Error | Error | Error |`);
+                continue;
+              }
+
+              const linksFile = path.join(resultsDir, `${pageName}-links.json`);
+              let reportLink = '';
+
+              if (fs.existsSync(linksFile)) {
+                try {
+                  const linksContent = fs.readFileSync(linksFile, 'utf8');
+                  if (linksContent && linksContent.trim() !== '' && linksContent.trim() !== 'undefined') {
+                    const links = JSON.parse(linksContent);
+                    reportLink = Object.values(links)[0] || '';
+                  }
+                } catch (e) {}
+              }
+
+              if (manifest && manifest.length > 0) {
+                const summary = manifest[0].summary || {};
+
+                const getScore = (key) => {
+                  const score = summary[key];
+                  if (score === undefined || score === null) return 'N/A';
+                  const pct = Math.round(score * 100);
+                  const emoji = pct >= 90 ? '🟢' : pct >= 50 ? '🟠' : '🔴';
+                  return `${emoji} ${pct}`;
+                };
+
+                const perf = summary.performance;
+                if (perf !== undefined && perf !== null) {
+                  totalPerf += Math.round(perf * 100);
+                  pageCount++;
+                }
+
+                const pageLink = reportLink ? `[${pageName}](${reportLink})` : pageName;
+                rows.push(`| ${pageLink} | ${getScore('performance')} | ${getScore('accessibility')} | ${getScore('best-practices')} | ${getScore('seo')} |`);
+              }
+            }
+
+            const avgPerf = pageCount > 0 ? Math.round(totalPerf / pageCount) : 0;
+
+            const summary = `## Lighthouse Report
+
+            | Page | Perf | A11y | Best Practices | SEO |
+            |------|------|------|----------------|-----|
+            ${rows.join('\n')}
+
+            Average Performance: **${avgPerf}** | [Score Legend](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring)
+            `;
+
+            await core.summary.addRaw(summary).write();
+            fs.writeFileSync('summary.md', summary);
+
+            core.setOutput('avg-performance', avgPerf);
+
+      - name: Comment on PR
+        if: github.event.workflow_run.event == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            if (!fs.existsSync('summary.md')) {
+              console.log('No summary file, skipping PR comment');
+              return;
+            }
+
+            const body = fs.readFileSync('summary.md', 'utf8');
+            if (!body || body.trim() === '') return;
+
+            // Get PR number from the workflow run
+            const runId = context.payload.workflow_run.id;
+            const run = await github.rest.actions.getWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            });
+
+            // Find associated PR
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: `${context.repo.owner}:${run.data.head_branch}`,
+              state: 'open',
+            });
+
+            if (prs.data.length === 0) {
+              console.log('No open PR found for this branch');
+              return;
+            }
+
+            const prNumber = prs.data[0].number;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' && comment.body.includes('Lighthouse Report')
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                comment_id: botComment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: prNumber,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            }
+
+  badge:
+    name: Update Badge
+    needs: summary
+    if:
+      github.event.workflow_run.head_branch == 'main' || (github.event_name ==
+      'workflow_dispatch' && contains(inputs.url, 'pikeandwest.com'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Download results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: lighthouse-*
+          path: results/
+          merge-multiple: true
+
+      - name: Update badge
+        run: |
+          # Calculate average score from results
+          TOTAL=0
+          COUNT=0
+          for f in results/*.json; do
+            [[ "$f" == *-links.json ]] && continue
+            [[ ! -f "$f" ]] && continue
+            SCORE=$(jq -r '.[0].summary.performance // 0' "$f" 2>/dev/null || echo 0)
+            if [[ "$SCORE" != "0" && "$SCORE" != "null" ]]; then
+              SCORE_PCT=$(echo "$SCORE * 100" | bc | cut -d. -f1)
+              TOTAL=$((TOTAL + SCORE_PCT))
+              COUNT=$((COUNT + 1))
+            fi
+          done
+
+          if [[ $COUNT -gt 0 ]]; then
+            AVG=$((TOTAL / COUNT))
+          else
+            AVG=0
+          fi
+
+          # Determine color
+          if [[ $AVG -ge 90 ]]; then
+            COLOR="brightgreen"
+          elif [[ $AVG -ge 50 ]]; then
+            COLOR="yellow"
+          else
+            COLOR="red"
+          fi
+
+          # Write badge JSON
+          mkdir -p .github/badges
+          echo "{\"schemaVersion\":1,\"label\":\"lighthouse\",\"message\":\"${AVG}\",\"color\":\"${COLOR}\"}" > .github/badges/lighthouse.json
+
+      - name: Commit badge
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .github/badges/
+          git diff --staged --quiet || git commit -m "chore: update lighthouse badge [skip ci]"
+          git push || echo "Nothing to push"
