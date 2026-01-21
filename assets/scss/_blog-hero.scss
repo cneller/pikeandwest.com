@@ -14,6 +14,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  overflow: hidden; // Prevent title from extending past hero boundaries
 
   // Dark overlay for text readability
   &::before {
@@ -30,10 +31,18 @@
     min-height: 250px;
   }
 
-  // Mobile
+  // Mobile - anchor content to bottom to prevent title overflow at top
   @media (max-width: $breakpoint-md) {
-    height: 30vh;
+    height: auto; // Let content determine height
+    min-height: 220px; // Slightly increased for longer titles
+    max-height: 280px; // Cap maximum height
+    align-items: flex-end; // Anchor content to bottom
+  }
+
+  // Mobile portrait - ensure enough space for multi-line titles
+  @media (max-width: $breakpoint-sm) {
     min-height: 200px;
+    max-height: 260px;
   }
 
   &__content {
@@ -41,6 +50,17 @@
     z-index: 2;
     text-align: center;
     padding: $spacing-lg;
+
+    // Mobile - add bottom padding when content is bottom-anchored
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-lg $spacing-md $spacing-xl; // More bottom padding
+      width: 100%;
+    }
+
+    // Mobile portrait
+    @media (max-width: $breakpoint-sm) {
+      padding: $spacing-md $spacing-sm $spacing-lg;
+    }
   }
 
   &__title {
