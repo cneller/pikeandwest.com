@@ -1,144 +1,454 @@
 // =========================
-// Footer
+// Footer - Horizontal Luxury Layout (Option C)
 // =========================
+// Structure:
+// - Main row: Logo/tagline (left) | Nav columns (center) | Contact (right)
+// - Bottom bar (copyright + legal)
+//
+// Responsive behavior:
+// - Desktop (992px+): 3-column horizontal layout
+// - Tablet (768-991px): Stacked with centered sections
+// - Mobile (<768px): Single column stacked
+//
+// Using minmax(0, 1fr) to prevent grid blowout from long text
+// Reference: https://css-tricks.com/preventing-a-grid-blowout/
 
 .footer {
   background-color: $color-gold;
-  height: 150px; // Webflow: exact height
-  margin: 0; // Webflow: no margin on .section.footer-wrap
-  padding: 20px 0; // Webflow: 20px vertical padding
+  padding: 0;
+  margin: 0;
 
-  &__container {
+  // =========================
+  // Main Content Row (Desktop: 3-column layout)
+  // =========================
+  &__main {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: $spacing-2xl;
+    padding: $spacing-2xl 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    @media (max-width: $breakpoint-lg) {
+      grid-template-columns: 1fr;
+      gap: $spacing-xl;
+      text-align: center;
+      padding: $spacing-xl $spacing-lg;
+    }
+  }
+
+  // =========================
+  // Brand Section (Logo + Tagline) - LEFT
+  // =========================
+  &__brand {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: $spacing-md;
-    text-align: center;
-    height: 100%;
-    // Centered vertical stack like Webflow original
+    align-items: flex-start;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+      order: 1;
+    }
   }
 
   &__logo {
-    width: 50px; // Webflow: width 50px (not height)
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $spacing-sm;
 
     img {
-      width: 100%;
+      width: 48px;
       height: auto;
     }
   }
 
-  &__link {
+  &__logo-text {
     font-family: $font-primary;
-    font-size: 14px; // Webflow: 14px
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: $color-cream; // Webflow: #fff7e1
-    text-decoration: none;
-    // Touch-friendly padding for 44px minimum touch target
-    padding: 12px 16px;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
+    font-size: 1.25rem;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.15em;
+    color: $color-cream;
+  }
 
-    &:hover {
+  &__tagline {
+    font-family: $font-display;
+    font-size: $font-size-md;
+    color: $color-cream;
+    margin: 0;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+  }
+
+  // =========================
+  // Contact Section (Address, Phone, Social) - RIGHT
+  // =========================
+  &__contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+      text-align: center;
+      order: 2;
+    }
+  }
+
+  &__contact-info {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+    }
+  }
+
+  &__contact-address {
+    font-family: $font-secondary;
+    font-size: $font-size-sm;
+    color: $color-cream;
+    text-decoration: none;
+    transition: color $transition-fast;
+    line-height: 1.5;
+
+    &:hover,
+    &:focus {
       color: $color-white;
     }
   }
 
-  &__links {
-    display: flex;
-    gap: $spacing-lg;
+  &__contact-phone {
+    font-family: $font-secondary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: $color-cream;
+    text-decoration: none;
+    transition: color $transition-fast;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus {
+      color: $color-white;
+    }
   }
 
+  // =========================
+  // Social Icons
+  // =========================
   &__social {
     display: flex;
-    gap: $spacing-md;
+    gap: $spacing-sm;
+    margin-top: $spacing-xs;
   }
 
   &__social-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    // Touch target padding while keeping icon at 25px visual size
-    min-width: 44px; // WCAG 2.5.5: 44px minimum touch target
-    min-height: 44px;
-    color: $color-white;
-    transition: color $transition-fast;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba($color-cream, 0.1);
+    color: $color-cream;
+    transition:
+      background-color $transition-fast,
+      color $transition-fast;
+    flex-shrink: 0;
 
-    &:hover {
-      color: $color-cream;
+    &:hover,
+    &:focus {
+      background-color: rgba($color-cream, 0.2);
+      color: $color-white;
     }
 
-    img,
     svg {
-      width: 25px; // Webflow: 25x25px visual size
-      height: 25px;
+      width: 18px;
+      height: 18px;
     }
   }
 
-  &__copyright {
-    font-size: 11px; // Webflow: 11px (not 14px)
-    color: $color-cream; // Webflow: #fff7e1
-    margin-top: 10px; // Webflow: margin-top 10px
-    text-align: center;
-  }
-
-  // Tablet responsive (max-width: 991px)
-  @media (max-width: $breakpoint-lg) {
-    .footer__container {
-      padding-left: 40px; // Webflow: .footer-wrap-1 padding at 991px
-      padding-right: 40px;
-    }
-
-    .footer__copyright {
-      text-align: center;
+  // =========================
+  // Navigation Section (CENTER - 2 columns)
+  // =========================
+  &__nav {
+    @media (max-width: $breakpoint-lg) {
+      order: 3;
       width: 100%;
     }
   }
 
-  // Mobile landscape responsive (max-width: 767px)
-  @media (max-width: $breakpoint-md) {
-    .footer__container {
-      text-align: center;
+  &__nav-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, auto));
+    gap: $spacing-md $spacing-3xl;
+
+    @media (max-width: $breakpoint-lg) {
+      justify-content: center;
+      gap: $spacing-lg $spacing-3xl;
     }
 
-    .footer__link {
-      font-size: 13px; // Webflow: .footer-link.mobile-horizontal font-size: 13px
+    @media (max-width: $breakpoint-sm) {
+      gap: $spacing-md $spacing-xl;
     }
   }
 
-  // Mobile portrait responsive (max-width: 479px)
-  @media (max-width: $breakpoint-sm) {
-    height: auto; // Webflow: .section.footer-wrap.mobile.vertical height: auto
+  // =========================
+  // Individual Columns
+  // =========================
+  &__column {
+    display: flex;
     flex-direction: column;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 
-    .footer__container {
-      padding-left: 10px; // Webflow: .footer-wrap-1.mobile.vertical padding
-      padding-right: 10px;
-      gap: 10px; // Webflow: grid-row-gap: 10px
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+    }
+  }
+
+  &__heading {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: $color-cream;
+    margin: 0 0 $spacing-sm;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+    }
+  }
+
+  // =========================
+  // Links
+  // =========================
+  &__link {
+    font-family: $font-secondary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-regular;
+    color: $color-cream;
+    text-decoration: none;
+    transition: color $transition-fast;
+    padding: $spacing-xs 0;
+    display: inline-block;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    &:hover,
+    &:focus {
+      color: $color-white;
+    }
+  }
+
+  // =========================
+  // Bottom Bar
+  // =========================
+  &__bottom {
+    background-color: darken($color-gold, 5%);
+    padding: $spacing-md $spacing-lg;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $spacing-sm $spacing-lg;
+  }
+
+  &__copyright {
+    font-family: $font-secondary;
+    font-size: $font-size-xs;
+    color: rgba($color-cream, 0.8);
+    margin: 0;
+  }
+
+  &__legal {
+    display: flex;
+  }
+
+  &__legal-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: $spacing-lg;
+  }
+
+  &__legal-link {
+    font-family: $font-secondary;
+    font-size: $font-size-xs;
+    color: rgba($color-cream, 0.8);
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover,
+    &:focus {
+      color: $color-white;
+    }
+  }
+
+  // =========================
+  // Responsive: Mobile Landscape (max-width: 767px)
+  // =========================
+  @media (max-width: $breakpoint-md) {
+    &__main {
+      padding: $spacing-lg $spacing-md;
+      gap: $spacing-lg;
     }
 
-    .footer__links {
+    &__tagline {
+      font-size: $font-size-base;
+    }
+
+    &__contact-address {
+      font-size: $font-size-xs;
+    }
+
+    &__contact-phone {
+      font-size: $font-size-sm;
+    }
+
+    &__social-link {
+      width: 32px;
+      height: 32px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    &__heading {
+      font-size: 11px;
+      margin-bottom: $spacing-xs;
+    }
+
+    &__link {
+      font-size: $font-size-xs;
+      padding: 3px 0;
+    }
+
+    &__list {
+      gap: 2px;
+    }
+
+    &__bottom {
+      padding: $spacing-sm $spacing-md;
       flex-direction: column;
-      gap: 10px;
+      gap: $spacing-xs;
     }
 
-    .footer__link {
-      font-size: 10px; // Webflow: .footer-link at 479px
-      line-height: 12px;
-      // Maintain touch target with reduced padding
-      padding: 8px 12px;
-      min-height: 44px;
+    &__legal-list {
+      gap: $spacing-md;
+    }
+  }
+
+  // =========================
+  // Responsive: Mobile Portrait (max-width: 479px)
+  // =========================
+  @media (max-width: $breakpoint-sm) {
+    &__main {
+      padding: $spacing-md $spacing-sm;
+      gap: $spacing-md;
     }
 
-    .footer__social {
-      gap: 10px;
+    &__logo img {
+      width: 36px;
     }
 
-    .footer__copyright {
-      font-size: 8px; // Webflow: .footer-copyright.mobile.vertical font-size: 8px
-      line-height: 12px;
+    &__tagline {
+      font-size: $font-size-sm;
+    }
+
+    &__contact-address {
+      font-size: 11px;
+    }
+
+    &__contact-phone {
+      font-size: $font-size-xs;
+    }
+
+    &__social {
+      gap: $spacing-xs;
+    }
+
+    &__social-link {
+      width: 28px;
+      height: 28px;
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &__nav-grid {
+      gap: $spacing-sm $spacing-lg;
+    }
+
+    &__heading {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    &__link {
+      font-size: 11px;
+      padding: 2px 0;
+      line-height: 1.4;
+    }
+
+    &__list {
+      gap: 1px;
+    }
+
+    &__bottom {
+      padding: $spacing-xs $spacing-sm;
+    }
+
+    &__copyright,
+    &__legal-link {
+      font-size: 10px;
+    }
+
+    &__legal-list {
+      gap: $spacing-sm;
+    }
+  }
+
+  // =========================
+  // Large Desktop Enhancement (min-width: 1280px)
+  // =========================
+  @media (min-width: $breakpoint-xl) {
+    &__main {
+      padding: $spacing-3xl 5%;
+    }
+
+    &__logo img {
+      width: 56px;
+    }
+
+    &__tagline {
+      font-size: $font-size-lg;
+    }
+
+    &__nav-grid {
+      gap: $spacing-lg $spacing-3xl;
     }
   }
 }

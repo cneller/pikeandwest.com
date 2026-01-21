@@ -1,0 +1,58 @@
+{{ define "main" }}
+{{/*
+  Events List Page Template
+
+  Purpose: Displays a grid of all event types offered at Pike & West.
+  Links to individual event pages for SEO value.
+
+  Context: . = Page (events section list)
+*/}}
+
+{{/* Page Header */}}
+<section class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">{{ .Title }}</h1>
+    {{ with .Description }}
+    <p class="page-header__description">{{ . }}</p>
+    {{ end }}
+  </div>
+</section>
+
+{{/* Breadcrumb Navigation */}}
+{{ partial "breadcrumb.html" (dict "Page" . "accentBar" true) }}
+
+{{/* Events Grid */}}
+<section class="events-list section">
+  <div class="container">
+    {{ with .Content }}
+    <div class="events-list__intro content">
+      {{ . }}
+    </div>
+    {{ end }}
+
+    <div class="events-list__grid">
+      {{ range .Pages }}
+      <a href="{{ .RelPermalink }}" class="events-list__card">
+        {{ with .Params.icon }}
+        {{ $icon := resources.Get (printf "images/icons/%s" .) }}
+        {{ if $icon }}
+        <div class="events-list__icon">
+          <img src="{{ $icon.RelPermalink }}" alt="" width="48" height="48" loading="lazy" />
+        </div>
+        {{ end }}
+        {{ end }}
+        <h2 class="events-list__title">{{ .Title }}</h2>
+        <p class="events-list__excerpt">{{ .Description | truncate 100 }}</p>
+        <span class="events-list__link">Learn More</span>
+      </a>
+      {{ end }}
+    </div>
+
+    {{/* CTA */}}
+    <div class="events-list__cta">
+      <p>Ready to start planning your event?</p>
+      <a href="/contact/" class="btn btn-primary">Contact Us Today</a>
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -12,6 +12,7 @@
 
 // Components
 @import 'typography';
+@import 'content-base';
 @import 'buttons';
 @import 'header';
 @import 'footer';
@@ -23,9 +24,11 @@
 @import 'page-header';
 @import 'contact';
 @import 'forms';
+@import 'page-hero';
 @import 'blog-hero';
 @import 'blog';
 @import 'breadcrumb';
+@import 'events-list';
 
 // Animations
 @import 'animations';

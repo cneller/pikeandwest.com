@@ -20,6 +20,9 @@
   {{- /* Footer cached - doesn't change per page */ -}}
   {{- partialCached "footer.html" . -}}
 
+  {{- /* LocalBusiness Schema for SEO - cached since it's site-wide */ -}}
+  {{- partialCached "schema-local-business.html" . -}}
+
   {{- partial "scripts.html" . -}}
 </body>
 </html>

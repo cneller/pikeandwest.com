@@ -108,6 +108,10 @@
       grid-row-gap: 0; // Webflow: grid-row-gap: 0 at 767px
     }
 
+    .about__content {
+      padding-bottom: 24px; // Add spacing between button and image below
+    }
+
     .about__subtitle {
       margin-top: 20px; // Webflow: .heading-2.mobile
       margin-bottom: 15px;

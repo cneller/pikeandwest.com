@@ -17,14 +17,74 @@
   url = "/blog/"
   weight = 3
 
+# =========================
 # Footer Navigation
+# =========================
 
-[[footer]]
-  name = "Contact Us"
-  url = "/contact/"
+# Footer: Celebrate Column (Event Types)
+[[footer_events]]
+  name = "Weddings"
+  url = "/events/weddings/"
   weight = 1
 
-[[footer]]
+[[footer_events]]
+  name = "Corporate Events"
+  url = "/events/corporate-events/"
+  weight = 2
+
+[[footer_events]]
+  name = "Birthday Parties"
+  url = "/events/birthday-parties/"
+  weight = 3
+
+[[footer_events]]
+  name = "Baby Showers"
+  url = "/events/baby-showers/"
+  weight = 4
+
+[[footer_events]]
+  name = "Private Parties"
+  url = "/events/private-parties/"
+  weight = 5
+
+[[footer_events]]
+  name = "Dance Events"
+  url = "/events/dance-events/"
+  weight = 6
+
+# Footer: Explore Column (priority order)
+[[footer_explore]]
+  name = "About"
+  url = "/about/"
+  weight = 1
+
+[[footer_explore]]
+  name = "Gallery"
+  url = "/"
+  weight = 2
+
+[[footer_explore]]
+  name = "Artist"
+  url = "/gallery-application/"
+  weight = 3
+
+[[footer_explore]]
+  name = "Contact"
+  url = "/contact/"
+  weight = 4
+
+[[footer_explore]]
   name = "Blog"
   url = "/blog/"
+  weight = 5
+
+# Footer: Legal (bottom bar)
+[[footer_legal]]
+  name = "Privacy Policy"
+  url = "/privacy/"
+  weight = 1
+
+[[footer_legal]]
+  name = "Accessibility"
+  url = "/accessibility/"
   weight = 2

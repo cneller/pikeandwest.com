@@ -9,7 +9,8 @@
 {{ end }}
 {{ $heroBg := "" }}
 {{ if $heroImage }}
-  {{ $heroBg = ($heroImage.Resize "1920x q85").RelPermalink }}
+  {{/* Convert to WebP for smaller file size - PNG images can be 4MB+, WebP ~100KB */}}
+  {{ $heroBg = ($heroImage.Resize "1920x webp q85").RelPermalink }}
 {{ end }}
 
 <section class="blog-hero" style="background-image: url('{{ $heroBg }}');">

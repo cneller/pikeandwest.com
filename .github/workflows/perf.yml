@@ -17,6 +17,12 @@ on:
         required: false
         default: 'hugo-site'
         type: string
+      is-preview:
+        description:
+          'Whether this is a preview deployment (disables is-crawlable check)'
+        required: false
+        default: false
+        type: boolean
   workflow_dispatch:
     inputs:
       deployment-url:
@@ -68,9 +74,18 @@ jobs:
           - { name: 'Contact', path: '/contact/' }
           - { name: 'Gallery', path: '/gallery-application/' }
           # Blog posts - backdated content series
-          - { name: 'Blog-BabyShower', path: '/blog/fall-baby-shower-inspiration/' }
-          - { name: 'Blog-Anniversary', path: '/blog/holiday-anniversary-celebrations/' }
-          - { name: 'Blog-Birthday', path: '/blog/milestone-birthday-new-year/' }
+          - {
+              name: 'Blog-BabyShower',
+              path: '/blog/fall-baby-shower-inspiration/',
+            }
+          - {
+              name: 'Blog-Anniversary',
+              path: '/blog/holiday-anniversary-celebrations/',
+            }
+          - {
+              name: 'Blog-Birthday',
+              path: '/blog/milestone-birthday-new-year/',
+            }
     steps:
       - name: Download config
         uses: actions/download-artifact@v4
@@ -83,6 +98,9 @@ jobs:
         uses: treosh/lighthouse-ci-action@v12
         env:
           LHCI_BUILD_CONTEXT__CURRENT_HASH: ${{ github.sha }}
+          # Disable is-crawlable check for preview deployments (Cloudflare adds noindex header)
+          LHCI_ASSERT__ASSERTIONS__IS_CRAWLABLE:
+            ${{ inputs.is-preview && 'off' || '' }}
         with:
           urls: ${{ inputs.deployment-url }}${{ matrix.page.path }}
           configPath: ./site/lighthouserc.json
@@ -299,7 +317,9 @@ jobs:
   label:
     name: Label PR
     needs: summary
-    if: github.event_name == 'pull_request' && needs.summary.outputs.has-regression == 'true'
+    if:
+      github.event_name == 'pull_request' &&
+      needs.summary.outputs.has-regression == 'true'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write

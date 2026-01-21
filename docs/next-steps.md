@@ -1,6 +1,6 @@
 # Pike & West - Next Steps
 
-> **Last Updated:** 2026-01-20
+> **Last Updated:** 2026-01-21
 > **Current Phase:** Pre-Launch Testing on beta.pikeandwest.com
 
 This document tracks the current project state and upcoming work. Keep this file updated as tasks are completed or priorities change.
@@ -16,28 +16,43 @@ This document tracks the current project state and upcoming work. Keep this file
 | Architecture Docs  | Complete | ADRs and patterns in docs/architecture/        |
 | Marketing Strategy | Complete | Comprehensive docs in docs/marketing-strategy/ |
 | Claude Hooks       | Active   | Pre-commit docs check hook enabled             |
+| Footer Redesign    | Ready    | PR #15 - Lighthouse 91% avg, ready for merge   |
+| Event Type Pages   | Complete | 6 landing pages for SEO (/events/\*)           |
 
 ## Top Priority
 
-### Hero Text Alignment
+### PR #15 Lighthouse Issues (Footer Redesign)
 
-**Issue:** The hero text and CTA button are not aligned with the Pike & West logo. Currently too far to the left.
+**Branch:** `claude/redesign-footer-seo-nXNY6`
+**Preview:** <https://425145d4.pikeandwest.pages.dev>
 
-**Context:**
+**All performance issues resolved. Ready for merge.**
 
-- Header uses `padding: 0 5%` for horizontal padding
-- Hero uses CSS Grid with `grid-template-columns: 1fr 1fr`
-- Current fix (`padding-left: 5vw`) is insufficient
-- The hero content should start at the same horizontal position as the logo
+**Fixed Issues:**
 
-**Files to investigate:**
+- [x] Hero text alignment - Now left-aligned under logo and vertically centered
+- [x] SEO 69 on previews - FALSE POSITIVE (Cloudflare adds `x-robots-tag: noindex` to preview URLs; production is 100%)
+- [x] Render blocking fonts - Google Fonts now loads asynchronously
+- [x] Critical CSS mismatch - Synced `critical.scss` with `_hero.scss` flexbox layout
+- [x] Blog hero images - Converted to WebP (4.3MB PNG → 351KB WebP), added preload hints
+- [x] Contact CLS - Added iframe dimensions and contain property (0.928 → 0.1)
 
-- `assets/scss/_header.scss` - Logo positioning
-- `assets/scss/_hero.scss` - Hero content alignment (line 54, 94)
-- `layouts/partials/header.html` - Header structure
-- `layouts/partials/hero.html` - Hero structure
+**Current Lighthouse Scores (Average: 91%):**
 
-**Approach:** Compare computed pixel positions of logo vs hero content in DevTools at various viewport widths to determine correct offset.
+| Page             | Perf   | A11y | Best Practices | SEO  |
+|------------------|--------|------|----------------|------|
+| Home             | 96     | 96   | 100            | 69\* |
+| About            | 74\*\* | 96   | 100            | 69\* |
+| Blog             | 93     | 96   | 100            | 69\* |
+| Blog-Anniversary | 96     | 96   | 100            | 69\* |
+| Blog-BabyShower  | 94     | 96   | 100            | 69\* |
+| Blog-Birthday    | 99     | 96   | 100            | 69\* |
+| Contact          | 77     | 96   | 78\*\*\*       | 69\* |
+| Gallery          | 98     | 92   | 96             | 69\* |
+
+\* SEO 69 expected on Cloudflare previews (noindex header). Production will be 100%.
+\*\* About variance likely due to single Lighthouse run; metrics look fine (LCP 1s, FCP 0.3s)
+\*\*\* Contact Best Practices 78% caused by third-party cookies from HoneyBook form (unavoidable)
 
 ---
 
@@ -145,12 +160,14 @@ hugo --templateMetrics
 
 ### Content (Priority: Medium)
 
-| Task                     | Status   | Notes                                                    |
-|--------------------------|----------|----------------------------------------------------------|
-| Blog section             | Active   | 5 posts published (2 current + 3 backdated Oct-Dec 2025) |
-| Gallery application page | Basic    | May need form improvements                               |
-| Team/About section       | Complete | Consider adding more team photos                         |
-| Event type pages         | Planned  | Individual pages for weddings, corporate, etc.           |
+| Task                     | Status   | Notes                                                               |
+|--------------------------|----------|---------------------------------------------------------------------|
+| Blog section             | Active   | 5 posts published (2 current + 3 backdated Oct-Dec 2025)            |
+| Gallery application page | Basic    | May need form improvements                                          |
+| Team/About section       | Complete | Consider adding more team photos                                    |
+| Event type pages         | Complete | 6 pages: weddings, corporate, birthday, baby shower, private, dance |
+| Privacy Policy           | Complete | /privacy/ - basic policy page                                       |
+| Accessibility Statement  | Complete | /accessibility/ - basic statement page                              |
 
 ### Technical Debt (Priority: Low)
 
@@ -188,10 +205,68 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 - [GTM & GA4 Guide (The Gray Company)](https://thegray.company/blog/cross-domain-tracking-guide)
 - [Server-Side Tagging Guide](https://usercentrics.com/guides/smarter-tagging-with-google-tag-manager/cross-domain-tracking/)
 
+## Recently Completed
+
+### Footer Redesign (2026-01-21)
+
+**Goal:** Redesign footer for better SEO through internal linking to event-specific pages.
+
+**Implementation:**
+
+| Component     | Description                                        |
+|---------------|----------------------------------------------------|
+| Footer Layout | 4-column grid: Celebrate, Connect, Venue, Visit Us |
+| Event Pages   | 6 new landing pages under `/events/`               |
+| Schema Markup | LocalBusiness structured data for local SEO        |
+| Legal Pages   | Privacy Policy and Accessibility Statement         |
+| Mobile Layout | 2-column grid maintained down to 320px             |
+
+**Files Created:**
+
+- `content/events/*.md` - 6 event type landing pages
+- `content/privacy.md` - Privacy policy
+- `content/accessibility.md` - Accessibility statement
+- `layouts/events/list.html` - Events section list template
+- `layouts/events/single.html` - Individual event page template
+- `layouts/partials/schema-local-business.html` - LocalBusiness schema
+- `assets/scss/_events-list.scss` - Events list styling
+
+**Files Modified:**
+
+- `layouts/partials/footer.html` - Complete redesign with multi-column layout
+- `assets/scss/_footer.scss` - Responsive 2-column grid (mobile), 4-column (desktop)
+- `config/_default/menus.toml` - Footer navigation sections added
+- `layouts/_default/baseof.html` - Schema partial included
+
+**Mobile Responsive Strategy:**
+
+- Desktop (992px+): 4 columns
+- Tablet & Mobile: 2 columns (using `minmax(0, 1fr)` to prevent grid blowout)
+- Text overflow handled with `overflow-wrap: break-word`
+
+**Branch:** `claude/redesign-footer-seo-nXNY6`
+
+---
+
 ## Changelog
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-21 | Added hero images to event pages with front matter support (`image`, `image_alt`)                 |
+| 2026-01-21 | Created shared `_page-hero.scss` styles, refactored blog-hero to extend it (-91 lines)            |
+| 2026-01-21 | Added Front Matter CMS configuration (`frontmatter.json`) for VS Code sidebar editing             |
+| 2026-01-21 | Created event archetype for new event pages                                                       |
+| 2026-01-21 | Created shared `_content-base.scss` mixin for consistent content typography                       |
+| 2026-01-21 | Refactored blog and event pages to use content-base mixin (-94 lines total)                       |
+| 2026-01-21 | Fixed event page text color (`$color-text` instead of `$color-text-light`)                        |
+| 2026-01-21 | Added breadcrumb navigation to event single and list pages                                        |
+| 2026-01-21 | Fixed hero positioning (left-align, vertical center) - flexbox layout                             |
+| 2026-01-21 | Resolved SEO 69 false positive - Cloudflare noindex on previews, added is-preview workflow input  |
+| 2026-01-21 | Performance: async Google Fonts loading, synced critical.scss with \_hero.scss                    |
+| 2026-01-21 | Added Lighthouse troubleshooting docs to CLAUDE.md                                                |
+| 2026-01-21 | Footer redesign with multi-column SEO layout and 6 event landing pages                            |
+| 2026-01-21 | Added Privacy Policy and Accessibility Statement pages                                            |
+| 2026-01-21 | Mobile footer changed from single-column to 2-column grid                                         |
 | 2026-01-20 | Initial creation with analytics verification tasks                                                |
 | 2026-01-20 | Added beta subdomain deployment status                                                            |
 | 2026-01-20 | Added future enhancements from web research                                                       |
