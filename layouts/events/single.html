@@ -3,20 +3,34 @@
   Single Event Page Template
 
   Purpose: Displays individual event type pages (weddings, birthdays, etc.)
-  with consistent styling and a clear CTA.
+  with hero image, breadcrumb, content, and CTA.
 
   Context: . = Page (event content page)
 */}}
 
-{{/* Page Header */}}
-<section class="page-header">
-  <div class="container">
-    <h1 class="page-header__title">{{ .Title }}</h1>
+{{/* Event Hero - Use page's featured image or fallback to venue image */}}
+{{ $heroImage := "" }}
+{{ with .Params.image }}
+  {{ $heroImage = resources.Get . }}
+{{ end }}
+{{ if not $heroImage }}
+  {{/* Default fallback image for events */}}
+  {{ $heroImage = resources.Get "images/venue/venue-01-interior.jpeg" }}
+{{ end }}
+{{ $heroBg := "" }}
+{{ if $heroImage }}
+  {{/* Convert to WebP for smaller file size */}}
+  {{ $heroBg = ($heroImage.Resize "1920x webp q85").RelPermalink }}
+{{ end }}
+
+<section class="page-hero" style="background-image: url('{{ $heroBg }}');">
+  <div class="page-hero__content">
+    <h1 class="page-hero__title">{{ .Title }}</h1>
   </div>
 </section>
 
 {{/* Breadcrumb Navigation */}}
-{{ partial "breadcrumb.html" (dict "Page" . "accentBar" true) }}
+{{ partial "breadcrumb.html" (dict "Page" . "accentBar" true "narrowContent" true) }}
 
 {{/* Event Content */}}
 <article class="event-page section">
