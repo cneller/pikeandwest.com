@@ -1,21 +1,17 @@
 # Main Navigation
-# "Contact Us" is primary (gold filled), others are outline style
-# Weight determines order: lower = higher priority
-
-[[main]]
-  name = "Contact Us"
-  url = "/contact/"
-  weight = 1
-
-[[main]]
-  name = "Artists"
-  url = "/gallery-application/"
-  weight = 2
+# Weight determines order: lower = left, higher = right
+# "Contact Us" is primary CTA (gold filled, far right per UX best practice)
+# "Blog" is secondary (text link style)
 
 [[main]]
   name = "Blog"
   url = "/blog/"
-  weight = 3
+  weight = 1
+
+[[main]]
+  name = "Contact Us"
+  url = "/contact/"
+  weight = 2
 
 # =========================
 # Footer Navigation
