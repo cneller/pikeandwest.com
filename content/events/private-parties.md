@@ -4,6 +4,8 @@ description: "Host your private party at Pike & West, Germantown's premier art g
 type: "events"
 eventType: "private-party"
 icon: "icon-champagne.png"
+image: "images/venue/venue-07-bar.jpg"
+image_alt: "Bar area at Pike & West perfect for private parties"
 ---
 
 ## Your Private Celebration, Our Elegant Space

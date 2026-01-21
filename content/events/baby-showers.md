@@ -4,6 +4,8 @@ description: "Host an elegant baby shower at Pike & West in Germantown, TN. Our 
 type: "events"
 eventType: "baby-shower"
 icon: "icon-rattle.png"
+image: "images/venue/venue-06-soft-seating.jpg"
+image_alt: "Comfortable seating area at Pike & West for intimate gatherings"
 ---
 
 ## A Beautiful Beginning Deserves a Beautiful Celebration

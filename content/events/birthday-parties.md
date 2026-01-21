@@ -4,6 +4,8 @@ description: "Celebrate milestone birthdays at Pike & West in Germantown, TN. Ou
 type: "events"
 eventType: "birthday"
 icon: "icon-cake.png"
+image: "images/venue/venue-05-dancefloor.jpg"
+image_alt: "Dance floor and celebration space at Pike & West"
 ---
 
 ## Celebrate Your Milestone Birthday in Style

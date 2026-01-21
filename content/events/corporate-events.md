@@ -4,6 +4,8 @@ description: "Host your corporate event, company party, or team gathering at Pik
 type: "events"
 eventType: "corporate"
 icon: "icon-badge.png"
+image: "images/venue/venue-01-interior.jpeg"
+image_alt: "Pike & West interior space perfect for corporate events"
 ---
 
 ## Elevate Your Corporate Events

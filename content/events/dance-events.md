@@ -4,6 +4,8 @@ description: "Host dance events, dance parties, and movement celebrations at Pik
 type: "events"
 eventType: "dance"
 icon: "icon-disco-ball.png"
+image: "images/venue/venue-08-disco-background.jpg"
+image_alt: "Dance floor with ambient lighting at Pike & West"
 ---
 
 ## Dance the Night Away at Pike & West

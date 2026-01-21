@@ -4,6 +4,8 @@ description: "Celebrate your wedding at Pike & West, Germantown's premier art ga
 type: "events"
 eventType: "wedding"
 icon: "icon-wedding-rings.png"
+image: "images/venue/venue-04-wedding.jpg"
+image_alt: "Elegant wedding reception setup at Pike & West venue"
 ---
 
 ## Your Dream Wedding Venue in Germantown
