@@ -184,6 +184,14 @@
   align-items: center;
   justify-content: center;
   background: $color-cream;
+  transition: opacity 0.3s ease-out;
+  z-index: 1;
+
+  // Fade out when iframe is loaded
+  &--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
 
   &__text {
     font-family: $font-primary;

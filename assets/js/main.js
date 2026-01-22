@@ -254,16 +254,20 @@ function initLazyIframes() {
         container.classList.add('iframe-lazy--loaded');
         container.appendChild(iframe);
 
-        // Remove placeholder after iframe starts loading
+        // Fade out placeholder after iframe loads
         const placeholder = container.querySelector('.iframe-placeholder');
         if (placeholder) {
-          iframe.addEventListener('load', () => {
-            placeholder.remove();
-          });
-          // Fallback: remove placeholder after timeout if load doesn't fire
+          const hidePlaceholder = () => {
+            placeholder.classList.add('iframe-placeholder--hidden');
+            // Remove from DOM after fade completes
+            setTimeout(() => placeholder.remove(), 300);
+          };
+
+          iframe.addEventListener('load', hidePlaceholder);
+          // Fallback: fade out after timeout if load doesn't fire
           setTimeout(() => {
-            if (placeholder.parentNode) {
-              placeholder.remove();
+            if (placeholder.parentNode && !placeholder.classList.contains('iframe-placeholder--hidden')) {
+              hidePlaceholder();
             }
           }, 5000);
         }
