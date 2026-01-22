@@ -281,7 +281,7 @@ function initLazyIframes() {
 }
 
 // Contact Form Facade
-// Auto-loads HoneyBook iframe when visible (no click required)
+// Auto-loads HoneyBook iframe after page load (async, non-blocking)
 function initContactFacade() {
   const facade = document.querySelector('.contact-facade');
 
@@ -321,18 +321,6 @@ function initContactFacade() {
     facade.appendChild(iframe);
   }
 
-  // Auto-load when facade is near viewport
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          loadIframe();
-          observer.unobserve(facade);
-        }
-      });
-    },
-    { rootMargin: '200px 0px', threshold: 0 }
-  );
-
-  observer.observe(facade);
+  // Load iframe async after page is ready (non-blocking)
+  requestIdleCallback ? requestIdleCallback(loadIframe) : setTimeout(loadIframe, 0);
 }
