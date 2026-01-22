@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initGalleryScrollButtons();
   initLightbox();
   initScrollAnimations();
+  initLazyIframes();
 });
 
 // Mobile Navigation
@@ -208,4 +209,68 @@ function initScrollAnimations() {
   }, observerOptions);
 
   fadeElements.forEach((el) => observer.observe(el));
+}
+
+// Lazy-load iframes with Intersection Observer
+// Delays iframe loading until user scrolls near, improving initial page load
+function initLazyIframes() {
+  const lazyContainers = document.querySelectorAll('.iframe-lazy');
+
+  if (lazyContainers.length === 0) return;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '200px 0px', // Start loading 200px before visible
+    threshold: 0,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const container = entry.target;
+        const src = container.dataset.src;
+        const title = container.dataset.title || 'Embedded content';
+        const isMap = container.classList.contains('iframe-lazy--map');
+
+        if (!src) return;
+
+        // Create the iframe element
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.title = title;
+        iframe.setAttribute('loading', 'lazy');
+        iframe.setAttribute('frameborder', '0');
+
+        if (isMap) {
+          iframe.setAttribute('allowfullscreen', '');
+          iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+          iframe.style.border = '0';
+        } else {
+          iframe.setAttribute('scrolling', 'no');
+        }
+
+        // Mark as loaded and insert iframe
+        container.classList.add('iframe-lazy--loaded');
+        container.appendChild(iframe);
+
+        // Remove placeholder after iframe starts loading
+        const placeholder = container.querySelector('.iframe-placeholder');
+        if (placeholder) {
+          iframe.addEventListener('load', () => {
+            placeholder.remove();
+          });
+          // Fallback: remove placeholder after timeout if load doesn't fire
+          setTimeout(() => {
+            if (placeholder.parentNode) {
+              placeholder.remove();
+            }
+          }, 5000);
+        }
+
+        observer.unobserve(container);
+      }
+    });
+  }, observerOptions);
+
+  lazyContainers.forEach((container) => observer.observe(container));
 }

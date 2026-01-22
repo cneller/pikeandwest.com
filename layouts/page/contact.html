@@ -4,15 +4,12 @@
     <h1 class="section-title">CONTACT US</h1>
     <address class="form-embed">
       {{ with .Site.Params.forms.contactEmbed }}
-      <iframe
-        src="{{ . }}"
-        title="Contact Form"
-        loading="lazy"
-        scrolling="no"
-        frameborder="0"
-        width="600"
-        height="1600"
-      ></iframe>
+      {{/* Lazy-loaded iframe with placeholder for better performance */}}
+      <div class="iframe-lazy" data-src="{{ . }}" data-title="Contact Form">
+        <div class="iframe-placeholder">
+          <span class="iframe-placeholder__text">Loading contact form...</span>
+        </div>
+      </div>
       {{ else }}
       <p>
         Contact form coming soon. Please call us at {{
@@ -30,16 +27,12 @@
     <div class="find-us__grid">
       <address class="find-us__map">
         {{ with .Site.Params.maps.embed }}
-        <iframe
-          src="{{ . }}"
-          style="border: 0"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Pike & West Location"
-          width="600"
-          height="400"
-        ></iframe>
+        {{/* Lazy-loaded map iframe with placeholder */}}
+        <div class="iframe-lazy iframe-lazy--map" data-src="{{ . }}" data-title="Pike & West Location">
+          <div class="iframe-placeholder">
+            <span class="iframe-placeholder__text">Loading map...</span>
+          </div>
+        </div>
         {{ end }}
       </address>
 

@@ -31,17 +31,36 @@
     // Prevent CLS from iframe content affecting layout
     contain: layout;
 
-    // Desktop: Two-column form layout (> 991px)
-    iframe {
+    // Lazy-loaded iframe container
+    .iframe-lazy {
+      // Desktop: Two-column form layout (> 991px)
+      width: 840px;
+      height: 960px;
+      position: relative;
+      background: $color-cream;
+
+      // Tablet and below (≤ 991px): Single-column when hamburger appears
+      @media (max-width: $breakpoint-lg) {
+        width: 300px;
+        height: 1600px;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+      }
+    }
+
+    // Legacy: direct iframe (fallback)
+    > iframe {
       width: 840px;
       height: 960px;
       border: 0;
       display: block;
-    }
 
-    // Tablet and below (≤ 991px): Single-column when hamburger appears
-    @media (max-width: $breakpoint-lg) {
-      iframe {
+      @media (max-width: $breakpoint-lg) {
         width: 300px;
         height: 1600px;
       }
@@ -76,7 +95,22 @@
       min-height: 300px;
     }
 
-    iframe {
+    // Lazy-loaded map iframe container
+    .iframe-lazy--map {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: $color-cream;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+    }
+
+    // Legacy: direct iframe (fallback)
+    > iframe {
       width: 100%;
       height: 100%;
       border: 0;
@@ -137,5 +171,34 @@
         text-align: center;
       }
     }
+  }
+}
+
+// =========================
+// Lazy-loaded Iframe Placeholder
+// =========================
+.iframe-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-cream;
+
+  &__text {
+    font-family: $font-primary;
+    font-size: 14px;
+    color: $color-medium-gray;
+    animation: iframe-pulse 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes iframe-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
   }
 }
