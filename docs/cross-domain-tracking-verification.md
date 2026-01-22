@@ -11,7 +11,7 @@
 | GA4 Measurement ID | G-Y9PFGHX5Z3                       |
 | GA4 Property ID    | 424998364                          |
 | GA4 Stream ID      | 6676080268                         |
-| Main Domain        | <www.pikeandwest.com>              |
+| Main Domain        | pikeandwest.com                    |
 | Ticket Domain      | tix.pikeandwest.com (TicketTailor) |
 
 ## Verification Results
@@ -21,7 +21,7 @@
 - **Status:** Verified
 - **Configuration:**
   - Measurement ID: G-Y9PFGHX5Z3
-  - Primary domain: <www.pikeandwest.com>
+  - Primary domain: pikeandwest.com
   - GA4 tracking enabled in TicketTailor admin
 
 ### 2. GTM GA4 Configuration Tag
@@ -52,7 +52,7 @@
 - **Configuration:**
   - Match type: "Ends with"
   - Domain: "pikeandwest.com"
-- **Effect:** Matches both <www.pikeandwest.com> and tix.pikeandwest.com
+- **Effect:** Matches both pikeandwest.com and tix.pikeandwest.com
 - **Screenshot:** `.playwright-mcp/ga4-cross-domain-config.png`
 
 ### 6. GA4 Realtime Verification
@@ -164,8 +164,8 @@ layouts/partials/scripts.html (modified - removed duplicate GTM code)
 
 ### Key URLs for Monitoring
 
-| Resource                   | URL                                                                                |
-|----------------------------|------------------------------------------------------------------------------------|
+| Resource                   | URL                                                                                  |
+|----------------------------|--------------------------------------------------------------------------------------|
 | Cloudflare Pages Dashboard | <https://dash.cloudflare.com/pages>                                                  |
 | GA4 Admin                  | <https://analytics.google.com/analytics/web/#/a300399219p424998364/admin>            |
 | GA4 DebugView              | <https://analytics.google.com/analytics/web/#/a300399219p424998364/admin/debugview>  |

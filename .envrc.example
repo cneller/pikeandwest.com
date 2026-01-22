@@ -1,6 +1,10 @@
-# Cloudflare Pages deployment credentials
+# Cloudflare credentials
 # Copy this file to .envrc and fill in your values
 # Run `direnv allow` after creating .envrc
 
 export CLOUDFLARE_ACCOUNT_ID="your-account-id-here"
 export CLOUDFLARE_API_TOKEN="your-api-token-here"
+
+# Zone ID for pikeandwest.com (required for DNS switching via scripts/dns-switch.sh)
+# Find at: Cloudflare dashboard → pikeandwest.com → Overview → API section (right sidebar)
+export CLOUDFLARE_ZONE_ID="your-zone-id-here"

@@ -2,7 +2,7 @@
 # Reference: https://developers.cloudflare.com/pages/configuration/redirects/
 #
 # NOTE: Cross-domain redirects (www → naked) are NOT supported in _redirects.
-# The www → pikeandwest.com redirect is configured via Cloudflare Bulk Redirects.
+# The www → pikeandwest.com redirect is configured via Cloudflare Redirect Rules.
 # See: docs/infrastructure/dns-configuration.md
 #
 # Add any path-level redirects below (relative URLs only):

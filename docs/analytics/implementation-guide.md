@@ -123,7 +123,7 @@ The Conversion Linker tag in GTM automatically:
 1. Log into TicketTailor admin
 2. Navigate to Settings > Integrations > Google Analytics
 3. Enter Measurement ID: `G-Y9PFGHX5Z3`
-4. Enter Primary Domain: `www.pikeandwest.com`
+4. Enter Primary Domain: `pikeandwest.com`
 5. Save changes
 
 TicketTailor's native GA4 integration automatically:

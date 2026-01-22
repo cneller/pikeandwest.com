@@ -46,7 +46,7 @@ Pike & West uses Google Tag Manager (GTM) and Google Analytics 4 (GA4) to track 
 
 | Domain               | Platform        | Analytics Method        |
 |----------------------|-----------------|-------------------------|
-| <www.pikeandwest.com>  | Hugo/Cloudflare | GTM container           |
+| pikeandwest.com      | Hugo/Cloudflare | GTM container           |
 | beta.pikeandwest.com | Hugo/Cloudflare | GTM container (staging) |
 | tix.pikeandwest.com  | TicketTailor    | Native GA4 integration  |
 
@@ -88,14 +88,14 @@ Cross-domain tracking enables session continuity when users navigate from the ma
 - Match type: "Ends with"
 - Domain: "pikeandwest.com"
 
-This configuration matches both `www.pikeandwest.com` and `tix.pikeandwest.com`.
+This configuration matches both `pikeandwest.com` and `tix.pikeandwest.com`.
 
 ### TicketTailor Integration
 
 TicketTailor has native GA4 support configured in their admin panel:
 
 - **Measurement ID:** G-Y9PFGHX5Z3
-- **Primary domain:** <www.pikeandwest.com>
+- **Primary domain:** pikeandwest.com
 
 See [TicketTailor GA4 Integration Guide](../plans/2026-01-19-tickettailor-ga4-integration.md) for setup details.
 
@@ -144,15 +144,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 | Environment | URL                      | GTM Loads | Purpose        |
 |-------------|--------------------------|-----------|----------------|
-| Production  | <www.pikeandwest.com>      | Yes       | Live site      |
+| Production  | pikeandwest.com          | Yes       | Live site      |
 | Staging     | beta.pikeandwest.com     | Yes       | Pre-production |
 | Preview     | \*.pikeandwest.pages.dev | Yes       | PR previews    |
 | Local       | localhost:1313           | No        | Development    |
 
 ## Admin URLs
 
-| Resource           | URL                                                                                |
-|--------------------|------------------------------------------------------------------------------------|
+| Resource           | URL                                                                                  |
+|--------------------|--------------------------------------------------------------------------------------|
 | GA4 Admin          | <https://analytics.google.com/analytics/web/#/a300399219p424998364/admin>            |
 | GA4 DebugView      | <https://analytics.google.com/analytics/web/#/a300399219p424998364/admin/debugview>  |
 | GA4 Realtime       | <https://analytics.google.com/analytics/web/#/a300399219p424998364/admin/realtime>   |

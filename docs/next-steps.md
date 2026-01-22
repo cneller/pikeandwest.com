@@ -7,17 +7,17 @@ This document tracks the current project state and upcoming work. Keep this file
 
 ## Current Status
 
-| Area               | Status   | Notes                                          |
-|--------------------|----------|------------------------------------------------|
-| Hugo Site          | Complete | All pages migrated from Webflow                |
-| Staging Deployment | Active   | beta.pikeandwest.com on Cloudflare Pages       |
-| GTM/GA4 Analytics  | Verified | Tracking active, cross-domain configured       |
-| Production Domain  | Pending  | <www.pikeandwest.com> still on Webflow         |
-| Architecture Docs  | Complete | ADRs and patterns in docs/architecture/        |
-| Marketing Strategy | Complete | Comprehensive docs in docs/marketing-strategy/ |
-| Claude Hooks       | Active   | Pre-commit docs check hook enabled             |
-| Footer Redesign    | Ready    | PR #15 - Lighthouse 91% avg, ready for merge   |
-| Event Type Pages   | Complete | 6 landing pages for SEO (/events/\*)           |
+| Area               | Status   | Notes                                                        |
+|--------------------|----------|--------------------------------------------------------------|
+| Hugo Site          | Complete | All pages migrated from Webflow                              |
+| Staging Deployment | Active   | beta.pikeandwest.com on Cloudflare Pages                     |
+| GTM/GA4 Analytics  | Verified | Tracking active, cross-domain configured                     |
+| Production Domain  | Active   | pikeandwest.com on Cloudflare Pages (naked domain canonical) |
+| Architecture Docs  | Complete | ADRs and patterns in docs/architecture/                      |
+| Marketing Strategy | Complete | Comprehensive docs in docs/marketing-strategy/               |
+| Claude Hooks       | Active   | Pre-commit docs check hook enabled                           |
+| Footer Redesign    | Ready    | PR #15 - Lighthouse 91% avg, ready for merge                 |
+| Event Type Pages   | Complete | 6 landing pages for SEO (/events/\*)                         |
 
 ## Top Priority
 

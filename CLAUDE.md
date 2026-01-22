@@ -174,6 +174,7 @@ webflow-export/
 - **[Site Analysis](docs/site-analysis/current-site-documentation.md)** - Original site documentation
 - **[Architecture Decisions](docs/architecture/decisions/)** - ADRs for key technical decisions
 - **[Implementation Patterns](docs/architecture/patterns/)** - Reusable code patterns
+- **[DNS Configuration](docs/infrastructure/dns-configuration.md)** - Current Webflow DNS and target Hugo/Cloudflare Pages setup
 
 ### Workflow for Style Matching
 
@@ -497,6 +498,8 @@ HUGO_VERSION=0.146.0
 
 ### Domain Configuration
 
+See **[DNS Configuration](docs/infrastructure/dns-configuration.md)** for current and target DNS setup.
+
 - Set up DNS records pointing to hosting provider
 - Configure SSL certificate (automatic with CF Pages)
 - Set up `www` to apex redirect
@@ -516,6 +519,31 @@ hugo --templateMetrics --templateMetricsHints
 # Create new content
 hugo new content/page-name.md
 ```
+
+## Scripts
+
+### DNS Switch (`scripts/dns-switch.sh`)
+
+Toggle DNS between Webflow and Hugo configurations via Cloudflare API.
+
+```bash
+# Required environment variables
+export CF_API_TOKEN="your-cloudflare-api-token"
+export CF_ZONE_ID="your-zone-id"
+
+# Check current DNS configuration
+./scripts/dns-switch.sh status
+
+# Switch to Hugo (Cloudflare Pages)
+./scripts/dns-switch.sh hugo
+
+# Switch back to Webflow
+./scripts/dns-switch.sh webflow
+```
+
+**Prerequisites:** `jq` installed, Cloudflare API token with `Zone.DNS (Edit)` permission.
+
+See [DNS Configuration](docs/infrastructure/dns-configuration.md) for full details.
 
 ## Project Status & Next Steps
 

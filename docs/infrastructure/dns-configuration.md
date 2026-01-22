@@ -8,7 +8,7 @@
 
 Changed from `www.pikeandwest.com` on 2026-01-21. See [migration analysis](./canonical-domain-migration-analysis.md) for rationale.
 
-Google Search Console domain property (`sc-domain:pikeandwest.com`) covers all variants. The www version now 301 redirects to naked domain via Cloudflare Pages `_redirects` file.
+Google Search Console domain property (`sc-domain:pikeandwest.com`) covers all variants. The www version now 301 redirects to naked domain via Cloudflare Redirect Rules (zone-level).
 
 ---
 
@@ -80,7 +80,7 @@ If rollback to Webflow is needed, change CNAME records back to Webflow's proxy s
    - **Do NOT touch MX or TXT records**
 
 3. **Configure redirects**
-   - Set up www → naked redirect via **Cloudflare Bulk Redirects** (not `_redirects`)
+   - Set up www → naked redirect via **Cloudflare Redirect Rules** (zone-level)
    - Required: `www.pikeandwest.com` → `pikeandwest.com` (naked domain is canonical)
    - Note: `_redirects` file only supports relative URLs, not cross-domain redirects
 
@@ -88,26 +88,28 @@ If rollback to Webflow is needed, change CNAME records back to Webflow's proxy s
    - Cloudflare Pages automatically provisions SSL
    - Verify certificate covers both domains
 
-### Redirect Configuration (Bulk Redirects)
+### Redirect Configuration (Redirect Rules)
 
-Cross-domain redirects (www → naked) require **Cloudflare Bulk Redirects**, not the `_redirects` file.
+Cross-domain redirects (www → naked) use **Cloudflare Redirect Rules** at the zone level. This is simpler than Bulk Redirects and is the recommended approach for single-domain www redirects.
+
+**Current Configuration:**
+
+| Setting               | Value                                |
+|-----------------------|--------------------------------------|
+| Rule name             | Redirect from WWW to root [Template] |
+| Request URL pattern   | `https://www.*`                      |
+| Target URL            | `https://${1}`                       |
+| Status code           | 301                                  |
+| Preserve query string | Yes                                  |
+
+**How it works:** The wildcard pattern `https://www.*` captures everything after `www.` and the `${1}` replacement inserts it into the target URL. For example, `https://www.pikeandwest.com/contact/` becomes `https://pikeandwest.com/contact/`.
 
 **Setup via Cloudflare Dashboard:**
 
-1. **Create Bulk Redirect List** (Account → Bulk Redirects → Create list):
-
-   | Field                 | Value                     |
-   |-----------------------|---------------------------|
-   | Source URL            | `www.pikeandwest.com`     |
-   | Target URL            | `https://pikeandwest.com` |
-   | Status                | 301                       |
-   | Preserve query string | Yes                       |
-   | Subpath matching      | Yes                       |
-   | Preserve path suffix  | Yes                       |
-
-2. **Create Bulk Redirect Rule** using the list above
-
-3. **Verify DNS** - www CNAME must exist and be proxied (already configured)
+1. Go to Zone → pikeandwest.com → Rules → Overview
+2. Use the "Redirect from WWW to root" template
+3. Enable "Preserve query string"
+4. Deploy
 
 **Test redirect:**
 
@@ -116,7 +118,7 @@ curl -I https://www.pikeandwest.com/
 # Expected: HTTP/2 301, location: https://pikeandwest.com/
 ```
 
-Reference: [Cloudflare Pages www redirect guide](https://developers.cloudflare.com/pages/how-to/www-redirect/)
+Reference: [Cloudflare Redirect Rules documentation](https://developers.cloudflare.com/rules/url-forwarding/examples/redirect-www-to-root/)
 
 ---
 
