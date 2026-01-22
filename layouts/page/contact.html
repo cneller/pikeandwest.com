@@ -4,12 +4,8 @@
     <h1 class="section-title">CONTACT US</h1>
     <address class="form-embed">
       {{ with .Site.Params.forms.contactEmbed }}
-      {{/* Lazy-loaded iframe with placeholder for better performance */}}
-      <div class="iframe-lazy" data-src="{{ . }}" data-title="Contact Form">
-        <div class="iframe-placeholder">
-          <span class="iframe-placeholder__text">Loading contact form...</span>
-        </div>
-      </div>
+      {{/* Facade pattern: static preview loads iframe on interaction */}}
+      {{ partial "contact-form-facade.html" $ }}
       {{ else }}
       <p>
         Contact form coming soon. Please call us at {{
