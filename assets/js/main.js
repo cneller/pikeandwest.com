@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initLightbox();
   initScrollAnimations();
   initLazyIframes();
+  initContactFacade();
 });
 
 // Mobile Navigation
@@ -273,4 +274,62 @@ function initLazyIframes() {
   }, observerOptions);
 
   lazyContainers.forEach((container) => observer.observe(container));
+}
+
+// Contact Form Facade
+// Loads HoneyBook iframe on user interaction instead of page load
+function initContactFacade() {
+  const facade = document.querySelector('.contact-facade');
+
+  if (!facade) return;
+
+  const trigger = facade.querySelector('.contact-facade__trigger');
+  const src = facade.dataset.iframeSrc;
+
+  if (!trigger || !src) return;
+
+  function loadIframe() {
+    // Prevent double-loading
+    if (facade.classList.contains('contact-facade--loading')) return;
+
+    facade.classList.add('contact-facade--loading');
+
+    // Update CTA text
+    const cta = facade.querySelector('.contact-facade__cta');
+    if (cta) {
+      cta.textContent = 'Loading form...';
+    }
+
+    // Create and insert iframe
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = 'Contact Form';
+    iframe.setAttribute('loading', 'eager'); // Load immediately once triggered
+    iframe.setAttribute('scrolling', 'no');
+    iframe.setAttribute('frameborder', '0');
+
+    iframe.addEventListener('load', () => {
+      facade.classList.remove('contact-facade--loading');
+      facade.classList.add('contact-facade--loaded');
+    });
+
+    // Fallback: mark as loaded after timeout (HoneyBook may not fire load)
+    setTimeout(() => {
+      if (!facade.classList.contains('contact-facade--loaded')) {
+        facade.classList.remove('contact-facade--loading');
+        facade.classList.add('contact-facade--loaded');
+      }
+    }, 8000);
+
+    facade.appendChild(iframe);
+  }
+
+  // Load on click or keyboard interaction
+  trigger.addEventListener('click', loadIframe);
+  trigger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      loadIframe();
+    }
+  });
 }
