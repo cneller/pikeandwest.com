@@ -84,15 +84,25 @@ jobs:
         run: |
           URL="${{ needs.prepare.outputs.url }}"
           echo "Checking $URL..."
+
+          # Use browser-like headers to avoid Cloudflare bot detection
+          USER_AGENT="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
           for i in {1..12}; do
-            if curl -sf "$URL" > /dev/null; then
-              echo "Site is up!"
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "User-Agent: $USER_AGENT" \
+              -H "Accept: text/html,application/xhtml+xml" \
+              -H "Accept-Language: en-US,en;q=0.9" \
+              "$URL")
+
+            if [[ "$HTTP_CODE" == "200" ]]; then
+              echo "Site is up! (HTTP $HTTP_CODE)"
               exit 0
             fi
-            echo "Attempt $i/12 failed, waiting 5s..."
+            echo "Attempt $i/12: HTTP $HTTP_CODE, waiting 5s..."
             sleep 5
           done
-          echo "Site failed to respond after 60s"
+          echo "Site failed to respond with 200 after 60s"
           exit 1
 
   audit:
