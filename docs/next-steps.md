@@ -252,6 +252,8 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-22 | Integrated editorial styling into Claude Code commands (`/blog-draft`, `/blog-outline`, `/content-audit`) |
+| 2026-01-22 | Updated blog archetype with editorial styling examples and quick reference                        |
 | 2026-01-22 | Added blog editorial styling: drop caps, pull quotes, decorative dividers (ADR-005)               |
 | 2026-01-22 | Created Hugo shortcodes: `pull-quote` and `divider` for easy content authoring                    |
 | 2026-01-22 | Fixed Cloudflare bot detection: removed curl health-check, rely on Lighthouse Chrome (score: 90)  |
