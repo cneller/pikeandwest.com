@@ -147,6 +147,99 @@ Quick reference for common patterns. Full details in `docs/architecture/patterns
 
 See also: [Animation Patterns](docs/architecture/patterns/animation-patterns.md) | [SCSS Organization](docs/architecture/patterns/scss-organization.md)
 
+## Blog Post Styling
+
+The blog supports several visual enhancements to create engaging, magazine-style content. These features are designed to match Pike & West's luxury aesthetic.
+
+### Drop Caps
+
+Large decorative first letters that begin articles. Applied automatically to the first paragraph of blog post content.
+
+**Automatic:** First paragraph gets a drop cap by default (uses `::first-letter` for accessibility).
+
+**Manual (add to any paragraph):**
+```markdown
+{.drop-cap}
+This paragraph will have a drop cap applied to it.
+```
+
+**Disable for first paragraph:**
+```markdown
+{.no-drop-cap}
+This first paragraph will NOT have a drop cap.
+```
+
+**Style:** Gold color, Le Mores display font, 3.5em size.
+
+### Pull Quotes
+
+Prominent excerpted text that highlights key messages. Use the shortcode:
+
+```markdown
+{{</* pull-quote */>}}
+Love doesn't fit neatly into a Hallmark card.
+{{</* /pull-quote */>}}
+```
+
+**With attribution:**
+```markdown
+{{</* pull-quote author="Pike & West Team" */>}}
+Every form of love deserves celebration.
+{{</* /pull-quote */>}}
+```
+
+**Floated (for longer articles):**
+```markdown
+{{</* pull-quote position="right" */>}}
+Floats to the right on desktop.
+{{</* /pull-quote */>}}
+
+{{</* pull-quote position="left" */>}}
+Floats to the left on desktop.
+{{</* /pull-quote */>}}
+```
+
+**Simple variant (minimal styling):**
+```markdown
+{{</* pull-quote variant="simple" */>}}
+No decorative borders or quote marks.
+{{</* /pull-quote */>}}
+```
+
+### Decorative Section Dividers
+
+Elegant separators between major sections. Use the shortcode:
+
+```markdown
+{{</* divider */>}}
+```
+
+**Styles available:**
+
+| Style | Usage | Description |
+|-------|-------|-------------|
+| ornament | `{{</* divider */>}}` or `{{</* divider style="ornament" */>}}` | Gold diamond symbol (default) |
+| line | `{{</* divider style="line" */>}}` | Gradient gold line |
+| flourish | `{{</* divider style="flourish" */>}}` | Lines fading from center |
+
+**Best practices:**
+- Use dividers sparingly (between major sections)
+- Choose one style consistently within a post
+- The ornament style works best for Pike & West's luxury brand
+
+### When to Use These Features
+
+| Feature | Best Used For |
+|---------|---------------|
+| Drop caps | Opening paragraphs (automatic), new major sections |
+| Pull quotes | Highlighting key insights, emotional moments, memorable phrases |
+| Dividers | Separating major topic shifts, before conclusions |
+
+**Frequency guidelines:**
+- Drop caps: 1 per article (automatic) or 1 per major section
+- Pull quotes: Every 3-5 paragraphs for longer articles
+- Dividers: 2-3 per article maximum
+
 ## Webflow Reference
 
 The original Webflow site export is preserved for reference during migration:
