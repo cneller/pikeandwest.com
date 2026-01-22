@@ -1,5 +1,9 @@
-# Canonical Domain Redirect
-# Redirect www to naked domain (301 permanent)
-# Reference: docs/infrastructure/canonical-domain-migration-analysis.md
+# Cloudflare Pages Redirects
+# Reference: https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# NOTE: Cross-domain redirects (www → naked) are NOT supported in _redirects.
+# The www → pikeandwest.com redirect is configured via Cloudflare Bulk Redirects.
+# See: docs/infrastructure/dns-configuration.md
+#
+# Add any path-level redirects below (relative URLs only):
 
-https://www.pikeandwest.com/* https://pikeandwest.com/:splat 301

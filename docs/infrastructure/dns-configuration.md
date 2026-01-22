@@ -80,23 +80,43 @@ If rollback to Webflow is needed, change CNAME records back to Webflow's proxy s
    - **Do NOT touch MX or TXT records**
 
 3. **Configure redirects**
-   - Set up www → naked redirect in `static/_redirects` or Cloudflare Page Rules
+   - Set up www → naked redirect via **Cloudflare Bulk Redirects** (not `_redirects`)
    - Required: `www.pikeandwest.com` → `pikeandwest.com` (naked domain is canonical)
+   - Note: `_redirects` file only supports relative URLs, not cross-domain redirects
 
 4. **Verify SSL**
    - Cloudflare Pages automatically provisions SSL
    - Verify certificate covers both domains
 
-### Redirect Configuration
+### Redirect Configuration (Bulk Redirects)
 
-Add to `static/_redirects` for Cloudflare Pages:
+Cross-domain redirects (www → naked) require **Cloudflare Bulk Redirects**, not the `_redirects` file.
 
-```text
-# Redirect www to naked domain (naked domain is canonical)
-https://www.pikeandwest.com/* https://pikeandwest.com/:splat 301
+**Setup via Cloudflare Dashboard:**
+
+1. **Create Bulk Redirect List** (Account → Bulk Redirects → Create list):
+
+   | Field                 | Value                     |
+   |-----------------------|---------------------------|
+   | Source URL            | `www.pikeandwest.com`     |
+   | Target URL            | `https://pikeandwest.com` |
+   | Status                | 301                       |
+   | Preserve query string | Yes                       |
+   | Subpath matching      | Yes                       |
+   | Preserve path suffix  | Yes                       |
+
+2. **Create Bulk Redirect Rule** using the list above
+
+3. **Verify DNS** - www CNAME must exist and be proxied (already configured)
+
+**Test redirect:**
+
+```bash
+curl -I https://www.pikeandwest.com/
+# Expected: HTTP/2 301, location: https://pikeandwest.com/
 ```
 
-Or configure via Cloudflare Page Rules for more control.
+Reference: [Cloudflare Pages www redirect guide](https://developers.cloudflare.com/pages/how-to/www-redirect/)
 
 ---
 
