@@ -126,7 +126,7 @@ hugo --templateMetrics
 ### 2. DNS Cutover
 
 1. In Cloudflare DNS, add CNAME for `www` → `pikeandwest.pages.dev`
-2. Add redirect rule: apex → www (or vice versa based on preference)
+2. Add redirect rule: apex → www (www is canonical per GSC verification)
 3. Wait for DNS propagation (up to 48h, usually faster)
 4. Verify SSL certificate is active
 
@@ -252,6 +252,10 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-22 | Fixed Cloudflare bot detection blocking Lighthouse health check (browser-like headers)            |
+| 2026-01-22 | Consolidated GitHub Actions: CI workflow (Build→Validate→Deploy), async Lighthouse workflow       |
+| 2026-01-22 | Removed Artists from main nav, reordered to Blog (left) → Contact Us (right, gold CTA)            |
+| 2026-01-21 | Verified canonical domain is `www.pikeandwest.com` via GSC (Playwright); updated DNS docs         |
 | 2026-01-21 | Added hero images to event pages with front matter support (`image`, `image_alt`)                 |
 | 2026-01-21 | Created shared `_page-hero.scss` styles, refactored blog-hero to extend it (-91 lines)            |
 | 2026-01-21 | Added Front Matter CMS configuration (`frontmatter.json`) for VS Code sidebar editing             |
