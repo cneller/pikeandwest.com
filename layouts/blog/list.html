@@ -28,7 +28,7 @@
         {{ with .Params.image }}
         {{ $img := resources.Get . }}
         {{ if $img }}
-        {{ $resized := $img.Resize "600x400 q85" }}
+        {{ $resized := $img.Fill "600x400 q85" }}
         <div class="blog-card__image-wrapper">
           <img
             src="{{ $resized.RelPermalink }}"
