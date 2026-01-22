@@ -1,0 +1,5 @@
+# Canonical Domain Redirect
+# Redirect www to naked domain (301 permanent)
+# Reference: docs/infrastructure/canonical-domain-migration-analysis.md
+
+https://www.pikeandwest.com/* https://pikeandwest.com/:splat 301
