@@ -252,7 +252,7 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
-| 2026-01-22 | Fixed Cloudflare bot detection blocking Lighthouse health check (browser-like headers)            |
+| 2026-01-22 | Fixed Cloudflare bot detection: removed curl health-check, rely on Lighthouse Chrome (score: 90)  |
 | 2026-01-22 | Consolidated GitHub Actions: CI workflow (Build→Validate→Deploy), async Lighthouse workflow       |
 | 2026-01-22 | Removed Artists from main nav, reordered to Blog (left) → Contact Us (right, gold CTA)            |
 | 2026-01-21 | Verified canonical domain is `www.pikeandwest.com` via GSC (Playwright); updated DNS docs         |
