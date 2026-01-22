@@ -118,6 +118,7 @@ Key decisions made during development. Full details in `docs/architecture/decisi
 | Hamburger breakpoint | 991px              | Webflow alignment; nav buttons visible on tablets ([ADR-004](docs/architecture/decisions/ADR-004-responsive-breakpoints.md))                     |
 | Hero height          | 75vh/65vh/60vh     | Shows content peek below fold; Webflow parity ([ADR-003](docs/architecture/decisions/ADR-003-hero-layout.md))                                    |
 | Breakpoints          | Webflow-aligned    | 479/767/991/1280/1920px for pixel-perfect parity ([ADR-004](docs/architecture/decisions/ADR-004-responsive-breakpoints.md))                      |
+| Blog editorial style | Drop caps, quotes  | Magazine-style luxury feel; accessible `::first-letter` ([ADR-005](docs/architecture/decisions/ADR-005-blog-editorial-styling.md))               |
 
 ## Implementation Patterns
 

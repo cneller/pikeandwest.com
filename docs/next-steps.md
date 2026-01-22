@@ -1,6 +1,6 @@
 # Pike & West - Next Steps
 
-> **Last Updated:** 2026-01-21
+> **Last Updated:** 2026-01-22
 > **Current Phase:** Pre-Launch Testing on beta.pikeandwest.com
 
 This document tracks the current project state and upcoming work. Keep this file updated as tasks are completed or priorities change.
@@ -252,6 +252,8 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-22 | Added blog editorial styling: drop caps, pull quotes, decorative dividers (ADR-005)               |
+| 2026-01-22 | Created Hugo shortcodes: `pull-quote` and `divider` for easy content authoring                    |
 | 2026-01-22 | Fixed Cloudflare bot detection: removed curl health-check, rely on Lighthouse Chrome (score: 90)  |
 | 2026-01-22 | Consolidated GitHub Actions: CI workflow (Build→Validate→Deploy), async Lighthouse workflow       |
 | 2026-01-22 | Removed Artists from main nav, reordered to Blog (left) → Contact Us (right, gold CTA)            |
