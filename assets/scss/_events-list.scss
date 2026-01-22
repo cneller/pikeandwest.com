@@ -46,6 +46,9 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
+      // Darken light gray icons for better contrast on cream background
+      // Filter converts light gray to dark charcoal (~#434345)
+      filter: brightness(0.4) contrast(1.2);
     }
   }
 
