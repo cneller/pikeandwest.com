@@ -1,0 +1,67 @@
+{{/*
+  Contact Form Facade
+  Purpose: Lightweight static preview that loads real HoneyBook iframe on interaction
+  Usage: {{ partial "contact-form-facade.html" . }}
+*/}}
+<div class="contact-facade" data-iframe-src="{{ .Site.Params.forms.contactEmbed }}">
+  {{/* Click overlay to trigger iframe load */}}
+  <button type="button" class="contact-facade__trigger" aria-label="Load contact form">
+    <span class="contact-facade__cta">Click to load contact form</span>
+  </button>
+
+  {{/* Static form preview */}}
+  <div class="contact-facade__preview" aria-hidden="true">
+    <div class="contact-facade__row">
+      <div class="contact-facade__field">
+        <label class="contact-facade__label">FULL NAME</label>
+        <div class="contact-facade__input" data-placeholder="Enter your full name"></div>
+      </div>
+      <div class="contact-facade__field">
+        <label class="contact-facade__label">EMAIL</label>
+        <div class="contact-facade__input" data-placeholder="Enter your email address"></div>
+      </div>
+    </div>
+
+    <div class="contact-facade__row">
+      <div class="contact-facade__field">
+        <label class="contact-facade__label">PHONE NUMBER</label>
+        <div class="contact-facade__input" data-placeholder="555-555-5555"></div>
+      </div>
+      <div class="contact-facade__field">
+        <label class="contact-facade__label">HOW DID YOU HEAR ABOUT US?</label>
+        <div class="contact-facade__select">Select an answer</div>
+      </div>
+    </div>
+
+    <div class="contact-facade__row">
+      <div class="contact-facade__field">
+        <label class="contact-facade__label">WHAT TYPE OF EVENT?</label>
+        <div class="contact-facade__select">Select an answer</div>
+      </div>
+      <div class="contact-facade__field">
+        <label class="contact-facade__label">ESTIMATED GUESTS</label>
+        <div class="contact-facade__input" data-placeholder="Hopefully 130 or less ;-)"></div>
+      </div>
+    </div>
+
+    <div class="contact-facade__row">
+      <div class="contact-facade__field">
+        <label class="contact-facade__label">EVENT DATE</label>
+        <div class="contact-facade__input" data-placeholder="MM/DD/YY"></div>
+      </div>
+      <div class="contact-facade__field">
+        <label class="contact-facade__label">DATE FLEXIBLE?</label>
+        <div class="contact-facade__select">Select an answer</div>
+      </div>
+    </div>
+
+    <div class="contact-facade__field contact-facade__field--full">
+      <label class="contact-facade__label">TELL US ABOUT YOUR EVENT</label>
+      <div class="contact-facade__textarea" data-placeholder="As much detail as you like!"></div>
+    </div>
+
+    <div class="contact-facade__submit">
+      <span class="contact-facade__button">SUBMIT</span>
+    </div>
+  </div>
+</div>
