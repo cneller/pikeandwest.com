@@ -281,16 +281,15 @@ function initLazyIframes() {
 }
 
 // Contact Form Facade
-// Loads HoneyBook iframe on user interaction instead of page load
+// Auto-loads HoneyBook iframe when visible (no click required)
 function initContactFacade() {
   const facade = document.querySelector('.contact-facade');
 
   if (!facade) return;
 
-  const trigger = facade.querySelector('.contact-facade__trigger');
   const src = facade.dataset.iframeSrc;
 
-  if (!trigger || !src) return;
+  if (!src) return;
 
   function loadIframe() {
     // Prevent double-loading
@@ -298,17 +297,11 @@ function initContactFacade() {
 
     facade.classList.add('contact-facade--loading');
 
-    // Update CTA text
-    const cta = facade.querySelector('.contact-facade__cta');
-    if (cta) {
-      cta.textContent = 'Loading form...';
-    }
-
     // Create and insert iframe
     const iframe = document.createElement('iframe');
     iframe.src = src;
     iframe.title = 'Contact Form';
-    iframe.setAttribute('loading', 'eager'); // Load immediately once triggered
+    iframe.setAttribute('loading', 'eager');
     iframe.setAttribute('scrolling', 'no');
     iframe.setAttribute('frameborder', '0');
 
@@ -328,12 +321,18 @@ function initContactFacade() {
     facade.appendChild(iframe);
   }
 
-  // Load on click or keyboard interaction
-  trigger.addEventListener('click', loadIframe);
-  trigger.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      loadIframe();
-    }
-  });
+  // Auto-load when facade is near viewport
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          loadIframe();
+          observer.unobserve(facade);
+        }
+      });
+    },
+    { rootMargin: '200px 0px', threshold: 0 }
+  );
+
+  observer.observe(facade);
 }

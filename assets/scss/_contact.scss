@@ -219,54 +219,42 @@
   position: relative;
   width: 840px;
   margin: 0 auto;
-  background: $color-white;
+  background: $color-cream;
   border: 1px solid rgba($color-medium-gray, 0.2);
   border-radius: 4px;
   overflow: hidden;
-  cursor: pointer;
 
   @media (max-width: $breakpoint-lg) {
     width: 100%;
     max-width: 400px;
   }
 
-  // Trigger overlay
-  &__trigger {
+  // Loading overlay (shown during iframe load)
+  &__overlay {
     position: absolute;
     inset: 0;
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba($color-white, 0.9);
-    border: none;
-    cursor: pointer;
+    background: $color-cream;
     opacity: 0;
-    transition: opacity $transition-base;
-
-    &:hover,
-    &:focus {
-      opacity: 1;
-    }
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
   }
 
-  &__cta {
-    padding: 16px 32px;
-    background: $color-gold;
-    color: $color-white;
+  &__loading-text {
     font-family: $font-primary;
     font-size: 14px;
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 4px;
-    box-shadow: $shadow-md;
+    color: $color-medium-gray;
+    animation: iframe-pulse 1.5s ease-in-out infinite;
   }
 
   // Static preview (visual only)
   &__preview {
     padding: 32px;
     pointer-events: none;
+    transition: opacity 0.3s ease-out;
   }
 
   &__row {
@@ -355,27 +343,25 @@
     border-radius: 4px;
   }
 
-  // Loading state (after click, before iframe loads)
+  // Loading state (iframe is being loaded)
   &--loading {
-    .contact-facade__trigger {
+    .contact-facade__overlay {
       opacity: 1;
-      background: $color-white;
-    }
-
-    .contact-facade__cta {
-      animation: iframe-pulse 1.5s ease-in-out infinite;
     }
 
     .contact-facade__preview {
-      filter: blur(2px);
+      opacity: 0.3;
     }
   }
 
-  // Loaded state (iframe inserted)
+  // Loaded state (iframe ready, fade out preview)
   &--loaded {
-    .contact-facade__trigger,
+    .contact-facade__overlay,
     .contact-facade__preview {
-      display: none;
+      opacity: 0;
+      pointer-events: none;
+      // Remove from layout after transition
+      transition: opacity 0.3s ease-out;
     }
 
     iframe {

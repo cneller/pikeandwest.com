@@ -1,13 +1,13 @@
 {{/*
   Contact Form Facade
-  Purpose: Lightweight static preview that loads real HoneyBook iframe on interaction
+  Purpose: Lightweight static preview that auto-loads real HoneyBook iframe when visible
   Usage: {{ partial "contact-form-facade.html" . }}
 */}}
 <div class="contact-facade" data-iframe-src="{{ .Site.Params.forms.contactEmbed }}">
-  {{/* Click overlay to trigger iframe load */}}
-  <button type="button" class="contact-facade__trigger" aria-label="Load contact form">
-    <span class="contact-facade__cta">Click to load contact form</span>
-  </button>
+  {{/* Loading overlay (shown automatically when iframe loads) */}}
+  <div class="contact-facade__overlay" aria-hidden="true">
+    <span class="contact-facade__loading-text">Loading form...</span>
+  </div>
 
   {{/* Static form preview */}}
   <div class="contact-facade__preview" aria-hidden="true">
