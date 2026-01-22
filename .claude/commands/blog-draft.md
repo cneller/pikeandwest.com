@@ -60,6 +60,12 @@ Generate a publication-ready blog post draft for Pike & West with Hugo front mat
    - Internal links to `/contact`, `/gallery`, related blog posts
    - Conclusion with clear CTA to schedule a tour
 
+   **Editorial Styling (REQUIRED):**
+   - Drop cap: Automatic on first paragraph (no action needed)
+   - Pull quotes: Include 1-2 per 1000 words using `{{</* pull-quote */>}}` shortcode
+   - Section dividers: Use `{{</* divider */>}}` between major sections (2-3 per article)
+   - See CLAUDE.md "Blog Post Styling" section for full documentation
+
 5. **SEO Validation**
    Verify:
    - Primary keyword in title, H1, first 100 words
@@ -118,3 +124,9 @@ Before completing, verify:
 - [ ] Brand voice is consistent
 - [ ] No generic venue language
 - [ ] Art/gallery angle emphasized where appropriate
+
+**Editorial Styling:**
+
+- [ ] Pull quotes included (1-2 per 1000 words)
+- [ ] Section dividers between major sections (2-3 total)
+- [ ] No `.no-drop-cap` on first paragraph (allow automatic drop cap)

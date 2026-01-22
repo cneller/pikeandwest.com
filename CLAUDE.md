@@ -241,6 +241,18 @@ Elegant separators between major sections. Use the shortcode:
 - Pull quotes: Every 3-5 paragraphs for longer articles
 - Dividers: 2-3 per article maximum
 
+### Claude Code Commands
+
+These slash commands enforce consistent editorial styling:
+
+| Command | Purpose |
+|---------|---------|
+| `/blog-outline <topic>` | Creates outline with editorial styling plan |
+| `/blog-draft <topic>` | Generates draft with required styling elements |
+| `/content-audit [path]` | Audits posts for missing editorial styling |
+
+Commands are defined in `.claude/commands/` and automatically check for pull quotes, dividers, and proper drop cap handling.
+
 ## Webflow Reference
 
 The original Webflow site export is preserved for reference during migration:

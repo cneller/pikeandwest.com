@@ -35,14 +35,21 @@ Review existing Pike & West content for SEO optimization, brand voice, and fresh
    - Missing art/gallery angle
    - Tone consistency (sophisticated but warm)
 
-4. **Freshness Check**
+4. **Editorial Styling Check**
+   Verify presence of:
+   - Pull quotes: At least 1 per 1000 words (search for `{{< pull-quote`)
+   - Section dividers: 2-3 per article (search for `{{< divider`)
+   - Drop cap: First paragraph should NOT have `.no-drop-cap` class
+   - Flag posts missing editorial styling for enhancement
+
+5. **Freshness Check**
    Flag content that:
    - Is older than 12 months without updates
    - Contains outdated references (pricing, dates, events)
    - Has broken internal links
    - Is thin content (under 800 words)
 
-5. **Generate Report**
+6. **Generate Report**
 
 ## Output Format
 
@@ -93,16 +100,21 @@ Review existing Pike & West content for SEO optimization, brand voice, and fresh
 - Heading structure: 5 pts
 - Internal links: 5 pts
 
-### Brand Voice (25 points)
+### Brand Voice (20 points)
 
-- Tone consistency: 10 pts
-- No generic language: 10 pts
-- Art/gallery angle: 5 pts
+- Tone consistency: 8 pts
+- No generic language: 8 pts
+- Art/gallery angle: 4 pts
 
-### Freshness (25 points)
+### Editorial Styling (10 points)
 
-- Updated within 12 months: 15 pts
-- No outdated info: 10 pts
+- Pull quotes present: 5 pts
+- Section dividers used: 5 pts
+
+### Freshness (20 points)
+
+- Updated within 12 months: 12 pts
+- No outdated info: 8 pts
 
 ### Technical (25 points)
 
