@@ -1,9 +1,11 @@
 ---
 name: page-editor
 description: >
-  Use this agent when creating or editing Pike & West event pages and static pages.
-  Ensures proper structure, SEO optimization, and brand voice for non-blog content.
-  Updates content index after every edit.
+  ALWAYS use this agent for ANY task involving Pike & West event pages or static pages.
+  Triggers: "edit event page", "update events", "create event page", "modify page",
+  "fix page content", "update contact page", "edit about page", any file in
+  content/events/*.md or content/*.md (except blog). Ensures proper structure,
+  SEO optimization, and brand voice. Updates content index after every edit.
 model: claude-opus-4-5-20251101
 inherits:
   - content-editing
