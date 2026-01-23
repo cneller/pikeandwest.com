@@ -43,6 +43,13 @@ export const urls = {
    */
   manualActions: (resourceId) =>
     `https://search.google.com/search-console/manual-actions?resource_id=${encodeURIComponent(resourceId)}`,
+
+  /**
+   * Sitemaps report
+   * @param {string} resourceId - e.g., "sc-domain:pikeandwest.com"
+   */
+  sitemaps: (resourceId) =>
+    `https://search.google.com/search-console/sitemaps?resource_id=${encodeURIComponent(resourceId)}`,
 };
 
 /**
@@ -299,5 +306,55 @@ export async function getManualActionsStatus(page) {
     return { hasActions: false, message: 'No manual actions' };
   } catch {
     return { hasActions: false, message: 'Unable to check' };
+  }
+}
+
+/**
+ * Extract sitemaps data from Sitemaps report
+ * @param {import('playwright').Page} page
+ * @returns {Promise<{sitemaps: Array, totalDiscovered: number}>}
+ */
+export async function getSitemapsStatus(page) {
+  try {
+    // Table structure: Sitemap | Type | Submitted | Last read | Status | Discovered pages | Discovered videos
+    const rows = await page.locator('table tbody tr').all();
+    const sitemaps = [];
+    let totalDiscovered = 0;
+
+    for (const row of rows) {
+      const cells = await row.locator('td').all();
+      if (cells.length >= 7) {
+        const url = (await cells[0].textContent())?.trim();
+        const type = (await cells[1].textContent())?.trim();
+        const submitted = (await cells[2].textContent())?.trim();
+        const lastRead = (await cells[3].textContent())?.trim();
+        const status = (await cells[4].textContent())?.trim();
+        const discoveredPages = parseInt(
+          (await cells[5].textContent())?.replace(/,/g, '') || '0',
+          10
+        );
+        const discoveredVideos = parseInt(
+          (await cells[6].textContent())?.replace(/,/g, '') || '0',
+          10
+        );
+
+        if (url) {
+          sitemaps.push({
+            url,
+            type,
+            submitted,
+            lastRead,
+            status,
+            discoveredPages,
+            discoveredVideos,
+          });
+          totalDiscovered += discoveredPages;
+        }
+      }
+    }
+
+    return { sitemaps, totalDiscovered };
+  } catch {
+    return { sitemaps: [], totalDiscovered: 0 };
   }
 }

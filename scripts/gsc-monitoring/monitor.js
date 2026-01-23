@@ -39,6 +39,7 @@ import {
   getHttpsStatus,
   getSecurityStatus,
   getManualActionsStatus,
+  getSitemapsStatus,
   isLoginPage,
 } from './selectors.js';
 
@@ -140,6 +141,8 @@ async function extractMetrics(page) {
     indexed: null,
     notIndexed: null,
     reasons: [],
+    // Sitemaps
+    sitemaps: null,
     // Performance
     totalClicks: null,
     // Experience
@@ -205,6 +208,16 @@ async function extractMetrics(page) {
 
   if (!isLoginPage(page)) {
     metrics.manualActions = await getManualActionsStatus(page);
+  }
+
+  // Check Sitemaps
+  console.log('Checking Sitemaps...');
+  await page.goto(urls.sitemaps(config.property.resource_id), {
+    waitUntil: 'networkidle',
+  });
+
+  if (!isLoginPage(page)) {
+    metrics.sitemaps = await getSitemapsStatus(page);
   }
 
   return metrics;
@@ -273,6 +286,22 @@ function printSummary(metrics) {
     console.log(`Non-HTTPS Pages: ${metrics.https.nonHttps}`);
   } else {
     console.log('HTTPS Status: Unable to extract');
+  }
+
+  // Sitemaps
+  console.log('\n--- Sitemaps ---');
+  if (metrics.sitemaps?.sitemaps?.length > 0) {
+    console.log(`Total Discovered URLs: ${metrics.sitemaps.totalDiscovered}`);
+    console.log(`Sitemaps (${metrics.sitemaps.sitemaps.length}):`);
+    for (const sm of metrics.sitemaps.sitemaps) {
+      const statusIcon = sm.status === 'Success' ? 'OK' : 'WARN';
+      console.log(`  - ${sm.url}`);
+      console.log(
+        `    [${statusIcon}] ${sm.status} | ${sm.discoveredPages} pages | Last read: ${sm.lastRead}`
+      );
+    }
+  } else {
+    console.log('No sitemaps found');
   }
 
   // Security

@@ -20,6 +20,13 @@ Playwright-based script to extract Google Search Console Coverage Report metrics
 - **Core Web Vitals** - Mobile and Desktop status (Good/Needs improvement/Poor or No data)
 - **HTTPS status** - Count of HTTPS vs Non-HTTPS pages
 
+### Sitemaps
+
+- **Sitemap URLs** - All submitted sitemaps
+- **Status** - Success, errors, or couldn't fetch
+- **Discovered pages** - URLs found in each sitemap
+- **Last read date** - When Google last processed the sitemap
+
 ### Security
 
 - **Security Issues** - Any detected security problems
@@ -74,7 +81,7 @@ Edit `config.yaml` to customize:
 
 ```json
 {
-  "timestamp": "2026-01-23T07:27:13.755Z",
+  "timestamp": "2026-01-23T07:31:18.771Z",
   "property": "sc-domain:pikeandwest.com",
   "propertyName": "Pike & West",
   "lastUpdate": "1/19/26",
@@ -83,23 +90,25 @@ Edit `config.yaml` to customize:
   "reasons": [
     { "reason": "Page with redirect", "count": 4 }
   ],
+  "sitemaps": {
+    "sitemaps": [
+      {
+        "url": "https://pikeandwest.com/sitemap.xml",
+        "status": "Success",
+        "discoveredPages": 61,
+        "lastRead": "Jan 22, 2026"
+      }
+    ],
+    "totalDiscovered": 63
+  },
   "totalClicks": 588,
   "coreWebVitals": {
     "mobile": { "status": "No data" },
     "desktop": { "status": "No data" }
   },
-  "https": {
-    "https": 4,
-    "nonHttps": 0
-  },
-  "security": {
-    "hasIssues": false,
-    "message": "No issues detected"
-  },
-  "manualActions": {
-    "hasActions": false,
-    "message": "No manual actions"
-  },
+  "https": { "https": 4, "nonHttps": 0 },
+  "security": { "hasIssues": false, "message": "No issues detected" },
+  "manualActions": { "hasActions": false, "message": "No manual actions" },
   "errors": []
 }
 ```
