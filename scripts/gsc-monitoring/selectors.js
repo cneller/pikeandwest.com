@@ -38,14 +38,11 @@ export const urls = {
  */
 export async function getIndexedCount(page) {
   try {
-    // Button with "Indexed" in name, find the count in child generic element
-    const button = page.getByRole('button', { name: /Indexed/i });
-    const countElement = button
-      .locator('div')
-      .filter({ hasText: /^\d+$/ })
-      .first();
-    const text = await countElement.textContent({ timeout: 5000 });
-    return text ? parseInt(text.trim(), 10) : null;
+    // Look for text like "3 indexed pages" in the Indexing section
+    const element = page.getByText(/\d+ indexed pages?/i);
+    const text = await element.textContent({ timeout: 5000 });
+    const match = text?.match(/(\d+)\s+indexed/i);
+    return match ? parseInt(match[1], 10) : null;
   } catch {
     return null;
   }
@@ -58,14 +55,11 @@ export async function getIndexedCount(page) {
  */
 export async function getNotIndexedCount(page) {
   try {
-    // Button with "Not indexed" in name
-    const button = page.getByRole('button', { name: /Not indexed/i });
-    const countElement = button
-      .locator('div')
-      .filter({ hasText: /^\d+$/ })
-      .first();
-    const text = await countElement.textContent({ timeout: 5000 });
-    return text ? parseInt(text.trim(), 10) : null;
+    // Look for text like "4 not indexed pages" in the Indexing section
+    const element = page.getByText(/\d+ not indexed pages?/i);
+    const text = await element.textContent({ timeout: 5000 });
+    const match = text?.match(/(\d+)\s+not indexed/i);
+    return match ? parseInt(match[1], 10) : null;
   } catch {
     return null;
   }
@@ -78,10 +72,9 @@ export async function getNotIndexedCount(page) {
  */
 export async function getLastUpdate(page) {
   try {
-    const element = page.getByText(/Last update:/i);
-    const text = await element.textContent({ timeout: 5000 });
-    // Extract date from "Last update: 1/19/26"
-    const match = text?.match(/Last update:\s*(.+)/i);
+    // Look for text containing "Last update:" anywhere on the page
+    const bodyText = await page.textContent('body', { timeout: 5000 });
+    const match = bodyText?.match(/Last update:\s*([\d/]+)/i);
     return match ? match[1].trim() : null;
   } catch {
     return null;
@@ -95,15 +88,16 @@ export async function getLastUpdate(page) {
  */
 export async function getIndexingReasons(page) {
   try {
-    // The reasons are in table rows with reason name and count
+    // Table structure: Reason | Source | Validation | Trend | Pages
+    // We want first column (reason) and last column (pages count)
     const rows = await page.locator('table tbody tr').all();
     const reasons = [];
 
     for (const row of rows) {
       const cells = await row.locator('td').all();
-      if (cells.length >= 2) {
+      if (cells.length >= 5) {
         const reason = await cells[0].textContent();
-        const countText = await cells[1].textContent();
+        const countText = await cells[4].textContent(); // Pages column is last (index 4)
         if (reason && countText) {
           const count = parseInt(countText.replace(/,/g, '').trim(), 10);
           if (!isNaN(count)) {

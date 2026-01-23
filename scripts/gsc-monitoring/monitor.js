@@ -74,8 +74,7 @@ function ensureOutputDirs() {
  */
 async function runAuthFlow(browserConfig) {
   console.log('\nAuthentication required');
-  console.log('A browser window will open. Please log in to Google.');
-  console.log('After logging in, navigate to Search Console and wait.\n');
+  console.log('A browser window will open. Please log in to Google.\n');
 
   const browser = await chromium.launch({
     headless: false, // Must be headed for manual login
@@ -87,16 +86,27 @@ async function runAuthFlow(browserConfig) {
 
   const page = await context.newPage();
 
-  // Navigate to GSC - will redirect to login if needed
+  // Navigate to Google accounts first to capture auth cookies
+  console.log('Step 1: Navigate to Google login...');
+  await page.goto('https://accounts.google.com/');
+
+  // Wait for user to log in (they'll either be on myaccount or still on login)
+  console.log('Please log in to Google if prompted.');
+  console.log('Waiting for login to complete...\n');
+
+  // Wait until we're past the login page
+  await page.waitForURL(
+    (url) =>
+      !url.href.includes('/signin') && !url.href.includes('/ServiceLogin'),
+    { timeout: 300000 }
+  );
+
+  console.log('Step 2: Navigate to Search Console...');
   await page.goto(urls.overview(config.property.resource_id));
 
-  // Wait for user to complete login and reach GSC
-  console.log('Waiting for you to log in...');
-  console.log('(The script will continue once GSC loads)\n');
-
-  // Wait until we're on the GSC domain and not on login
-  await page.waitForURL(/search\.google\.com\/search-console/, {
-    timeout: 300000, // 5 minutes for manual login
+  // Wait until we're on the GSC dashboard (not the about/landing page)
+  await page.waitForURL(/search\.google\.com\/search-console\?resource_id/, {
+    timeout: 60000,
   });
 
   console.log('Login detected, saving session...\n');
@@ -144,15 +154,15 @@ async function extractMetrics(page) {
 
   metrics.indexed = await getIndexedCount(page);
   metrics.notIndexed = await getNotIndexedCount(page);
-  metrics.lastUpdate = await getLastUpdate(page);
 
-  // Navigate to full report for reasons breakdown
+  // Navigate to full report for reasons breakdown and last update
   console.log('Navigating to Page Indexing Report...');
   await page.goto(urls.indexingReport(config.property.resource_id), {
     waitUntil: 'networkidle',
   });
 
   if (!isLoginPage(page)) {
+    metrics.lastUpdate = await getLastUpdate(page);
     metrics.reasons = await getIndexingReasons(page);
   }
 
