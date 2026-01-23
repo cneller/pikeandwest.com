@@ -59,6 +59,53 @@ You should be used whenever:
 
 ---
 
+## Front Matter Requirements
+
+Every blog post requires properly formatted front matter. Pay special attention to the `date` field.
+
+### Date Field - CRITICAL
+
+**The `date` field MUST be set to the actual current moment, NOT a future time.**
+
+Posts with future dates will not appear on the site unless Hugo is run with the `-F` flag.
+
+**Before creating a new post, get the current timestamp:**
+
+```bash
+date +%Y-%m-%dT%H:%M:%S%z
+```
+
+This returns the format Hugo expects (e.g., `2026-01-23T04:45:00-0600`).
+
+**Rules:**
+
+1. **New posts:** Always use the ACTUAL current time from the `date` command above
+2. **Never guess the time** - Run the command to get accurate local time with timezone
+3. **Never use a round time** like `10:00:00` unless that is actually the current time
+4. **Scheduled posts:** Only use a future date if the user explicitly requests scheduled publication
+
+### Required Front Matter Fields
+
+```yaml
+---
+title: "Post Title with Primary Keyword"        # 50-60 characters
+description: "Meta description for SEO..."      # 150-160 characters
+date: 2026-01-23T04:45:00-0600                  # ACTUAL current time (run date command)
+draft: false                                    # Set true only if explicitly drafting
+author: "Pike & West"
+categories: ["Event Planning"]                  # One primary category
+tags: ["tag1", "tag2", "tag3"]                  # 3-6 relevant tags
+image: "images/venue/venue-XX.jpeg"             # Hero image path
+image_alt: "Descriptive alt text..."            # Required for accessibility
+keywords:
+  - primary keyword Memphis
+  - secondary keyword Germantown
+  - tertiary keyword Tennessee
+---
+```
+
+---
+
 ## Editorial Styling Reference
 
 ### Required Elements (Every Post)
