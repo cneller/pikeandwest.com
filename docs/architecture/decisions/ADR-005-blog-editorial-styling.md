@@ -2,6 +2,7 @@
 
 **Status:** Accepted
 **Date:** 2026-01-22
+**Updated:** 2026-01-23
 
 ## Context
 
@@ -11,43 +12,42 @@ Blog posts needed visual enhancements to:
 2. Break up long-form content for better readability
 3. Highlight key quotes and insights
 4. Create visual hierarchy within articles
+5. Support planning guides with structured content (timelines, checklists)
+6. Showcase client testimonials inline
 
-Research into editorial design best practices identified three high-impact features commonly used by luxury publications.
+Research into editorial design best practices (newspapers, magazines, luxury publications) identified features commonly used by professional publications.
 
 ## Decision
 
-Implement three editorial styling patterns:
+Implement a comprehensive editorial styling system with 11 components:
 
-1. **Drop Caps** - Large decorative first letters
-2. **Pull Quotes** - Prominent excerpted text
-3. **Decorative Section Dividers** - Elegant separators
+### Core Elements (Required)
 
-### Drop Caps
+| Component | Purpose | Implementation |
+|-----------|---------|----------------|
+| Drop Caps | Decorative first letter | CSS `::first-letter` (accessible) |
+| Pull Quotes | Highlight key insights | `{{< pull-quote >}}` shortcode |
+| Section Dividers | Separate major sections | `{{< divider >}}` shortcode |
 
-Use CSS `::first-letter` pseudo-element (not span-based solutions) for accessibility:
+### Extended Elements (Content-Appropriate)
 
-- Screen readers read text naturally without "burping" on separated letters
-- Applied automatically to first paragraph of blog content
-- Manual class available for other paragraphs (`.drop-cap`)
-- Disable option via `.no-drop-cap` class
+| Component | Purpose | Implementation |
+|-----------|---------|----------------|
+| Standfirst | Intro summary paragraph | `{{< standfirst >}}` shortcode |
+| Kicker | Category label above headline | `{{< kicker >}}` shortcode |
+| Tip Box | Planning advice callouts | `{{< tip >}}` shortcode |
+| Fact Box | Quick stats/specs sidebar | `{{< fact-box >}}` shortcode |
+| Key Takeaways | End-of-article summary | `{{< key-takeaways >}}` shortcode |
+| Timeline | Planning milestones | `{{< timeline >}}` shortcode |
+| Sidebar Quote | Client testimonials | `{{< sidebar-quote >}}` shortcode |
+| Numbered List | Styled step-by-step | `{{< numbered-list >}}` shortcode |
 
-### Pull Quotes
+### Design Principles
 
-Use semantic HTML5 structure:
-
-- `<aside>` element for non-essential content (proper for excerpts)
-- `<blockquote>` inside for the quote text
-- `<cite>` for attribution
-- Hugo shortcode for easy authoring
-
-### Section Dividers
-
-Decorative `<hr>` elements with three style variants:
-
-- `ornament` - Gold diamond symbol (default)
-- `line` - Gradient gold line
-- `flourish` - Lines fading from center
-- Use `aria-hidden="true"` on decorative dividers
+1. **Accessibility First**: Use semantic HTML (`<aside>`, `<blockquote>`, `::first-letter`)
+2. **Brand Consistency**: Gold accents, Le Mores display font, cream backgrounds
+3. **Restraint**: Guidelines prevent overuse (e.g., 2-3 dividers max per article)
+4. **Flexibility**: Floatable variants for sidebars, multiple style options
 
 ## Consequences
 
@@ -55,9 +55,10 @@ Decorative `<hr>` elements with three style variants:
 - **Positive:** Accessible implementation (screen reader friendly)
 - **Positive:** Easy to use via Hugo shortcodes
 - **Positive:** Consistent with luxury brand positioning
+- **Positive:** Supports diverse content types (planning guides, inspiration, news)
 - **Negative:** Authors need to learn shortcode syntax
 - **Negative:** Requires restraint (overuse diminishes impact)
-- **Neutral:** Adds ~230 lines to `_blog.scss`
+- **Neutral:** Adds ~630 lines to `_blog.scss`
 
 ## Implementation Details
 
@@ -65,37 +66,25 @@ Decorative `<hr>` elements with three style variants:
 
 | File | Purpose |
 |------|---------|
-| `assets/scss/_blog.scss` | All editorial styling |
-| `layouts/shortcodes/pull-quote.html` | Pull quote shortcode |
-| `layouts/shortcodes/divider.html` | Divider shortcode |
-| `CLAUDE.md` | Usage documentation |
+| `assets/scss/_blog.scss` | All editorial styling (~630 lines) |
+| `layouts/shortcodes/*.html` | 11 shortcode templates |
+| `.claude/agents/blog-editor.md` | Reusable formatting agent |
+| `archetypes/blog.md` | Template with all examples |
+| `CLAUDE.md` | Quick reference documentation |
 
-### Drop Caps CSS
-
-```scss
-// Accessibility: uses ::first-letter (no DOM modification)
-.blog-post__content > p:first-of-type::first-letter {
-  float: left;
-  font-family: $font-display;
-  font-size: 3.5em;
-  line-height: 0.8;
-  padding-right: 0.1em;
-  color: $color-gold;
-}
-```
-
-### Pull Quote Shortcode
+### Shortcode Summary
 
 ```markdown
-{{</* pull-quote author="Attribution" */>}}
-Quote text here.
-{{</* /pull-quote */>}}
-```
-
-### Divider Shortcode
-
-```markdown
-{{</* divider style="ornament" */>}}
+{{</* pull-quote author="Name" */>}}Quote{{</* /pull-quote */>}}
+{{</* divider style="ornament|line|flourish" */>}}
+{{</* standfirst */>}}Intro summary{{</* /standfirst */>}}
+{{</* kicker */>}}Category{{</* /kicker */>}}
+{{</* tip title="Pro Tip" */>}}Advice{{</* /tip */>}}
+{{</* fact-box title="At a Glance" position="right" */>}}Stats{{</* /fact-box */>}}
+{{</* key-takeaways */>}}Summary points{{</* /key-takeaways */>}}
+{{</* timeline title="Planning" */>}}Milestones{{</* /timeline */>}}
+{{</* sidebar-quote author="Name" event="Wedding 2025" */>}}Testimonial{{</* /sidebar-quote */>}}
+{{</* numbered-list title="Steps" */>}}Numbered items{{</* /numbered-list */>}}
 ```
 
 ### Usage Guidelines
@@ -103,12 +92,27 @@ Quote text here.
 | Feature | Frequency | Best Used For |
 |---------|-----------|---------------|
 | Drop caps | 1 per article (auto) | Article opening |
-| Pull quotes | Every 3-5 paragraphs | Key insights, emotional moments |
+| Pull quotes | 1-2 per 1000 words | Key insights, emotional moments |
 | Dividers | 2-3 per article max | Major topic shifts |
+| Standfirst | Long articles | Summary hook |
+| Kicker | Categorized content | Topic labels |
+| Tip boxes | Planning content | Actionable advice |
+| Fact boxes | Venue-focused content | Specs, quick stats |
+| Key takeaways | 1500+ word articles | End summary |
+| Timelines | Planning guides | Milestones |
+| Sidebar quotes | Throughout | Client testimonials |
+| Numbered lists | Step-by-step content | Instructions |
+
+### Automation
+
+- **Blog Editor Agent**: `.claude/agents/blog-editor.md` provides formatting workflow
+- **Commands**: `/blog-draft`, `/blog-outline`, `/content-audit` enforce styling
+- **Archetype**: `archetypes/blog.md` includes all shortcode examples
 
 ## References
 
 - [Smashing Magazine: Block Quotes and Pull Quotes](https://www.smashingmagazine.com/2008/06/block-quotes-and-pull-quotes-examples-and-good-practices/)
 - [Adrian Roselli: Accessible Drop Caps](https://adrianroselli.com/2019/10/accessible-drop-caps.html)
 - [CSS-Tricks: Drop Caps](https://css-tricks.com/snippets/css/drop-caps/)
-- [Sara Soueidan: Not Your Typical Horizontal Rules](https://www.sarasoueidan.com/blog/horizontal-rules/)
+- [Fiveable: Newspaper Layout Fundamentals](https://fiveable.me/editorial-design/unit-8/newspaper-layout-fundamentals/study-guide/ObFtrRuiCVJvMFt8)
+- [Vev: Interactive Article Design](https://www.vev.design/blog/interactive-articles/)

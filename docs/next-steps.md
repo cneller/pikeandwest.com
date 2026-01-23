@@ -252,6 +252,9 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-23 | Expanded editorial styling: 8 new shortcodes (standfirst, kicker, tip, fact-box, key-takeaways, timeline, sidebar-quote, numbered-list) |
+| 2026-01-23 | Created blog-editor agent (`.claude/agents/blog-editor.md`) for consistent formatting             |
+| 2026-01-23 | Updated ADR-005 with comprehensive editorial styling system (11 components total)                 |
 | 2026-01-22 | Integrated editorial styling into Claude Code commands (`/blog-draft`, `/blog-outline`, `/content-audit`) |
 | 2026-01-22 | Updated blog archetype with editorial styling examples and quick reference                        |
 | 2026-01-22 | Added blog editorial styling: drop caps, pull quotes, decorative dividers (ADR-005)               |
