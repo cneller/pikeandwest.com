@@ -15,7 +15,9 @@
     "backstop:reference": "backstop reference --configPath=backstop.json",
     "backstop:test": "backstop test --configPath=backstop.json",
     "backstop:approve": "backstop approve --configPath=backstop.json",
-    "backstop:report": "backstop openReport --configPath=backstop.json"
+    "backstop:report": "backstop openReport --configPath=backstop.json",
+    "gsc:monitor": "node scripts/gsc-monitoring/monitor.js",
+    "gsc:auth": "node scripts/gsc-monitoring/monitor.js --auth"
   },
   "keywords": [],
   "author": "",
