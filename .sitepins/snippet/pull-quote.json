@@ -1,0 +1,7 @@
+{
+  "label": "pull-quote",
+  "schema": [
+    "blog"
+  ],
+  "code": "{{< pull-quote author=\"\" >}}\n\n{{< /pull-quote >}}\n"
+}
