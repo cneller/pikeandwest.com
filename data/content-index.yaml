@@ -3,10 +3,10 @@ meta:
   schema_version: "1.0"
   last_updated: "2026-01-23"
   last_full_audit: "2026-01-23"
-  updated_by: page-editor
+  updated_by: blog-editor
   stats:
-    total_pages: 21
-    blog_posts: 6
+    total_pages: 22
+    blog_posts: 7
     event_pages: 6
     static_pages: 9
     orphan_pages: 0
@@ -114,6 +114,7 @@ clusters:
     cluster_pages:
       - /blog/welcome-to-pike-and-west
       - /blog/valentines-day-love-in-all-forms
+      - /blog/engagement-party-planning-from-yes-to-celebration
     planned_content:
       - title: "Wedding Planning Timeline: 12 Months to Your Big Day"
         primary_keyword: wedding planning timeline
@@ -654,6 +655,83 @@ pages:
       editorial: 12
       freshness: 13
       technical: 20
+    issues_count: 0
+    updated_by: blog-editor
+  /blog/engagement-party-planning-from-yes-to-celebration:
+    title: "Engagement Party Planning: From 'Yes' to Celebration"
+    type: blog
+    status: published
+    primary_keyword: engagement party venue Memphis
+    secondary_keywords:
+      - engagement party planning Germantown
+      - engagement celebration Tennessee
+      - engagement party ideas Memphis
+      - where to host engagement party Germantown TN
+    search_intent: informational
+    keyword_difficulty: medium
+    topic_summary:
+      Complete guide to planning elegant engagement parties in 2026 featuring
+      trending themes, modern etiquette, and practical tips for Memphis-area couples.
+    cluster: weddings
+    funnel_stage: tofu
+    content_goal: traffic
+    entities:
+      - Pike & West
+      - Memphis
+      - Germantown
+    personas:
+      - bride
+      - groom
+      - host
+    personas_primary: bride
+    event_types:
+      - wedding
+      - private-party
+    event_types_primary: wedding
+    word_count: 1450
+    target_word_count: 1500
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 2
+      divider: 3
+      tip: 2
+      fact-box: 1
+      timeline: 1
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: true
+    has_cta: true
+    images:
+      count: 0
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out:
+      - /events/weddings/
+      - /events/private-parties/
+      - /contact/
+    links_in: []
+    links_recommended: []
+    orphan: false
+    author: Pike & West
+    created: "2026-01-23"
+    last_modified: "2026-01-23"
+    last_audited: "2026-01-23"
+    next_review: "2026-07-23"
+    audit_score: 92
+    audit_scores:
+      seo: 20
+      brand_voice: 18
+      editorial: 18
+      freshness: 15
+      technical: 21
     issues_count: 0
     updated_by: blog-editor
   /events/weddings:
