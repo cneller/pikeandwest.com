@@ -22,11 +22,98 @@ meta:
 
 # === TAXONOMY DEFINITIONS ===
 definitions:
-  personas: {}
-  event_types: {}
-  funnel_stages: {}
-  content_goals: {}
-  search_intents: {}
+  personas:
+    bride:
+      name: "Bride"
+      description: "Planning their wedding, primary decision maker"
+    groom:
+      name: "Groom"
+      description: "Planning their wedding, often secondary decision maker"
+    wedding-planner:
+      name: "Wedding Planner"
+      description: "Professional planner coordinating for clients"
+    corporate-planner:
+      name: "Corporate Planner"
+      description:
+        "HR, office manager, or executive assistant planning business events"
+    executive:
+      name: "Executive"
+      description: "C-suite or decision maker approving venues and budgets"
+    parent:
+      name: "Parent"
+      description: "Planning children's birthdays, baby showers, graduations"
+    host:
+      name: "Party Host"
+      description: "Planning private parties, anniversaries, celebrations"
+    artist:
+      name: "Artist"
+      description: "Interested in gallery exhibitions or applications"
+
+  event_types:
+    wedding:
+      name: "Wedding"
+      page: /events/weddings
+    corporate:
+      name: "Corporate Event"
+      page: /events/corporate-events
+      includes:
+        - holiday-party
+        - team-building
+        - conference
+    birthday:
+      name: "Birthday Party"
+      page: /events/birthday-parties
+    baby-shower:
+      name: "Baby Shower"
+      page: /events/baby-showers
+    anniversary:
+      name: "Anniversary Party"
+      page: null # Content gap - needs dedicated page
+    private-party:
+      name: "Private Party"
+      page: /events/private-parties
+    dance:
+      name: "Dance Event"
+      page: /events/dance-events
+
+  funnel_stages:
+    tofu:
+      name: "Top of Funnel"
+      description: "Awareness - inspiration, ideas, general info"
+    mofu:
+      name: "Middle of Funnel"
+      description: "Consideration - comparisons, planning guides, specifics"
+    bofu:
+      name: "Bottom of Funnel"
+      description: "Decision - pricing, booking, tours, testimonials"
+
+  content_goals:
+    awareness:
+      name: "Awareness"
+      description: "Introduce Pike & West to new audiences"
+    traffic:
+      name: "Traffic"
+      description: "Drive organic search traffic"
+    leads:
+      name: "Leads"
+      description: "Capture contact information"
+    conversion:
+      name: "Conversion"
+      description: "Drive tour bookings and inquiries"
+
+  search_intents:
+    informational:
+      name: "Informational"
+      description: "User wants to learn something"
+    navigational:
+      name: "Navigational"
+      description: "User looking for specific page/brand"
+    commercial:
+      name: "Commercial"
+      description: "User researching before purchase"
+    transactional:
+      name: "Transactional"
+      description: "User ready to take action"
 
 # === TOPIC CLUSTERS ===
 clusters: {}
