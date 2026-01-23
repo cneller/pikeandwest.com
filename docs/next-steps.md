@@ -1,6 +1,6 @@
 # Pike & West - Next Steps
 
-> **Last Updated:** 2026-01-22
+> **Last Updated:** 2026-01-23
 > **Current Phase:** Pre-Launch Testing on beta.pikeandwest.com
 
 This document tracks the current project state and upcoming work. Keep this file updated as tasks are completed or priorities change.
@@ -252,6 +252,7 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-23 | Refactored blog-editor agent as authoritative source for editorial styling; commands delegate to agent |
 | 2026-01-23 | Expanded editorial styling: 8 new shortcodes (standfirst, kicker, tip, fact-box, key-takeaways, timeline, sidebar-quote, numbered-list) |
 | 2026-01-23 | Created blog-editor agent (`.claude/agents/blog-editor.md`) for consistent formatting             |
 | 2026-01-23 | Updated ADR-005 with comprehensive editorial styling system (11 components total)                 |
