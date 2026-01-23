@@ -1,13 +1,27 @@
 ---
-title: "Valentine's Day Is for Everyone: Celebrating Love in All Its Forms"
-description: "Valentine's Day isn't just for couples. Discover beautiful ways to celebrate—singles parties, Galentine's gatherings, parent-child dates, and milestone moments."
-date: 2026-01-22
+title: 'Valentine''s Day Is for Everyone: Celebrating Love in All Its Forms'
+description: >-
+  Valentine's Day isn't just for couples. Discover beautiful ways to
+  celebrate—singles parties, Galentine's gatherings, parent-child dates, and
+  milestone moments.
+date: 2026-01-22T00:00:00.000Z
 draft: false
-author: "Pike & West"
-categories: ["Planning Tips"]
-tags: ["Valentine's Day", "Galentine's Day", "singles party", "daddy daughter dance", "celebration ideas", "February events", "friendship", "self-love"]
-image: "images/venue/venue-06-soft-seating.jpg"
-image_alt: "Elegant soft seating area at Pike & West venue with warm lighting perfect for intimate Valentine's Day celebrations"
+author: Pike & West
+categories:
+  - Planning Tips
+tags:
+  - Valentine's Day
+  - Galentine's Day
+  - singles party
+  - daddy daughter dance
+  - celebration ideas
+  - February events
+  - friendship
+  - self-love
+image: media/assets/images/16B8F347-7996-4B11-AF68-A7718CC8ACC1.JPG
+image_alt: >-
+  Elegant soft seating area at Pike & West venue with warm lighting perfect for
+  intimate Valentine's Day celebrations
 keywords:
   - Valentine's Day party venue Memphis
   - Galentine's Day event Germantown
@@ -41,11 +55,9 @@ A "Single and Ready to Mingle" party isn't about being sad you're alone. It's ab
 
 **What makes a great singles celebration:**
 
-- **The dress code matters.** Make it an excuse to wear something that makes you feel incredible. This is the season of love—love of yourself counts. Red dress? Pink suit? Go for it.
-
-- **Keep the focus on connection.** Skip the forced icebreakers. Create an environment where conversation flows naturally—good music, beautiful space, excellent food.
-
-- **Embrace the irony with warmth.** Heart-shaped everything is allowed. Pink champagne is encouraged. You're not mocking Valentine's Day; you're claiming it.
+* **The dress code matters.** Make it an excuse to wear something that makes you feel incredible. This is the season of love—love of yourself counts. Red dress? Pink suit? Go for it.
+* **Keep the focus on connection.** Skip the forced icebreakers. Create an environment where conversation flows naturally—good music, beautiful space, excellent food.
+* **Embrace the irony with warmth.** Heart-shaped everything is allowed. Pink champagne is encouraged. You're not mocking Valentine's Day; you're claiming it.
 
 The best singles parties we've seen have this energy: confident, joyful, and genuinely celebratory. No pity party. Just a party.
 
@@ -75,10 +87,10 @@ You're showing your children that love—the real kind, the sacrificial kind, th
 
 **Ideas for parent-child Valentine's celebrations:**
 
-- Host a formal daddy-daughter or mommy-son dance with a DJ, photo booth, and dinner
-- Plan an experiential outing: cooking class, painting session, pottery studio
-- Create a special at-home tradition: homemade fondue, movie marathon, fort building
-- Make something together that becomes a keepsake
+* Host a formal daddy-daughter or mommy-son dance with a DJ, photo booth, and dinner
+* Plan an experiential outing: cooking class, painting session, pottery studio
+* Create a special at-home tradition: homemade fondue, movie marathon, fort building
+* Make something together that becomes a keepsake
 
 {{< divider >}}
 
@@ -92,11 +104,9 @@ The trend has grown beyond a single day. "Galentine's Week" events are popping u
 
 **What makes Galentine's special:**
 
-- **It's unapologetically feminine.** Lean into the pink. Bring out the flowers. This is not the time for minimalism.
-
-- **It celebrates a specific kind of love.** The friend who answered the phone at 2 AM. The one who told you the truth when you didn't want to hear it. The group chat that has seen you through everything. This love deserves a party.
-
-- **It's flexible.** A Galentine's celebration can be an intimate dinner for four or a bash for forty. Pajamas and face masks or cocktail dresses and champagne. Book club discussion or dance party. The only requirement is the people.
+* **It's unapologetically feminine.** Lean into the pink. Bring out the flowers. This is not the time for minimalism.
+* **It celebrates a specific kind of love.** The friend who answered the phone at 2 AM. The one who told you the truth when you didn't want to hear it. The group chat that has seen you through everything. This love deserves a party.
+* **It's flexible.** A Galentine's celebration can be an intimate dinner for four or a bash for forty. Pajamas and face masks or cocktail dresses and champagne. Book club discussion or dance party. The only requirement is the people.
 
 At Pike & West, we've hosted Galentine's gatherings that ranged from elegant seated dinners to lively cocktail parties with photo stations and live music. The common thread? Joy. Real, unguarded joy among women who genuinely like each other.
 
@@ -124,13 +134,10 @@ Valentine's Day for long-term couples often becomes about saying out loud what y
 
 **Ideas for couples celebrating milestones:**
 
-- **Recreate something meaningful.** Your first date restaurant (or at least the cuisine). The song you danced to at your wedding. The dessert from your honeymoon.
-
-- **Gather your people.** Anniversary parties around Valentine's Day carry extra warmth. The season already feels romantic—lean into it.
-
-- **Exchange something written.** Letters, updated vows, a list of reasons you're still glad. Words on paper become keepsakes.
-
-- **Make new memories.** A cooking class neither of you has tried. A trip somewhere you've talked about for years. The relationship is established; the experiences don't have to be.
+* **Recreate something meaningful.** Your first date restaurant (or at least the cuisine). The song you danced to at your wedding. The dessert from your honeymoon.
+* **Gather your people.** Anniversary parties around Valentine's Day carry extra warmth. The season already feels romantic—lean into it.
+* **Exchange something written.** Letters, updated vows, a list of reasons you're still glad. Words on paper become keepsakes.
+* **Make new memories.** A cooking class neither of you has tried. A trip somewhere you've talked about for years. The relationship is established; the experiences don't have to be.
 
 ## Bringing Your Celebration to Life
 
