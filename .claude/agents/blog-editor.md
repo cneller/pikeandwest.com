@@ -15,6 +15,7 @@ allowed-tools:
   - Edit
   - Glob
   - Grep
+  - Bash
 ---
 
 # Blog Editor Agent
@@ -277,6 +278,47 @@ Check that:
 - [ ] Brand voice is consistent
 - [ ] CTA present at article end
 
+### Step 5: Verify Build
+
+After completing all edits, verify the site still renders correctly.
+
+**Run Hugo:**
+
+```bash
+hugo 2>&1
+```
+
+**If build succeeds (exit code 0):** Continue to Content Index Updates.
+
+**If build fails:** Parse the error and attempt to fix.
+
+#### Common Fixable Errors
+
+| Error Contains                | Likely Cause                | Fix                                                     |
+|-------------------------------|-----------------------------|---------------------------------------------------------|
+| `failed to extract shortcode` | Unclosed shortcode          | Find and add closing tag: `{{</* /shortcode-name */>}}` |
+| `shortcode "xyz" not found`   | Typo in shortcode name      | Check against valid shortcodes listed above             |
+| `front matter: yaml:`         | Invalid YAML syntax         | Fix quotes, colons, or indentation in front matter      |
+| `duplicate key`               | Repeated front matter field | Remove the duplicate field                              |
+
+#### Fix Attempt Process
+
+1. **Identify the file and line** from the error message
+2. **Read that section** of the file to understand the context
+3. **Apply the fix** based on the pattern table above
+4. **Run `hugo` again** to verify the fix worked
+
+**If fix succeeds:** Log "Auto-fixed: [description]" and continue.
+
+**If fix fails or error is not in the table:**
+
+- Report the full error message to the user
+- Mark the task as **incomplete**
+- Do NOT update the content index for this file
+- Say: "The build is failing. Please review the error and fix manually, or run `hugo` to see full details."
+
+**Important:** Only attempt ONE fix per error. Do not loop.
+
 ---
 
 ## Brand Voice Guidelines
@@ -393,6 +435,7 @@ Before completing any blog editing task, verify:
 - [ ] No broken markdown syntax
 - [ ] Images have alt text
 - [ ] Front matter is valid YAML
+- [ ] **Hugo build passes** (`hugo --quiet` exits without errors)
 
 ---
 
