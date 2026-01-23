@@ -17,8 +17,8 @@ meta:
     static_pages: 8
     orphan_pages: 0
     avg_audit_score: 0
-    content_gaps: 0
-    clusters_defined: 0
+    content_gaps: 6
+    clusters_defined: 3
 
 # === TAXONOMY DEFINITIONS ===
 definitions:
@@ -116,7 +116,97 @@ definitions:
       description: "User ready to take action"
 
 # === TOPIC CLUSTERS ===
-clusters: {}
+clusters:
+  weddings:
+    name: "Weddings at Pike & West"
+    description: "Everything about hosting weddings at our venue"
+    pillar_page: /events/weddings
+
+    cluster_pages:
+      - /blog/welcome-to-pike-and-west
+      - /blog/valentines-day-love-in-all-forms
+
+    planned_content:
+      - title: "Wedding Planning Timeline: 12 Months to Your Big Day"
+        primary_keyword: "wedding planning timeline"
+        funnel_stage: mofu
+        priority: high
+      - title: "Memphis Wedding Venue Comparison Guide"
+        primary_keyword: "Memphis wedding venues"
+        funnel_stage: mofu
+        priority: medium
+      - title: "Intimate Wedding Ideas for Small Guest Lists"
+        primary_keyword: "intimate wedding venue"
+        funnel_stage: tofu
+        priority: medium
+
+    target_keywords:
+      - "wedding venue Memphis"
+      - "wedding venue Germantown TN"
+      - "art gallery wedding"
+      - "intimate wedding venue"
+
+    linking_rules:
+      - "All cluster pages MUST link to pillar: /events/weddings"
+      - "All cluster pages SHOULD link to: /contact"
+      - "Cluster pages SHOULD cross-link to related posts"
+
+  corporate:
+    name: "Corporate Events"
+    description: "Business events, team building, holiday parties"
+    pillar_page: /events/corporate-events
+
+    cluster_pages:
+      - /blog/corporate-event-planning-tips-2026
+
+    planned_content:
+      - title: "Team Building Event Ideas That Actually Work"
+        primary_keyword: "team building events Memphis"
+        funnel_stage: tofu
+        priority: high
+      - title: "Holiday Party Planning Guide for Memphis Companies"
+        primary_keyword: "corporate holiday party venue"
+        funnel_stage: mofu
+        priority: high
+        seasonal: Q4
+
+    target_keywords:
+      - "corporate event venue Memphis"
+      - "team building venue"
+      - "holiday party venue Memphis"
+
+    linking_rules:
+      - "All cluster pages MUST link to pillar: /events/corporate-events"
+      - "All cluster pages SHOULD link to: /contact"
+
+  celebrations:
+    name: "Life Celebrations"
+    description: "Birthdays, anniversaries, baby showers, milestones"
+    pillar_page: /events/private-parties
+
+    cluster_pages:
+      - /events/birthday-parties
+      - /events/baby-showers
+      - /blog/milestone-birthday-new-year
+      - /blog/holiday-anniversary-celebrations
+      - /blog/fall-baby-shower-inspiration
+
+    planned_content:
+      - title: "Anniversary Party Ideas: Celebrating Milestone Years"
+        primary_keyword: "anniversary party venue"
+        funnel_stage: tofu
+        priority: high
+        creates_page: /events/anniversary-parties
+
+    target_keywords:
+      - "birthday party venue Memphis"
+      - "baby shower venue"
+      - "anniversary party venue"
+      - "milestone celebration venue"
+
+    linking_rules:
+      - "All cluster pages MUST link to pillar: /events/private-parties"
+      - "Birthday content should cross-link with milestone content"
 
 # === PAGE ENTRIES ===
 pages:
