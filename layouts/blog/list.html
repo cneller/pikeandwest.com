@@ -20,7 +20,7 @@
   <div class="container">
     {{ if .Pages }}
     <div class="blog-list__grid">
-      {{ range .Pages.ByDate.Reverse }}
+      {{ range (.Paginate (.Pages.ByDate.Reverse)).Pages }}
       {{ $page := . }}
       <article class="blog-card">
         {{/* Stretched link overlay - makes entire card clickable */}}
@@ -55,6 +55,8 @@
       </article>
       {{ end }}
     </div>
+    {{/* Pagination */}}
+    {{ template "_internal/pagination.html" . }}
     {{ else }}
     <p class="blog-list__empty">No blog posts yet. Check back soon!</p>
     {{ end }}

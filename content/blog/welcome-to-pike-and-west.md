@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the Pike & West Blog | Germantown Event Inspiration"
 description: "Introducing our new blog where we'll share event inspiration, gallery updates, and tips for planning your perfect celebration."
-date: 2026-01-19
+date: 2025-01-01
 draft: false
 author: "Pike & West"
 categories: ["News"]
