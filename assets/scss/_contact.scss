@@ -326,17 +326,20 @@
   &__input,
   &__select {
     padding: 12px 16px;
-    background: rgba($color-cream, 0.5);
-    border: 1px solid rgba($color-medium-gray, 0.2);
+    background: linear-gradient(
+      110deg,
+      rgba($color-cream, 0.9) 8%,
+      rgba($color-white, 0.6) 18%,
+      rgba($color-cream, 0.9) 33%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    border: 1px solid rgba($color-medium-gray, 0.15);
     border-radius: 4px;
     font-family: $font-secondary;
     font-size: 14px;
-    color: $color-medium-gray;
-
-    &::before {
-      content: attr(data-placeholder);
-      opacity: 0.6;
-    }
+    color: transparent; // Hide placeholder text, shimmer is the indicator
+    min-height: 44px; // Maintain consistent height
   }
 
   &__select {
@@ -357,7 +360,17 @@
   }
 
   &__textarea {
-    @extend .contact-facade__input;
+    padding: 12px 16px;
+    background: linear-gradient(
+      110deg,
+      rgba($color-cream, 0.9) 8%,
+      rgba($color-white, 0.6) 18%,
+      rgba($color-cream, 0.9) 33%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    border: 1px solid rgba($color-medium-gray, 0.15);
+    border-radius: 4px;
     min-height: 120px;
   }
 
