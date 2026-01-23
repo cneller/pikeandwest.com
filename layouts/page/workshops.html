@@ -1,6 +1,41 @@
 {{ define "main" }}
 {{- $workshops := site.Data.workshops -}}
 
+{{/* Event Schema for SEO */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Creative Workshops at Pike & West",
+  "description": "{{ .Description }}",
+  "image": "{{ (resources.Get "images/hero/venue-exterior.jpg").Permalink }}",
+  "location": {
+    "@type": "Place",
+    "name": "Pike & West",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2277 West Street",
+      "addressLocality": "Germantown",
+      "addressRegion": "TN",
+      "postalCode": "38138",
+      "addressCountry": "US"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Pike & West",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ .Site.Params.ticketTailor.fallbackUrl }}",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
 {{/* Page Header */}}
 <section class="page-header">
   <div class="container">
@@ -71,15 +106,26 @@
         <div class="workshops-features__icon">
           {{- $icon := resources.Get (printf "images/icons/%s" .icon) -}}
           {{- if $icon -}}
-            {{- $resized := $icon.Resize "80x" -}}
-            <img
-              src="{{ $resized.RelPermalink }}"
-              alt=""
-              width="{{ $resized.Width }}"
-              height="{{ $resized.Height }}"
-              loading="lazy"
-              decoding="async"
-            >
+            {{- if eq $icon.MediaType.SubType "svg" -}}
+              <img
+                src="{{ $icon.RelPermalink }}"
+                alt=""
+                width="80"
+                height="80"
+                loading="lazy"
+                decoding="async"
+              >
+            {{- else -}}
+              {{- $resized := $icon.Resize "80x" -}}
+              <img
+                src="{{ $resized.RelPermalink }}"
+                alt=""
+                width="{{ $resized.Width }}"
+                height="{{ $resized.Height }}"
+                loading="lazy"
+                decoding="async"
+              >
+            {{- end -}}
           {{- end -}}
         </div>
         <h3 class="workshops-features__title">{{ .title }}</h3>
@@ -98,7 +144,7 @@
     <div class="workshops-host__content">
       <h2 class="workshops-host__heading">{{ .heading }}</h2>
       <p class="workshops-host__text">{{ .text }}</p>
-      <a href="{{ .button_link }}" class="btn btn-outline">{{ .button_text }}</a>
+      <a href="{{ .button_link }}" class="btn btn-primary">{{ .button_text }}</a>
     </div>
   </div>
 </section>

@@ -7,24 +7,36 @@ subheading: "Immerse yourself in art"
 intro:
   title: "Join Us for Hands-On Creativity"
   paragraphs:
-    - "Pike & West hosts intimate creative workshops where you can explore new artistic skills in our inspiring gallery setting. From painting and pottery to mixed media and more, our workshops offer a unique opportunity to create something beautiful."
-    - "All skill levels are welcome. Materials are provided, and you'll leave with your own original artwork."
+    - "Whether you've never held a paintbrush or you're a seasoned artist, our
+      workshops welcome you to slow down, get creative, and connect with others
+      who share your curiosity. In our gallery setting, surrounded by inspiring
+      art, you'll discover what your hands can create."
+    - "No experience needed—just an open mind. We provide all the materials, and
+      you'll take home your own original piece to treasure or share."
 
 # What to expect section
 features:
-  - icon: "icon-champagne.png"
+  - icon: "icon-palette.svg"
     title: "Social Atmosphere"
-    description: "Create alongside fellow art enthusiasts in our elegant venue"
-  - icon: "icon-disco-ball.png"
+    description:
+      "Create alongside fellow art enthusiasts in our elegant venue. Meet new
+      friends over shared creativity in an intimate, supportive setting."
+  - icon: "icon-instructor.svg"
     title: "Expert Instruction"
-    description: "Learn from talented local artists and instructors"
-  - icon: "icon-cake.png"
+    description:
+      "Learn from talented local artists and instructors. Our instructors guide
+      you step by step, so you'll feel confident from your first brushstroke."
+  - icon: "icon-supplies.svg"
     title: "All Materials Included"
-    description: "Everything you need is provided - just bring yourself"
+    description:
+      "Everything you need is provided—just bring yourself. Canvas, paints,
+      brushes, aprons—we've got it covered. Just show up ready to create."
 
 # CTA for hosting workshops (secondary)
 host_cta:
   heading: "Want to Host a Workshop?"
-  text: "Are you an artist or instructor interested in hosting a creative workshop at Pike & West? We'd love to hear from you."
+  text:
+    "Are you an artist or instructor interested in hosting a creative workshop
+    at Pike & West? We'd love to hear from you."
   button_text: "Get in Touch"
   button_link: "/contact/"

@@ -125,24 +125,24 @@ Key decisions made during development. Full details in `docs/architecture/decisi
 
 The site uses distinct CTA language to differentiate between venue rentals and workshop attendance:
 
-| User Intent | CTA Language | Where Used |
-|-------------|--------------|------------|
-| Rent the venue | "Host Your Event" | Header (primary), Event types, Footer |
-| See the space | "Book a Tour" | Hero, CTA banner |
-| Attend a workshop | "Workshops" | Header (secondary), Footer |
-| Teach a workshop | "Get in Touch" | Workshops page secondary CTA |
+| User Intent       | CTA Language      | Where Used                            |
+|-------------------|-------------------|---------------------------------------|
+| Rent the venue    | "Host Your Event" | Header (primary), Event types, Footer |
+| See the space     | "Book a Tour"     | Hero, CTA banner                      |
+| Attend a workshop | "Workshops"       | Header (secondary), Footer            |
+| Teach a workshop  | "Get in Touch"    | Workshops page secondary CTA          |
 
 **Key CTAs by location:**
 
-| Location | CTA | Links To |
-|----------|-----|----------|
-| Header (outline button) | Workshops | `/workshops/` |
-| Header (gold button) | Host Your Event | `/contact/` |
-| Hero section | BOOK A TOUR | `/contact/` |
-| Event types section | HOST YOUR EVENT | `/contact/` |
-| CTA banner | Book a Tour | `/contact/` |
-| Footer | Host an Event | `/contact/` |
-| Footer | Workshops | `/workshops/` |
+| Location                | CTA             | Links To      |
+|-------------------------|-----------------|---------------|
+| Header (outline button) | Workshops       | `/workshops/` |
+| Header (gold button)    | Host Your Event | `/contact/`   |
+| Hero section            | BOOK A TOUR     | `/contact/`   |
+| Event types section     | HOST YOUR EVENT | `/contact/`   |
+| CTA banner              | Book a Tour     | `/contact/`   |
+| Footer                  | Host an Event   | `/contact/`   |
+| Footer                  | Workshops       | `/workshops/` |
 
 See [Workshops Plan](docs/plans/2026-01-23-workshops-classes-feature.md) for full implementation details.
 
@@ -180,18 +180,20 @@ The blog supports magazine-style visual enhancements for engaging, professional 
 
 ### Required Elements (Every Post)
 
-| Element | Implementation | Notes |
-|---------|----------------|-------|
-| Drop cap | Automatic on first paragraph | Uses `::first-letter` for accessibility |
-| Pull quotes | `{{</* pull-quote */>}}` | 1-2 per 1000 words |
-| Section dividers | `{{</* divider */>}}` | 2-3 per article |
+| Element          | Implementation               | Notes                                   |
+|------------------|------------------------------|-----------------------------------------|
+| Drop cap         | Automatic on first paragraph | Uses `::first-letter` for accessibility |
+| Pull quotes      | `{{</* pull-quote */>}}`     | 1-2 per 1000 words                      |
+| Section dividers | `{{</* divider */>}}`        | 2-3 per article                         |
 
 ### All Available Shortcodes
 
 #### Drop Caps
+
 Automatic on first paragraph. Disable with `{.no-drop-cap}` or add manually with `{.drop-cap}`.
 
 #### Pull Quotes
+
 ```markdown
 {{</* pull-quote */>}}Highlighted quote{{</* /pull-quote */>}}
 {{</* pull-quote author="Name" */>}}Quote with attribution{{</* /pull-quote */>}}
@@ -199,6 +201,7 @@ Automatic on first paragraph. Disable with `{.no-drop-cap}` or add manually with
 ```
 
 #### Section Dividers
+
 ```markdown
 {{</* divider */>}}                    <!-- Gold diamond (default) -->
 {{</* divider style="line" */>}}       <!-- Gradient gold line -->
@@ -206,6 +209,7 @@ Automatic on first paragraph. Disable with `{.no-drop-cap}` or add manually with
 ```
 
 #### Standfirst (Intro Summary)
+
 ```markdown
 {{</* standfirst */>}}
 Bold intro paragraph bridging headline and body copy.
@@ -213,17 +217,20 @@ Bold intro paragraph bridging headline and body copy.
 ```
 
 #### Kicker (Category Label)
+
 ```markdown
 {{</* kicker */>}}Planning Tips{{</* /kicker */>}}
 ```
 
 #### Tip Box
+
 ```markdown
 {{</* tip */>}}Planning advice here.{{</* /tip */>}}
 {{</* tip title="Insider Tip" */>}}Custom title.{{</* /tip */>}}
 ```
 
 #### Fact Box
+
 ```markdown
 {{</* fact-box title="At a Glance" */>}}
 - **Capacity:** 150 seated
@@ -236,6 +243,7 @@ Floated sidebar version.
 ```
 
 #### Key Takeaways
+
 ```markdown
 {{</* key-takeaways */>}}
 - Main point one
@@ -244,6 +252,7 @@ Floated sidebar version.
 ```
 
 #### Timeline
+
 ```markdown
 {{</* timeline title="Planning Timeline" */>}}
 - **12-18 months:** Book venue
@@ -252,6 +261,7 @@ Floated sidebar version.
 ```
 
 #### Sidebar Quote (Testimonial)
+
 ```markdown
 {{</* sidebar-quote author="Sarah M." event="Wedding, Oct 2025" */>}}
 Pike & West made our day magical.
@@ -259,6 +269,7 @@ Pike & West made our day magical.
 ```
 
 #### Numbered List (Styled Steps)
+
 ```markdown
 {{</* numbered-list title="How to Book" */>}}
 1. Choose your date
@@ -269,43 +280,64 @@ Pike & West made our day magical.
 
 ### When to Use Each Feature
 
-| Feature | Best Used For |
-|---------|---------------|
-| Drop caps | Article opening (automatic) |
-| Pull quotes | Key insights, emotional moments |
-| Dividers | Major topic transitions |
-| Standfirst | Long articles needing summary |
-| Kicker | Categorized content |
-| Tip box | Planning advice, pro tips |
-| Fact box | Venue specs, quick stats |
-| Key takeaways | End of long articles |
-| Timeline | Planning guides, milestones |
-| Sidebar quote | Client testimonials |
-| Numbered list | Step-by-step instructions |
+| Feature       | Best Used For                   |
+|---------------|---------------------------------|
+| Drop caps     | Article opening (automatic)     |
+| Pull quotes   | Key insights, emotional moments |
+| Dividers      | Major topic transitions         |
+| Standfirst    | Long articles needing summary   |
+| Kicker        | Categorized content             |
+| Tip box       | Planning advice, pro tips       |
+| Fact box      | Venue specs, quick stats        |
+| Key takeaways | End of long articles            |
+| Timeline      | Planning guides, milestones     |
+| Sidebar quote | Client testimonials             |
+| Numbered list | Step-by-step instructions       |
 
 ### Claude Code Commands
 
-| Command | Purpose |
-|---------|---------|
-| `/blog-outline <topic>` | Creates outline with editorial styling plan |
-| `/blog-draft <topic>` | Generates draft with required styling elements |
-| `/content-audit [path]` | Audits posts for missing editorial styling |
+| Command                 | Purpose                                        |
+|-------------------------|------------------------------------------------|
+| `/blog-outline <topic>` | Creates outline with editorial styling plan    |
+| `/blog-draft <topic>`   | Generates draft with required styling elements |
+| `/content-audit [path]` | Audits posts for missing editorial styling     |
 
 ### Blog Editor Agent (Auto-Delegated)
 
 **The blog-editor agent is automatically invoked when working with `content/blog/*.md` files.** It handles all editorial styling decisions and ensures consistent formatting across posts.
 
 Located at `.claude/agents/blog-editor.md`, the agent:
+
 - Applies required elements (drop caps, pull quotes, dividers)
 - Selects content-appropriate elements (tip boxes, fact boxes, timelines, etc.)
 - Validates against the quality checklist
 - Ensures brand voice consistency
 
 **Commands delegate to this agent:**
+
 - `/blog-draft` → Phase 2 delegates styling to agent
 - `/content-audit` → Phase 2 delegates evaluation to agent
 
 The agent contains all editorial styling logic, so even if commands are forgotten, the agent will apply correct formatting when editing blog content.
+
+## Mandatory Content Agent Delegation
+
+**CRITICAL:** When editing Pike & West content, you MUST delegate to the appropriate agent:
+
+| Content Location          | Required Agent | Trigger                                 |
+|---------------------------|----------------|-----------------------------------------|
+| `content/blog/*.md`       | `blog-editor`  | Any create, edit, review, or audit task |
+| `content/events/*.md`     | `page-editor`  | Any create, edit, or update task        |
+| `content/*.md` (non-blog) | `page-editor`  | Any static page modifications           |
+
+**How to delegate:**
+
+1. Use the Task tool with `subagent_type` set to the agent name
+2. Provide the file path and task description
+3. The agent will handle formatting, brand voice, and content index updates
+
+**DO NOT** edit content files directly without delegating to the appropriate agent.
+This ensures consistent editorial quality and proper content index maintenance.
 
 ## Webflow Reference
 

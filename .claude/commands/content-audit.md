@@ -1,6 +1,6 @@
 ---
-description: Review existing content against strategy, SEO requirements, and brand guidelines
-allowed-tools: Read, Glob, Grep, Task
+description: Review existing content against strategy, SEO requirements, and brand guidelines using parallel sub-agents
+allowed-tools: Read, Glob, Grep, Task, TodoWrite
 arguments:
   - name: path
     description: Specific file or directory to audit (optional, defaults to all blog content)
@@ -9,64 +9,172 @@ arguments:
 
 # /content-audit Command
 
-Review existing Pike & West content for SEO optimization, brand voice, and freshness.
+Map-reduce content audit for Pike & West blog posts. Spawns parallel sub-agents
+for each piece of content, then aggregates results for cross-article analysis.
 
-**IMPORTANT:** For editorial styling evaluation and recommendations, delegate to the
-`blog-editor` agent. The agent contains all formatting logic and quality checklists.
+---
 
-## When Invoked
+## Prime Directives
 
-### Phase 1: Data Collection (This Command)
+**The audit exists to answer these questions:**
 
-1. **Content Inventory**
-   - Scan `content/blog/*.md` for all published pieces (or specific path if provided)
-   - Extract metadata: dates, categories, keywords, word counts
-   - Note content age and last update date
+### 1. Is Each Post Discoverable? (SEO)
 
-2. **SEO Analysis**
-   For each piece, check:
-   - Title tag optimization (50-60 chars, includes keyword)
-   - Meta description quality (150-160 chars)
-   - Keyword targeting (primary in title, H1, first 100 words)
-   - Heading structure (proper H2/H3 hierarchy, no skipped levels)
-   - Internal link count (target: 2-4 per post)
-   - Image alt text presence
+- Can search engines understand what this post is about?
+- Will it appear for relevant searches?
+- Does it have proper metadata for rich snippets?
 
-3. **Brand Voice Review**
-   Check for:
-   - "venue" overuse (should vary with "gallery", "space", "setting")
-   - "party" usage (should be "celebration", "gathering")
-   - Generic CTAs (should be branded: "Schedule your private tour")
-   - Missing art/gallery angle
-   - Tone consistency (sophisticated but warm)
+### 2. Does Each Post Convert? (Brand & CTA)
 
-4. **Freshness Check**
-   Flag content that:
-   - Is older than 12 months without updates
-   - Contains outdated references (pricing, dates, events)
-   - Has broken internal links
-   - Is thin content (under 800 words)
+- Does it sound like Pike & West (sophisticated, warm, art-focused)?
+- Does it guide readers toward booking a tour or contacting us?
+- Does it avoid language that cheapens the brand?
 
-### Phase 2: Editorial Styling Evaluation (Delegate to Agent)
+### 3. Is Each Post Engaging? (Editorial Styling)
 
-Invoke the `blog-editor` agent to evaluate editorial styling compliance:
+- Does it use visual breaks to prevent reader fatigue?
+- Are key insights highlighted for scanners?
+- Does it look like premium magazine content?
 
+### 4. Is the Content Portfolio Healthy? (Cross-Article)
+
+- Are we competing with ourselves for keywords?
+- Are there content gaps in our coverage?
+- Is traffic spread across posts or concentrated?
+- Are all areas of content kept fresh?
+
+---
+
+## Execution Flow
+
+### Phase 1: Content Discovery
+
+1. Scan for blog posts:
+
+   ```
+   content/blog/*.md (excluding _index.md)
+   ```
+
+   Or use provided path argument.
+
+2. Create inventory with basic metadata:
+   - File path
+   - Title (from front matter)
+   - Date and lastmod
+   - Word count (approximate)
+
+3. Report: "Found X posts to audit. Launching parallel analysis..."
+
+### Phase 2: Map (Parallel Sub-Agents)
+
+For EACH post, launch the `content-auditor` agent with this prompt:
+
+```text
+Audit this blog post and return STRUCTURED DATA for aggregation.
+
+File: [filepath]
+
+You MUST return your analysis in the EXACT JSON format specified in your
+instructions. This data will be parsed programmatically for cross-article
+analysis.
+
+Focus on:
+1. SEO signals and keyword targeting
+2. Brand voice compliance
+3. Editorial styling completeness
+4. Freshness and accuracy
+5. Technical quality
+
+Return the structured audit result.
 ```
-Use the blog-editor agent to audit this post for editorial styling:
-- Required elements (drop caps, pull quotes, dividers)
-- Content-appropriate elements (tip boxes, fact boxes, timelines, etc.)
-- Quality checklist validation
+
+**Important:** Launch ALL sub-agents in parallel using multiple Task tool calls
+in a single message. Do not wait for one to complete before starting the next.
+
+### Phase 3: Reduce (Aggregation & Cross-Analysis)
+
+After all sub-agents complete, aggregate results and perform cross-article analysis:
+
+#### 3.0 Update Content Index
+
+Before generating the report, ensure all sub-agent results are written to
+`data/content-index.yaml`. Each sub-agent should have updated its page entry.
+
+Then update aggregated fields:
+
+```yaml
+meta:
+  last_full_audit: [today]
+  stats:
+    avg_audit_score: [calculate from all pages]
+    orphan_pages: [count pages where orphan: true]
 ```
 
-The agent will check for:
-- Pull quotes (1 per 1000 words minimum)
-- Section dividers (2-3 per article)
-- Content-appropriate elements based on post type
-- Proper shortcode syntax
+#### 3.1 Individual Aggregation
 
-### Phase 3: Generate Report
+- Collect all audit results
+- Sort by score (lowest first for priority)
+- Calculate overall portfolio health score
 
-Compile findings from both phases into the audit report.
+#### 3.2 Keyword Cannibalization Detection
+
+Query the content index for keyword conflicts:
+
+```python
+# Pseudocode
+for page in index['pages']:
+    primary = page['primary_keyword']
+    for other in index['pages']:
+        if other['primary_keyword'] == primary and other != page:
+            # Flag cannibalization
+```
+
+- Group posts by similar keywords
+- Flag when 2+ posts target the same primary keyword
+- Flag when a secondary keyword appears as another post's primary
+- Recommend: merge, differentiate, or redirect
+
+#### 3.3 Topic Overlap Analysis
+
+Using the `topic_summary` from each result:
+
+- Identify posts covering similar topics
+- Flag potential content consolidation opportunities
+- Check if topics are sufficiently differentiated
+
+#### 3.4 Internal Link Health
+
+Build link graph from the content index:
+
+```python
+for page in index['pages']:
+    for link in page['links_out']:
+        # Add edge: page -> link
+    if not page['links_in']:
+        page['orphan'] = True
+```
+
+- Identify orphan posts (no inbound links)
+- Identify link hoarders (too many links to one post)
+- Identify missing obvious links between related content
+
+#### 3.5 Content Freshness Distribution
+
+Using dates and freshness scores:
+
+- Identify stale content areas
+- Check if seasonal content is updated
+- Flag posts that need refreshing
+
+#### 3.6 Editorial Consistency
+
+Using editorial styling scores:
+
+- Calculate average styling completeness
+- Identify posts that look inconsistent with the rest
+- Flag posts dragging down visual quality
+
+---
 
 ## Output Format
 
@@ -74,72 +182,110 @@ Compile findings from both phases into the audit report.
 # Pike & West Content Audit Report
 
 **Audit Date:** [date]
-**Content Analyzed:** [count] posts
-**Overall Health Score:** [score]/100
+**Posts Analyzed:** [count]
+**Portfolio Health Score:** [score]/100
+
+---
 
 ## Executive Summary
-| Category           | Score  | Status   |
-|--------------------|--------|----------|
-| SEO Optimization   | XX/100 | [status] |
-| Brand Voice        | XX/100 | [status] |
-| Editorial Styling  | XX/100 | [status] |
-| Freshness          | XX/100 | [status] |
+
+| Metric                  | Value    | Status   |
+|-------------------------|----------|----------|
+| Average Post Score      | XX/100   | [🟢🟡🔴] |
+| SEO Health              | XX/100   | [🟢🟡🔴] |
+| Brand Voice             | XX/100   | [🟢🟡🔴] |
+| Editorial Styling       | XX/100   | [🟢🟡🔴] |
+| Keyword Cannibalization | X issues | [🟢🟡🔴] |
+| Content Gaps            | X areas  | [🟢🟡🔴] |
+
+---
 
 ## Critical Issues (Fix This Week)
-[Posts scoring below 50 with specific issues and fixes]
 
-## Editorial Styling Needed
-[Posts missing pull quotes, dividers, or content-appropriate elements]
-[Recommendations from blog-editor agent]
+### Keyword Cannibalization
+[Posts competing for the same keywords with recommendations]
+
+### Posts Below 50 Score
+[Specific issues and fixes for each]
+
+---
+
+## Cross-Article Findings
+
+### Topic Overlap
+[Posts covering similar ground, with recommendations]
+
+### Internal Linking Issues
+- **Orphan posts:** [posts with no inbound links]
+- **Under-linked:** [posts that should link to each other]
+
+### Freshness Concerns
+[Posts that need updating, grouped by urgency]
+
+---
+
+## Individual Post Scores
+
+| Post    | Score | SEO | Voice | Style | Fresh | Issues  |
+|---------|-------|-----|-------|-------|-------|---------|
+| [title] | XX    | X   | X     | X     | X     | [count] |
+| ...     | XX    | X   | X     | X     | X     | [count] |
+
+---
 
 ## High Priority (Fix This Month)
-[Posts scoring 50-70 with issues]
 
-## Quick Wins (Minor Updates)
-[Posts needing small fixes for significant improvement]
+[Posts scoring 50-70 with specific issues]
 
-## Healthy Content (No Action Needed)
-[Posts meeting all standards]
+---
+
+## Quick Wins
+
+[Easy fixes across multiple posts that improve scores significantly]
+
+---
 
 ## Recommended Update Schedule
-[Prioritized action plan]
+
+| Week | Post   | Action                        | Priority |
+|------|--------|-------------------------------|----------|
+| 1    | [post] | [fix keyword cannibalization] | Critical |
+| 1    | [post] | [add editorial styling]       | High     |
+| 2    | [post] | [refresh stale content]       | Medium   |
+| ...  | ...    | ...                           | ...      |
+
+---
+
+## Content Gap Analysis
+
+### Missing Topics
+Based on existing coverage, consider creating content for:
+- [topic suggestion based on gaps]
+- [seasonal content missing]
+
+### Underserved Keywords
+Keywords mentioned but not targeted as primary:
+- [keyword] → could be its own post
 ```
 
-## Scoring Criteria
+---
 
-### SEO (25 points)
-- Title optimization: 5 pts
-- Meta description: 5 pts
-- Keyword placement: 5 pts
-- Heading structure: 5 pts
-- Internal links: 5 pts
+## Technical Notes
 
-### Brand Voice (20 points)
-- Tone consistency: 8 pts
-- No generic language: 8 pts
-- Art/gallery angle: 4 pts
+### Sub-Agent Configuration
 
-### Editorial Styling (15 points)
-*Evaluated by blog-editor agent*
-- Required elements (drop cap, pull quotes, dividers): 10 pts
-- Content-appropriate elements: 5 pts
+- **Model:** haiku (fast, cost-effective)
+- **Tools:** Read, Glob, Grep (read-only)
+- **Parallelism:** All agents launch simultaneously
 
-### Freshness (15 points)
-- Updated within 12 months: 10 pts
-- No outdated info: 5 pts
+### Error Handling
 
-### Technical (25 points)
-- Image alt text: 10 pts
-- Working links: 10 pts
-- Adequate length: 5 pts
+- If a sub-agent fails, note the failure and continue with others
+- Include failed posts in final report with "audit failed" status
+- Suggest manual review for failed audits
 
-## Fixing Editorial Styling Issues
+### Performance
 
-For posts flagged with missing editorial styling, use the blog-editor agent:
-
-```
-Use the blog-editor agent to retrofit [post-name].md with editorial styling.
-```
-
-The agent will add appropriate pull quotes, dividers, and content-specific
-elements based on its formatting workflow.
+- With 6 posts: ~10-15 seconds total
+- With 20 posts: ~20-30 seconds total
+- Sub-agents run in parallel, so time scales with slowest agent, not count
