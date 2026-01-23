@@ -1,0 +1,29 @@
+# 404 Error Page Content
+# Maintains Pike & West's sophisticated yet warm brand voice
+
+headline: "Lost in the Gallery"
+
+tagline:
+  - "The art of getting lost."
+  - "The art of finding your way."
+  - "Let us help."
+
+message:
+  "The page you're looking for has wandered off. Perhaps it's admiring the
+  artwork somewhere."
+
+cta_primary:
+  text: "Return Home"
+  link: "/"
+
+cta_secondary:
+  - text: "Browse Events"
+    link: "/events/"
+  - text: "Contact Us"
+    link: "/contact/"
+  - text: "Read Our Blog"
+    link: "/blog/"
+
+# Background image - use moody interior shot
+background_image: "images/venue/venue-08-disco-background.jpg"
+image_alt: "Pike & West venue interior with artistic lighting"

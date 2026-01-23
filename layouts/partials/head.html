@@ -2,19 +2,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 {{/* Title */}}
-<title>
-  {{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | Pike & West{{ end }}
-</title>
+{{- $title := "" -}}
+{{- if .IsHome -}}
+  {{- $title = .Site.Title -}}
+{{- else if eq .Kind "404" -}}
+  {{- $title = "Page Not Found | Pike & West" -}}
+{{- else -}}
+  {{- $title = printf "%s | Pike & West" .Title -}}
+{{- end -}}
+<title>{{ $title }}</title>
 
 {{/* Meta Description */}}
+{{- $description := "" -}}
+{{- if eq .Kind "404" -}}
+  {{- $description = "The page you're looking for doesn't exist. Explore Pike & West's art gallery and event venue in Germantown, TN." -}}
+{{- else if .Description -}}
+  {{- $description = .Description -}}
+{{- else -}}
+  {{- $description = .Site.Params.description -}}
+{{- end -}}
 <meta
   name="description"
-  content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}"
+  content="{{ $description }}"
 />
 
 {{/* Robots Meta Tag - supports page-level noindex/nofollow via front matter */}}
 {{- $robotsContent := "index, follow" -}}
-{{- if .Params.noindex -}}
+{{- if eq .Kind "404" -}}
+  {{- $robotsContent = "noindex, follow" -}}
+{{- else if .Params.noindex -}}
   {{- $robotsContent = "noindex, follow" -}}
 {{- end -}}
 {{- if .Params.nofollow -}}
@@ -35,11 +51,15 @@
 {{/* Canonical URL - supports custom canonical via front matter */}}
 <link rel="canonical" href="{{ with .Params.canonical }}{{ . }}{{ else }}{{ .Permalink }}{{ end }}" />
 
-{{/* Open Graph */}}
-<meta property="og:title" content="{{ .Title }}" />
+{{/* Open Graph - reuse $title and $description for consistency */}}
+{{- $ogTitle := .Title -}}
+{{- if eq .Kind "404" -}}
+  {{- $ogTitle = "Page Not Found" -}}
+{{- end -}}
+<meta property="og:title" content="{{ $ogTitle }}" />
 <meta
   property="og:description"
-  content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}"
+  content="{{ $description }}"
 />
 <meta property="og:url" content="{{ .Permalink }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
@@ -76,10 +96,10 @@
 {{- else with .Site.Params.social.twitter }}
 <meta name="twitter:creator" content="@{{ . }}" />
 {{- end }}
-<meta name="twitter:title" content="{{ .Title }}" />
+<meta name="twitter:title" content="{{ $ogTitle }}" />
 <meta
   name="twitter:description"
-  content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}"
+  content="{{ $description }}"
 />
 {{- with .Params.image }}
 <meta name="twitter:image" content="{{ . | absURL }}" />

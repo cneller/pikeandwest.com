@@ -14,7 +14,8 @@
   </main>
 
   {{- $isContactPage := and .File (eq .File.BaseFileName "contact") -}}
-  {{- if not $isContactPage -}}
+  {{- $is404Page := eq .Kind "404" -}}
+  {{- if and (not $isContactPage) (not $is404Page) -}}
     {{- partial "cta-banner.html" . -}}
   {{- end -}}
   {{- /* Footer cached - doesn't change per page */ -}}

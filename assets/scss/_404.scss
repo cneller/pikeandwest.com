@@ -1,0 +1,164 @@
+// =========================
+// 404 Error Page
+// =========================
+// Matches hero section aesthetic with centered content
+// Uses venue interior as background for immersive feel
+
+.error-404 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: $spacing-3xl $spacing-lg;
+  text-align: center;
+
+  // Background image with dark overlay
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  // Dark overlay for text readability
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba($color-black, 0.6) 0%,
+      rgba($color-black, 0.7) 100%
+    );
+    z-index: 0;
+  }
+
+  // Content wrapper
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  // Headline - Le Mores Collection serif
+  &__headline {
+    font-family: $font-display;
+    font-size: 48px;
+    font-weight: $font-weight-regular;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+    color: $color-cream;
+    margin: 0 0 $spacing-lg;
+  }
+
+  // Tagline - matches hero tagline style
+  &__tagline {
+    font-family: $font-secondary;
+    font-size: 18px;
+    font-weight: $font-weight-regular;
+    line-height: 1.6;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $color-cream;
+    margin-bottom: $spacing-xl;
+  }
+
+  // Message text
+  &__message {
+    font-family: $font-secondary;
+    font-size: 16px;
+    font-weight: $font-weight-light;
+    line-height: 1.8;
+    color: rgba($color-cream, 0.9);
+    margin-bottom: $spacing-2xl;
+  }
+
+  // Primary CTA
+  &__cta-primary {
+    margin-bottom: $spacing-xl;
+  }
+
+  // Secondary links row
+  &__cta-secondary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $spacing-md;
+  }
+
+  // Secondary link style (text links, not buttons)
+  &__link {
+    font-family: $font-primary;
+    font-size: 14px;
+    font-weight: $font-weight-regular;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $color-cream;
+    text-decoration: none;
+    padding: $spacing-xs $spacing-sm;
+    border-bottom: 1px solid transparent;
+    transition: border-color $transition-base;
+
+    &:hover,
+    &:focus {
+      border-bottom-color: $color-gold;
+    }
+  }
+
+  // ===== BREAKPOINT: 1920px+ (Ultra-wide) =====
+  @media (min-width: $breakpoint-2xl) {
+    &__headline {
+      font-size: 64px;
+    }
+
+    &__tagline {
+      font-size: 22px;
+    }
+  }
+
+  // ===== BREAKPOINT: 991px (Tablet) =====
+  @media (max-width: $breakpoint-lg) {
+    min-height: 60vh;
+    padding: $spacing-2xl $spacing-lg;
+
+    &__headline {
+      font-size: 40px;
+    }
+  }
+
+  // ===== BREAKPOINT: 767px (Mobile Landscape) =====
+  @media (max-width: $breakpoint-md) {
+    min-height: 50vh;
+
+    &__headline {
+      font-size: 32px;
+    }
+
+    &__tagline {
+      font-size: 16px;
+    }
+
+    &__cta-secondary {
+      flex-direction: column;
+      gap: $spacing-sm;
+    }
+  }
+
+  // ===== BREAKPOINT: 479px (Mobile Portrait) =====
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-xl $spacing-md;
+
+    &__headline {
+      font-size: 28px;
+      letter-spacing: 0.05em;
+    }
+
+    &__tagline {
+      font-size: 14px;
+    }
+
+    &__message {
+      font-size: 14px;
+    }
+  }
+}
