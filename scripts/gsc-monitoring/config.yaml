@@ -1,0 +1,19 @@
+# GSC Monitoring Configuration for Pike & West
+
+property:
+  resource_id: "sc-domain:pikeandwest.com"
+  name: "Pike & West"
+
+output:
+  trends_file: "reports/trends.jsonl"
+  latest_file: "reports/latest.json"
+
+auth:
+  state_file: ".auth/gsc-state.json"
+  expiry_hours: 20
+
+browser:
+  headless: true
+  viewport:
+    width: 1440
+    height: 900

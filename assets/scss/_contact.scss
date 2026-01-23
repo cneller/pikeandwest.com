@@ -31,17 +31,36 @@
     // Prevent CLS from iframe content affecting layout
     contain: layout;
 
-    // Desktop: Two-column form layout (> 991px)
-    iframe {
+    // Lazy-loaded iframe container
+    .iframe-lazy {
+      // Desktop: Two-column form layout (> 991px)
+      width: 840px;
+      height: 960px;
+      position: relative;
+      background: $color-cream;
+
+      // Tablet and below (≤ 991px): Single-column when hamburger appears
+      @media (max-width: $breakpoint-lg) {
+        width: 300px;
+        height: 1600px;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+      }
+    }
+
+    // Legacy: direct iframe (fallback)
+    > iframe {
       width: 840px;
       height: 960px;
       border: 0;
       display: block;
-    }
 
-    // Tablet and below (≤ 991px): Single-column when hamburger appears
-    @media (max-width: $breakpoint-lg) {
-      iframe {
+      @media (max-width: $breakpoint-lg) {
         width: 300px;
         height: 1600px;
       }
@@ -76,7 +95,22 @@
       min-height: 300px;
     }
 
-    iframe {
+    // Lazy-loaded map iframe container
+    .iframe-lazy--map {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: $color-cream;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+    }
+
+    // Legacy: direct iframe (fallback)
+    > iframe {
       width: 100%;
       height: 100%;
       border: 0;
@@ -137,5 +171,280 @@
         text-align: center;
       }
     }
+  }
+}
+
+// =========================
+// Lazy-loaded Iframe Placeholder
+// =========================
+.iframe-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-cream;
+  transition: opacity 0.3s ease-out;
+  z-index: 1;
+
+  // Fade out when iframe is loaded
+  &--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__text {
+    font-family: $font-primary;
+    font-size: 14px;
+    color: $color-medium-gray;
+    animation: iframe-pulse 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes iframe-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 300% 0;
+  }
+  100% {
+    background-position: -300% 0;
+  }
+}
+
+// Accessibility: Disable animation for users who prefer reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .iframe-placeholder__text {
+    animation: none;
+    opacity: 0.7;
+  }
+
+  .iframe-placeholder {
+    transition: none;
+  }
+}
+
+// =========================
+// Contact Form Shimmer
+// Pixel-perfect shimmer aligned to HubSpot form layout
+// Measurements documented in docs/contact-form/README.md
+// =========================
+
+// Shimmer colors
+$shimmer-color-light: rgba($color-medium-gray, 0.15);
+$shimmer-color-dark: rgba($color-medium-gray, 0.25);
+
+// Desktop measurements (840px viewport)
+// Based on Playwright bounding box extraction
+$shimmer-desktop-width: 840px;
+$shimmer-desktop-height: 960px;
+$shimmer-desktop-padding-x: 42px; // Content starts at x=42
+$shimmer-desktop-padding-top: 87px; // First label at y=109, minus label height
+$shimmer-desktop-column-gap: 60px; // Gap between columns (449 - 389 = 60)
+$shimmer-desktop-column-width: 347px; // Measured input width
+
+// Mobile measurements (324px viewport)
+$shimmer-mobile-width: 324px;
+$shimmer-mobile-height: 1400px;
+$shimmer-mobile-padding-x: 16px; // Content starts at x=16
+$shimmer-mobile-padding-top: 73px; // First label at y=93, minus label height
+
+// Shared measurements
+$shimmer-input-height: 42px; // All inputs are 42px tall
+$shimmer-label-height: 20px; // Label text height
+$shimmer-label-gap: 8px; // Gap between label and input
+$shimmer-hint-height: 16px; // "This question is required" text
+$shimmer-row-gap: 44px; // Space between field groups (label+input+hint to next label)
+$shimmer-textarea-height: 180px; // Textarea is 180px tall
+$shimmer-button-width: 96px; // Submit button width
+$shimmer-button-height: 42px; // Submit button height
+
+// Breakpoint where form switches from 2-column to 1-column
+$shimmer-breakpoint: 868px;
+
+@keyframes shimmer-pulse {
+  0%,
+  100% {
+    background-color: $shimmer-color-light;
+  }
+  50% {
+    background-color: $shimmer-color-dark;
+  }
+}
+
+.contact-shimmer {
+  position: relative;
+  margin: 0 auto;
+
+  // Desktop: Two-column form layout
+  width: $shimmer-desktop-width;
+  height: $shimmer-desktop-height;
+
+  // Mobile: Single-column layout
+  @media (max-width: $shimmer-breakpoint) {
+    width: $shimmer-mobile-width;
+    height: $shimmer-mobile-height;
+  }
+
+  &__overlay {
+    display: flex;
+    flex-direction: column;
+    gap: $shimmer-row-gap;
+    // Desktop padding matches HubSpot form content area
+    padding: $shimmer-desktop-padding-top $shimmer-desktop-padding-x 32px;
+    transition: opacity 0.3s ease-out;
+
+    @media (max-width: $shimmer-breakpoint) {
+      padding: $shimmer-mobile-padding-top $shimmer-mobile-padding-x 32px;
+    }
+  }
+
+  &__row {
+    display: grid;
+    // Desktop: Two equal columns with 60px gap
+    grid-template-columns: $shimmer-desktop-column-width $shimmer-desktop-column-width;
+    gap: $shimmer-desktop-column-gap;
+
+    @media (max-width: $shimmer-breakpoint) {
+      // Mobile: Single column, full width
+      grid-template-columns: 1fr;
+      gap: $shimmer-row-gap;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $shimmer-label-gap;
+
+    &--full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+
+    @media (max-width: $shimmer-breakpoint) {
+      align-items: center;
+    }
+  }
+
+  &__submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+    padding-right: 0; // Button aligns to right edge of content
+
+    @media (max-width: $shimmer-breakpoint) {
+      justify-content: center;
+      margin-top: 32px;
+    }
+  }
+
+  // Loaded state - crossfade shimmer to iframe
+  &--loaded {
+    .contact-shimmer__overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .contact-shimmer__iframe iframe {
+      opacity: 1;
+    }
+  }
+
+  &__iframe {
+    position: absolute;
+    inset: 0;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease-in;
+    }
+  }
+}
+
+// Shimmer block elements - match exact HubSpot field dimensions
+.shimmer-block {
+  animation: shimmer-pulse 2s ease-in-out infinite;
+  border-radius: 0; // HubSpot uses square corners
+
+  &--label {
+    // Labels vary in width; use percentage for natural look
+    width: 50%;
+    max-width: 200px;
+    height: $shimmer-label-height;
+  }
+
+  &--input {
+    width: 100%;
+    height: $shimmer-input-height;
+  }
+
+  &--textarea {
+    width: 100%;
+    height: $shimmer-textarea-height;
+  }
+
+  &--hint {
+    // "This question is required" text
+    width: 35%;
+    max-width: 140px;
+    height: $shimmer-hint-height;
+    margin-top: 4px;
+  }
+
+  &--button {
+    width: $shimmer-button-width;
+    height: $shimmer-button-height;
+    border-radius: 4px; // Button has slight radius
+  }
+
+  &--icon {
+    // Menu icon in header
+    width: 42px;
+    height: 42px;
+  }
+
+  &--disclaimer {
+    // Footer disclaimer text
+    width: 100%;
+    max-width: 600px;
+    height: 32px;
+
+    @media (max-width: $shimmer-breakpoint) {
+      height: 48px; // Wraps to more lines on mobile
+    }
+  }
+}
+
+// Accessibility: Respect reduced motion preference for shimmer
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-block {
+    animation: none;
+    background-color: $shimmer-color-dark;
   }
 }

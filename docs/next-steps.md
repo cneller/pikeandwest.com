@@ -191,6 +191,7 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 ### Project Documentation
 
 - [Analytics Strategy](./analytics/README.md)
+- [Contact Form Shimmer](./contact-form/README.md) - HubSpot form measurements and shimmer specs
 - [Cross-Domain Tracking Verification](./cross-domain-tracking-verification.md)
 - [CSS Mapping](./webflow-to-hugo-css-mapping.md)
 - [Site Analysis](./site-analysis/current-site-documentation.md)
@@ -256,6 +257,10 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 | 2026-01-23 | Expanded editorial styling: 8 new shortcodes (standfirst, kicker, tip, fact-box, key-takeaways, timeline, sidebar-quote, numbered-list) |
 | 2026-01-23 | Created blog-editor agent (`.claude/agents/blog-editor.md`) for consistent formatting             |
 | 2026-01-23 | Updated ADR-005 with comprehensive editorial styling system (11 components total)                 |
+| 2026-01-23 | Fixed FOUC on contact page: added full page critical CSS (shimmer, Find Us, footer)               |
+| 2026-01-23 | Consolidated facade/shimmer to single shimmer implementation, removed ~750 lines of dead code     |
+| 2026-01-23 | Added pixel-perfect shimmer measurements via Playwright (docs/contact-form/README.md)             |
+| 2026-01-23 | Added shimmer blocks for all form elements: labels, inputs, hints, buttons, header, footer        |
 | 2026-01-22 | Integrated editorial styling into Claude Code commands (`/blog-draft`, `/blog-outline`, `/content-audit`) |
 | 2026-01-22 | Updated blog archetype with editorial styling examples and quick reference                        |
 | 2026-01-22 | Added blog editorial styling: drop caps, pull quotes, decorative dividers (ADR-005)               |

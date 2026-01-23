@@ -1,0 +1,89 @@
+{{/*
+  Contact Form Shimmer
+  Purpose: Pixel-perfect pulse shimmer aligned to HubSpot form layout
+  Measurements: docs/contact-form/README.md
+  Usage: {{ partial "contact-form-shimmer.html" . }}
+*/}}
+<div class="contact-shimmer" data-iframe-src="{{ .Site.Params.forms.contactEmbed }}">
+  {{/* Shimmer overlay - positioned to match HubSpot form */}}
+  <div class="contact-shimmer__overlay" aria-hidden="true">
+    {{/* Header bar with menu icon and submit button */}}
+    <div class="contact-shimmer__header">
+      <div class="shimmer-block shimmer-block--icon"></div>
+      <div class="shimmer-block shimmer-block--button"></div>
+    </div>
+
+    {{/* Row 1: Full Name + Email */}}
+    <div class="contact-shimmer__row">
+      <div class="contact-shimmer__field">
+        <div class="shimmer-block shimmer-block--label"></div>
+        <div class="shimmer-block shimmer-block--input"></div>
+        <div class="shimmer-block shimmer-block--hint"></div>
+      </div>
+      <div class="contact-shimmer__field">
+        <div class="shimmer-block shimmer-block--label"></div>
+        <div class="shimmer-block shimmer-block--input"></div>
+        <div class="shimmer-block shimmer-block--hint"></div>
+      </div>
+    </div>
+
+    {{/* Row 2: Phone + How did you hear */}}
+    <div class="contact-shimmer__row">
+      <div class="contact-shimmer__field">
+        <div class="shimmer-block shimmer-block--label"></div>
+        <div class="shimmer-block shimmer-block--input"></div>
+        <div class="shimmer-block shimmer-block--hint"></div>
+      </div>
+      <div class="contact-shimmer__field">
+        <div class="shimmer-block shimmer-block--label"></div>
+        <div class="shimmer-block shimmer-block--input"></div>
+        <div class="shimmer-block shimmer-block--hint"></div>
+      </div>
+    </div>
+
+    {{/* Row 3: Event type + Guest count */}}
+    <div class="contact-shimmer__row">
+      <div class="contact-shimmer__field">
+        <div class="shimmer-block shimmer-block--label"></div>
+        <div class="shimmer-block shimmer-block--input"></div>
+        <div class="shimmer-block shimmer-block--hint"></div>
+      </div>
+      <div class="contact-shimmer__field">
+        <div class="shimmer-block shimmer-block--label"></div>
+        <div class="shimmer-block shimmer-block--input"></div>
+        <div class="shimmer-block shimmer-block--hint"></div>
+      </div>
+    </div>
+
+    {{/* Row 4: Date + Flexible */}}
+    <div class="contact-shimmer__row">
+      <div class="contact-shimmer__field">
+        <div class="shimmer-block shimmer-block--label"></div>
+        <div class="shimmer-block shimmer-block--input"></div>
+        <div class="shimmer-block shimmer-block--hint"></div>
+      </div>
+      <div class="contact-shimmer__field">
+        <div class="shimmer-block shimmer-block--label"></div>
+        <div class="shimmer-block shimmer-block--input"></div>
+        <div class="shimmer-block shimmer-block--hint"></div>
+      </div>
+    </div>
+
+    {{/* Row 5: Textarea (full width) */}}
+    <div class="contact-shimmer__row">
+      <div class="contact-shimmer__field contact-shimmer__field--full">
+        <div class="shimmer-block shimmer-block--label"></div>
+        <div class="shimmer-block shimmer-block--textarea"></div>
+      </div>
+    </div>
+
+    {{/* Footer with disclaimer and submit button */}}
+    <div class="contact-shimmer__footer">
+      <div class="shimmer-block shimmer-block--disclaimer"></div>
+      <div class="shimmer-block shimmer-block--button"></div>
+    </div>
+  </div>
+
+  {{/* Iframe container - populated by JS */}}
+  <div class="contact-shimmer__iframe"></div>
+</div>
