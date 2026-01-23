@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" stroke="#aa6e0b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Art supplies - hand-drawn style -->
+
+  <!-- Paint tube 1 -->
+  <path d="M80 350l0-120" stroke-width="35"/>
+  <path d="M80 230l0-40" stroke-width="20"/>
+  <path d="M80 190l0-30" stroke-width="10"/>
+  <ellipse cx="80" cy="350" rx="17" ry="8" fill="#aa6e0b"/>
+  <path d="M65 280l30 0" stroke-width="4"/>
+
+  <!-- Paint tube 2 -->
+  <path d="M160 380l0-100" stroke-width="30"/>
+  <path d="M160 280l0-35" stroke-width="18"/>
+  <path d="M160 245l0-25" stroke-width="8"/>
+  <ellipse cx="160" cy="380" rx="15" ry="7" fill="#aa6e0b"/>
+
+  <!-- Paintbrush 1 - tall -->
+  <path d="M260 420l0-250" stroke-width="12"/>
+  <path d="M260 170l0-80" stroke-width="6"/>
+  <ellipse cx="260" cy="100" rx="8" ry="25" fill="#aa6e0b"/>
+
+  <!-- Paintbrush 2 - medium -->
+  <path d="M320 420l0-200" stroke-width="10"/>
+  <path d="M320 220l0-60" stroke-width="5"/>
+  <ellipse cx="320" cy="168" rx="6" ry="20" fill="#aa6e0b"/>
+
+  <!-- Pencil -->
+  <path d="M380 420l0-180" stroke-width="14"/>
+  <path d="M380 240l0-50" stroke-width="10" stroke="#aa6e0b"/>
+  <path d="M380 190l0-40" stroke-width="6"/>
+  <path d="M380 150l0 0" stroke-width="2"/>
+
+  <!-- Scissors -->
+  <ellipse cx="450" cy="280" rx="20" ry="35" fill="none" stroke-width="6"/>
+  <ellipse cx="450" cy="360" rx="20" ry="35" fill="none" stroke-width="6"/>
+  <circle cx="450" cy="320" r="8" fill="#aa6e0b"/>
+  <path d="M430 250l-30-80" stroke-width="5"/>
+  <path d="M430 390l-30 80" stroke-width="5"/>
+
+  <!-- Container/cup holding supplies (implied) -->
+  <path d="M230 420l120 0" stroke-width="4" stroke-dasharray="8 8"/>
+</svg>

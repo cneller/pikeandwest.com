@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" stroke="#aa6e0b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Artist palette - hand-drawn style -->
+  <!-- Main palette shape -->
+  <path d="M256 80c-120 0-200 70-200 170c0 100 80 180 200 180c40 0 75-15 100-40c-10-20-15-45-15-70c0-80 50-120 100-120c20 0 35 5 50 15c5-15 10-35 10-55c0-100-100-180-245-180z" fill="#aa6e0b" fill-opacity="0.1"/>
+
+  <!-- Thumb hole -->
+  <ellipse cx="180" cy="320" rx="35" ry="40" fill="white" stroke="#aa6e0b"/>
+
+  <!-- Paint dollops - hand-drawn circles -->
+  <circle cx="150" cy="180" r="25" fill="#aa6e0b" fill-opacity="0.3"/>
+  <circle cx="230" cy="140" r="22" fill="#aa6e0b" fill-opacity="0.5"/>
+  <circle cx="320" cy="150" r="20" fill="#aa6e0b" fill-opacity="0.7"/>
+  <circle cx="380" cy="200" r="24" fill="#aa6e0b" fill-opacity="0.4"/>
+  <circle cx="350" cy="280" r="18" fill="#aa6e0b" fill-opacity="0.6"/>
+
+  <!-- Paintbrush 1 -->
+  <path d="M420 100l60-60" stroke-width="12"/>
+  <path d="M420 100l-30 30" stroke-width="6"/>
+  <ellipse cx="400" cy="120" rx="8" ry="20" transform="rotate(-45 400 120)" fill="#aa6e0b"/>
+
+  <!-- Paintbrush 2 -->
+  <path d="M460 160l40-30" stroke-width="10"/>
+  <path d="M460 160l-25 20" stroke-width="5"/>
+  <ellipse cx="445" cy="172" rx="6" ry="15" transform="rotate(-35 445 172)" fill="#aa6e0b"/>
+</svg>

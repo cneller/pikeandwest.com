@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" stroke="#aa6e0b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Teacher at easel - hand-drawn style -->
+
+  <!-- Easel legs -->
+  <path d="M180 480l80-280"/>
+  <path d="M380 480l-80-280"/>
+  <path d="M280 480l0-200"/>
+
+  <!-- Easel cross bar -->
+  <path d="M200 350l160 0"/>
+
+  <!-- Canvas on easel -->
+  <rect x="190" y="120" width="180" height="140" rx="3" fill="#aa6e0b" fill-opacity="0.1"/>
+
+  <!-- Simple landscape on canvas -->
+  <path d="M210 220l40-50l30 30l50-60l40 80" stroke-width="4"/>
+  <circle cx="350" cy="150" r="12" fill="#aa6e0b" fill-opacity="0.3"/>
+
+  <!-- Person/instructor figure -->
+  <!-- Head -->
+  <circle cx="100" cy="200" r="35" fill="#aa6e0b" fill-opacity="0.15"/>
+
+  <!-- Body -->
+  <path d="M100 235l0 120" stroke-width="10"/>
+
+  <!-- Arms - one reaching toward canvas -->
+  <path d="M100 270l70-20" stroke-width="8"/>
+  <path d="M100 280l-40 40" stroke-width="8"/>
+
+  <!-- Legs -->
+  <path d="M100 355l-30 100" stroke-width="8"/>
+  <path d="M100 355l30 100" stroke-width="8"/>
+
+  <!-- Paintbrush in hand -->
+  <path d="M170 250l20-30" stroke-width="6"/>
+  <ellipse cx="185" cy="228" rx="5" ry="12" transform="rotate(-55 185 228)" fill="#aa6e0b"/>
+</svg>
