@@ -71,15 +71,26 @@
         <div class="workshops-features__icon">
           {{- $icon := resources.Get (printf "images/icons/%s" .icon) -}}
           {{- if $icon -}}
-            {{- $resized := $icon.Resize "80x" -}}
-            <img
-              src="{{ $resized.RelPermalink }}"
-              alt=""
-              width="{{ $resized.Width }}"
-              height="{{ $resized.Height }}"
-              loading="lazy"
-              decoding="async"
-            >
+            {{- if eq $icon.MediaType.SubType "svg" -}}
+              <img
+                src="{{ $icon.RelPermalink }}"
+                alt=""
+                width="80"
+                height="80"
+                loading="lazy"
+                decoding="async"
+              >
+            {{- else -}}
+              {{- $resized := $icon.Resize "80x" -}}
+              <img
+                src="{{ $resized.RelPermalink }}"
+                alt=""
+                width="{{ $resized.Width }}"
+                height="{{ $resized.Height }}"
+                loading="lazy"
+                decoding="async"
+              >
+            {{- end -}}
           {{- end -}}
         </div>
         <h3 class="workshops-features__title">{{ .title }}</h3>
