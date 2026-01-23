@@ -1,0 +1,7 @@
+{
+  "label": "line",
+  "schema": [
+    "blog"
+  ],
+  "code": "{{< divider style=\"line\" >}}\n"
+}
