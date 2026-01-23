@@ -364,8 +364,8 @@
 
   &__input,
   &__select {
-    height: 42px; // Exact HoneyBook input height
-    padding: 0 20px 0 12px; // Exact HoneyBook padding
+    height: 42px;
+    padding: 0 20px 0 12px;
     background: linear-gradient(
       110deg,
       $color-white 0%,
@@ -374,11 +374,8 @@
     );
     background-size: 200% 100%;
     animation: shimmer 3s ease-in-out infinite;
-    border: 1.5px solid $color-black; // Exact HoneyBook border: 1.5px solid #434345
-    border-radius: 0; // HoneyBook has square corners
-    font-family: $font-primary; // Raleway
-    font-size: 16px; // Exact HoneyBook font size
-    color: transparent; // Hide placeholder text, shimmer is the indicator
+    border: none;
+    border-radius: 8px;
     box-sizing: border-box;
   }
 
@@ -397,13 +394,13 @@
       height: 0;
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
-      border-top: 5px solid $color-black;
+      border-top: 5px solid rgba($color-black, 0.3);
     }
   }
 
   &__textarea {
-    height: 180px; // Exact HoneyBook textarea height
-    padding: 12px; // Exact HoneyBook textarea padding
+    height: 180px;
+    padding: 12px;
     background: linear-gradient(
       110deg,
       $color-white 0%,
@@ -412,8 +409,8 @@
     );
     background-size: 200% 100%;
     animation: shimmer 3s ease-in-out infinite;
-    border: 1.5px solid $color-black; // Exact HoneyBook border
-    border-radius: 0; // HoneyBook has square corners
+    border: none;
+    border-radius: 8px;
     box-sizing: border-box;
   }
 
