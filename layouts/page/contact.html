@@ -4,8 +4,8 @@
     <h1 class="section-title">CONTACT US</h1>
     <address class="form-embed">
       {{ with .Site.Params.forms.contactEmbed }}
-      {{/* Facade pattern: static preview loads iframe on interaction */}}
-      {{ partial "contact-form-facade.html" $ }}
+      {{/* Shimmer pattern: pulse shimmer loads iframe on scroll */}}
+      {{ partial "contact-form-shimmer.html" $ }}
       {{ else }}
       <p>
         Contact form coming soon. Please call us at {{

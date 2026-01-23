@@ -1,6 +1,6 @@
 # Pike & West - Next Steps
 
-> **Last Updated:** 2026-01-21
+> **Last Updated:** 2026-01-23
 > **Current Phase:** Pre-Launch Testing on beta.pikeandwest.com
 
 This document tracks the current project state and upcoming work. Keep this file updated as tasks are completed or priorities change.
@@ -191,6 +191,7 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 ### Project Documentation
 
 - [Analytics Strategy](./analytics/README.md)
+- [Contact Form Shimmer](./contact-form/README.md) - HubSpot form measurements and shimmer specs
 - [Cross-Domain Tracking Verification](./cross-domain-tracking-verification.md)
 - [CSS Mapping](./webflow-to-hugo-css-mapping.md)
 - [Site Analysis](./site-analysis/current-site-documentation.md)
@@ -252,6 +253,9 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-23 | Consolidated facade/shimmer to single shimmer implementation, removed ~750 lines of dead code     |
+| 2026-01-23 | Added pixel-perfect shimmer measurements via Playwright (docs/contact-form/README.md)             |
+| 2026-01-23 | Added shimmer blocks for all form elements: labels, inputs, hints, buttons, header, footer        |
 | 2026-01-22 | Fixed Cloudflare bot detection: removed curl health-check, rely on Lighthouse Chrome (score: 90)  |
 | 2026-01-22 | Consolidated GitHub Actions: CI workflow (Build→Validate→Deploy), async Lighthouse workflow       |
 | 2026-01-22 | Removed Artists from main nav, reordered to Blog (left) → Contact Us (right, gold CTA)            |

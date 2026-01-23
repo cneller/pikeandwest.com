@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initLightbox();
   initScrollAnimations();
   initLazyIframes();
-  initContactFacade();
+  initContactShimmer();
 });
 
 // Mobile Navigation
@@ -283,86 +283,44 @@ function initLazyIframes() {
   lazyContainers.forEach((container) => observer.observe(container));
 }
 
-// Contact Form Facade
-// Auto-loads HoneyBook iframe after page load (async, non-blocking)
-function initContactFacade() {
-  const facade = document.querySelector('.contact-facade');
+// Contact Form Shimmer
+// Loads iframe on scroll, crossfades from shimmer
+function initContactShimmer() {
+  const shimmer = document.querySelector('.contact-shimmer');
+  if (!shimmer) return;
 
-  if (!facade) return;
+  const src = shimmer.dataset.iframeSrc;
+  const iframeContainer = shimmer.querySelector('.contact-shimmer__iframe');
+  if (!src || !iframeContainer) return;
 
-  const src = facade.dataset.iframeSrc;
+  // Load iframe when shimmer scrolls into view
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const iframe = document.createElement('iframe');
+          iframe.src = src;
+          iframe.title = 'Contact Form';
+          iframe.setAttribute('scrolling', 'no');
 
-  if (!src) return;
+          iframe.addEventListener('load', () => {
+            shimmer.classList.add('contact-shimmer--loaded');
+          });
 
-  let loadAttempted = false;
+          // Fallback: mark loaded after timeout
+          setTimeout(() => {
+            if (!shimmer.classList.contains('contact-shimmer--loaded')) {
+              shimmer.classList.add('contact-shimmer--loaded');
+            }
+          }, 8000);
 
-  function loadIframe() {
-    // Prevent double-loading
-    if (facade.classList.contains('contact-facade--loading')) return;
+          iframeContainer.appendChild(iframe);
+          observer.disconnect();
+        }
+      });
+    },
+    { rootMargin: '100px' }
+  );
 
-    loadAttempted = true;
-    facade.classList.add('contact-facade--loading');
-
-    // Create and insert iframe
-    const iframe = document.createElement('iframe');
-    iframe.src = src;
-    iframe.title = 'Contact Form';
-    iframe.setAttribute('loading', 'eager');
-    iframe.setAttribute('scrolling', 'no');
-    iframe.setAttribute('frameborder', '0');
-
-    iframe.addEventListener('load', () => {
-      facade.classList.remove('contact-facade--loading');
-      facade.classList.add('contact-facade--loaded');
-      facade.setAttribute('aria-busy', 'false');
-    });
-
-    iframe.addEventListener('error', () => {
-      showError();
-    });
-
-    facade.appendChild(iframe);
-  }
-
-  function showError() {
-    facade.classList.remove('contact-facade--loading');
-    facade.classList.add('contact-facade--error');
-    facade.setAttribute('aria-busy', 'false');
-  }
-
-  // Extended timeout: show error state if form doesn't load
-  // Note: iframe load event may not fire for cross-origin, so we have two timeouts:
-  // - 8s: assume loaded (normal fallback)
-  // - 15s: assume error if still not visibly loaded
-  setTimeout(() => {
-    if (
-      loadAttempted &&
-      !facade.classList.contains('contact-facade--loaded') &&
-      !facade.classList.contains('contact-facade--error')
-    ) {
-      // First timeout: assume it loaded (iframe load event may not fire cross-origin)
-      facade.classList.remove('contact-facade--loading');
-      facade.classList.add('contact-facade--loaded');
-      facade.setAttribute('aria-busy', 'false');
-    }
-  }, 8000);
-
-  setTimeout(() => {
-    // Extended timeout: if page seems broken, show error
-    // This catches cases where the iframe exists but content failed to render
-    if (
-      loadAttempted &&
-      !facade.classList.contains('contact-facade--loaded') &&
-      !facade.classList.contains('contact-facade--error')
-    ) {
-      showError();
-    }
-  }, 15000);
-
-  // Load iframe async after page is ready (non-blocking)
-  if (typeof requestIdleCallback !== 'undefined') {
-    requestIdleCallback(loadIframe);
-  } else {
-    setTimeout(loadIframe, 0);
-  }
+  observer.observe(shimmer);
 }
