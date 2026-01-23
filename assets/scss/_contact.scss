@@ -304,6 +304,31 @@
     }
   }
 
+  // Staggered shimmer animation for visual flow
+  &__row:nth-child(1) .contact-facade__input,
+  &__row:nth-child(1) .contact-facade__select {
+    animation-delay: 0s;
+  }
+
+  &__row:nth-child(2) .contact-facade__input,
+  &__row:nth-child(2) .contact-facade__select {
+    animation-delay: 0.1s;
+  }
+
+  &__row:nth-child(3) .contact-facade__input,
+  &__row:nth-child(3) .contact-facade__select {
+    animation-delay: 0.2s;
+  }
+
+  &__row:nth-child(4) .contact-facade__input,
+  &__row:nth-child(4) .contact-facade__select {
+    animation-delay: 0.3s;
+  }
+
+  &__field--full .contact-facade__textarea {
+    animation-delay: 0.4s;
+  }
+
   &__field {
     display: flex;
     flex-direction: column;
