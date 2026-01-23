@@ -291,6 +291,8 @@
     width: 100%;
     height: 100%;
     border: 0;
+    opacity: 0; // Start hidden, fade in when loaded
+    transition: opacity 0.4s ease-out;
   }
 
   &__row {
@@ -426,12 +428,18 @@
     }
   }
 
-  // Loaded state (iframe ready - hide overlay and preview)
+  // Loaded state (iframe ready - smooth crossfade)
   &--loaded {
     .contact-facade__overlay,
     .contact-facade__preview {
       opacity: 0;
       pointer-events: none;
+      transition: opacity 0.4s ease-out;
+    }
+
+    iframe {
+      opacity: 1;
+      transition: opacity 0.4s ease-out 0.1s; // Slight delay for crossfade effect
     }
   }
 
