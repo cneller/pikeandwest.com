@@ -1,0 +1,18 @@
+{{/*
+  Standfirst/Deck Shortcode
+
+  Purpose: Bold intro paragraph that bridges headline and body copy
+  Provides article summary to hook readers and improve scannability
+
+  Usage:
+    {{< standfirst >}}
+    Valentine's Day isn't just for couples. Discover beautiful ways
+    to celebrate love in all its forms.
+    {{< /standfirst >}}
+
+  Placement: Immediately after the title/headline, before main content
+*/}}
+
+<p class="standfirst">
+  {{- .Inner | markdownify -}}
+</p>

@@ -1,0 +1,51 @@
+{{/*
+  Pull Quote Shortcode
+
+  Purpose: Display a prominent pull quote to highlight key text from an article
+
+  Usage:
+    Basic:
+      {{< pull-quote >}}
+      Your quote text here.
+      {{< /pull-quote >}}
+
+    With attribution:
+      {{< pull-quote author="Jane Smith" >}}
+      Your quote text here.
+      {{< /pull-quote >}}
+
+    Floated variants (for longer articles):
+      {{< pull-quote position="right" >}}...{{< /pull-quote >}}
+      {{< pull-quote position="left" >}}...{{< /pull-quote >}}
+
+    Simple variant (no decorations):
+      {{< pull-quote variant="simple" >}}...{{< /pull-quote >}}
+
+  Parameters:
+    - author (optional): Attribution text
+    - position (optional): "left", "right", or empty for centered
+    - variant (optional): "simple" for minimal styling
+*/}}
+
+{{- $author := .Get "author" -}}
+{{- $position := .Get "position" -}}
+{{- $variant := .Get "variant" -}}
+
+{{- $class := "pull-quote" -}}
+{{- if eq $position "right" -}}
+  {{- $class = "pull-quote pull-quote--right" -}}
+{{- else if eq $position "left" -}}
+  {{- $class = "pull-quote pull-quote--left" -}}
+{{- end -}}
+{{- if eq $variant "simple" -}}
+  {{- $class = printf "%s pull-quote--simple" $class -}}
+{{- end -}}
+
+<aside class="{{ $class }}">
+  <blockquote>
+    {{ .Inner | markdownify }}
+    {{- if $author }}
+    <cite>{{ $author }}</cite>
+    {{- end }}
+  </blockquote>
+</aside>

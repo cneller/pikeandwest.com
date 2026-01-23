@@ -21,9 +21,15 @@ Here's what we've learned about Valentine's Day after years of hosting celebrati
 
 Yes, there are the couples—the ones celebrating decades together, the ones still feeling that first-year flutter. But there are also the best friends raising champagne glasses to each other. The fathers leading daughters across dance floors. The mothers making memories over pierced ears and chocolate cake. The groups of singles who refuse to let their relationship status define how they celebrate the season.
 
+{{< pull-quote >}}
+Valentine's Day is really just an invitation to look around at your life and appreciate what you have.
+{{< /pull-quote >}}
+
 Valentine's Day 2026 falls on a Saturday, which means something special: time. Time for real celebrations, not rushed weeknight dinners. Time to gather the people who matter and honor the love that exists in your life—romantic or otherwise.
 
 Because here's the truth about Valentine's Day: it's really just an invitation to look around at your life and appreciate what you have. Hearts, flowers, pink and red—what's not to love about that?
+
+{{< divider >}}
 
 ## Single and Ready to Celebrate
 
@@ -43,6 +49,8 @@ A "Single and Ready to Mingle" party isn't about being sad you're alone. It's ab
 
 The best singles parties we've seen have this energy: confident, joyful, and genuinely celebratory. No pity party. Just a party.
 
+{{< divider >}}
+
 ## Love in Different Forms: Parent-Child Celebrations
 
 Some of our favorite Valentine's memories don't involve romantic partners at all.
@@ -61,12 +69,18 @@ Valentine's Day traditions don't have to match the greeting cards. One mother we
 
 Single parents especially can claim this holiday. You're not second-best because you're not part of a couple. You're showing your children that love—the real kind, the sacrificial kind, the showing-up-every-day kind—looks exactly like this. Like you.
 
+{{< pull-quote author="For Single Parents" >}}
+You're showing your children that love—the real kind, the sacrificial kind, the showing-up-every-day kind—looks exactly like this.
+{{< /pull-quote >}}
+
 **Ideas for parent-child Valentine's celebrations:**
 
 - Host a formal daddy-daughter or mommy-son dance with a DJ, photo booth, and dinner
 - Plan an experiential outing: cooking class, painting session, pottery studio
 - Create a special at-home tradition: homemade fondue, movie marathon, fort building
 - Make something together that becomes a keepsake
+
+{{< divider >}}
 
 ## Galentine's Day: Women Celebrating Women
 
@@ -86,6 +100,8 @@ The trend has grown beyond a single day. "Galentine's Week" events are popping u
 
 At Pike & West, we've hosted Galentine's gatherings that ranged from elegant seated dinners to lively cocktail parties with photo stations and live music. The common thread? Joy. Real, unguarded joy among women who genuinely like each other.
 
+{{< divider >}}
+
 ## The First Move: Valentine's Courage
 
 We'd be missing something if we didn't acknowledge this: Valentine's Day has always been an excuse to be brave.
@@ -95,6 +111,8 @@ For all the people in established relationships, there are others standing at th
 This is beautiful, even if it doesn't translate to an event venue. These are personal moments—first dates, nervous dinners, the beginning of something that might become a story told at anniversary parties decades later.
 
 If this is where you are, we're cheering for you. Take the shot. Make the reservation. Say the thing.
+
+{{< divider >}}
 
 ## Celebrating the Long Love
 
@@ -124,7 +142,7 @@ At Pike & West, our gallery setting provides the kind of backdrop that elevates 
 
 What we love about Valentine's season is the variety. Every event is different because every form of love is different. We're just here to give your particular version of love a beautiful place to be celebrated.
 
----
+{{< divider style="line" >}}
 
 ## Celebrate Your Way at Pike & West
 

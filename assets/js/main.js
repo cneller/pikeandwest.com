@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
   initGalleryScrollButtons();
   initLightbox();
   initScrollAnimations();
+  initLazyIframes();
+  initContactShimmer();
 });
 
 // Mobile Navigation
@@ -208,4 +210,117 @@ function initScrollAnimations() {
   }, observerOptions);
 
   fadeElements.forEach((el) => observer.observe(el));
+}
+
+// Lazy-load iframes with Intersection Observer
+// Delays iframe loading until user scrolls near, improving initial page load
+function initLazyIframes() {
+  const lazyContainers = document.querySelectorAll('.iframe-lazy');
+
+  if (lazyContainers.length === 0) return;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '200px 0px', // Start loading 200px before visible
+    threshold: 0,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const container = entry.target;
+        const src = container.dataset.src;
+        const title = container.dataset.title || 'Embedded content';
+        const isMap = container.classList.contains('iframe-lazy--map');
+
+        if (!src) return;
+
+        // Create the iframe element
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.title = title;
+        iframe.setAttribute('loading', 'lazy');
+        iframe.setAttribute('frameborder', '0');
+
+        if (isMap) {
+          iframe.setAttribute('allowfullscreen', '');
+          iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+          iframe.style.border = '0';
+        } else {
+          iframe.setAttribute('scrolling', 'no');
+        }
+
+        // Mark as loaded and insert iframe
+        container.classList.add('iframe-lazy--loaded');
+        container.appendChild(iframe);
+
+        // Fade out placeholder after iframe loads
+        const placeholder = container.querySelector('.iframe-placeholder');
+        if (placeholder) {
+          const hidePlaceholder = () => {
+            placeholder.classList.add('iframe-placeholder--hidden');
+            // Remove from DOM after fade completes
+            setTimeout(() => placeholder.remove(), 300);
+          };
+
+          iframe.addEventListener('load', hidePlaceholder);
+          // Fallback: fade out after timeout if load doesn't fire
+          setTimeout(() => {
+            if (
+              placeholder.parentNode &&
+              !placeholder.classList.contains('iframe-placeholder--hidden')
+            ) {
+              hidePlaceholder();
+            }
+          }, 5000);
+        }
+
+        observer.unobserve(container);
+      }
+    });
+  }, observerOptions);
+
+  lazyContainers.forEach((container) => observer.observe(container));
+}
+
+// Contact Form Shimmer
+// Loads iframe on scroll, crossfades from shimmer
+function initContactShimmer() {
+  const shimmer = document.querySelector('.contact-shimmer');
+  if (!shimmer) return;
+
+  const src = shimmer.dataset.iframeSrc;
+  const iframeContainer = shimmer.querySelector('.contact-shimmer__iframe');
+  if (!src || !iframeContainer) return;
+
+  // Load iframe when shimmer scrolls into view
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const iframe = document.createElement('iframe');
+          iframe.src = src;
+          iframe.title = 'Contact Form';
+          iframe.setAttribute('scrolling', 'no');
+
+          iframe.addEventListener('load', () => {
+            shimmer.classList.add('contact-shimmer--loaded');
+          });
+
+          // Fallback: mark loaded after timeout
+          setTimeout(() => {
+            if (!shimmer.classList.contains('contact-shimmer--loaded')) {
+              shimmer.classList.add('contact-shimmer--loaded');
+            }
+          }, 8000);
+
+          iframeContainer.appendChild(iframe);
+          observer.disconnect();
+        }
+      });
+    },
+    { rootMargin: '100px' }
+  );
+
+  observer.observe(shimmer);
 }

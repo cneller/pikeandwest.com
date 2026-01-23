@@ -1,0 +1,28 @@
+{{/*
+  Decorative Divider Shortcode
+
+  Purpose: Insert decorative section dividers in blog posts
+
+  Usage:
+    Default ornament (diamond):
+      {{< divider >}}
+
+    Gold line:
+      {{< divider style="line" >}}
+
+    Flourish (lines with gradient):
+      {{< divider style="flourish" >}}
+
+  Parameters:
+    - style (optional): "ornament" (default), "line", or "flourish"
+*/}}
+
+{{- $style := .Get "style" | default "ornament" -}}
+
+{{- if eq $style "line" -}}
+<hr class="divider-gold-line" aria-hidden="true">
+{{- else if eq $style "flourish" -}}
+<hr class="divider-flourish" aria-hidden="true">
+{{- else -}}
+<hr class="divider-ornament" aria-hidden="true">
+{{- end -}}

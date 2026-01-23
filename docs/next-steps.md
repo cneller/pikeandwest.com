@@ -192,6 +192,7 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 ### Project Documentation
 
 - [Analytics Strategy](./analytics/README.md)
+- [Contact Form Shimmer](./contact-form/README.md) - HubSpot form measurements and shimmer specs
 - [Cross-Domain Tracking Verification](./cross-domain-tracking-verification.md)
 - [CSS Mapping](./webflow-to-hugo-css-mapping.md)
 - [Site Analysis](./site-analysis/current-site-documentation.md)
@@ -257,6 +258,18 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 | 2026-01-23 | Updated CTAs: "Host Your Event" (venue), "Book a Tour" (tours), "Workshops" (classes)             |
 | 2026-01-23 | Header nav changed: Blog → Workshops, Contact Us → Host Your Event                                |
 | 2026-01-23 | Footer nav changed: Contact → Host an Event, added Workshops link                                 |
+| 2026-01-23 | Refactored blog-editor agent as authoritative source for editorial styling; commands delegate to agent |
+| 2026-01-23 | Expanded editorial styling: 8 new shortcodes (standfirst, kicker, tip, fact-box, key-takeaways, timeline, sidebar-quote, numbered-list) |
+| 2026-01-23 | Created blog-editor agent (`.claude/agents/blog-editor.md`) for consistent formatting             |
+| 2026-01-23 | Updated ADR-005 with comprehensive editorial styling system (11 components total)                 |
+| 2026-01-23 | Fixed FOUC on contact page: added full page critical CSS (shimmer, Find Us, footer)               |
+| 2026-01-23 | Consolidated facade/shimmer to single shimmer implementation, removed ~750 lines of dead code     |
+| 2026-01-23 | Added pixel-perfect shimmer measurements via Playwright (docs/contact-form/README.md)             |
+| 2026-01-23 | Added shimmer blocks for all form elements: labels, inputs, hints, buttons, header, footer        |
+| 2026-01-22 | Integrated editorial styling into Claude Code commands (`/blog-draft`, `/blog-outline`, `/content-audit`) |
+| 2026-01-22 | Updated blog archetype with editorial styling examples and quick reference                        |
+| 2026-01-22 | Added blog editorial styling: drop caps, pull quotes, decorative dividers (ADR-005)               |
+| 2026-01-22 | Created Hugo shortcodes: `pull-quote` and `divider` for easy content authoring                    |
 | 2026-01-22 | Fixed Cloudflare bot detection: removed curl health-check, rely on Lighthouse Chrome (score: 90)  |
 | 2026-01-22 | Consolidated GitHub Actions: CI workflow (Build→Validate→Deploy), async Lighthouse workflow       |
 | 2026-01-22 | Removed Artists from main nav, reordered to Blog (left) → Contact Us (right, gold CTA)            |

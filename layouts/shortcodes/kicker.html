@@ -1,0 +1,14 @@
+{{/*
+  Kicker Shortcode
+
+  Purpose: Category/topic label displayed above headline
+  Creates visual hierarchy and categorizes content
+
+  Usage:
+    {{< kicker >}}Planning Tips{{< /kicker >}}
+    # Spring Wedding Trends for 2026
+
+  Style: Small caps, gold color, letter-spacing
+*/}}
+
+<span class="kicker">{{- .Inner | markdownify -}}</span>

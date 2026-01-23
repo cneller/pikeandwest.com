@@ -1,0 +1,36 @@
+{{/*
+  Timeline Shortcode
+
+  Purpose: Visual planning timeline with milestones
+  Perfect for wedding planning guides, event checklists
+
+  Usage:
+    {{< timeline >}}
+    {{< timeline-item time="12-18 months" >}}Book venue and caterer{{< /timeline-item >}}
+    {{< timeline-item time="9-12 months" >}}Send save-the-dates{{< /timeline-item >}}
+    {{< timeline-item time="6-9 months" >}}Finalize guest list{{< /timeline-item >}}
+    {{< /timeline >}}
+
+    Or with simple markdown (parsed as list):
+    {{< timeline >}}
+    - **12-18 months:** Book venue and caterer
+    - **9-12 months:** Send save-the-dates
+    - **6-9 months:** Finalize guest list
+    {{< /timeline >}}
+
+  Parameters:
+    - title (optional): Timeline title
+*/}}
+
+{{- $title := .Get "title" -}}
+
+<div class="timeline">
+  {{- if $title }}
+  <div class="timeline__header">
+    <span class="timeline__title">{{ $title }}</span>
+  </div>
+  {{- end }}
+  <div class="timeline__content">
+    {{- .Inner | markdownify -}}
+  </div>
+</div>

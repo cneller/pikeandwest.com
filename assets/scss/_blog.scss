@@ -240,11 +240,76 @@
       }
     }
 
-    // Horizontal rule
+    // Horizontal rule - Basic
     hr {
       margin: $spacing-2xl 0;
       border: none;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    // =========================
+    // Decorative Section Dividers
+    // =========================
+    // Use: <hr class="divider-ornament"> in markdown or HTML
+    // Or use three asterisks (***) which Hugo converts to <hr>
+    // To use ornamental style, add {.divider-ornament} after ***
+
+    hr.divider-ornament,
+    hr.divider-gold {
+      border: none;
+      height: auto;
+      text-align: center;
+      margin: $spacing-3xl auto;
+      background: transparent;
+
+      &::before {
+        content: '◆';
+        display: inline-block;
+        color: $color-gold;
+        font-size: $font-size-sm;
+        letter-spacing: 1em;
+        padding: 0 $spacing-lg;
+      }
+    }
+
+    // Divider with flourish lines
+    hr.divider-flourish {
+      border: none;
+      height: 1px;
+      background: transparent;
+      margin: $spacing-3xl 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &::before {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba($color-gold, 0.4));
+      }
+
+      &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to left, transparent, rgba($color-gold, 0.4));
+      }
+    }
+
+    // Simple gold line divider
+    hr.divider-gold-line {
+      border: none;
+      height: 2px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        $color-gold 20%,
+        $color-gold 80%,
+        transparent
+      );
+      margin: $spacing-3xl auto;
+      max-width: 200px;
     }
 
     // Tables
@@ -264,6 +329,687 @@
         background-color: $color-cream;
         font-weight: $font-weight-semibold;
       }
+    }
+
+    // =========================
+    // Drop Caps
+    // =========================
+    // Automatically applied to first paragraph after headings
+    // Uses ::first-letter for accessibility (no DOM modification)
+    // Screen readers read the text naturally
+
+    // Auto drop cap on first paragraph of content
+    > p:first-of-type::first-letter {
+      float: left;
+      font-family: $font-display;
+      font-size: 3.5em;
+      line-height: 0.8;
+      padding-right: 0.1em;
+      padding-top: 0.05em;
+      color: $color-gold;
+      font-weight: $font-weight-regular;
+    }
+
+    // Manual drop cap class for other paragraphs
+    // Use: <p class="drop-cap">Your text...</p>
+    // Or in markdown with attribute: {.drop-cap}
+    p.drop-cap::first-letter {
+      float: left;
+      font-family: $font-display;
+      font-size: 3.5em;
+      line-height: 0.8;
+      padding-right: 0.1em;
+      padding-top: 0.05em;
+      color: $color-gold;
+      font-weight: $font-weight-regular;
+    }
+
+    // Disable drop cap when explicitly requested
+    p.no-drop-cap::first-letter {
+      float: none;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      padding: 0;
+      color: inherit;
+    }
+
+    // =========================
+    // Pull Quotes
+    // =========================
+    // Use: <aside class="pull-quote"><blockquote>Quote text</blockquote></aside>
+    // Or use the shortcode: {{< pull-quote >}}Quote text{{< /pull-quote >}}
+    // For attribution: {{< pull-quote author="Name" >}}Quote{{< /pull-quote >}}
+
+    aside.pull-quote {
+      margin: $spacing-2xl 0;
+      padding: 0;
+      clear: both;
+
+      blockquote {
+        margin: 0;
+        padding: $spacing-xl $spacing-2xl;
+        border-left: none;
+        border-top: 2px solid $color-gold;
+        border-bottom: 2px solid $color-gold;
+        background: transparent;
+        font-family: $font-display;
+        font-size: $font-size-2xl;
+        font-style: normal;
+        line-height: 1.4;
+        color: $color-text;
+        text-align: center;
+        position: relative;
+
+        @media (max-width: $breakpoint-md) {
+          font-size: $font-size-xl;
+          padding: $spacing-lg;
+        }
+
+        p {
+          margin: 0;
+          font-size: inherit;
+          line-height: inherit;
+
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+
+        // Decorative quotation marks
+        &::before {
+          content: '"';
+          display: block;
+          font-family: $font-display;
+          font-size: $font-size-4xl;
+          color: $color-gold;
+          line-height: 1;
+          margin-bottom: $spacing-sm;
+
+          @media (max-width: $breakpoint-md) {
+            font-size: $font-size-3xl;
+          }
+        }
+
+        cite,
+        .pull-quote__attribution {
+          display: block;
+          margin-top: $spacing-md;
+          font-family: $font-secondary;
+          font-size: $font-size-sm;
+          font-style: normal;
+          color: $color-gold;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+
+          &::before {
+            content: '— ';
+          }
+        }
+      }
+    }
+
+    // Pull quote variant: floated to side (for longer articles)
+    aside.pull-quote--right,
+    aside.pull-quote--left {
+      @media (min-width: $breakpoint-md + 1) {
+        width: 45%;
+        margin-top: $spacing-md;
+        margin-bottom: $spacing-md;
+
+        blockquote {
+          font-size: $font-size-xl;
+          padding: $spacing-lg;
+        }
+      }
+    }
+
+    aside.pull-quote--right {
+      @media (min-width: $breakpoint-md + 1) {
+        float: right;
+        margin-left: $spacing-xl;
+        margin-right: -$spacing-xl;
+      }
+    }
+
+    aside.pull-quote--left {
+      @media (min-width: $breakpoint-md + 1) {
+        float: left;
+        margin-right: $spacing-xl;
+        margin-left: -$spacing-xl;
+      }
+    }
+
+    // Simple pull quote (no decorations, just larger text)
+    aside.pull-quote--simple {
+      blockquote {
+        border: none;
+        padding: $spacing-xl 0;
+
+        &::before {
+          display: none;
+        }
+      }
+    }
+
+    // =========================
+    // Kicker (Category Label)
+    // =========================
+    // Small caps label above headline
+    // Use: {{< kicker >}}Planning Tips{{< /kicker >}}
+
+    .kicker {
+      display: block;
+      font-family: $font-primary;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      color: $color-gold;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: $spacing-sm;
+    }
+
+    // =========================
+    // Standfirst / Deck
+    // =========================
+    // Bold intro paragraph bridging headline and body
+    // Use: {{< standfirst >}}Summary text{{< /standfirst >}}
+
+    .standfirst {
+      font-family: $font-secondary;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-light;
+      line-height: 1.6;
+      color: $color-text;
+      border-left: 3px solid $color-gold;
+      padding-left: $spacing-lg;
+      margin: $spacing-lg 0 $spacing-2xl;
+
+      @media (min-width: $breakpoint-md + 1) {
+        font-size: $font-size-xl;
+      }
+
+      // Standfirst should not have drop cap
+      &::first-letter {
+        float: none;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        padding: 0;
+        color: inherit;
+      }
+    }
+
+    // =========================
+    // Tip Box
+    // =========================
+    // Highlighted planning advice / pro tips
+    // Use: {{< tip >}}Advice here{{< /tip >}}
+
+    .tip-box {
+      margin: $spacing-xl 0;
+      padding: $spacing-lg;
+      background: $color-cream;
+      border-left: 4px solid $color-gold;
+      border-radius: 0 $border-radius-md $border-radius-md 0;
+
+      &__header {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        margin-bottom: $spacing-sm;
+      }
+
+      &__icon {
+        font-size: $font-size-lg;
+      }
+
+      &__title {
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-gold;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      &__content {
+        font-family: $font-secondary;
+        font-size: $font-size-base;
+        line-height: 1.6;
+        color: $color-text;
+
+        p:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    // =========================
+    // Fact Box
+    // =========================
+    // Sidebar with key facts/stats
+    // Use: {{< fact-box title="At a Glance" >}}...{{< /fact-box >}}
+
+    .fact-box {
+      margin: $spacing-xl 0;
+      padding: $spacing-lg;
+      background: $color-cream;
+      border: 1px solid rgba($color-gold, 0.3);
+      border-radius: $border-radius-md;
+
+      &__header {
+        margin-bottom: $spacing-md;
+        padding-bottom: $spacing-sm;
+        border-bottom: 2px solid $color-gold;
+      }
+
+      &__title {
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-gold;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      &__content {
+        font-family: $font-secondary;
+        font-size: $font-size-sm;
+        line-height: 1.6;
+        color: $color-text;
+
+        ul,
+        ol {
+          margin: 0;
+          padding-left: $spacing-lg;
+        }
+
+        li {
+          margin-bottom: $spacing-xs;
+        }
+
+        p:last-child,
+        ul:last-child,
+        ol:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      // Floated variants
+      &--right,
+      &--left {
+        @media (min-width: $breakpoint-md + 1) {
+          width: 280px;
+          margin-top: $spacing-sm;
+          margin-bottom: $spacing-md;
+        }
+      }
+
+      &--right {
+        @media (min-width: $breakpoint-md + 1) {
+          float: right;
+          margin-left: $spacing-xl;
+        }
+      }
+
+      &--left {
+        @media (min-width: $breakpoint-md + 1) {
+          float: left;
+          margin-right: $spacing-xl;
+        }
+      }
+    }
+
+    // =========================
+    // Key Takeaways
+    // =========================
+    // Summary box at article end
+    // Use: {{< key-takeaways >}}...{{< /key-takeaways >}}
+
+    .key-takeaways {
+      margin: $spacing-2xl 0;
+      padding: $spacing-xl;
+      background: $color-white;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-top: 4px solid $color-gold;
+      border-radius: $border-radius-md;
+
+      &__header {
+        margin-bottom: $spacing-md;
+      }
+
+      &__title {
+        font-family: $font-display;
+        font-size: $font-size-xl;
+        color: $color-text;
+      }
+
+      &__content {
+        font-family: $font-secondary;
+        font-size: $font-size-base;
+        line-height: 1.6;
+
+        ul {
+          margin: 0;
+          padding-left: $spacing-lg;
+
+          li {
+            margin-bottom: $spacing-sm;
+            position: relative;
+
+            &::marker {
+              color: $color-gold;
+            }
+          }
+        }
+
+        p:last-child,
+        ul:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    // =========================
+    // Timeline
+    // =========================
+    // Visual planning timeline with milestones
+    // Use: {{< timeline >}}...{{< /timeline >}}
+
+    .timeline {
+      margin: $spacing-xl 0;
+      padding: $spacing-lg 0;
+
+      &__header {
+        margin-bottom: $spacing-lg;
+      }
+
+      &__title {
+        font-family: $font-display;
+        font-size: $font-size-xl;
+        color: $color-text;
+      }
+
+      &__content {
+        position: relative;
+        padding-left: $spacing-2xl;
+
+        // Vertical line
+        &::before {
+          content: '';
+          position: absolute;
+          left: 6px;
+          top: 0;
+          bottom: 0;
+          width: 2px;
+          background: linear-gradient(to bottom, $color-gold, rgba($color-gold, 0.2));
+        }
+
+        // Style list items as timeline items
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        li {
+          position: relative;
+          margin-bottom: $spacing-lg;
+          padding-left: $spacing-md;
+
+          // Timeline dot
+          &::before {
+            content: '';
+            position: absolute;
+            left: -$spacing-2xl + 2px;
+            top: 0.5em;
+            width: 10px;
+            height: 10px;
+            background: $color-gold;
+            border-radius: 50%;
+            border: 2px solid $color-white;
+            box-shadow: 0 0 0 2px $color-gold;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      // Explicit timeline items (when using timeline-item shortcode)
+      &__item {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-sm $spacing-md;
+        margin-bottom: $spacing-lg;
+        padding-left: $spacing-md;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &--done {
+          .timeline__marker {
+            background: $color-gold;
+
+            &::after {
+              content: '✓';
+              color: $color-white;
+              font-size: 0.6em;
+            }
+          }
+        }
+      }
+
+      &__marker {
+        position: absolute;
+        left: -$spacing-2xl + 2px;
+        top: 0.25em;
+        width: 12px;
+        height: 12px;
+        background: $color-white;
+        border: 2px solid $color-gold;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &__time {
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-gold;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        flex-shrink: 0;
+      }
+
+      &__description {
+        font-family: $font-secondary;
+        font-size: $font-size-base;
+        color: $color-text;
+        flex: 1;
+        min-width: 200px;
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+
+    // =========================
+    // Sidebar Quote (Testimonial)
+    // =========================
+    // Floated testimonial box for client praise
+    // Use: {{< sidebar-quote author="Name" >}}...{{< /sidebar-quote >}}
+
+    .sidebar-quote {
+      margin: $spacing-lg 0;
+      padding: $spacing-lg;
+      background: $color-cream;
+      border-radius: $border-radius-md;
+
+      @media (min-width: $breakpoint-md + 1) {
+        width: 260px;
+        margin-top: $spacing-sm;
+        margin-bottom: $spacing-md;
+      }
+
+      &--right {
+        @media (min-width: $breakpoint-md + 1) {
+          float: right;
+          margin-left: $spacing-xl;
+        }
+      }
+
+      &--left {
+        @media (min-width: $breakpoint-md + 1) {
+          float: left;
+          margin-right: $spacing-xl;
+        }
+      }
+
+      &__text {
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: transparent;
+        font-family: $font-display;
+        font-size: $font-size-lg;
+        font-style: italic;
+        line-height: 1.4;
+        color: $color-text;
+
+        &::before {
+          content: '"';
+          color: $color-gold;
+        }
+
+        &::after {
+          content: '"';
+          color: $color-gold;
+        }
+
+        p {
+          display: inline;
+          font-size: inherit;
+          line-height: inherit;
+        }
+      }
+
+      &__attribution {
+        margin-top: $spacing-md;
+        padding-top: $spacing-sm;
+        border-top: 1px solid rgba($color-gold, 0.3);
+      }
+
+      &__author {
+        display: block;
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-text;
+      }
+
+      &__event {
+        display: block;
+        font-family: $font-secondary;
+        font-size: $font-size-xs;
+        color: $color-text-light;
+        margin-top: 2px;
+      }
+    }
+
+    // =========================
+    // Numbered List (Styled Steps)
+    // =========================
+    // Large decorative numbers for step-by-step guides
+    // Use: {{< numbered-list >}}1. Step one...{{< /numbered-list >}}
+
+    .numbered-list {
+      margin: $spacing-xl 0;
+
+      &__header {
+        margin-bottom: $spacing-lg;
+      }
+
+      &__title {
+        font-family: $font-display;
+        font-size: $font-size-xl;
+        color: $color-text;
+      }
+
+      &__items {
+        list-style: none;
+        counter-reset: numbered-list;
+        margin: 0;
+        padding: 0;
+
+        > li {
+          counter-increment: numbered-list;
+          position: relative;
+          padding-left: $spacing-3xl;
+          margin-bottom: $spacing-lg;
+          min-height: 2.5rem;
+
+          &::before {
+            content: counter(numbered-list);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-family: $font-display;
+            font-size: $font-size-2xl;
+            font-weight: $font-weight-regular;
+            color: $color-gold;
+            line-height: 1;
+            width: 2rem;
+            text-align: center;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    // =========================
+    // Lead Paragraph
+    // =========================
+    // First paragraph styling (larger, emphasized)
+    // Automatically applied or use class .lead
+
+    .lead {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-light;
+      line-height: 1.7;
+      color: $color-text;
+
+      @media (min-width: $breakpoint-md + 1) {
+        font-size: $font-size-xl;
+      }
+    }
+
+    // =========================
+    // Subhead Variations
+    // =========================
+    // Inline bold subheads for breaking up text
+    // Use: **Subhead Text**{.subhead-inline}
+
+    .subhead-inline {
+      display: block;
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      color: $color-text;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: $spacing-xl;
+      margin-bottom: $spacing-sm;
     }
   }
 
