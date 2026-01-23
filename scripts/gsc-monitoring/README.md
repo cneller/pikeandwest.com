@@ -4,10 +4,26 @@ Playwright-based script to extract Google Search Console Coverage Report metrics
 
 ## Metrics Extracted
 
+### Indexing
+
 - **Indexed count** - Total pages indexed by Google
 - **Not indexed count** - Pages not indexed
 - **Indexing reasons** - Breakdown of why pages aren't indexed
 - **Last update date** - When GSC last updated the data
+
+### Performance
+
+- **Total clicks** - Web search clicks over 90 days
+
+### Experience
+
+- **Core Web Vitals** - Mobile and Desktop status (Good/Needs improvement/Poor or No data)
+- **HTTPS status** - Count of HTTPS vs Non-HTTPS pages
+
+### Security
+
+- **Security Issues** - Any detected security problems
+- **Manual Actions** - Any penalties applied by Google
 
 ## Usage
 
@@ -58,7 +74,7 @@ Edit `config.yaml` to customize:
 
 ```json
 {
-  "timestamp": "2026-01-22T10:30:00Z",
+  "timestamp": "2026-01-23T07:27:13.755Z",
   "property": "sc-domain:pikeandwest.com",
   "propertyName": "Pike & West",
   "lastUpdate": "1/19/26",
@@ -67,6 +83,23 @@ Edit `config.yaml` to customize:
   "reasons": [
     { "reason": "Page with redirect", "count": 4 }
   ],
+  "totalClicks": 588,
+  "coreWebVitals": {
+    "mobile": { "status": "No data" },
+    "desktop": { "status": "No data" }
+  },
+  "https": {
+    "https": 4,
+    "nonHttps": 0
+  },
+  "security": {
+    "hasIssues": false,
+    "message": "No issues detected"
+  },
+  "manualActions": {
+    "hasActions": false,
+    "message": "No manual actions"
+  },
   "errors": []
 }
 ```

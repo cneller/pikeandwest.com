@@ -34,6 +34,11 @@ import {
   getNotIndexedCount,
   getLastUpdate,
   getIndexingReasons,
+  getTotalClicks,
+  getCoreWebVitals,
+  getHttpsStatus,
+  getSecurityStatus,
+  getManualActionsStatus,
   isLoginPage,
 } from './selectors.js';
 
@@ -131,9 +136,19 @@ async function extractMetrics(page) {
     property: config.property.resource_id,
     propertyName: config.property.name,
     lastUpdate: null,
+    // Indexing
     indexed: null,
     notIndexed: null,
     reasons: [],
+    // Performance
+    totalClicks: null,
+    // Experience
+    coreWebVitals: null,
+    https: null,
+    // Security
+    security: null,
+    manualActions: null,
+    // Errors
     errors: [],
   };
 
@@ -150,10 +165,16 @@ async function extractMetrics(page) {
   }
 
   // Extract overview metrics
-  console.log('Extracting metrics...');
-
+  console.log('Extracting indexing metrics...');
   metrics.indexed = await getIndexedCount(page);
   metrics.notIndexed = await getNotIndexedCount(page);
+
+  console.log('Extracting performance metrics...');
+  metrics.totalClicks = await getTotalClicks(page);
+
+  console.log('Extracting experience metrics...');
+  metrics.coreWebVitals = await getCoreWebVitals(page);
+  metrics.https = await getHttpsStatus(page);
 
   // Navigate to full report for reasons breakdown and last update
   console.log('Navigating to Page Indexing Report...');
@@ -164,6 +185,26 @@ async function extractMetrics(page) {
   if (!isLoginPage(page)) {
     metrics.lastUpdate = await getLastUpdate(page);
     metrics.reasons = await getIndexingReasons(page);
+  }
+
+  // Check Security Issues
+  console.log('Checking Security Issues...');
+  await page.goto(urls.securityActions(config.property.resource_id), {
+    waitUntil: 'networkidle',
+  });
+
+  if (!isLoginPage(page)) {
+    metrics.security = await getSecurityStatus(page);
+  }
+
+  // Check Manual Actions
+  console.log('Checking Manual Actions...');
+  await page.goto(urls.manualActions(config.property.resource_id), {
+    waitUntil: 'networkidle',
+  });
+
+  if (!isLoginPage(page)) {
+    metrics.manualActions = await getManualActionsStatus(page);
   }
 
   return metrics;
@@ -191,31 +232,69 @@ function saveMetrics(metrics) {
  * @param {object} metrics
  */
 function printSummary(metrics) {
-  console.log('\n' + '='.repeat(50));
+  console.log('\n' + '='.repeat(55));
   console.log('GSC MONITORING REPORT');
-  console.log('='.repeat(50));
+  console.log('='.repeat(55));
   console.log(`Property: ${metrics.propertyName} (${metrics.property})`);
   console.log(`Timestamp: ${metrics.timestamp}`);
   console.log(`Last GSC Update: ${metrics.lastUpdate || 'Unknown'}`);
-  console.log('');
+
+  // Performance
+  console.log('\n--- Performance ---');
+  console.log(`Total Clicks (90 days): ${metrics.totalClicks ?? 'Error'}`);
+
+  // Indexing
+  console.log('\n--- Indexing ---');
   console.log(`Indexed Pages: ${metrics.indexed ?? 'Error'}`);
   console.log(`Not Indexed: ${metrics.notIndexed ?? 'Error'}`);
 
-  if (metrics.reasons.length > 0) {
-    console.log('\nNot Indexed Breakdown:');
+  if (metrics.reasons?.length > 0) {
+    console.log('Not Indexed Breakdown:');
     for (const r of metrics.reasons) {
       console.log(`  - ${r.reason}: ${r.count}`);
     }
   }
 
-  if (metrics.errors.length > 0) {
-    console.log('\nErrors:');
+  // Experience
+  console.log('\n--- Experience ---');
+  if (metrics.coreWebVitals) {
+    console.log(
+      `Core Web Vitals (Mobile): ${metrics.coreWebVitals.mobile?.status || 'Unknown'}`
+    );
+    console.log(
+      `Core Web Vitals (Desktop): ${metrics.coreWebVitals.desktop?.status || 'Unknown'}`
+    );
+  } else {
+    console.log('Core Web Vitals: Unable to extract');
+  }
+
+  if (metrics.https) {
+    console.log(`HTTPS Pages: ${metrics.https.https}`);
+    console.log(`Non-HTTPS Pages: ${metrics.https.nonHttps}`);
+  } else {
+    console.log('HTTPS Status: Unable to extract');
+  }
+
+  // Security
+  console.log('\n--- Security & Manual Actions ---');
+  if (metrics.security) {
+    const secIcon = metrics.security.hasIssues ? 'WARNING' : 'OK';
+    console.log(`Security Issues: [${secIcon}] ${metrics.security.message}`);
+  }
+  if (metrics.manualActions) {
+    const maIcon = metrics.manualActions.hasActions ? 'WARNING' : 'OK';
+    console.log(`Manual Actions: [${maIcon}] ${metrics.manualActions.message}`);
+  }
+
+  // Errors
+  if (metrics.errors?.length > 0) {
+    console.log('\n--- Errors ---');
     for (const e of metrics.errors) {
       console.log(`  Warning: ${e}`);
     }
   }
 
-  console.log('='.repeat(50) + '\n');
+  console.log('='.repeat(55) + '\n');
 }
 
 /**

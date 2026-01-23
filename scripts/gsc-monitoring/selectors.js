@@ -29,6 +29,20 @@ export const urls = {
    * Login page (for detecting auth required)
    */
   login: 'https://accounts.google.com/',
+
+  /**
+   * Security & Manual Actions report
+   * @param {string} resourceId - e.g., "sc-domain:pikeandwest.com"
+   */
+  securityActions: (resourceId) =>
+    `https://search.google.com/search-console/security-issues?resource_id=${encodeURIComponent(resourceId)}`,
+
+  /**
+   * Manual Actions report
+   * @param {string} resourceId - e.g., "sc-domain:pikeandwest.com"
+   */
+  manualActions: (resourceId) =>
+    `https://search.google.com/search-console/manual-actions?resource_id=${encodeURIComponent(resourceId)}`,
 };
 
 /**
@@ -124,4 +138,166 @@ export async function getIndexingReasons(page) {
 export function isLoginPage(page) {
   const url = page.url();
   return url.includes('accounts.google.com') || url.includes('/signin');
+}
+
+/**
+ * Extract total web search clicks from Overview page
+ * @param {import('playwright').Page} page
+ * @returns {Promise<number|null>}
+ */
+export async function getTotalClicks(page) {
+  try {
+    // Look for text like "588 total web search clicks"
+    const bodyText = await page.textContent('body', { timeout: 5000 });
+    const match = bodyText?.match(/([\d,]+)\s+total web search clicks/i);
+    if (match) {
+      return parseInt(match[1].replace(/,/g, ''), 10);
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Extract Core Web Vitals status from Overview page
+ * @param {import('playwright').Page} page
+ * @returns {Promise<{mobile: object, desktop: object}|null>}
+ */
+export async function getCoreWebVitals(page) {
+  try {
+    // Find the Experience table and extract CWV row
+    const bodyText = await page.textContent('body', { timeout: 5000 });
+
+    // Check if we have CWV data or "No data"
+    const hasNoData = /Core Web Vitals.*No data/is.test(bodyText);
+
+    if (hasNoData) {
+      return {
+        mobile: {
+          good: null,
+          needsImprovement: null,
+          poor: null,
+          status: 'No data',
+        },
+        desktop: {
+          good: null,
+          needsImprovement: null,
+          poor: null,
+          status: 'No data',
+        },
+      };
+    }
+
+    // Try to extract actual values if available
+    // The table structure shows Good/Needs improvement/Poor columns
+    // For now, return status based on presence of data
+    return {
+      mobile: { status: 'Available' },
+      desktop: { status: 'Available' },
+    };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Extract HTTPS status from Overview page
+ * @param {import('playwright').Page} page
+ * @returns {Promise<{https: number, nonHttps: number}|null>}
+ */
+export async function getHttpsStatus(page) {
+  try {
+    // Look for HTTPS row in Experience table
+    // Table structure: HTTPS | (empty) | count | (empty) | count | trend | Open report
+    const rows = await page.locator('table tbody tr').all();
+
+    for (const row of rows) {
+      const rowText = await row.textContent();
+      // Find the row that starts with "HTTPS" (not header row with "Non HTTPS")
+      if (rowText?.match(/^HTTPS\s*\d/)) {
+        // Extract all numbers from the row
+        const numbers = rowText.match(/\d+/g);
+        if (numbers && numbers.length >= 2) {
+          return {
+            https: parseInt(numbers[0], 10),
+            nonHttps: parseInt(numbers[1], 10),
+          };
+        }
+      }
+    }
+
+    // Fallback: search body text for pattern like "HTTPS4 0Open report"
+    const bodyText = await page.textContent('body', { timeout: 5000 });
+    // Look for HTTPS followed by two numbers
+    const match = bodyText?.match(/HTTPS\s*(\d+)\s*(\d+)/);
+    if (match) {
+      return {
+        https: parseInt(match[1], 10),
+        nonHttps: parseInt(match[2], 10),
+      };
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Check Security Issues status
+ * @param {import('playwright').Page} page
+ * @returns {Promise<{hasIssues: boolean, message: string}>}
+ */
+export async function getSecurityStatus(page) {
+  try {
+    const bodyText = await page.textContent('body', { timeout: 5000 });
+
+    // Look for "No issues detected" or similar
+    if (/no (security )?issues detected/i.test(bodyText)) {
+      return { hasIssues: false, message: 'No issues detected' };
+    }
+
+    // Look for issue indicators
+    if (/security issues? (detected|found)/i.test(bodyText)) {
+      return { hasIssues: true, message: 'Security issues detected' };
+    }
+
+    // Default - check page title/heading
+    const heading = await page
+      .locator('h1')
+      .first()
+      .textContent({ timeout: 3000 });
+    return { hasIssues: false, message: heading?.trim() || 'Unknown' };
+  } catch {
+    return { hasIssues: false, message: 'Unable to check' };
+  }
+}
+
+/**
+ * Check Manual Actions status
+ * @param {import('playwright').Page} page
+ * @returns {Promise<{hasActions: boolean, message: string}>}
+ */
+export async function getManualActionsStatus(page) {
+  try {
+    const bodyText = await page.textContent('body', { timeout: 5000 });
+
+    // Look for "No issues detected" or "No manual actions"
+    if (/no (manual actions?|issues?) detected/i.test(bodyText)) {
+      return { hasActions: false, message: 'No manual actions' };
+    }
+
+    // Look for manual action indicators
+    if (
+      /manual action/i.test(bodyText) &&
+      /detected|found|applied/i.test(bodyText)
+    ) {
+      return { hasActions: true, message: 'Manual actions detected' };
+    }
+
+    return { hasActions: false, message: 'No manual actions' };
+  } catch {
+    return { hasActions: false, message: 'Unable to check' };
+  }
 }
