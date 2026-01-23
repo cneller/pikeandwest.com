@@ -1,0 +1,31 @@
+{{/*
+  Tip Box Shortcode
+
+  Purpose: Highlighted planning advice or pro tips
+  Draws attention to actionable recommendations
+
+  Usage:
+    {{< tip >}}
+    Book your venue 12-18 months in advance for peak wedding season.
+    {{< /tip >}}
+
+    With custom title:
+    {{< tip title="Insider Tip" >}}
+    Ask about weekday rates for significant savings.
+    {{< /tip >}}
+
+  Parameters:
+    - title (optional): Custom title (defaults to "Pro Tip")
+*/}}
+
+{{- $title := .Get "title" | default "Pro Tip" -}}
+
+<aside class="tip-box" role="note">
+  <div class="tip-box__header">
+    <span class="tip-box__icon" aria-hidden="true">💡</span>
+    <span class="tip-box__title">{{ $title }}</span>
+  </div>
+  <div class="tip-box__content">
+    {{- .Inner | markdownify -}}
+  </div>
+</aside>

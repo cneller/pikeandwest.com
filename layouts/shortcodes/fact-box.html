@@ -1,0 +1,41 @@
+{{/*
+  Fact Box Shortcode
+
+  Purpose: Sidebar with key facts, stats, or quick reference info
+  Perfect for "At a Glance" venue specs or event details
+
+  Usage:
+    {{< fact-box title="At a Glance" >}}
+    - **Capacity:** 150 seated, 200 standing
+    - **Square Feet:** 4,500
+    - **Catering:** In-house or external
+    {{< /fact-box >}}
+
+    Floated variant:
+    {{< fact-box title="Venue Details" position="right" >}}
+    ...
+    {{< /fact-box >}}
+
+  Parameters:
+    - title (optional): Box title (defaults to "Quick Facts")
+    - position (optional): "left", "right", or empty for full-width
+*/}}
+
+{{- $title := .Get "title" | default "Quick Facts" -}}
+{{- $position := .Get "position" -}}
+
+{{- $class := "fact-box" -}}
+{{- if eq $position "right" -}}
+  {{- $class = "fact-box fact-box--right" -}}
+{{- else if eq $position "left" -}}
+  {{- $class = "fact-box fact-box--left" -}}
+{{- end -}}
+
+<aside class="{{ $class }}">
+  <div class="fact-box__header">
+    <span class="fact-box__title">{{ $title }}</span>
+  </div>
+  <div class="fact-box__content">
+    {{- .Inner | markdownify -}}
+  </div>
+</aside>

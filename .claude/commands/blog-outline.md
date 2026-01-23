@@ -41,6 +41,9 @@ Create a detailed outline before writing a full blog post for Pike & West.
      - `/contact` (tour scheduling)
      - `/gallery` (photo opportunities)
      - Related blog posts
+   - **Editorial styling placement:**
+     - Pull quote candidates (key insights worth highlighting)
+     - Section divider locations (between major topic shifts)
 
 4. **SEO Planning**
    Include:
@@ -109,6 +112,15 @@ Create a detailed outline before writing a full blog post for Pike & West.
 
 ## Internal Links to Include
 1. [page] - [in which section]
+
+## Editorial Styling Plan
+**Pull Quotes (1-2 per 1000 words):**
+1. "[quote candidate]" - after [section]
+2. "[quote candidate]" - after [section]
+
+**Section Dividers:**
+- After [section] - before [section]
+- After [section] - before Conclusion
 
 ## Next Step
 Approve this outline and run `/blog-draft "[topic]"` to generate the full post.

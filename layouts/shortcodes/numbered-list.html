@@ -1,0 +1,39 @@
+{{/*
+  Numbered List Shortcode
+
+  Purpose: Styled numbered list with large decorative numbers
+  Perfect for step-by-step guides and processes
+
+  Usage:
+    {{< numbered-list >}}
+    1. Choose your date and guest count
+    2. Schedule a venue tour
+    3. Review catering options
+    4. Book your date
+    {{< /numbered-list >}}
+
+    Or with nested items:
+    {{< numbered-list >}}
+    {{< list-item >}}Choose your date and guest count{{< /list-item >}}
+    {{< list-item >}}Schedule a venue tour{{< /list-item >}}
+    {{< list-item >}}Review catering options{{< /list-item >}}
+    {{< /numbered-list >}}
+
+  Parameters:
+    - title (optional): List title/heading
+    - start (optional): Starting number (defaults to 1)
+*/}}
+
+{{- $title := .Get "title" -}}
+{{- $start := .Get "start" | default "1" -}}
+
+<div class="numbered-list">
+  {{- if $title }}
+  <div class="numbered-list__header">
+    <span class="numbered-list__title">{{ $title }}</span>
+  </div>
+  {{- end }}
+  <ol class="numbered-list__items" start="{{ $start }}">
+    {{- .Inner | markdownify -}}
+  </ol>
+</div>

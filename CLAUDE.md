@@ -118,6 +118,7 @@ Key decisions made during development. Full details in `docs/architecture/decisi
 | Hamburger breakpoint | 991px              | Webflow alignment; nav buttons visible on tablets ([ADR-004](docs/architecture/decisions/ADR-004-responsive-breakpoints.md))                     |
 | Hero height          | 75vh/65vh/60vh     | Shows content peek below fold; Webflow parity ([ADR-003](docs/architecture/decisions/ADR-003-hero-layout.md))                                    |
 | Breakpoints          | Webflow-aligned    | 479/767/991/1280/1920px for pixel-perfect parity ([ADR-004](docs/architecture/decisions/ADR-004-responsive-breakpoints.md))                      |
+| Blog editorial style | Drop caps, quotes  | Magazine-style luxury feel; accessible `::first-letter` ([ADR-005](docs/architecture/decisions/ADR-005-blog-editorial-styling.md))               |
 
 ## Implementation Patterns
 
@@ -146,6 +147,139 @@ Quick reference for common patterns. Full details in `docs/architecture/patterns
 ```
 
 See also: [Animation Patterns](docs/architecture/patterns/animation-patterns.md) | [SCSS Organization](docs/architecture/patterns/scss-organization.md)
+
+## Blog Post Styling
+
+The blog supports magazine-style visual enhancements for engaging, professional content. Full documentation in `.claude/agents/blog-editor.md`.
+
+### Required Elements (Every Post)
+
+| Element | Implementation | Notes |
+|---------|----------------|-------|
+| Drop cap | Automatic on first paragraph | Uses `::first-letter` for accessibility |
+| Pull quotes | `{{</* pull-quote */>}}` | 1-2 per 1000 words |
+| Section dividers | `{{</* divider */>}}` | 2-3 per article |
+
+### All Available Shortcodes
+
+#### Drop Caps
+Automatic on first paragraph. Disable with `{.no-drop-cap}` or add manually with `{.drop-cap}`.
+
+#### Pull Quotes
+```markdown
+{{</* pull-quote */>}}Highlighted quote{{</* /pull-quote */>}}
+{{</* pull-quote author="Name" */>}}Quote with attribution{{</* /pull-quote */>}}
+{{</* pull-quote position="right" */>}}Floated right{{</* /pull-quote */>}}
+```
+
+#### Section Dividers
+```markdown
+{{</* divider */>}}                    <!-- Gold diamond (default) -->
+{{</* divider style="line" */>}}       <!-- Gradient gold line -->
+{{</* divider style="flourish" */>}}   <!-- Fading lines -->
+```
+
+#### Standfirst (Intro Summary)
+```markdown
+{{</* standfirst */>}}
+Bold intro paragraph bridging headline and body copy.
+{{</* /standfirst */>}}
+```
+
+#### Kicker (Category Label)
+```markdown
+{{</* kicker */>}}Planning Tips{{</* /kicker */>}}
+```
+
+#### Tip Box
+```markdown
+{{</* tip */>}}Planning advice here.{{</* /tip */>}}
+{{</* tip title="Insider Tip" */>}}Custom title.{{</* /tip */>}}
+```
+
+#### Fact Box
+```markdown
+{{</* fact-box title="At a Glance" */>}}
+- **Capacity:** 150 seated
+- **Square Feet:** 4,500
+{{</* /fact-box */>}}
+
+{{</* fact-box title="Details" position="right" */>}}
+Floated sidebar version.
+{{</* /fact-box */>}}
+```
+
+#### Key Takeaways
+```markdown
+{{</* key-takeaways */>}}
+- Main point one
+- Main point two
+{{</* /key-takeaways */>}}
+```
+
+#### Timeline
+```markdown
+{{</* timeline title="Planning Timeline" */>}}
+- **12-18 months:** Book venue
+- **9-12 months:** Send save-the-dates
+{{</* /timeline */>}}
+```
+
+#### Sidebar Quote (Testimonial)
+```markdown
+{{</* sidebar-quote author="Sarah M." event="Wedding, Oct 2025" */>}}
+Pike & West made our day magical.
+{{</* /sidebar-quote */>}}
+```
+
+#### Numbered List (Styled Steps)
+```markdown
+{{</* numbered-list title="How to Book" */>}}
+1. Choose your date
+2. Schedule a tour
+3. Review options
+{{</* /numbered-list */>}}
+```
+
+### When to Use Each Feature
+
+| Feature | Best Used For |
+|---------|---------------|
+| Drop caps | Article opening (automatic) |
+| Pull quotes | Key insights, emotional moments |
+| Dividers | Major topic transitions |
+| Standfirst | Long articles needing summary |
+| Kicker | Categorized content |
+| Tip box | Planning advice, pro tips |
+| Fact box | Venue specs, quick stats |
+| Key takeaways | End of long articles |
+| Timeline | Planning guides, milestones |
+| Sidebar quote | Client testimonials |
+| Numbered list | Step-by-step instructions |
+
+### Claude Code Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/blog-outline <topic>` | Creates outline with editorial styling plan |
+| `/blog-draft <topic>` | Generates draft with required styling elements |
+| `/content-audit [path]` | Audits posts for missing editorial styling |
+
+### Blog Editor Agent (Auto-Delegated)
+
+**The blog-editor agent is automatically invoked when working with `content/blog/*.md` files.** It handles all editorial styling decisions and ensures consistent formatting across posts.
+
+Located at `.claude/agents/blog-editor.md`, the agent:
+- Applies required elements (drop caps, pull quotes, dividers)
+- Selects content-appropriate elements (tip boxes, fact boxes, timelines, etc.)
+- Validates against the quality checklist
+- Ensures brand voice consistency
+
+**Commands delegate to this agent:**
+- `/blog-draft` → Phase 2 delegates styling to agent
+- `/content-audit` → Phase 2 delegates evaluation to agent
+
+The agent contains all editorial styling logic, so even if commands are forgotten, the agent will apply correct formatting when editing blog content.
 
 ## Webflow Reference
 

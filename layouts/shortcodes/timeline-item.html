@@ -1,0 +1,24 @@
+{{/*
+  Timeline Item Shortcode
+
+  Purpose: Individual milestone in a timeline
+  Must be used within {{< timeline >}} shortcode
+
+  Usage:
+    {{< timeline-item time="12-18 months" >}}
+    Book venue and caterer
+    {{< /timeline-item >}}
+
+  Parameters:
+    - time (required): Time marker (e.g., "12-18 months", "Week 1")
+    - done (optional): Mark as completed with checkmark
+*/}}
+
+{{- $time := .Get "time" -}}
+{{- $done := .Get "done" -}}
+
+<div class="timeline__item{{ if $done }} timeline__item--done{{ end }}">
+  <div class="timeline__marker" aria-hidden="true"></div>
+  <div class="timeline__time">{{ $time }}</div>
+  <div class="timeline__description">{{- .Inner | markdownify -}}</div>
+</div>

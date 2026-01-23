@@ -1,0 +1,41 @@
+{{/*
+  Sidebar Quote Shortcode
+
+  Purpose: Floated testimonial box for client praise
+  Different from pull-quote: this is for external testimonials, not article excerpts
+
+  Usage:
+    {{< sidebar-quote author="Sarah M." >}}
+    Pike & West made our day absolutely magical.
+    {{< /sidebar-quote >}}
+
+    With event details:
+    {{< sidebar-quote author="Sarah M." event="Wedding, October 2025" >}}
+    Pike & West made our day absolutely magical.
+    {{< /sidebar-quote >}}
+
+    Position options:
+    {{< sidebar-quote author="Name" position="left" >}}...{{< /sidebar-quote >}}
+    {{< sidebar-quote author="Name" position="right" >}}...{{< /sidebar-quote >}}
+
+  Parameters:
+    - author (optional): Person's name
+    - event (optional): Event type and date
+    - position (optional): "left" or "right" (defaults to right)
+*/}}
+
+{{- $author := .Get "author" -}}
+{{- $event := .Get "event" -}}
+{{- $position := .Get "position" | default "right" -}}
+
+<aside class="sidebar-quote sidebar-quote--{{ $position }}">
+  <blockquote class="sidebar-quote__text">
+    {{- .Inner | markdownify -}}
+  </blockquote>
+  {{- if or $author $event }}
+  <div class="sidebar-quote__attribution">
+    {{- if $author }}<span class="sidebar-quote__author">{{ $author }}</span>{{ end -}}
+    {{- if $event }}<span class="sidebar-quote__event">{{ $event }}</span>{{ end -}}
+  </div>
+  {{- end }}
+</aside>
