@@ -211,6 +211,21 @@
   }
 }
 
+// Accessibility: Disable animation for users who prefer reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .iframe-placeholder__text,
+  .contact-facade__loading-text {
+    animation: none;
+    opacity: 0.7;
+  }
+
+  .contact-facade__overlay,
+  .contact-facade__preview,
+  .iframe-placeholder {
+    transition: none;
+  }
+}
+
 // =========================
 // Contact Form Facade
 // Lightweight static preview shown while iframe loads in background
