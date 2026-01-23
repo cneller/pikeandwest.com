@@ -352,14 +352,31 @@
   }
 
   &__label {
-    font-family: $font-primary; // Raleway
-    font-size: 18px; // Exact HoneyBook label size
-    font-weight: $font-weight-regular; // 400
-    text-transform: none; // Content is already uppercase
-    letter-spacing: normal;
-    color: $color-black; // #434345 (same as HoneyBook)
-    // Subtle pulse to indicate loading
-    animation: iframe-pulse 2s ease-in-out infinite;
+    width: 120px;
+    height: 14px;
+    background: linear-gradient(
+      110deg,
+      rgba($color-cream, 0.8) 0%,
+      rgba($color-white, 0.5) 25%,
+      rgba($color-cream, 0.8) 50%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    border-radius: 4px;
+
+    // Width modifiers for realistic appearance
+    &--sm {
+      width: 60px;
+    }
+    &--md {
+      width: 100px;
+    }
+    &--lg {
+      width: 160px;
+    }
+    &--xl {
+      width: 220px;
+    }
   }
 
   &__input,
@@ -415,26 +432,25 @@
   }
 
   &__submit {
+    margin-top: 32px;
     display: flex;
-    justify-content: flex-end; // HoneyBook button is right-aligned
-    margin-top: 24px;
+    justify-content: flex-start;
   }
 
   &__button {
-    width: 96px; // Exact HoneyBook button width
-    height: 42px; // Exact HoneyBook button height
-    padding: 0 14px; // Exact HoneyBook padding
-    background: #a76627; // Exact HoneyBook button color
-    color: #fff7de; // Exact HoneyBook button text color
-    font-family: $font-primary; // Raleway
-    font-size: 18px; // Exact HoneyBook font size
-    font-weight: $font-weight-bold; // 700
-    text-transform: none; // HoneyBook doesn't use uppercase
-    letter-spacing: normal;
-    border-radius: 0; // HoneyBook has square corners
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 200px;
+    height: 50px;
+    background: linear-gradient(
+      110deg,
+      rgba($color-cream, 0.9) 0%,
+      rgba($color-white, 0.6) 25%,
+      rgba($color-cream, 0.9) 50%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    animation-delay: 0.5s;
+    border: none;
+    border-radius: 8px;
   }
 
   // Loading state (iframe is being loaded - dim preview slightly)
@@ -517,13 +533,16 @@
     .contact-facade__input,
     .contact-facade__select,
     .contact-facade__textarea,
-    .contact-facade__label {
+    .contact-facade__label,
+    .contact-facade__button {
       animation: none;
     }
 
     .contact-facade__input,
     .contact-facade__select,
-    .contact-facade__textarea {
+    .contact-facade__textarea,
+    .contact-facade__label,
+    .contact-facade__button {
       background: rgba($color-cream, 0.7);
     }
   }
