@@ -1,0 +1,80 @@
+{{/*
+  Contact Form Facade
+  Purpose: Lightweight static preview that auto-loads real HoneyBook iframe when visible
+  Usage: {{ partial "contact-form-facade.html" . }}
+*/}}
+<div class="contact-facade"
+     data-iframe-src="{{ .Site.Params.forms.contactEmbed }}"
+     role="region"
+     aria-label="Contact form"
+     aria-busy="true">
+  {{/* Loading indicator (subtle, positioned at bottom) */}}
+  <div class="contact-facade__overlay" aria-hidden="true" aria-busy="true">
+    <div class="contact-facade__loading-indicator"></div>
+  </div>
+
+  {{/* Error state (shown if iframe fails to load) */}}
+  <div class="contact-facade__error" aria-live="assertive">
+    <p class="contact-facade__error-title">Having trouble loading the form?</p>
+    <p class="contact-facade__error-contact">
+      Call us at <a href="tel:+1{{ replaceRE "[^0-9]" "" .Site.Params.contact.phone }}">{{ .Site.Params.contact.phone }}</a>
+      or email <a href="mailto:{{ .Site.Params.contact.email }}">{{ .Site.Params.contact.email }}</a>
+    </p>
+  </div>
+
+  {{/* Static form preview - shimmer skeleton */}}
+  <div class="contact-facade__preview" aria-hidden="true">
+    <div class="contact-facade__row">
+      <div class="contact-facade__field">
+        <div class="contact-facade__label contact-facade__label--md"></div>
+        <div class="contact-facade__input"></div>
+      </div>
+      <div class="contact-facade__field">
+        <div class="contact-facade__label contact-facade__label--sm"></div>
+        <div class="contact-facade__input"></div>
+      </div>
+    </div>
+
+    <div class="contact-facade__row">
+      <div class="contact-facade__field">
+        <div class="contact-facade__label contact-facade__label--lg"></div>
+        <div class="contact-facade__input"></div>
+      </div>
+      <div class="contact-facade__field">
+        <div class="contact-facade__label contact-facade__label--xl"></div>
+        <div class="contact-facade__select"></div>
+      </div>
+    </div>
+
+    <div class="contact-facade__row">
+      <div class="contact-facade__field">
+        <div class="contact-facade__label contact-facade__label--xl"></div>
+        <div class="contact-facade__select"></div>
+      </div>
+      <div class="contact-facade__field">
+        <div class="contact-facade__label contact-facade__label--xl"></div>
+        <div class="contact-facade__input"></div>
+      </div>
+    </div>
+
+    <div class="contact-facade__row">
+      <div class="contact-facade__field">
+        <div class="contact-facade__label contact-facade__label--xl"></div>
+        <div class="contact-facade__input"></div>
+      </div>
+      <div class="contact-facade__field">
+        <div class="contact-facade__label contact-facade__label--lg"></div>
+        <div class="contact-facade__select"></div>
+      </div>
+    </div>
+
+    <div class="contact-facade__field contact-facade__field--full">
+      <div class="contact-facade__label contact-facade__label--xl"></div>
+      <div class="contact-facade__textarea"></div>
+    </div>
+
+    <div class="contact-facade__submit">
+      <div class="contact-facade__button"></div>
+    </div>
+  </div>
+</div>

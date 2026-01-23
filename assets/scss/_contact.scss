@@ -31,17 +31,36 @@
     // Prevent CLS from iframe content affecting layout
     contain: layout;
 
-    // Desktop: Two-column form layout (> 991px)
-    iframe {
+    // Lazy-loaded iframe container
+    .iframe-lazy {
+      // Desktop: Two-column form layout (> 991px)
+      width: 840px;
+      height: 960px;
+      position: relative;
+      background: $color-cream;
+
+      // Tablet and below (≤ 991px): Single-column when hamburger appears
+      @media (max-width: $breakpoint-lg) {
+        width: 300px;
+        height: 1600px;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+      }
+    }
+
+    // Legacy: direct iframe (fallback)
+    > iframe {
       width: 840px;
       height: 960px;
       border: 0;
       display: block;
-    }
 
-    // Tablet and below (≤ 991px): Single-column when hamburger appears
-    @media (max-width: $breakpoint-lg) {
-      iframe {
+      @media (max-width: $breakpoint-lg) {
         width: 300px;
         height: 1600px;
       }
@@ -76,7 +95,22 @@
       min-height: 300px;
     }
 
-    iframe {
+    // Lazy-loaded map iframe container
+    .iframe-lazy--map {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: $color-cream;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+    }
+
+    // Legacy: direct iframe (fallback)
+    > iframe {
       width: 100%;
       height: 100%;
       border: 0;
@@ -136,6 +170,380 @@
       a {
         text-align: center;
       }
+    }
+  }
+}
+
+// =========================
+// Lazy-loaded Iframe Placeholder
+// =========================
+.iframe-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-cream;
+  transition: opacity 0.3s ease-out;
+  z-index: 1;
+
+  // Fade out when iframe is loaded
+  &--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__text {
+    font-family: $font-primary;
+    font-size: 14px;
+    color: $color-medium-gray;
+    animation: iframe-pulse 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes iframe-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 300% 0;
+  }
+  100% {
+    background-position: -300% 0;
+  }
+}
+
+// Accessibility: Disable animation for users who prefer reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .iframe-placeholder__text,
+  .contact-facade__loading-text {
+    animation: none;
+    opacity: 0.7;
+  }
+
+  .contact-facade__overlay,
+  .contact-facade__preview,
+  .iframe-placeholder {
+    transition: none;
+  }
+}
+
+// =========================
+// Contact Form Facade
+// Lightweight static preview shown while iframe loads in background
+// =========================
+.contact-facade {
+  position: relative;
+  width: 848px; // Exact HoneyBook container width
+  height: 960px; // Fixed height prevents layout shift
+  margin: 0 auto;
+  background: $color-cream;
+  border: none; // HoneyBook form has no outer border
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-lg) {
+    width: 100%;
+    max-width: 400px;
+    height: 1600px; // Taller for single-column mobile layout
+  }
+
+  // Loading overlay (transparent, just holds the indicator)
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background: transparent;
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
+  }
+
+  &__loading-indicator {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($color-gold, 0.5),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.2s ease-in-out infinite;
+    border-radius: 2px;
+  }
+
+  // Static preview (absolutely positioned, same spot as iframe)
+  &__preview {
+    position: absolute;
+    inset: 0;
+    // HoneyBook layout: 848px container, 760px content (350+60+350), leaves 44px each side
+    padding: 60px 44px 32px; // Top accounts for HoneyBook header bar
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
+    overflow: hidden;
+  }
+
+  // Iframe loads behind preview, becomes visible when loaded
+  iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    opacity: 0; // Start hidden, fade in when loaded
+    transition: opacity 0.4s ease-out;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 350px 350px; // Exact HoneyBook input width
+    gap: 60px; // Exact HoneyBook horizontal gap
+    margin-bottom: 28px; // Vertical gap between rows
+
+    @media (max-width: $breakpoint-lg) {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+  }
+
+  // Staggered shimmer animation for visual flow
+  &__row:nth-child(1) .contact-facade__input,
+  &__row:nth-child(1) .contact-facade__select {
+    animation-delay: 0s;
+  }
+
+  &__row:nth-child(2) .contact-facade__input,
+  &__row:nth-child(2) .contact-facade__select {
+    animation-delay: 0.1s;
+  }
+
+  &__row:nth-child(3) .contact-facade__input,
+  &__row:nth-child(3) .contact-facade__select {
+    animation-delay: 0.2s;
+  }
+
+  &__row:nth-child(4) .contact-facade__input,
+  &__row:nth-child(4) .contact-facade__select {
+    animation-delay: 0.3s;
+  }
+
+  &__field--full .contact-facade__textarea {
+    animation-delay: 0.4s;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; // Exact HoneyBook label-to-input gap
+
+    &--full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__label {
+    width: 120px;
+    height: 14px;
+    background: linear-gradient(
+      110deg,
+      rgba($color-cream, 0.8) 0%,
+      rgba($color-white, 0.5) 25%,
+      rgba($color-cream, 0.8) 50%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    border-radius: 4px;
+
+    // Width modifiers for realistic appearance
+    &--sm {
+      width: 60px;
+    }
+    &--md {
+      width: 100px;
+    }
+    &--lg {
+      width: 160px;
+    }
+    &--xl {
+      width: 220px;
+    }
+  }
+
+  &__input,
+  &__select {
+    height: 42px;
+    padding: 0 20px 0 12px;
+    background: linear-gradient(
+      110deg,
+      $color-white 0%,
+      rgba($color-cream, 0.5) 25%,
+      $color-white 50%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    border: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+  &__select {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid rgba($color-black, 0.3);
+    }
+  }
+
+  &__textarea {
+    height: 180px;
+    padding: 12px;
+    background: linear-gradient(
+      110deg,
+      $color-white 0%,
+      rgba($color-cream, 0.5) 25%,
+      $color-white 50%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    border: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+  &__submit {
+    margin-top: 32px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &__button {
+    width: 200px;
+    height: 50px;
+    background: linear-gradient(
+      110deg,
+      rgba($color-cream, 0.9) 0%,
+      rgba($color-white, 0.6) 25%,
+      rgba($color-cream, 0.9) 50%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    animation-delay: 0.5s;
+    border: none;
+    border-radius: 8px;
+  }
+
+  // Loading state (iframe is being loaded - dim preview slightly)
+  &--loading {
+    .contact-facade__preview {
+      opacity: 0.5;
+    }
+  }
+
+  // Loaded state (iframe ready - smooth crossfade)
+  &--loaded {
+    .contact-facade__overlay,
+    .contact-facade__preview {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease-out;
+    }
+
+    iframe {
+      opacity: 1;
+      transition: opacity 0.4s ease-out 0.1s; // Slight delay for crossfade effect
+    }
+  }
+
+  // Error state (iframe failed to load after extended timeout)
+  &--error {
+    .contact-facade__overlay,
+    .contact-facade__preview {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .contact-facade__error {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  &__error {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: $color-cream;
+    text-align: center;
+    padding: $spacing-xl;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
+  }
+
+  &__error-title {
+    font-family: $font-primary;
+    font-size: 18px;
+    font-weight: $font-weight-medium;
+    color: $color-black;
+    margin-bottom: $spacing-md;
+  }
+
+  &__error-contact {
+    font-family: $font-secondary;
+    font-size: 14px;
+    line-height: 1.6;
+    color: $color-medium-gray;
+
+    a {
+      color: $color-gold;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Accessibility: Respect reduced motion preference
+  @media (prefers-reduced-motion: reduce) {
+    .contact-facade__input,
+    .contact-facade__select,
+    .contact-facade__textarea,
+    .contact-facade__label,
+    .contact-facade__button {
+      animation: none;
+    }
+
+    .contact-facade__input,
+    .contact-facade__select,
+    .contact-facade__textarea,
+    .contact-facade__label,
+    .contact-facade__button {
+      background: rgba($color-cream, 0.7);
     }
   }
 }

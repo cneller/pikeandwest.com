@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
   initGalleryScrollButtons();
   initLightbox();
   initScrollAnimations();
+  initLazyIframes();
+  initContactFacade();
 });
 
 // Mobile Navigation
@@ -208,4 +210,159 @@ function initScrollAnimations() {
   }, observerOptions);
 
   fadeElements.forEach((el) => observer.observe(el));
+}
+
+// Lazy-load iframes with Intersection Observer
+// Delays iframe loading until user scrolls near, improving initial page load
+function initLazyIframes() {
+  const lazyContainers = document.querySelectorAll('.iframe-lazy');
+
+  if (lazyContainers.length === 0) return;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '200px 0px', // Start loading 200px before visible
+    threshold: 0,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const container = entry.target;
+        const src = container.dataset.src;
+        const title = container.dataset.title || 'Embedded content';
+        const isMap = container.classList.contains('iframe-lazy--map');
+
+        if (!src) return;
+
+        // Create the iframe element
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.title = title;
+        iframe.setAttribute('loading', 'lazy');
+        iframe.setAttribute('frameborder', '0');
+
+        if (isMap) {
+          iframe.setAttribute('allowfullscreen', '');
+          iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+          iframe.style.border = '0';
+        } else {
+          iframe.setAttribute('scrolling', 'no');
+        }
+
+        // Mark as loaded and insert iframe
+        container.classList.add('iframe-lazy--loaded');
+        container.appendChild(iframe);
+
+        // Fade out placeholder after iframe loads
+        const placeholder = container.querySelector('.iframe-placeholder');
+        if (placeholder) {
+          const hidePlaceholder = () => {
+            placeholder.classList.add('iframe-placeholder--hidden');
+            // Remove from DOM after fade completes
+            setTimeout(() => placeholder.remove(), 300);
+          };
+
+          iframe.addEventListener('load', hidePlaceholder);
+          // Fallback: fade out after timeout if load doesn't fire
+          setTimeout(() => {
+            if (
+              placeholder.parentNode &&
+              !placeholder.classList.contains('iframe-placeholder--hidden')
+            ) {
+              hidePlaceholder();
+            }
+          }, 5000);
+        }
+
+        observer.unobserve(container);
+      }
+    });
+  }, observerOptions);
+
+  lazyContainers.forEach((container) => observer.observe(container));
+}
+
+// Contact Form Facade
+// Auto-loads HoneyBook iframe after page load (async, non-blocking)
+function initContactFacade() {
+  const facade = document.querySelector('.contact-facade');
+
+  if (!facade) return;
+
+  const src = facade.dataset.iframeSrc;
+
+  if (!src) return;
+
+  let loadAttempted = false;
+
+  function loadIframe() {
+    // Prevent double-loading
+    if (facade.classList.contains('contact-facade--loading')) return;
+
+    loadAttempted = true;
+    facade.classList.add('contact-facade--loading');
+
+    // Create and insert iframe
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = 'Contact Form';
+    iframe.setAttribute('loading', 'eager');
+    iframe.setAttribute('scrolling', 'no');
+    iframe.setAttribute('frameborder', '0');
+
+    iframe.addEventListener('load', () => {
+      facade.classList.remove('contact-facade--loading');
+      facade.classList.add('contact-facade--loaded');
+      facade.setAttribute('aria-busy', 'false');
+    });
+
+    iframe.addEventListener('error', () => {
+      showError();
+    });
+
+    facade.appendChild(iframe);
+  }
+
+  function showError() {
+    facade.classList.remove('contact-facade--loading');
+    facade.classList.add('contact-facade--error');
+    facade.setAttribute('aria-busy', 'false');
+  }
+
+  // Extended timeout: show error state if form doesn't load
+  // Note: iframe load event may not fire for cross-origin, so we have two timeouts:
+  // - 8s: assume loaded (normal fallback)
+  // - 15s: assume error if still not visibly loaded
+  setTimeout(() => {
+    if (
+      loadAttempted &&
+      !facade.classList.contains('contact-facade--loaded') &&
+      !facade.classList.contains('contact-facade--error')
+    ) {
+      // First timeout: assume it loaded (iframe load event may not fire cross-origin)
+      facade.classList.remove('contact-facade--loading');
+      facade.classList.add('contact-facade--loaded');
+      facade.setAttribute('aria-busy', 'false');
+    }
+  }, 8000);
+
+  setTimeout(() => {
+    // Extended timeout: if page seems broken, show error
+    // This catches cases where the iframe exists but content failed to render
+    if (
+      loadAttempted &&
+      !facade.classList.contains('contact-facade--loaded') &&
+      !facade.classList.contains('contact-facade--error')
+    ) {
+      showError();
+    }
+  }, 15000);
+
+  // Load iframe async after page is ready (non-blocking)
+  if (typeof requestIdleCallback !== 'undefined') {
+    requestIdleCallback(loadIframe);
+  } else {
+    setTimeout(loadIframe, 0);
+  }
 }
