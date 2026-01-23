@@ -1,0 +1,7 @@
+{
+  "label": "divider",
+  "schema": [
+    "blog"
+  ],
+  "code": "{{< divider >}}\n"
+}
