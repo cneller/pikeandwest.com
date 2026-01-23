@@ -1,11 +1,12 @@
 ---
 name: blog-editor
 description: >
-  Use this agent when creating, editing, or reviewing Pike & West blog posts.
-  Automatically applies magazine-style editorial formatting including drop caps,
-  pull quotes, section dividers, tip boxes, fact boxes, timelines, and other
-  visual enhancements. Ensures brand voice consistency and accessibility.
-  Updates content index after every edit.
+  ALWAYS use this agent for ANY task involving Pike & West blog content.
+  Triggers: "write a blog post", "edit blog", "create blog article", "update blog",
+  "blog draft", "new blog post", "modify blog content", "review blog", "fix blog",
+  any file in content/blog/*.md. Applies magazine-style editorial formatting
+  (drop caps, pull quotes, dividers, tip boxes, fact boxes, timelines).
+  Ensures brand voice and updates content index after every edit.
 model: claude-opus-4-5-20251101
 inherits:
   - content-editing
