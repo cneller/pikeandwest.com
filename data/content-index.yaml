@@ -11,10 +11,10 @@ meta:
   updated_by: manual
 
   stats:
-    total_pages: 0
-    blog_posts: 0
-    event_pages: 0
-    static_pages: 0
+    total_pages: 20
+    blog_posts: 6
+    event_pages: 6
+    static_pages: 8
     orphan_pages: 0
     avg_audit_score: 0
     content_gaps: 0
@@ -119,4 +119,1453 @@ definitions:
 clusters: {}
 
 # === PAGE ENTRIES ===
-pages: {}
+pages:
+  # ==================== BLOG POSTS ====================
+
+  /blog/corporate-event-planning-tips-2026:
+    title: "5 Tips for Planning a Memorable Corporate Event in 2026"
+    type: blog
+    status: published
+    primary_keyword: "corporate event planning"
+    secondary_keywords:
+      - "corporate venue Germantown"
+      - "company party ideas"
+      - "team celebration venue"
+    search_intent: informational
+    keyword_difficulty: medium
+    topic_summary:
+      "Expert tips for planning corporate events including venue booking,
+      catering, and creating memorable experiences."
+    cluster: corporate
+    funnel_stage: mofu
+    content_goal: traffic
+    entities:
+      - Pike & West
+      - Memphis
+      - Germantown
+    personas:
+      - corporate-planner
+      - executive
+    personas_primary: corporate-planner
+    event_types:
+      - corporate
+    event_types_primary: corporate
+    word_count: 0
+    target_word_count: 1500
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended:
+      - tip
+      - numbered-list
+    drop_cap: true
+    has_cta: false
+    images:
+      count: 0
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /events/corporate-events
+      - /contact
+    orphan: false
+    author: "Pike & West"
+    created: "2026-01-20"
+    last_modified: "2026-01-20"
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /blog/fall-baby-shower-inspiration:
+    title: "Creating the Perfect Fall Baby Shower in 2026"
+    type: blog
+    status: published
+    primary_keyword: "fall baby shower ideas"
+    secondary_keywords:
+      - "baby shower venue Germantown"
+      - "elegant baby shower venues"
+      - "boho baby shower venue"
+    search_intent: informational
+    keyword_difficulty: medium
+    topic_summary:
+      "Elegant autumn baby shower ideas featuring honey-inspired decor,
+      eco-friendly touches, and sophisticated celebration themes."
+    cluster: celebrations
+    funnel_stage: tofu
+    content_goal: traffic
+    entities:
+      - Pike & West
+      - Memphis
+      - Germantown
+    personas:
+      - parent
+      - host
+    personas_primary: parent
+    event_types:
+      - baby-shower
+    event_types_primary: baby-shower
+    word_count: 0
+    target_word_count: 1500
+    evergreen: false
+    seasonal_relevance:
+      - Q3
+      - Q4
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended:
+      - tip
+      - fact-box
+    drop_cap: true
+    has_cta: false
+    images:
+      count: 0
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /events/baby-showers
+      - /contact
+    orphan: false
+    author: "Pike & West"
+    created: "2026-01-20"
+    last_modified: "2026-01-20"
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /blog/holiday-anniversary-celebrations:
+    title: "Celebrating Your Anniversary During the Holiday Season"
+    type: blog
+    status: published
+    primary_keyword: "anniversary party venue"
+    secondary_keywords:
+      - "holiday anniversary ideas"
+      - "romantic venue Germantown"
+      - "milestone anniversary celebration"
+    search_intent: informational
+    keyword_difficulty: medium
+    topic_summary:
+      "How to create intimate, intentional anniversary celebrations during the
+      holiday season with the low-key luxe trend."
+    cluster: celebrations
+    funnel_stage: tofu
+    content_goal: traffic
+    entities:
+      - Pike & West
+      - Memphis
+      - Germantown
+    personas:
+      - host
+    personas_primary: host
+    event_types:
+      - anniversary
+      - private-party
+    event_types_primary: anniversary
+    word_count: 0
+    target_word_count: 1500
+    evergreen: false
+    seasonal_relevance:
+      - Q4
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended:
+      - pull-quote
+      - sidebar-quote
+    drop_cap: true
+    has_cta: false
+    images:
+      count: 0
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /events/private-parties
+      - /contact
+    orphan: false
+    author: "Pike & West"
+    created: "2025-11-08"
+    last_modified: "2025-11-08"
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /blog/milestone-birthday-new-year:
+    title: "Planning a Milestone Birthday Celebration to Start the New Year"
+    type: blog
+    status: published
+    primary_keyword: "milestone birthday venue"
+    secondary_keywords:
+      - "50th birthday party ideas"
+      - "birthday celebration venue Germantown"
+      - "adult birthday party planning"
+    search_intent: informational
+    keyword_difficulty: medium
+    topic_summary:
+      "Expert tips for planning milestone birthday celebrations (30th, 40th,
+      50th) in January, including Golden Jubilee and retro decade themes."
+    cluster: celebrations
+    funnel_stage: tofu
+    content_goal: traffic
+    entities:
+      - Pike & West
+      - Memphis
+      - Germantown
+    personas:
+      - host
+      - parent
+    personas_primary: host
+    event_types:
+      - birthday
+    event_types_primary: birthday
+    word_count: 0
+    target_word_count: 1500
+    evergreen: false
+    seasonal_relevance:
+      - Q1
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended:
+      - tip
+      - fact-box
+    drop_cap: true
+    has_cta: false
+    images:
+      count: 0
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /events/birthday-parties
+      - /contact
+    orphan: false
+    author: "Pike & West"
+    created: "2025-12-19"
+    last_modified: "2025-12-19"
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /blog/valentines-day-love-in-all-forms:
+    title: "Valentine's Day Is for Everyone: Celebrating Love in All Its Forms"
+    type: blog
+    status: published
+    primary_keyword: "Valentine's Day party venue"
+    secondary_keywords:
+      - "Galentine's Day event Germantown"
+      - "daddy daughter dance Tennessee"
+      - "singles Valentine's party"
+    search_intent: informational
+    keyword_difficulty: medium
+    topic_summary:
+      "Valentine's Day celebration ideas beyond couples including Galentine's
+      gatherings, daddy-daughter dances, and singles parties."
+    cluster: weddings
+    funnel_stage: tofu
+    content_goal: traffic
+    entities:
+      - Pike & West
+      - Memphis
+      - Germantown
+    personas:
+      - host
+      - parent
+    personas_primary: host
+    event_types:
+      - private-party
+      - dance
+    event_types_primary: private-party
+    word_count: 0
+    target_word_count: 1500
+    evergreen: false
+    seasonal_relevance:
+      - Q1
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 1
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended:
+      - divider
+    drop_cap: true
+    has_cta: false
+    images:
+      count: 0
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /events/private-parties
+      - /events/dance-events
+      - /contact
+    orphan: false
+    author: "Pike & West"
+    created: "2026-01-22"
+    last_modified: "2026-01-22"
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /blog/welcome-to-pike-and-west:
+    title: "Welcome to the Pike & West Blog"
+    type: blog
+    status: published
+    primary_keyword: "Pike & West blog"
+    secondary_keywords:
+      - "Germantown event venue news"
+      - "event planning inspiration Memphis"
+    search_intent: navigational
+    keyword_difficulty: low
+    topic_summary:
+      "Introduction to the Pike & West blog featuring event inspiration,
+      planning advice, and venue updates."
+    cluster: weddings
+    funnel_stage: tofu
+    content_goal: awareness
+    entities:
+      - Pike & West
+      - Memphis
+      - Germantown
+    personas:
+      - bride
+      - corporate-planner
+      - host
+    personas_primary: bride
+    event_types:
+      - wedding
+      - corporate
+      - private-party
+    event_types_primary: wedding
+    word_count: 0
+    target_word_count: 800
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: true
+    has_cta: false
+    images:
+      count: 0
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /events/weddings
+      - /contact
+    orphan: false
+    author: "Pike & West"
+    created: "2026-01-19"
+    last_modified: "2026-01-19"
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  # ==================== EVENT PAGES ====================
+
+  /events/weddings:
+    title: "Weddings at Pike & West"
+    type: event-page
+    status: published
+    primary_keyword: "wedding venue Germantown"
+    secondary_keywords:
+      - "art gallery wedding Memphis"
+      - "elegant wedding venue Tennessee"
+      - "intimate wedding space"
+    search_intent: commercial
+    keyword_difficulty: high
+    topic_summary:
+      "Pike & West offers an elegant art gallery setting for wedding ceremonies
+      and receptions in Germantown, TN."
+    cluster: weddings
+    funnel_stage: mofu
+    content_goal: leads
+    entities:
+      - Pike & West
+      - Germantown
+      - Memphis
+    personas:
+      - bride
+      - groom
+      - wedding-planner
+    personas_primary: bride
+    event_types:
+      - wedding
+    event_types_primary: wedding
+    word_count: 0
+    target_word_count: 800
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: true
+    images:
+      count: 1
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /contact
+      - /blog/welcome-to-pike-and-west
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /events/corporate-events:
+    title: "Corporate Events at Pike & West"
+    type: event-page
+    status: published
+    primary_keyword: "corporate event venue Memphis"
+    secondary_keywords:
+      - "company party venue Germantown"
+      - "team gathering space Tennessee"
+      - "professional event venue"
+    search_intent: commercial
+    keyword_difficulty: high
+    topic_summary:
+      "Pike & West offers a distinctive art gallery setting for corporate
+      events, holiday parties, and team celebrations."
+    cluster: corporate
+    funnel_stage: mofu
+    content_goal: leads
+    entities:
+      - Pike & West
+      - Germantown
+      - Memphis
+    personas:
+      - corporate-planner
+      - executive
+    personas_primary: corporate-planner
+    event_types:
+      - corporate
+    event_types_primary: corporate
+    word_count: 0
+    target_word_count: 800
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: true
+    images:
+      count: 1
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /contact
+      - /blog/corporate-event-planning-tips-2026
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /events/birthday-parties:
+    title: "Birthday Parties at Pike & West"
+    type: event-page
+    status: published
+    primary_keyword: "birthday party venue Memphis"
+    secondary_keywords:
+      - "milestone birthday venue Germantown"
+      - "adult birthday party space"
+      - "elegant birthday celebration"
+    search_intent: commercial
+    keyword_difficulty: medium
+    topic_summary:
+      "Pike & West provides an elegant art gallery backdrop for milestone
+      birthday celebrations including 30th, 40th, and 50th birthdays."
+    cluster: celebrations
+    funnel_stage: mofu
+    content_goal: leads
+    entities:
+      - Pike & West
+      - Germantown
+      - Memphis
+    personas:
+      - host
+      - parent
+    personas_primary: host
+    event_types:
+      - birthday
+    event_types_primary: birthday
+    word_count: 0
+    target_word_count: 600
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: true
+    images:
+      count: 1
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /contact
+      - /blog/milestone-birthday-new-year
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /events/baby-showers:
+    title: "Baby Showers at Pike & West"
+    type: event-page
+    status: published
+    primary_keyword: "baby shower venue Germantown"
+    secondary_keywords:
+      - "elegant baby shower Memphis"
+      - "baby shower space Tennessee"
+    search_intent: commercial
+    keyword_difficulty: medium
+    topic_summary:
+      "Pike & West offers an elegant art gallery setting for baby showers with
+      sophisticated yet warm atmosphere."
+    cluster: celebrations
+    funnel_stage: mofu
+    content_goal: leads
+    entities:
+      - Pike & West
+      - Germantown
+      - Memphis
+    personas:
+      - parent
+      - host
+    personas_primary: parent
+    event_types:
+      - baby-shower
+    event_types_primary: baby-shower
+    word_count: 0
+    target_word_count: 600
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: true
+    images:
+      count: 1
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /contact
+      - /blog/fall-baby-shower-inspiration
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /events/private-parties:
+    title: "Private Parties at Pike & West"
+    type: event-page
+    status: published
+    primary_keyword: "private party venue Germantown"
+    secondary_keywords:
+      - "anniversary venue Memphis"
+      - "private celebration space Tennessee"
+      - "reunion venue"
+    search_intent: commercial
+    keyword_difficulty: medium
+    topic_summary:
+      "Pike & West hosts private events including anniversary celebrations,
+      reunions, holiday gatherings, and special occasions."
+    cluster: celebrations
+    funnel_stage: mofu
+    content_goal: leads
+    entities:
+      - Pike & West
+      - Germantown
+      - Memphis
+    personas:
+      - host
+    personas_primary: host
+    event_types:
+      - private-party
+      - anniversary
+    event_types_primary: private-party
+    word_count: 0
+    target_word_count: 600
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: true
+    images:
+      count: 1
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /contact
+      - /blog/holiday-anniversary-celebrations
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /events/dance-events:
+    title: "Dance Events at Pike & West"
+    type: event-page
+    status: published
+    primary_keyword: "dance event venue Memphis"
+    secondary_keywords:
+      - "dance party space Germantown"
+      - "quinceañera venue Tennessee"
+      - "prom venue"
+    search_intent: commercial
+    keyword_difficulty: medium
+    topic_summary:
+      "Pike & West's open gallery floor plan creates an ideal space for dance
+      events including themed parties, quinceañeras, and celebrations."
+    cluster: celebrations
+    funnel_stage: mofu
+    content_goal: leads
+    entities:
+      - Pike & West
+      - Germantown
+      - Memphis
+    personas:
+      - host
+      - parent
+    personas_primary: host
+    event_types:
+      - dance
+    event_types_primary: dance
+    word_count: 0
+    target_word_count: 600
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: true
+    images:
+      count: 1
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /contact
+      - /blog/valentines-day-love-in-all-forms
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  # ==================== STATIC PAGES ====================
+
+  /:
+    title: "Pike & West | Germantown Gallery and Event Venue"
+    type: static-page
+    status: published
+    primary_keyword: "event venue Germantown TN"
+    secondary_keywords:
+      - "art gallery venue Memphis"
+      - "wedding venue Germantown"
+      - "corporate event space Memphis"
+    search_intent: navigational
+    keyword_difficulty: high
+    topic_summary:
+      "Pike & West homepage introducing Germantown's premier art gallery and
+      event venue for weddings, corporate events, and private celebrations."
+    cluster: null
+    funnel_stage: tofu
+    content_goal: awareness
+    entities:
+      - Pike & West
+      - Germantown
+      - Memphis
+    personas:
+      - bride
+      - corporate-planner
+      - host
+    personas_primary: bride
+    event_types:
+      - wedding
+      - corporate
+      - private-party
+    event_types_primary: wedding
+    word_count: 0
+    target_word_count: null
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: true
+    images:
+      count: 0
+      hero_image: true
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended: []
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /about:
+    title: "About Pike & West | Germantown's Premier Art Gallery & Event Venue"
+    type: static-page
+    status: published
+    primary_keyword: "art gallery Germantown TN"
+    secondary_keywords:
+      - "Pike & West story"
+      - "event venue history Memphis"
+    search_intent: informational
+    keyword_difficulty: low
+    topic_summary:
+      "About Pike & West, Germantown's premier art gallery and event venue,
+      including our story and team."
+    cluster: null
+    funnel_stage: mofu
+    content_goal: awareness
+    entities:
+      - Pike & West
+      - Germantown
+      - Memphis
+    personas:
+      - bride
+      - corporate-planner
+      - artist
+    personas_primary: bride
+    event_types: []
+    event_types_primary: null
+    word_count: 0
+    target_word_count: 500
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: true
+    images:
+      count: 0
+      hero_image: false
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended:
+      - /contact
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /contact:
+    title: "Contact Pike & West | Schedule a Tour in Germantown, TN"
+    type: static-page
+    status: published
+    primary_keyword: "tour Pike & West"
+    secondary_keywords:
+      - "event venue contact Memphis"
+      - "Germantown venue tour"
+    search_intent: transactional
+    keyword_difficulty: low
+    topic_summary:
+      "Contact page for Pike & West with tour scheduling, address, phone, and
+      contact form."
+    cluster: null
+    funnel_stage: bofu
+    content_goal: conversion
+    entities:
+      - Pike & West
+      - Germantown
+      - 2277 West Street
+    personas:
+      - bride
+      - corporate-planner
+      - host
+    personas_primary: bride
+    event_types: []
+    event_types_primary: null
+    word_count: 0
+    target_word_count: null
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: contact
+    cta_destination: null
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: true
+    images:
+      count: 0
+      hero_image: false
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended: []
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /gallery-application:
+    title: "Gallery Application"
+    type: static-page
+    status: published
+    primary_keyword: "art gallery application Germantown"
+    secondary_keywords:
+      - "exhibit artwork Tennessee"
+      - "gallery artist submission Memphis"
+    search_intent: transactional
+    keyword_difficulty: low
+    topic_summary:
+      "Application page for artists to submit work for exhibition at Pike & West
+      gallery."
+    cluster: null
+    funnel_stage: bofu
+    content_goal: leads
+    entities:
+      - Pike & West
+      - Germantown
+    personas:
+      - artist
+    personas_primary: artist
+    event_types: []
+    event_types_primary: null
+    word_count: 0
+    target_word_count: 300
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: contact
+    cta_destination: null
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: true
+    images:
+      count: 0
+      hero_image: false
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended: []
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /accessibility:
+    title: "Accessibility Statement"
+    type: static-page
+    status: published
+    primary_keyword: null
+    secondary_keywords: []
+    search_intent: informational
+    keyword_difficulty: null
+    topic_summary:
+      "Pike & West's commitment to digital accessibility and WCAG compliance."
+    cluster: null
+    funnel_stage: null
+    content_goal: null
+    entities:
+      - Pike & West
+    personas: []
+    personas_primary: null
+    event_types: []
+    event_types_primary: null
+    word_count: 0
+    target_word_count: null
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: none
+    cta_destination: null
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: false
+    images:
+      count: 0
+      hero_image: false
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended: []
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /privacy:
+    title: "Privacy Policy"
+    type: static-page
+    status: published
+    primary_keyword: null
+    secondary_keywords: []
+    search_intent: informational
+    keyword_difficulty: null
+    topic_summary:
+      "Pike & West privacy policy covering data collection, use, and protection."
+    cluster: null
+    funnel_stage: null
+    content_goal: null
+    entities:
+      - Pike & West
+    personas: []
+    personas_primary: null
+    event_types: []
+    event_types_primary: null
+    word_count: 0
+    target_word_count: null
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: none
+    cta_destination: null
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: false
+    images:
+      count: 0
+      hero_image: false
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended: []
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /blog:
+    title: "Blog | Event Planning Tips & Inspiration from Pike & West"
+    type: static-page
+    status: published
+    primary_keyword: "event planning blog Memphis"
+    secondary_keywords:
+      - "venue tips Germantown"
+      - "celebration ideas Tennessee"
+    search_intent: informational
+    keyword_difficulty: medium
+    topic_summary:
+      "Pike & West blog index page featuring event planning tips and
+      inspiration."
+    cluster: null
+    funnel_stage: tofu
+    content_goal: traffic
+    entities:
+      - Pike & West
+      - Memphis
+      - Germantown
+    personas:
+      - bride
+      - corporate-planner
+      - host
+    personas_primary: bride
+    event_types: []
+    event_types_primary: null
+    word_count: 0
+    target_word_count: null
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: none
+    cta_destination: null
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: false
+    images:
+      count: 0
+      hero_image: false
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended: []
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
+
+  /events:
+    title: "Events at Pike & West"
+    type: static-page
+    status: published
+    primary_keyword: "events Pike & West"
+    secondary_keywords:
+      - "event types Germantown venue"
+    search_intent: navigational
+    keyword_difficulty: low
+    topic_summary:
+      "Pike & West events index page listing all event types from weddings to
+      corporate events."
+    cluster: null
+    funnel_stage: tofu
+    content_goal: awareness
+    entities:
+      - Pike & West
+      - Germantown
+    personas:
+      - bride
+      - corporate-planner
+      - host
+    personas_primary: bride
+    event_types:
+      - wedding
+      - corporate
+      - birthday
+      - baby-shower
+      - private-party
+      - dance
+    event_types_primary: null
+    word_count: 0
+    target_word_count: null
+    evergreen: true
+    seasonal_relevance: []
+    cta_type: none
+    cta_destination: null
+    shortcodes:
+      pull-quote: 0
+      divider: 0
+      tip: 0
+      fact-box: 0
+      timeline: 0
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: false
+    has_cta: false
+    images:
+      count: 0
+      hero_image: false
+      all_have_alt: true
+      images_list: []
+    links_out: []
+    links_in: []
+    links_recommended: []
+    orphan: false
+    author: ""
+    created: null
+    last_modified: null
+    last_audited: null
+    next_review: null
+    audit_score: 0
+    audit_scores:
+      seo: 0
+      brand_voice: 0
+      editorial: 0
+      freshness: 0
+      technical: 0
+    issues_count: 0
