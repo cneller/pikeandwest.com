@@ -1,0 +1,32 @@
+# GSC Monitoring Configuration
+# Copy to config.yaml and customize
+
+# Google Search Console property
+property:
+  # Resource ID from GSC URL (after resource_id=)
+  resource_id: "sc-domain:example.com"
+  # Human-readable name for reports
+  name: "Example Site"
+
+# Output settings
+output:
+  # JSONL file for trend tracking (appends each run)
+  trends_file: "reports/trends.jsonl"
+  # Latest snapshot (overwrites each run)
+  latest_file: "reports/latest.json"
+
+# Auth settings
+auth:
+  # Storage state file location
+  state_file: ".auth/gsc-state.json"
+  # Session expiry in hours (Google sessions ~24h)
+  expiry_hours: 20
+
+# Browser settings
+browser:
+  # Run headless (false for auth setup)
+  headless: true
+  # Viewport dimensions
+  viewport:
+    width: 1440
+    height: 900
