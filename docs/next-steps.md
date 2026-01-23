@@ -253,6 +253,7 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-23 | Fixed FOUC on contact page: added full page critical CSS (shimmer, Find Us, footer)               |
 | 2026-01-23 | Consolidated facade/shimmer to single shimmer implementation, removed ~750 lines of dead code     |
 | 2026-01-23 | Added pixel-perfect shimmer measurements via Playwright (docs/contact-form/README.md)             |
 | 2026-01-23 | Added shimmer blocks for all form elements: labels, inputs, hints, buttons, header, footer        |
