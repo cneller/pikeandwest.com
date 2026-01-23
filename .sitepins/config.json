@@ -10,6 +10,18 @@
   "custom-commit": false,
   "arrangement": [
     {
+      "type": "file",
+      "targetPath": "content/_index.md",
+      "groupName": "Homepage"
+    },
+    {
+      "type": "folder",
+      "targetPath": "content",
+      "groupName": "Pages",
+      "include": "*.md",
+      "exclude": "_index.md"
+    },
+    {
       "type": "folder",
       "targetPath": "content/blog",
       "groupName": "Blog",
@@ -18,8 +30,8 @@
     },
     {
       "type": "folder",
-      "targetPath": "content",
-      "groupName": "Pages",
+      "targetPath": "content/events",
+      "groupName": "Event Pages",
       "include": "*.md",
       "exclude": ""
     }
