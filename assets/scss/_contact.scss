@@ -495,4 +495,20 @@
       }
     }
   }
+
+  // Accessibility: Respect reduced motion preference
+  @media (prefers-reduced-motion: reduce) {
+    .contact-facade__input,
+    .contact-facade__select,
+    .contact-facade__textarea,
+    .contact-facade__label {
+      animation: none;
+    }
+
+    .contact-facade__input,
+    .contact-facade__select,
+    .contact-facade__textarea {
+      background: rgba($color-cream, 0.7);
+    }
+  }
 }
