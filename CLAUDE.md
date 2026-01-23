@@ -265,13 +265,21 @@ Pike & West made our day magical.
 | `/blog-draft <topic>` | Generates draft with required styling elements |
 | `/content-audit [path]` | Audits posts for missing editorial styling |
 
-### Blog Editor Agent
+### Blog Editor Agent (Auto-Delegated)
 
-Use the blog-editor agent (`.claude/agents/blog-editor.md`) when creating or editing blog posts. It provides:
-- Complete shortcode reference
-- Formatting workflow
-- Quality checklist
-- Brand voice reminders
+**The blog-editor agent is automatically invoked when working with `content/blog/*.md` files.** It handles all editorial styling decisions and ensures consistent formatting across posts.
+
+Located at `.claude/agents/blog-editor.md`, the agent:
+- Applies required elements (drop caps, pull quotes, dividers)
+- Selects content-appropriate elements (tip boxes, fact boxes, timelines, etc.)
+- Validates against the quality checklist
+- Ensures brand voice consistency
+
+**Commands delegate to this agent:**
+- `/blog-draft` → Phase 2 delegates styling to agent
+- `/content-audit` → Phase 2 delegates evaluation to agent
+
+The agent contains all editorial styling logic, so even if commands are forgotten, the agent will apply correct formatting when editing blog content.
 
 ## Webflow Reference
 
