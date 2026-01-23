@@ -8,5 +8,13 @@
     "data"
   ],
   "custom-commit": false,
-  "arrangement": []
+  "arrangement": [
+    {
+      "type": "folder",
+      "targetPath": "content/blog",
+      "groupName": "Blog",
+      "include": "*.md",
+      "exclude": "_index.md"
+    }
+  ]
 }
