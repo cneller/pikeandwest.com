@@ -3,10 +3,14 @@
   Purpose: Lightweight static preview that auto-loads real HoneyBook iframe when visible
   Usage: {{ partial "contact-form-facade.html" . }}
 */}}
-<div class="contact-facade" data-iframe-src="{{ .Site.Params.forms.contactEmbed }}">
+<div class="contact-facade"
+     data-iframe-src="{{ .Site.Params.forms.contactEmbed }}"
+     role="region"
+     aria-label="Contact form"
+     aria-busy="true">
   {{/* Loading overlay (shown automatically when iframe loads) */}}
-  <div class="contact-facade__overlay" aria-hidden="true">
-    <span class="contact-facade__loading-text">Loading form...</span>
+  <div class="contact-facade__overlay" aria-live="polite">
+    <span class="contact-facade__loading-text">Loading contact form...</span>
   </div>
 
   {{/* Static form preview */}}

@@ -266,7 +266,10 @@ function initLazyIframes() {
           iframe.addEventListener('load', hidePlaceholder);
           // Fallback: fade out after timeout if load doesn't fire
           setTimeout(() => {
-            if (placeholder.parentNode && !placeholder.classList.contains('iframe-placeholder--hidden')) {
+            if (
+              placeholder.parentNode &&
+              !placeholder.classList.contains('iframe-placeholder--hidden')
+            ) {
               hidePlaceholder();
             }
           }, 5000);
@@ -308,6 +311,7 @@ function initContactFacade() {
     iframe.addEventListener('load', () => {
       facade.classList.remove('contact-facade--loading');
       facade.classList.add('contact-facade--loaded');
+      facade.setAttribute('aria-busy', 'false');
     });
 
     // Fallback: mark as loaded after timeout (HoneyBook may not fire load)
@@ -315,6 +319,7 @@ function initContactFacade() {
       if (!facade.classList.contains('contact-facade--loaded')) {
         facade.classList.remove('contact-facade--loading');
         facade.classList.add('contact-facade--loaded');
+        facade.setAttribute('aria-busy', 'false');
       }
     }, 8000);
 
@@ -322,5 +327,7 @@ function initContactFacade() {
   }
 
   // Load iframe async after page is ready (non-blocking)
-  requestIdleCallback ? requestIdleCallback(loadIframe) : setTimeout(loadIframe, 0);
+  requestIdleCallback
+    ? requestIdleCallback(loadIframe)
+    : setTimeout(loadIframe, 0);
 }
