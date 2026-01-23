@@ -3,7 +3,7 @@ meta:
   schema_version: "1.0"
   last_updated: "2026-01-23"
   last_full_audit: "2026-01-23"
-  updated_by: blog-editor
+  updated_by: page-editor
   stats:
     total_pages: 21
     blog_posts: 6
@@ -802,7 +802,7 @@ pages:
       technical: 0
     issues_count: 0
   /events/birthday-parties:
-    title: Birthday Parties at Pike & West
+    title: Birthday Parties at Pike & West | Memphis Venue
     type: event-page
     status: published
     primary_keyword: birthday party venue Memphis
@@ -810,11 +810,13 @@ pages:
       - milestone birthday venue Germantown
       - adult birthday party space
       - elegant birthday celebration
+      - 50th birthday venue Tennessee
     search_intent: commercial
     keyword_difficulty: medium
     topic_summary:
       Pike & West provides an elegant art gallery backdrop for milestone
-      birthday celebrations including 30th, 40th, and 50th birthdays.
+      birthday celebrations including 30th, 40th, and 50th birthdays in
+      Germantown, TN with flexible layouts and exclusive venue use.
     cluster: celebrations
     funnel_stage: mofu
     content_goal: leads
@@ -829,7 +831,7 @@ pages:
     event_types:
       - birthday
     event_types_primary: birthday
-    word_count: 0
+    word_count: 784
     target_word_count: 600
     evergreen: true
     seasonal_relevance: []
@@ -839,7 +841,7 @@ pages:
       pull-quote: 0
       divider: 0
       tip: 0
-      fact-box: 0
+      fact-box: 1
       timeline: 0
       sidebar-quote: 0
       numbered-list: 0
@@ -853,39 +855,46 @@ pages:
       count: 1
       hero_image: true
       all_have_alt: true
-      images_list: []
-    links_out: []
-    links_in: []
-    links_recommended:
-      - /contact
+      images_list:
+        - images/venue/venue-05-dancefloor.jpg
+    links_out:
+      - /events/private-parties/
+      - /blog/milestone-birthday-new-year/
+      - /contact/
+    links_in:
       - /blog/milestone-birthday-new-year
+    links_recommended: []
     orphan: false
-    author: ""
-    created: null
-    last_modified: null
-    last_audited: null
-    next_review: null
-    audit_score: 0
+    author: Pike & West
+    created: "2026-01-23"
+    last_modified: "2026-01-23"
+    last_audited: "2026-01-23"
+    next_review: "2026-07-23"
+    audit_score: 88
     audit_scores:
-      seo: 0
-      brand_voice: 0
-      editorial: 0
-      freshness: 0
-      technical: 0
+      seo: 20
+      brand_voice: 18
+      editorial: 16
+      freshness: 15
+      technical: 19
     issues_count: 0
+    updated_by: page-editor
   /events/baby-showers:
-    title: Baby Showers at Pike & West
+    title: Baby Showers at Pike & West | Memphis Venue
     type: event-page
     status: published
     primary_keyword: baby shower venue Germantown
     secondary_keywords:
       - elegant baby shower Memphis
       - baby shower space Tennessee
+      - baby shower venue Memphis
+      - gender reveal party venue
     search_intent: commercial
     keyword_difficulty: medium
     topic_summary:
-      Pike & West offers an elegant art gallery setting for baby showers with
-      sophisticated yet warm atmosphere.
+      Pike & West offers an elegant art gallery setting for baby showers, gender
+      reveals, and sprinkle celebrations with sophisticated yet warm atmosphere
+      and flexible configurations for 15-60 guests.
     cluster: celebrations
     funnel_stage: mofu
     content_goal: leads
@@ -900,7 +909,7 @@ pages:
     event_types:
       - baby-shower
     event_types_primary: baby-shower
-    word_count: 0
+    word_count: 578
     target_word_count: 600
     evergreen: true
     seasonal_relevance: []
@@ -924,26 +933,29 @@ pages:
       count: 1
       hero_image: true
       all_have_alt: true
-      images_list: []
-    links_out: []
-    links_in: []
-    links_recommended:
-      - /contact
+      images_list:
+        - images/venue/venue-06-soft-seating.jpg
+    links_out:
+      - /blog/fall-baby-shower-inspiration/
+      - /contact/
+    links_in:
       - /blog/fall-baby-shower-inspiration
+    links_recommended: []
     orphan: false
-    author: ""
-    created: null
-    last_modified: null
-    last_audited: null
-    next_review: null
-    audit_score: 0
+    author: Pike & West
+    created: "2026-01-23"
+    last_modified: "2026-01-23"
+    last_audited: "2026-01-23"
+    next_review: "2026-07-23"
+    audit_score: 85
     audit_scores:
-      seo: 0
-      brand_voice: 0
-      editorial: 0
-      freshness: 0
-      technical: 0
+      seo: 18
+      brand_voice: 18
+      editorial: 16
+      freshness: 15
+      technical: 18
     issues_count: 0
+    updated_by: page-editor
   /events/private-parties:
     title: Private Parties at Pike & West
     type: event-page
@@ -1017,19 +1029,22 @@ pages:
       technical: 0
     issues_count: 0
   /events/dance-events:
-    title: Dance Events at Pike & West
+    title: Dance Events at Pike & West | Memphis Venue
     type: event-page
     status: published
     primary_keyword: dance event venue Memphis
     secondary_keywords:
       - dance party space Germantown
       - quinceañera venue Tennessee
-      - prom venue
+      - prom venue Memphis
+      - daddy daughter dance venue
+      - New Years Eve party venue
     search_intent: commercial
     keyword_difficulty: medium
     topic_summary:
-      Pike & West's open gallery floor plan creates an ideal space for dance
-      events including themed parties, quinceañeras, and celebrations.
+      Pike & West's open gallery floor plan creates an ideal art-inspired space
+      for dance events including quinceañeras, themed parties, daddy-daughter
+      dances, and milestone celebrations in Germantown, TN.
     cluster: celebrations
     funnel_stage: mofu
     content_goal: leads
@@ -1044,7 +1059,7 @@ pages:
     event_types:
       - dance
     event_types_primary: dance
-    word_count: 0
+    word_count: 620
     target_word_count: 600
     evergreen: true
     seasonal_relevance: []
@@ -1068,26 +1083,28 @@ pages:
       count: 1
       hero_image: true
       all_have_alt: true
-      images_list: []
-    links_out: []
-    links_in: []
-    links_recommended:
-      - /contact
+      images_list:
+        - images/venue/venue-08-disco-background.jpg
+    links_out:
       - /blog/valentines-day-love-in-all-forms
+      - /contact/
+    links_in: []
+    links_recommended: []
     orphan: false
-    author: ""
-    created: null
-    last_modified: null
-    last_audited: null
-    next_review: null
-    audit_score: 0
+    author: Pike & West
+    created: "2026-01-23"
+    last_modified: "2026-01-23"
+    last_audited: "2026-01-23"
+    next_review: "2026-07-23"
+    audit_score: 85
     audit_scores:
-      seo: 0
-      brand_voice: 0
-      editorial: 0
-      freshness: 0
-      technical: 0
+      seo: 18
+      brand_voice: 18
+      editorial: 16
+      freshness: 15
+      technical: 18
     issues_count: 0
+    updated_by: page-editor
   /:
     title: Pike & West | Germantown Gallery and Event Venue
     type: static-page

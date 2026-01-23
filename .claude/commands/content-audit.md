@@ -95,21 +95,6 @@ in a single message. Do not wait for one to complete before starting the next.
 
 After all sub-agents complete, aggregate results and perform cross-article analysis:
 
-#### 3.0 Update Content Index
-
-Before generating the report, ensure all sub-agent results are written to
-`data/content-index.yaml`. Each sub-agent should have updated its page entry.
-
-Then update aggregated fields:
-
-```yaml
-meta:
-  last_full_audit: [today]
-  stats:
-    avg_audit_score: [calculate from all pages]
-    orphan_pages: [count pages where orphan: true]
-```
-
 #### 3.1 Individual Aggregation
 
 - Collect all audit results
@@ -118,16 +103,7 @@ meta:
 
 #### 3.2 Keyword Cannibalization Detection
 
-Query the content index for keyword conflicts:
-
-```python
-# Pseudocode
-for page in index['pages']:
-    primary = page['primary_keyword']
-    for other in index['pages']:
-        if other['primary_keyword'] == primary and other != page:
-            # Flag cannibalization
-```
+Using the `primary_keyword` and `secondary_keywords` from each result:
 
 - Group posts by similar keywords
 - Flag when 2+ posts target the same primary keyword
@@ -144,16 +120,9 @@ Using the `topic_summary` from each result:
 
 #### 3.4 Internal Link Health
 
-Build link graph from the content index:
+Using the `internal_links_out` from each result:
 
-```python
-for page in index['pages']:
-    for link in page['links_out']:
-        # Add edge: page -> link
-    if not page['links_in']:
-        page['orphan'] = True
-```
-
+- Build a link graph
 - Identify orphan posts (no inbound links)
 - Identify link hoarders (too many links to one post)
 - Identify missing obvious links between related content

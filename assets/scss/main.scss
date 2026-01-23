@@ -10,6 +10,17 @@
 // Base
 @import 'base';
 
+// =========================
+// FOUC Prevention Reveal
+// =========================
+// Override cloak from critical.scss when main styles load.
+
+main,
+.cta-banner,
+.footer {
+  display: block;
+}
+
 // Components
 @import 'typography';
 @import 'content-base';

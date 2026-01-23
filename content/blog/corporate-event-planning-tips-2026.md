@@ -103,17 +103,16 @@ An art gallery setting like Pike & West offers built-in conversation starters an
 
 The practical details can make or break a gathering. We've seen beautifully conceived events stumble because transportation was confusing, dietary needs were overlooked, or technology failed at a critical moment. Address these elements well in advance:
 
-{{< numbered-list title="Logistics Checklist" >}}
+**Logistics Checklist:**
 
-1. Confirm parking arrangements and share detailed directions with all attendees
-2. Collect dietary restrictions and preferences at least two weeks before the event
-3. Test all presentation equipment, microphones, and displays during your venue walkthrough
-4. Create a detailed timeline with buffer periods built in for arrivals and transitions
-5. Designate a point person for the day of the event who can troubleshoot unexpected issues
-6. Prepare backup plans for weather (if outdoor elements are involved) and technology
-7. Brief your catering team on service timing and any special requirements
-8. Arrange for professional photography if the occasion warrants documentation
-   {{< /numbered-list >}}
+- Confirm parking arrangements and share detailed directions with all attendees
+- Collect dietary restrictions and preferences at least two weeks before the event
+- Test all presentation equipment, microphones, and displays during your venue walkthrough
+- Create a detailed timeline with buffer periods built in for arrivals and transitions
+- Designate a point person for the day of the event who can troubleshoot unexpected issues
+- Prepare backup plans for weather (if outdoor elements are involved) and technology
+- Brief your catering team on service timing and any special requirements
+- Arrange for professional photography if the occasion warrants documentation
 
 **Transportation considerations**: Will guests need parking validation, rideshare coordination, or shuttle service from a central location? If your gathering includes alcohol service, have you communicated responsible transportation options?
 

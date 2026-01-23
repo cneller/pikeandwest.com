@@ -48,6 +48,21 @@
     align-items: center;
     gap: $spacing-sm;
     padding: $spacing-lg;
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+
+    &:hover,
+    &:focus {
+      transform: translateY(-4px);
+      opacity: 0.9;
+    }
+
+    &:focus {
+      outline: 2px solid $color-cream;
+      outline-offset: 4px;
+    }
   }
 
   &__icon {

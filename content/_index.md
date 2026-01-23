@@ -1,16 +1,16 @@
 ---
-title: "Pike & West | Germantown Gallery and Event Venue"
-description: "Pike & West is Germantown's premier art gallery and event venue. Host your wedding, corporate event, birthday, or private party in our elegant space."
+title: "Pike & West | Art Gallery & Event Venue in Germantown, TN"
+description: "Discover Pike & West, Germantown's premier art gallery and event venue. Host your wedding, corporate event, birthday, or private party in our elegant, modern space with a stunning multi-story patio."
 keywords:
   - event venue Germantown TN
   - art gallery venue Memphis
   - wedding venue Germantown
   - corporate event space Memphis
   - private party venue Tennessee
-# Open Graph / Social sharing
-og_image: "images/hero/venue-exterior.jpg"
-og_type: "website"
-## Page sections (for future CMS toggle controls)
+  - baby shower venue Germantown
+  - birthday party venue Memphis area
+image: "images/hero/venue-exterior.jpg"
+image_alt: "Pike & West venue exterior - white brick carriage house style building in Germantown, TN"
 sections:
   hero: true
   venue_gallery: true

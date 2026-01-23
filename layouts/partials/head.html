@@ -107,6 +107,12 @@
 <link rel="dns-prefetch" href="https://maps.gstatic.com" />
 {{- end }}
 
+{{/* Workshops page - Ticket Tailor widget preconnect */}}
+{{- if eq .Layout "workshops" }}
+<link rel="preconnect" href="https://cdn.tickettailor.com" />
+<link rel="preconnect" href="https://tix.pikeandwest.com" />
+{{- end }}
+
 {{/* 2. Preload Critical Fonts (WOFF2 - self-hosted, subset for display) */}}
 <link
   rel="preload"

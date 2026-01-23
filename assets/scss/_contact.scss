@@ -238,9 +238,10 @@
 // Measurements documented in docs/contact-form/README.md
 // =========================
 
-// Shimmer colors
-$shimmer-color-light: rgba($color-medium-gray, 0.15);
-$shimmer-color-dark: rgba($color-medium-gray, 0.25);
+// Shimmer colors - cream background to match HoneyBook iframe
+$shimmer-bg: $color-cream;
+$shimmer-color-light: darken($color-cream, 5%);
+$shimmer-color-dark: darken($color-cream, 10%);
 
 // Desktop measurements (840px viewport)
 // Based on Playwright bounding box extraction
@@ -283,6 +284,7 @@ $shimmer-breakpoint: 868px;
 .contact-shimmer {
   position: relative;
   margin: 0 auto;
+  background: $shimmer-bg;
 
   // Desktop: Two-column form layout
   width: $shimmer-desktop-width;
