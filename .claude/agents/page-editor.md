@@ -13,6 +13,7 @@ allowed-tools:
   - Edit
   - Glob
   - Grep
+  - Bash
 ---
 
 # Page Editor Agent
@@ -82,6 +83,49 @@ Each event page should include:
 
 ---
 
+## Verify Build
+
+After completing all edits, verify the site still renders correctly.
+
+**Run Hugo:**
+
+```bash
+hugo 2>&1
+```
+
+**If build succeeds (exit code 0):** Continue to Content Index Updates.
+
+**If build fails:** Parse the error and attempt to fix.
+
+### Common Fixable Errors
+
+| Error Contains                | Likely Cause                | Fix                                 |
+|-------------------------------|-----------------------------|-------------------------------------|
+| `failed to extract shortcode` | Unclosed shortcode          | Find and add closing tag            |
+| `shortcode "xyz" not found`   | Typo in shortcode name      | Check against valid Hugo shortcodes |
+| `front matter: yaml:`         | Invalid YAML syntax         | Fix quotes, colons, or indentation  |
+| `duplicate key`               | Repeated front matter field | Remove the duplicate                |
+
+### Fix Attempt Process
+
+1. **Identify the file and line** from the error message
+2. **Read that section** of the file
+3. **Apply the fix** based on the pattern table
+4. **Run `hugo` again** to verify
+
+**If fix succeeds:** Log "Auto-fixed: [description]" and continue.
+
+**If fix fails or error is not fixable:**
+
+- Report the full error message
+- Mark the task as **incomplete**
+- Do NOT update the content index
+- Say: "The build is failing. Please review the error."
+
+**Important:** Only ONE fix attempt. Do not loop.
+
+---
+
 ## Content Index Updates
 
 After EVERY page edit, update `data/content-index.yaml`:
@@ -122,6 +166,7 @@ Before completing any page edit:
 - [ ] Internal links working
 - [ ] CTA present and linked to /contact
 - [ ] Front matter valid YAML
+- [ ] Hugo build verified (Step: Verify Build)
 
 ### Index
 
