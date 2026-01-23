@@ -255,23 +255,32 @@
     height: 1600px; // Taller for single-column mobile layout
   }
 
-  // Loading overlay (shown immediately, hides when loaded)
+  // Loading overlay (transparent, just holds the indicator)
   &__overlay {
     position: absolute;
     inset: 0;
     z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: $color-cream;
+    background: transparent;
+    pointer-events: none;
     transition: opacity 0.3s ease-out;
   }
 
-  &__loading-text {
-    font-family: $font-primary;
-    font-size: 14px;
-    color: $color-medium-gray;
-    animation: iframe-pulse 1.5s ease-in-out infinite;
+  &__loading-indicator {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($color-gold, 0.5),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.2s ease-in-out infinite;
+    border-radius: 2px;
   }
 
   // Static preview (absolutely positioned, same spot as iframe)
