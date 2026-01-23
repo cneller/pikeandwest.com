@@ -211,6 +211,15 @@
   }
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 // Accessibility: Disable animation for users who prefer reduced motion
 @media (prefers-reduced-motion: reduce) {
   .iframe-placeholder__text,
