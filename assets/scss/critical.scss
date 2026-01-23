@@ -582,3 +582,492 @@ $shimmer-breakpoint: 868px;
     background-color: $shimmer-color-dark;
   }
 }
+
+// =========================
+// Find Us Section (from _contact.scss)
+// =========================
+.find-us {
+  padding: 4rem 0;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  &__map {
+    width: 100%;
+    height: 400px;
+    contain: layout;
+    background: $color-cream;
+
+    @media (max-width: $breakpoint-md) {
+      height: 100%;
+      min-height: 300px;
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    justify-content: center;
+    padding-left: 20px;
+  }
+
+  &__detail {
+    margin-bottom: 30px;
+    overflow: hidden;
+
+    strong {
+      display: block;
+      font-family: $font-primary;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      line-height: 20px;
+      margin-bottom: 10px;
+      color: $color-medium-gray;
+    }
+
+    span,
+    a {
+      font-family: $font-primary;
+      font-size: 14px;
+      line-height: 24px;
+      color: $color-black;
+    }
+
+    a {
+      color: $color-gold;
+    }
+  }
+
+  @media (max-width: 479px) {
+    &__details {
+      text-align: center;
+      padding-left: 0;
+    }
+
+    &__detail {
+      strong,
+      span,
+      a {
+        text-align: center;
+      }
+    }
+  }
+}
+
+// Iframe placeholder (loading state)
+.iframe-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-cream;
+
+  &__text {
+    font-family: $font-primary;
+    font-size: 14px;
+    color: $color-medium-gray;
+  }
+}
+
+.iframe-lazy--map {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: $color-cream;
+}
+
+// =========================
+// Footer (from _footer.scss)
+// =========================
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+$spacing-sm: 0.5rem;
+$spacing-xs: 0.25rem;
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-md: 1.125rem;
+$font-size-lg: 1.25rem;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$breakpoint-sm: 479px;
+$breakpoint-lg: 991px;
+$breakpoint-xl: 1280px;
+
+.footer {
+  background-color: $color-gold;
+  padding: 0;
+  margin: 0;
+
+  &__main {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: $spacing-2xl;
+    padding: $spacing-2xl 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    @media (max-width: $breakpoint-lg) {
+      grid-template-columns: 1fr;
+      gap: $spacing-xl;
+      text-align: center;
+      padding: $spacing-xl $spacing-lg;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+      order: 1;
+    }
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $spacing-sm;
+
+    img {
+      width: 48px;
+      height: auto;
+    }
+  }
+
+  &__tagline {
+    font-family: $font-display;
+    font-size: $font-size-md;
+    color: $color-cream;
+    margin: 0;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+  }
+
+  &__contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+      text-align: center;
+      order: 2;
+    }
+  }
+
+  &__contact-info {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+    }
+  }
+
+  &__contact-address {
+    font-family: $font-secondary;
+    font-size: $font-size-sm;
+    color: $color-cream;
+    text-decoration: none;
+    line-height: 1.5;
+  }
+
+  &__contact-phone {
+    font-family: $font-secondary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: $color-cream;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  &__social {
+    display: flex;
+    gap: $spacing-sm;
+    margin-top: $spacing-xs;
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba($color-cream, 0.1);
+    color: $color-cream;
+    flex-shrink: 0;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__nav {
+    @media (max-width: $breakpoint-lg) {
+      order: 3;
+      width: 100%;
+    }
+  }
+
+  &__nav-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, auto));
+    gap: 1rem 4rem;
+
+    @media (max-width: $breakpoint-lg) {
+      justify-content: center;
+      gap: $spacing-lg 4rem;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      gap: 1rem 2rem;
+    }
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow-wrap: break-word;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+    }
+  }
+
+  &__heading {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: $color-cream;
+    margin: 0 0 $spacing-sm;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    @media (max-width: $breakpoint-lg) {
+      align-items: center;
+    }
+  }
+
+  &__link {
+    font-family: $font-secondary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-regular;
+    color: $color-cream;
+    text-decoration: none;
+    padding: $spacing-xs 0;
+    display: inline-block;
+    overflow-wrap: break-word;
+  }
+
+  &__bottom {
+    background-color: #996308;
+    padding: 1rem $spacing-lg;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $spacing-sm $spacing-lg;
+  }
+
+  &__copyright {
+    font-family: $font-secondary;
+    font-size: $font-size-xs;
+    color: rgba($color-cream, 0.8);
+    margin: 0;
+  }
+
+  &__legal {
+    display: flex;
+  }
+
+  &__legal-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: $spacing-lg;
+  }
+
+  &__legal-link {
+    font-family: $font-secondary;
+    font-size: $font-size-xs;
+    color: rgba($color-cream, 0.8);
+    text-decoration: none;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    &__main {
+      padding: $spacing-lg 1rem;
+      gap: $spacing-lg;
+    }
+
+    &__tagline {
+      font-size: $font-size-base;
+    }
+
+    &__contact-address {
+      font-size: $font-size-xs;
+    }
+
+    &__contact-phone {
+      font-size: $font-size-sm;
+    }
+
+    &__social-link {
+      width: 32px;
+      height: 32px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    &__heading {
+      font-size: 11px;
+      margin-bottom: $spacing-xs;
+    }
+
+    &__link {
+      font-size: $font-size-xs;
+      padding: 3px 0;
+    }
+
+    &__list {
+      gap: 2px;
+    }
+
+    &__bottom {
+      padding: $spacing-sm 1rem;
+      flex-direction: column;
+      gap: $spacing-xs;
+    }
+
+    &__legal-list {
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &__main {
+      padding: 1rem $spacing-sm;
+      gap: 1rem;
+    }
+
+    &__logo img {
+      width: 36px;
+    }
+
+    &__tagline {
+      font-size: $font-size-sm;
+    }
+
+    &__contact-address {
+      font-size: 11px;
+    }
+
+    &__contact-phone {
+      font-size: $font-size-xs;
+    }
+
+    &__social {
+      gap: $spacing-xs;
+    }
+
+    &__social-link {
+      width: 28px;
+      height: 28px;
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &__nav-grid {
+      gap: $spacing-sm $spacing-lg;
+    }
+
+    &__heading {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    &__link {
+      font-size: 11px;
+      padding: 2px 0;
+      line-height: 1.4;
+    }
+
+    &__list {
+      gap: 1px;
+    }
+
+    &__bottom {
+      padding: $spacing-xs $spacing-sm;
+    }
+
+    &__copyright,
+    &__legal-link {
+      font-size: 10px;
+    }
+
+    &__legal-list {
+      gap: $spacing-sm;
+    }
+  }
+
+  @media (min-width: $breakpoint-xl) {
+    &__main {
+      padding: 4rem 5%;
+    }
+
+    &__logo img {
+      width: 56px;
+    }
+
+    &__tagline {
+      font-size: $font-size-lg;
+    }
+
+    &__nav-grid {
+      gap: $spacing-lg 4rem;
+    }
+  }
+}
