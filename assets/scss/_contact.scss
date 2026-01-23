@@ -213,10 +213,10 @@
 
 @keyframes shimmer {
   0% {
-    background-position: 200% 0;
+    background-position: 300% 0;
   }
   100% {
-    background-position: -200% 0;
+    background-position: -300% 0;
   }
 }
 
@@ -366,13 +366,14 @@
     padding: 12px 16px;
     background: linear-gradient(
       110deg,
-      rgba($color-cream, 0.9) 8%,
-      rgba($color-white, 0.6) 18%,
-      rgba($color-cream, 0.9) 33%
+      $color-cream 8%,
+      rgba($color-white, 1) 18%,
+      rgba($color-gold, 0.08) 28%,
+      $color-cream 38%
     );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s ease-in-out infinite;
-    border: 1px solid rgba($color-medium-gray, 0.15);
+    background-size: 300% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+    border: 1px solid rgba($color-medium-gray, 0.2);
     border-radius: 4px;
     font-family: $font-secondary;
     font-size: 14px;
@@ -401,13 +402,14 @@
     padding: 12px 16px;
     background: linear-gradient(
       110deg,
-      rgba($color-cream, 0.9) 8%,
-      rgba($color-white, 0.6) 18%,
-      rgba($color-cream, 0.9) 33%
+      $color-cream 8%,
+      rgba($color-white, 1) 18%,
+      rgba($color-gold, 0.08) 28%,
+      $color-cream 38%
     );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s ease-in-out infinite;
-    border: 1px solid rgba($color-medium-gray, 0.15);
+    background-size: 300% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+    border: 1px solid rgba($color-medium-gray, 0.2);
     border-radius: 4px;
     min-height: 120px;
   }
