@@ -64,7 +64,18 @@ Generate a publication-ready blog post draft for Pike & West with Hugo front mat
    - Drop cap: Automatic on first paragraph (no action needed)
    - Pull quotes: Include 1-2 per 1000 words using `{{</* pull-quote */>}}` shortcode
    - Section dividers: Use `{{</* divider */>}}` between major sections (2-3 per article)
-   - See CLAUDE.md "Blog Post Styling" section for full documentation
+
+   **Additional Styling (as appropriate):**
+   - Tip boxes: `{{</* tip */>}}` for planning advice
+   - Fact boxes: `{{</* fact-box */>}}` for venue specs, quick stats
+   - Key takeaways: `{{</* key-takeaways */>}}` at end of long articles (1500+ words)
+   - Timelines: `{{</* timeline */>}}` for planning guides
+   - Sidebar quotes: `{{</* sidebar-quote */>}}` for testimonials
+   - Numbered lists: `{{</* numbered-list */>}}` for step-by-step guides
+   - Standfirst: `{{</* standfirst */>}}` for article summary intro
+   - Kicker: `{{</* kicker */>}}` for category label above headline
+
+   See `.claude/agents/blog-editor.md` for full shortcode reference.
 
 5. **SEO Validation**
    Verify:
@@ -125,8 +136,16 @@ Before completing, verify:
 - [ ] No generic venue language
 - [ ] Art/gallery angle emphasized where appropriate
 
-**Editorial Styling:**
+**Editorial Styling (Required):**
 
 - [ ] Pull quotes included (1-2 per 1000 words)
 - [ ] Section dividers between major sections (2-3 total)
 - [ ] No `.no-drop-cap` on first paragraph (allow automatic drop cap)
+
+**Editorial Styling (Content-Appropriate):**
+
+- [ ] Tip boxes for planning advice (if applicable)
+- [ ] Fact box for venue/event specs (if applicable)
+- [ ] Key takeaways at end (for articles 1500+ words)
+- [ ] Timeline for planning guides (if applicable)
+- [ ] Numbered list for step-by-step content (if applicable)

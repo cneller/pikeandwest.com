@@ -150,100 +150,114 @@ See also: [Animation Patterns](docs/architecture/patterns/animation-patterns.md)
 
 ## Blog Post Styling
 
-The blog supports several visual enhancements to create engaging, magazine-style content. These features are designed to match Pike & West's luxury aesthetic.
+The blog supports magazine-style visual enhancements for engaging, professional content. Full documentation in `.claude/agents/blog-editor.md`.
 
-### Drop Caps
+### Required Elements (Every Post)
 
-Large decorative first letters that begin articles. Applied automatically to the first paragraph of blog post content.
+| Element | Implementation | Notes |
+|---------|----------------|-------|
+| Drop cap | Automatic on first paragraph | Uses `::first-letter` for accessibility |
+| Pull quotes | `{{</* pull-quote */>}}` | 1-2 per 1000 words |
+| Section dividers | `{{</* divider */>}}` | 2-3 per article |
 
-**Automatic:** First paragraph gets a drop cap by default (uses `::first-letter` for accessibility).
+### All Available Shortcodes
 
-**Manual (add to any paragraph):**
+#### Drop Caps
+Automatic on first paragraph. Disable with `{.no-drop-cap}` or add manually with `{.drop-cap}`.
+
+#### Pull Quotes
 ```markdown
-{.drop-cap}
-This paragraph will have a drop cap applied to it.
+{{</* pull-quote */>}}Highlighted quote{{</* /pull-quote */>}}
+{{</* pull-quote author="Name" */>}}Quote with attribution{{</* /pull-quote */>}}
+{{</* pull-quote position="right" */>}}Floated right{{</* /pull-quote */>}}
 ```
 
-**Disable for first paragraph:**
+#### Section Dividers
 ```markdown
-{.no-drop-cap}
-This first paragraph will NOT have a drop cap.
+{{</* divider */>}}                    <!-- Gold diamond (default) -->
+{{</* divider style="line" */>}}       <!-- Gradient gold line -->
+{{</* divider style="flourish" */>}}   <!-- Fading lines -->
 ```
 
-**Style:** Gold color, Le Mores display font, 3.5em size.
-
-### Pull Quotes
-
-Prominent excerpted text that highlights key messages. Use the shortcode:
-
+#### Standfirst (Intro Summary)
 ```markdown
-{{</* pull-quote */>}}
-Love doesn't fit neatly into a Hallmark card.
-{{</* /pull-quote */>}}
+{{</* standfirst */>}}
+Bold intro paragraph bridging headline and body copy.
+{{</* /standfirst */>}}
 ```
 
-**With attribution:**
+#### Kicker (Category Label)
 ```markdown
-{{</* pull-quote author="Pike & West Team" */>}}
-Every form of love deserves celebration.
-{{</* /pull-quote */>}}
+{{</* kicker */>}}Planning Tips{{</* /kicker */>}}
 ```
 
-**Floated (for longer articles):**
+#### Tip Box
 ```markdown
-{{</* pull-quote position="right" */>}}
-Floats to the right on desktop.
-{{</* /pull-quote */>}}
-
-{{</* pull-quote position="left" */>}}
-Floats to the left on desktop.
-{{</* /pull-quote */>}}
+{{</* tip */>}}Planning advice here.{{</* /tip */>}}
+{{</* tip title="Insider Tip" */>}}Custom title.{{</* /tip */>}}
 ```
 
-**Simple variant (minimal styling):**
+#### Fact Box
 ```markdown
-{{</* pull-quote variant="simple" */>}}
-No decorative borders or quote marks.
-{{</* /pull-quote */>}}
+{{</* fact-box title="At a Glance" */>}}
+- **Capacity:** 150 seated
+- **Square Feet:** 4,500
+{{</* /fact-box */>}}
+
+{{</* fact-box title="Details" position="right" */>}}
+Floated sidebar version.
+{{</* /fact-box */>}}
 ```
 
-### Decorative Section Dividers
-
-Elegant separators between major sections. Use the shortcode:
-
+#### Key Takeaways
 ```markdown
-{{</* divider */>}}
+{{</* key-takeaways */>}}
+- Main point one
+- Main point two
+{{</* /key-takeaways */>}}
 ```
 
-**Styles available:**
+#### Timeline
+```markdown
+{{</* timeline title="Planning Timeline" */>}}
+- **12-18 months:** Book venue
+- **9-12 months:** Send save-the-dates
+{{</* /timeline */>}}
+```
 
-| Style | Usage | Description |
-|-------|-------|-------------|
-| ornament | `{{</* divider */>}}` or `{{</* divider style="ornament" */>}}` | Gold diamond symbol (default) |
-| line | `{{</* divider style="line" */>}}` | Gradient gold line |
-| flourish | `{{</* divider style="flourish" */>}}` | Lines fading from center |
+#### Sidebar Quote (Testimonial)
+```markdown
+{{</* sidebar-quote author="Sarah M." event="Wedding, Oct 2025" */>}}
+Pike & West made our day magical.
+{{</* /sidebar-quote */>}}
+```
 
-**Best practices:**
-- Use dividers sparingly (between major sections)
-- Choose one style consistently within a post
-- The ornament style works best for Pike & West's luxury brand
+#### Numbered List (Styled Steps)
+```markdown
+{{</* numbered-list title="How to Book" */>}}
+1. Choose your date
+2. Schedule a tour
+3. Review options
+{{</* /numbered-list */>}}
+```
 
-### When to Use These Features
+### When to Use Each Feature
 
 | Feature | Best Used For |
 |---------|---------------|
-| Drop caps | Opening paragraphs (automatic), new major sections |
-| Pull quotes | Highlighting key insights, emotional moments, memorable phrases |
-| Dividers | Separating major topic shifts, before conclusions |
-
-**Frequency guidelines:**
-- Drop caps: 1 per article (automatic) or 1 per major section
-- Pull quotes: Every 3-5 paragraphs for longer articles
-- Dividers: 2-3 per article maximum
+| Drop caps | Article opening (automatic) |
+| Pull quotes | Key insights, emotional moments |
+| Dividers | Major topic transitions |
+| Standfirst | Long articles needing summary |
+| Kicker | Categorized content |
+| Tip box | Planning advice, pro tips |
+| Fact box | Venue specs, quick stats |
+| Key takeaways | End of long articles |
+| Timeline | Planning guides, milestones |
+| Sidebar quote | Client testimonials |
+| Numbered list | Step-by-step instructions |
 
 ### Claude Code Commands
-
-These slash commands enforce consistent editorial styling:
 
 | Command | Purpose |
 |---------|---------|
@@ -251,7 +265,13 @@ These slash commands enforce consistent editorial styling:
 | `/blog-draft <topic>` | Generates draft with required styling elements |
 | `/content-audit [path]` | Audits posts for missing editorial styling |
 
-Commands are defined in `.claude/commands/` and automatically check for pull quotes, dividers, and proper drop cap handling.
+### Blog Editor Agent
+
+Use the blog-editor agent (`.claude/agents/blog-editor.md`) when creating or editing blog posts. It provides:
+- Complete shortcode reference
+- Formatting workflow
+- Quality checklist
+- Brand voice reminders
 
 ## Webflow Reference
 

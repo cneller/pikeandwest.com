@@ -36,11 +36,19 @@ Review existing Pike & West content for SEO optimization, brand voice, and fresh
    - Tone consistency (sophisticated but warm)
 
 4. **Editorial Styling Check**
-   Verify presence of:
+   Verify presence of required elements:
    - Pull quotes: At least 1 per 1000 words (search for `{{< pull-quote`)
    - Section dividers: 2-3 per article (search for `{{< divider`)
    - Drop cap: First paragraph should NOT have `.no-drop-cap` class
-   - Flag posts missing editorial styling for enhancement
+
+   Check for content-appropriate elements:
+   - Tip boxes: Present in planning content (search for `{{< tip`)
+   - Fact boxes: Present in venue-focused content (search for `{{< fact-box`)
+   - Key takeaways: Present in articles 1500+ words (search for `{{< key-takeaways`)
+   - Timelines: Present in planning guides (search for `{{< timeline`)
+   - Numbered lists: Present in step-by-step content (search for `{{< numbered-list`)
+
+   Flag posts missing editorial styling for enhancement.
 
 5. **Freshness Check**
    Flag content that:

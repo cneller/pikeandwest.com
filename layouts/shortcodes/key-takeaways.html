@@ -1,0 +1,32 @@
+{{/*
+  Key Takeaways Shortcode
+
+  Purpose: Summary box at article end with main points
+  Provides quick reference for readers who skim
+
+  Usage:
+    {{< key-takeaways >}}
+    - Valentine's Day celebrations come in many forms
+    - Book venues early for February dates
+    - Consider Galentine's events for group bookings
+    {{< /key-takeaways >}}
+
+    With custom title:
+    {{< key-takeaways title="What We Covered" >}}
+    ...
+    {{< /key-takeaways >}}
+
+  Parameters:
+    - title (optional): Custom title (defaults to "Key Takeaways")
+*/}}
+
+{{- $title := .Get "title" | default "Key Takeaways" -}}
+
+<aside class="key-takeaways">
+  <div class="key-takeaways__header">
+    <span class="key-takeaways__title">{{ $title }}</span>
+  </div>
+  <div class="key-takeaways__content">
+    {{- .Inner | markdownify -}}
+  </div>
+</aside>
