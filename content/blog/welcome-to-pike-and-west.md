@@ -1,13 +1,13 @@
 ---
-title: "Welcome to the Pike & West Blog"
-description: "Introducing our new blog where we'll share event inspiration, venue updates, and tips for planning your perfect celebration."
+title: "Welcome to the Pike & West Blog | Germantown Event Inspiration"
+description: "Introducing our new blog where we'll share event inspiration, gallery updates, and tips for planning your perfect celebration."
 date: 2026-01-19
 draft: false
 author: "Pike & West"
 categories: ["News"]
 tags: ["announcement", "welcome", "Germantown venue", "event planning"]
 image: "images/venue/venue-01-interior.jpeg"
-image_alt: "Pike & West venue interior with elegant lighting and sophisticated decor"
+image_alt: "Pike & West gallery interior with elegant lighting and sophisticated decor"
 keywords:
   - Pike & West blog
   - Germantown event venue news
@@ -15,13 +15,17 @@ keywords:
   - venue updates Tennessee
 ---
 
-We're excited to launch the Pike & West blog! This is where we'll share event inspiration, practical planning advice, and a glimpse into what makes our Germantown art gallery and event venue special.
+We're excited to launch the Pike & West blog! This is where we'll share event inspiration, practical planning advice, and a glimpse into what makes our Germantown art gallery and event space special.
 
-Whether you're dreaming of an intimate anniversary dinner, planning a milestone birthday celebration, or coordinating your company's next gathering, we hope this space becomes a valuable resource in your planning journey.
+Whether you're dreaming of an [intimate wedding](/events/weddings/), planning a milestone birthday celebration, or coordinating your [company's next gathering](/events/corporate-events/), we hope this space becomes a valuable resource in your planning journey.
 
 ## Event Inspiration
 
-From elegant wedding receptions to creative corporate gatherings, we'll showcase the beautiful celebrations that have taken place within our walls. Each event at Pike & West tells a unique story, and we're honored to be part of so many meaningful moments.
+From elegant wedding receptions to creative corporate gatherings, we'll showcase the beautiful celebrations that have taken place within our walls.
+
+{{< pull-quote >}}
+Each event at Pike & West tells a unique story, and we're honored to be part of so many meaningful moments.
+{{< /pull-quote >}}
 
 Expect to find:
 
@@ -30,7 +34,9 @@ Expect to find:
 - Color palette inspiration drawn from the artwork displayed in our space
 - Creative touches that elevate gatherings from ordinary to extraordinary
 
-Our hope is that these features spark ideas for your own celebration while showing the versatility of our space.
+Our hope is that these features spark ideas for your own celebration while showing the versatility of our gallery.
+
+{{< divider >}}
 
 ## Planning Tips
 
@@ -40,15 +46,17 @@ We'll share practical guidance on topics like:
 
 - How to create a realistic planning timeline
 - Working with caterers, photographers, and other vendors
-- Making the most of your venue space
+- Making the most of your event space
 - Budget-friendly ways to add elegance
-- Questions to ask when touring potential venues
+- Questions to ask when touring potential settings
 
 These aren't generic tips you'll find anywhere. They're insights specific to planning events in the Memphis and Germantown area, drawn from our direct experience helping clients create memorable gatherings.
 
-## Venue Updates
+{{< divider >}}
 
-Pike & West continues to evolve. As an art gallery, our walls feature rotating exhibitions that change the atmosphere throughout the year. As an event venue, we're always looking for ways to enhance the experience for our clients and their guests.
+## Gallery Updates
+
+Pike & West continues to evolve. As an art gallery, our walls feature rotating exhibitions that change the atmosphere throughout the year. As an event space, we're always looking for ways to enhance the experience for our clients and their guests.
 
 Through this blog, you'll be the first to know about:
 
@@ -63,9 +71,9 @@ There's a lot that goes into creating the kind of seamless, elegant events Pike 
 
 You'll meet our team, learn about our approach to hospitality, and see the care that goes into every detail—from the lighting we use to create warmth to the way we set up spaces for natural conversation flow.
 
----
+{{< divider style="line" >}}
 
-We're genuinely excited about this new chapter and the opportunity to connect with you beyond venue tours and event planning calls. Whether you're actively planning a celebration or simply gathering ideas for someday, we hope you'll find value here.
+We're genuinely excited about this new chapter and the opportunity to connect with you beyond gallery tours and event planning calls. Whether you're actively planning a [private celebration](/events/private-parties/) or simply gathering ideas for someday, we hope you'll find value here.
 
 Have a topic you'd like us to cover? We'd love to hear from you.
 

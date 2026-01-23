@@ -17,7 +17,7 @@ keywords:
   - eco-friendly baby shower Memphis
 ---
 
-There's something magical about celebrating a new life during autumn. The comfortable weather, rich color palettes, and cozy atmosphere make fall the perfect season for baby showers. If you're planning a shower for someone special, here's how to create an unforgettable celebration that feels intentional, elegant, and perfectly seasonal.
+There's something magical about celebrating a new life during autumn. The comfortable weather, rich color palettes, and cozy atmosphere make fall the perfect season for [baby showers](/events/baby-showers/). If you're planning a shower for someone special, here's how to create an unforgettable celebration that feels intentional, elegant, and perfectly seasonal.
 
 ## Why Fall Is Perfect for Baby Showers
 
@@ -45,9 +45,15 @@ Neutral tones with natural textures create sophisticated warmth. Think macramé 
 
 Forest-inspired details—baby foxes, deer, and woodland creatures—create a whimsical atmosphere. Complement the theme with mushroom-shaped treats, a trail mix station, and nature-inspired centerpieces featuring moss, pinecones, and branches.
 
+{{< divider >}}
+
 ## Embracing Autumn's Color Palette
 
-The most sophisticated fall baby showers move beyond obvious orange-and-brown combinations. Consider these trending palettes:
+{{< pull-quote >}}
+The most sophisticated fall baby showers move beyond obvious orange-and-brown combinations.
+{{< /pull-quote >}}
+
+Consider these trending palettes:
 
 **Gender-Neutral Elegance**: Sage green, mustard yellow, and warm taupe create a modern, sophisticated look that photographs beautifully and works for any baby.
 
@@ -56,6 +62,8 @@ The most sophisticated fall baby showers move beyond obvious orange-and-brown co
 **Soft Harvest**: Blush pink, terracotta, and dusty rose offer a feminine take on fall colors that feels current without being trendy.
 
 At Pike & West, our neutral art gallery backdrop lets any color palette shine. The warm lighting and clean walls provide the perfect canvas for your chosen aesthetic, while the rotating artwork adds visual interest and conversation starters for guests.
+
+{{< divider style="line" >}}
 
 ## Eco-Friendly Touches That Impress
 
@@ -79,7 +87,11 @@ The best baby showers prioritize connection over formality. Here's how to create
 
 **Background Music**: A thoughtful playlist at low volume creates atmosphere without competing with conversation. Consider music that reflects the parents-to-be's taste.
 
-**Low-Key Luxe**: Quality over quantity makes guests feel valued. Better food, comfortable seating, and beautiful flowers matter more than elaborate decorations or expensive favors.
+{{< pull-quote >}}
+Quality over quantity makes guests feel valued. Better food, comfortable seating, and beautiful flowers matter more than elaborate decorations or expensive favors.
+{{< /pull-quote >}}
+
+{{< divider >}}
 
 ## Activities That Feel Elevated
 
@@ -97,29 +109,13 @@ Skip the awkward games that make guests uncomfortable. Instead, focus on meaning
 
 A well-planned baby shower takes about six to eight weeks to pull together comfortably. Here's a general timeline:
 
-**6-8 Weeks Before**
+{{< timeline title="Baby Shower Planning Timeline" >}}
 
-- Book your venue
-- Set the guest list with the parents-to-be
-- Choose your theme and color palette
-
-**4-6 Weeks Before**
-
-- Send invitations (digital or print)
-- Book catering and any rentals
-- Order custom items like banners or personalized favors
-
-**2 Weeks Before**
-
-- Confirm final guest count with venue and caterer
-- Plan your timeline for the day
-- Finalize any activities or games
-
-**Day Before**
-
-- Prep any DIY decorations
-- Confirm delivery times
-- Charge camera batteries
+- **6-8 Weeks Before:** Book your venue, set the guest list with the parents-to-be, and choose your theme and color palette
+- **4-6 Weeks Before:** Send invitations (digital or print), book catering and any rentals, order custom items like banners or personalized favors
+- **2 Weeks Before:** Confirm final guest count with venue and caterer, plan your timeline for the day, finalize any activities or games
+- **Day Before:** Prep any DIY decorations, confirm delivery times, charge camera batteries
+  {{< /timeline >}}
 
 ## Frequently Asked Questions
 
@@ -141,6 +137,6 @@ This depends entirely on your venue and the atmosphere you want to create. Intim
 
 Fall is a beautiful time to gather and celebrate new beginnings. At Pike & West, our art gallery setting provides an elegant, versatile backdrop for baby showers that feel sophisticated without being stuffy. The warm lighting, beautiful artwork, and flexible layout let you create exactly the atmosphere you envision.
 
-Whether you're planning an intimate gathering of close friends or a larger celebration with extended family, we'd love to help you create something special.
+Whether you're planning an intimate gathering of close friends or a larger celebration with extended family, we'd love to help you create something special. From [baby showers](/events/baby-showers/) to [private parties](/events/private-parties/) of all kinds, our space adapts to your vision.
 
 [Schedule a tour](/contact/) to see our space and start planning. Call us at 901.206.5575 or visit our contact page to get started.

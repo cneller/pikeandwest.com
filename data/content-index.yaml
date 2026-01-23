@@ -212,7 +212,7 @@ pages:
     event_types:
       - corporate
     event_types_primary: corporate
-    word_count: 611
+    word_count: 1637
     target_word_count: 1500
     evergreen: true
     seasonal_relevance: []
@@ -220,17 +220,16 @@ pages:
     cta_destination: /contact
     shortcodes:
       pull-quote: 1
-      divider: 4
-      tip: 1
-      fact-box: 0
+      divider: 6
+      tip: 2
+      fact-box: 1
       timeline: 0
-      sidebar-quote: 0
-      numbered-list: 0
-      standfirst: 0
+      sidebar-quote: 1
+      numbered-list: 1
+      standfirst: 1
       kicker: 0
-      key-takeaways: 0
-    shortcodes_recommended:
-      - numbered-list
+      key-takeaways: 1
+    shortcodes_recommended: []
     drop_cap: true
     has_cta: true
     images:
@@ -249,14 +248,14 @@ pages:
     last_modified: "2026-01-23"
     last_audited: "2026-01-23"
     next_review: "2026-07-23"
-    audit_score: 85
+    audit_score: 94
     audit_scores:
       seo: 18
-      brand_voice: 18
-      editorial: 12
+      brand_voice: 20
+      editorial: 18
       freshness: 15
-      technical: 22
-    issues_count: 1
+      technical: 23
+    issues_count: 0
     updated_by: blog-editor
   /blog/fall-baby-shower-inspiration:
     title: Creating the Perfect Fall Baby Shower in 2026
