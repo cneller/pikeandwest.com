@@ -35,13 +35,22 @@
       <div class="tt-widget">
         <div class="tt-widget-fallback">
           <p>
-            <a href="{{ . }}" target="_blank" rel="noopener noreferrer">
+            <a href="{{ $.Site.Params.ticketTailor.fallbackUrl }}" target="_blank" rel="noopener noreferrer">
               Click here to view upcoming workshops and purchase tickets
             </a>
           </p>
         </div>
+        <script
+          src="https://cdn.tickettailor.com/js/widgets/min/widget.js"
+          data-url="{{ $.Site.Params.ticketTailor.fallbackUrl }}"
+          data-type="inline"
+          data-inline-minimal="true"
+          data-inline-show-logo="false"
+          data-inline-bg-fill="false"
+          data-inline-inherit-ref-from-url-param=""
+          data-inline-ref="website_widget"
+        ></script>
       </div>
-      <script src="https://cdn.tickettailor.com/js/widgets/min/widget.js" data-url="{{ . }}" data-type="inline" data-inline-minimal="true" data-inline-show-logo="false" data-inline-bg-fill="false"></script>
       {{ else }}
       <div class="workshops-events__placeholder">
         <p>Workshop schedule coming soon!</p>

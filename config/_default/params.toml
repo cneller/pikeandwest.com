@@ -31,7 +31,6 @@ defaultOgImage = "/images/og-default.jpg"
   galleryApplicationPlacementId = "65174362ef543a000898bc37"
 
 [ticketTailor]
-  # Ticket Tailor widget URL - get this from your Ticket Tailor dashboard
-  # Go to Promote > Website embed codes > Copy the URL
-  # Example: "https://www.tickettailor.com/events/pikeandwest"
-  # widgetUrl = ""
+  # Ticket Tailor widget URL - custom domain: tix.pikeandwest.com
+  widgetUrl = "https://tix.pikeandwest.com/all-tickets/pw/"
+  fallbackUrl = "https://tix.pikeandwest.com/all-tickets/pw/?ref=website_widget"
