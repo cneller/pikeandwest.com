@@ -29,3 +29,8 @@ defaultOgImage = "/images/og-default.jpg"
   contactEmbed = "https://portal.pikeandwest.com/public/inquiry"
   # HoneyBook widget placement ID (loaded via JavaScript, not iframe)
   galleryApplicationPlacementId = "65174362ef543a000898bc37"
+
+[ticketTailor]
+  # Ticket Tailor widget URL - custom domain: tix.pikeandwest.com
+  widgetUrl = "https://tix.pikeandwest.com/all-tickets/pw/"
+  fallbackUrl = "https://tix.pikeandwest.com/all-tickets/pw/?ref=website_widget"

@@ -1,0 +1,107 @@
+{{ define "main" }}
+{{- $workshops := site.Data.workshops -}}
+
+{{/* Page Header */}}
+<section class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">{{ $workshops.heading }}</h1>
+    {{ with $workshops.subheading }}
+    <p class="page-header__subtitle">{{ . }}</p>
+    {{ end }}
+  </div>
+</section>
+
+{{/* Intro Section */}}
+<section class="workshops-intro section">
+  <div class="container">
+    <div class="workshops-intro__content">
+      <h2 class="workshops-intro__title">{{ $workshops.intro.title }}</h2>
+      <div class="workshops-intro__text">
+        {{ range $workshops.intro.paragraphs }}
+        <p>{{ . }}</p>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{/* Ticket Tailor Widget Section */}}
+<section class="workshops-events section">
+  <div class="container">
+    <h2 class="section-title">Upcoming Workshops</h2>
+    <div class="workshops-events__widget">
+      {{ with .Site.Params.ticketTailor.widgetUrl }}
+      <!-- Ticket Tailor Widget -->
+      <div class="tt-widget">
+        <div class="tt-widget-fallback">
+          <p>
+            <a href="{{ $.Site.Params.ticketTailor.fallbackUrl }}" target="_blank" rel="noopener noreferrer">
+              Click here to view upcoming workshops and purchase tickets
+            </a>
+          </p>
+        </div>
+        <script
+          src="https://cdn.tickettailor.com/js/widgets/min/widget.js"
+          data-url="{{ $.Site.Params.ticketTailor.fallbackUrl }}"
+          data-type="inline"
+          data-inline-minimal="true"
+          data-inline-show-logo="false"
+          data-inline-bg-fill="false"
+          data-inline-inherit-ref-from-url-param=""
+          data-inline-ref="website_widget"
+        ></script>
+      </div>
+      {{ else }}
+      <div class="workshops-events__placeholder">
+        <p>Workshop schedule coming soon!</p>
+        <p>Follow us on <a href="{{ .Site.Params.social.instagram }}" target="_blank" rel="noopener noreferrer">Instagram</a> for announcements.</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+{{/* Features Section */}}
+{{ with $workshops.features }}
+<section class="workshops-features section">
+  <div class="container">
+    <div class="workshops-features__grid">
+      {{ range . }}
+      <div class="workshops-features__item">
+        <div class="workshops-features__icon">
+          {{- $icon := resources.Get (printf "images/icons/%s" .icon) -}}
+          {{- if $icon -}}
+            {{- $resized := $icon.Resize "80x" -}}
+            <img
+              src="{{ $resized.RelPermalink }}"
+              alt=""
+              width="{{ $resized.Width }}"
+              height="{{ $resized.Height }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {{- end -}}
+        </div>
+        <h3 class="workshops-features__title">{{ .title }}</h3>
+        <p class="workshops-features__description">{{ .description }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{/* Host a Workshop CTA */}}
+{{ with $workshops.host_cta }}
+<section class="workshops-host section">
+  <div class="container">
+    <div class="workshops-host__content">
+      <h2 class="workshops-host__heading">{{ .heading }}</h2>
+      <p class="workshops-host__text">{{ .text }}</p>
+      <a href="{{ .button_link }}" class="btn btn-outline">{{ .button_text }}</a>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ end }}

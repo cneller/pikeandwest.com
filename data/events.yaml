@@ -2,7 +2,7 @@
 # Each event has an icon filename and display label
 
 heading: "The perfect place for your next..."
-cta_text: "CONTACT US"
+cta_text: "HOST YOUR EVENT"
 cta_link: "/contact/"
 
 types:

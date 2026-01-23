@@ -119,6 +119,32 @@ Key decisions made during development. Full details in `docs/architecture/decisi
 | Hero height          | 75vh/65vh/60vh     | Shows content peek below fold; Webflow parity ([ADR-003](docs/architecture/decisions/ADR-003-hero-layout.md))                                    |
 | Breakpoints          | Webflow-aligned    | 479/767/991/1280/1920px for pixel-perfect parity ([ADR-004](docs/architecture/decisions/ADR-004-responsive-breakpoints.md))                      |
 | Blog editorial style | Drop caps, quotes  | Magazine-style luxury feel; accessible `::first-letter` ([ADR-005](docs/architecture/decisions/ADR-005-blog-editorial-styling.md))               |
+| CTA language         | Host/Attend split  | Clear distinction between venue rentals and workshop attendance ([plan](docs/plans/2026-01-23-workshops-classes-feature.md))                     |
+
+## CTA Language System
+
+The site uses distinct CTA language to differentiate between venue rentals and workshop attendance:
+
+| User Intent | CTA Language | Where Used |
+|-------------|--------------|------------|
+| Rent the venue | "Host Your Event" | Header (primary), Event types, Footer |
+| See the space | "Book a Tour" | Hero, CTA banner |
+| Attend a workshop | "Workshops" | Header (secondary), Footer |
+| Teach a workshop | "Get in Touch" | Workshops page secondary CTA |
+
+**Key CTAs by location:**
+
+| Location | CTA | Links To |
+|----------|-----|----------|
+| Header (outline button) | Workshops | `/workshops/` |
+| Header (gold button) | Host Your Event | `/contact/` |
+| Hero section | BOOK A TOUR | `/contact/` |
+| Event types section | HOST YOUR EVENT | `/contact/` |
+| CTA banner | Book a Tour | `/contact/` |
+| Footer | Host an Event | `/contact/` |
+| Footer | Workshops | `/workshops/` |
+
+See [Workshops Plan](docs/plans/2026-01-23-workshops-classes-feature.md) for full implementation details.
 
 ## Implementation Patterns
 
