@@ -1,0 +1,35 @@
+# Pike & West Content Index
+# Maintained by content editing agents
+# Last manual edit should be rare - agents keep this updated
+
+# === INDEX METADATA ===
+meta:
+  version: "1.0"
+  schema_version: "1.0"
+  last_updated: "2026-01-23"
+  last_full_audit: null
+  updated_by: manual
+
+  stats:
+    total_pages: 0
+    blog_posts: 0
+    event_pages: 0
+    static_pages: 0
+    orphan_pages: 0
+    avg_audit_score: 0
+    content_gaps: 0
+    clusters_defined: 0
+
+# === TAXONOMY DEFINITIONS ===
+definitions:
+  personas: {}
+  event_types: {}
+  funnel_stages: {}
+  content_goals: {}
+  search_intents: {}
+
+# === TOPIC CLUSTERS ===
+clusters: {}
+
+# === PAGE ENTRIES ===
+pages: {}
