@@ -1,6 +1,6 @@
 # Pike & West - Next Steps
 
-> **Last Updated:** 2026-01-21
+> **Last Updated:** 2026-01-23
 > **Current Phase:** Pre-Launch Testing on beta.pikeandwest.com
 
 This document tracks the current project state and upcoming work. Keep this file updated as tasks are completed or priorities change.
@@ -160,14 +160,15 @@ hugo --templateMetrics
 
 ### Content (Priority: Medium)
 
-| Task                     | Status   | Notes                                                               |
-|--------------------------|----------|---------------------------------------------------------------------|
-| Blog section             | Active   | 5 posts published (2 current + 3 backdated Oct-Dec 2025)            |
-| Gallery application page | Basic    | May need form improvements                                          |
-| Team/About section       | Complete | Consider adding more team photos                                    |
-| Event type pages         | Complete | 6 pages: weddings, corporate, birthday, baby shower, private, dance |
-| Privacy Policy           | Complete | /privacy/ - basic policy page                                       |
-| Accessibility Statement  | Complete | /accessibility/ - basic statement page                              |
+| Task                     | Status      | Notes                                                               |
+|--------------------------|-------------|---------------------------------------------------------------------|
+| Workshops section        | In Progress | Page structure complete, pending Ticket Tailor setup                |
+| Blog section             | Active      | 5 posts published (2 current + 3 backdated Oct-Dec 2025)            |
+| Gallery application page | Basic       | May need form improvements                                          |
+| Team/About section       | Complete    | Consider adding more team photos                                    |
+| Event type pages         | Complete    | 6 pages: weddings, corporate, birthday, baby shower, private, dance |
+| Privacy Policy           | Complete    | /privacy/ - basic policy page                                       |
+| Accessibility Statement  | Complete    | /accessibility/ - basic statement page                              |
 
 ### Technical Debt (Priority: Low)
 
@@ -252,6 +253,10 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 | Date       | Change                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------|
+| 2026-01-23 | Added workshops page with Ticket Tailor widget placeholder (`/workshops/`)                        |
+| 2026-01-23 | Updated CTAs: "Host Your Event" (venue), "Book a Tour" (tours), "Workshops" (classes)             |
+| 2026-01-23 | Header nav changed: Blog → Workshops, Contact Us → Host Your Event                                |
+| 2026-01-23 | Footer nav changed: Contact → Host an Event, added Workshops link                                 |
 | 2026-01-22 | Fixed Cloudflare bot detection: removed curl health-check, rely on Lighthouse Chrome (score: 90)  |
 | 2026-01-22 | Consolidated GitHub Actions: CI workflow (Build→Validate→Deploy), async Lighthouse workflow       |
 | 2026-01-22 | Removed Artists from main nav, reordered to Blog (left) → Contact Us (right, gold CTA)            |

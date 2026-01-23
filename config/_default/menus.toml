@@ -1,15 +1,15 @@
 # Main Navigation
 # Weight determines order: lower = left, higher = right
-# "Contact Us" is primary CTA (gold filled, far right per UX best practice)
-# "Blog" is secondary (text link style)
+# "Host Your Event" is primary CTA (gold filled, far right per UX best practice)
+# "Workshops" is secondary (text link style)
 
 [[main]]
-  name = "Blog"
-  url = "/blog/"
+  name = "Workshops"
+  url = "/workshops/"
   weight = 1
 
 [[main]]
-  name = "Contact Us"
+  name = "Host Your Event"
   url = "/contact/"
   weight = 2
 
@@ -65,7 +65,7 @@
   weight = 3
 
 [[footer_explore]]
-  name = "Contact"
+  name = "Host an Event"
   url = "/contact/"
   weight = 4
 
@@ -73,6 +73,11 @@
   name = "Blog"
   url = "/blog/"
   weight = 5
+
+[[footer_explore]]
+  name = "Workshops"
+  url = "/workshops/"
+  weight = 6
 
 # Footer: Legal (bottom bar)
 [[footer_legal]]

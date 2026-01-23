@@ -29,3 +29,9 @@ defaultOgImage = "/images/og-default.jpg"
   contactEmbed = "https://portal.pikeandwest.com/public/inquiry"
   # HoneyBook widget placement ID (loaded via JavaScript, not iframe)
   galleryApplicationPlacementId = "65174362ef543a000898bc37"
+
+[ticketTailor]
+  # Ticket Tailor widget URL - get this from your Ticket Tailor dashboard
+  # Go to Promote > Website embed codes > Copy the URL
+  # Example: "https://www.tickettailor.com/events/pikeandwest"
+  # widgetUrl = ""

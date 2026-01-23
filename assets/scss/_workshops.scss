@@ -1,0 +1,229 @@
+// =========================
+// Workshops Page Styles
+// =========================
+
+// Intro Section
+.workshops-intro {
+  text-align: center;
+  padding-top: $spacing-2xl;
+  padding-bottom: $spacing-2xl;
+
+  &__content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-family: $font-primary;
+    font-size: 28px;
+    font-weight: $font-weight-regular;
+    line-height: 1.15em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $color-medium-gray;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__text {
+    opacity: 0.6;
+    color: $color-medium-gray;
+    line-height: 28px;
+
+    p {
+      margin-bottom: 1em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding-top: $spacing-xl;
+    padding-bottom: $spacing-xl;
+
+    &__title {
+      font-size: 22px;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &__title {
+      font-size: 18px;
+    }
+
+    &__text {
+      font-size: 13px;
+      line-height: 1.5em;
+    }
+  }
+}
+
+// Ticket Tailor Widget Section
+.workshops-events {
+  background-color: $color-cream;
+  padding-top: $spacing-3xl;
+  padding-bottom: $spacing-3xl;
+
+  .section-title {
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+  }
+
+  &__widget {
+    max-width: 900px;
+    margin: 0 auto;
+    min-height: 300px;
+
+    // Ticket Tailor widget container
+    .tt-widget {
+      width: 100%;
+    }
+  }
+
+  &__placeholder {
+    text-align: center;
+    padding: $spacing-3xl $spacing-lg;
+    background-color: $color-white;
+    border-radius: $border-radius-lg;
+
+    p {
+      margin-bottom: $spacing-md;
+      color: $color-medium-gray;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    a {
+      color: $color-gold;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding-top: $spacing-2xl;
+    padding-bottom: $spacing-2xl;
+  }
+}
+
+// Features Section
+.workshops-features {
+  padding-top: $spacing-3xl;
+  padding-bottom: $spacing-3xl;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-2xl;
+
+    @media (max-width: $breakpoint-lg) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $spacing-xl;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      grid-template-columns: 1fr;
+      gap: $spacing-xl;
+    }
+  }
+
+  &__item {
+    text-align: center;
+    padding: $spacing-lg;
+  }
+
+  &__icon {
+    margin-bottom: $spacing-lg;
+
+    img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+    }
+  }
+
+  &__title {
+    font-family: $font-primary;
+    font-size: 18px;
+    font-weight: $font-weight-medium;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-medium-gray;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__description {
+    opacity: 0.6;
+    color: $color-medium-gray;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding-top: $spacing-2xl;
+    padding-bottom: $spacing-2xl;
+
+    &__title {
+      font-size: 15px;
+    }
+
+    &__description {
+      font-size: 13px;
+    }
+  }
+}
+
+// Host a Workshop CTA Section
+.workshops-host {
+  background-color: $color-cream;
+  padding-top: $spacing-3xl;
+  padding-bottom: $spacing-3xl;
+  text-align: center;
+
+  &__content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  &__heading {
+    font-family: $font-primary;
+    font-size: 24px;
+    font-weight: $font-weight-regular;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $color-medium-gray;
+    margin-bottom: $spacing-md;
+  }
+
+  &__text {
+    opacity: 0.6;
+    color: $color-medium-gray;
+    line-height: 1.6;
+    margin-bottom: $spacing-xl;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding-top: $spacing-2xl;
+    padding-bottom: $spacing-2xl;
+
+    &__heading {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &__heading {
+      font-size: 16px;
+    }
+
+    &__text {
+      font-size: 13px;
+    }
+  }
+}

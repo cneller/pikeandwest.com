@@ -1,0 +1,30 @@
+# Workshops page content
+# Edit this file to update the workshops landing page
+
+heading: "Creative Workshops"
+subheading: "Immerse yourself in art"
+
+intro:
+  title: "Join Us for Hands-On Creativity"
+  paragraphs:
+    - "Pike & West hosts intimate creative workshops where you can explore new artistic skills in our inspiring gallery setting. From painting and pottery to mixed media and more, our workshops offer a unique opportunity to create something beautiful."
+    - "All skill levels are welcome. Materials are provided, and you'll leave with your own original artwork."
+
+# What to expect section
+features:
+  - icon: "icon-champagne.png"
+    title: "Social Atmosphere"
+    description: "Create alongside fellow art enthusiasts in our elegant venue"
+  - icon: "icon-disco-ball.png"
+    title: "Expert Instruction"
+    description: "Learn from talented local artists and instructors"
+  - icon: "icon-cake.png"
+    title: "All Materials Included"
+    description: "Everything you need is provided - just bring yourself"
+
+# CTA for hosting workshops (secondary)
+host_cta:
+  heading: "Want to Host a Workshop?"
+  text: "Are you an artist or instructor interested in hosting a creative workshop at Pike & West? We'd love to hear from you."
+  button_text: "Get in Touch"
+  button_link: "/contact/"
