@@ -1,6 +1,41 @@
 {{ define "main" }}
 {{- $workshops := site.Data.workshops -}}
 
+{{/* Event Schema for SEO */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Creative Workshops at Pike & West",
+  "description": "{{ .Description }}",
+  "image": "{{ (resources.Get "images/hero/venue-exterior.jpg").Permalink }}",
+  "location": {
+    "@type": "Place",
+    "name": "Pike & West",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2277 West Street",
+      "addressLocality": "Germantown",
+      "addressRegion": "TN",
+      "postalCode": "38138",
+      "addressCountry": "US"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Pike & West",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ .Site.Params.ticketTailor.fallbackUrl }}",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
 {{/* Page Header */}}
 <section class="page-header">
   <div class="container">
