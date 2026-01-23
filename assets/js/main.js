@@ -294,10 +294,13 @@ function initContactFacade() {
 
   if (!src) return;
 
+  let loadAttempted = false;
+
   function loadIframe() {
     // Prevent double-loading
     if (facade.classList.contains('contact-facade--loading')) return;
 
+    loadAttempted = true;
     facade.classList.add('contact-facade--loading');
 
     // Create and insert iframe
@@ -314,20 +317,52 @@ function initContactFacade() {
       facade.setAttribute('aria-busy', 'false');
     });
 
-    // Fallback: mark as loaded after timeout (HoneyBook may not fire load)
-    setTimeout(() => {
-      if (!facade.classList.contains('contact-facade--loaded')) {
-        facade.classList.remove('contact-facade--loading');
-        facade.classList.add('contact-facade--loaded');
-        facade.setAttribute('aria-busy', 'false');
-      }
-    }, 8000);
+    iframe.addEventListener('error', () => {
+      showError();
+    });
 
     facade.appendChild(iframe);
   }
 
+  function showError() {
+    facade.classList.remove('contact-facade--loading');
+    facade.classList.add('contact-facade--error');
+    facade.setAttribute('aria-busy', 'false');
+  }
+
+  // Extended timeout: show error state if form doesn't load
+  // Note: iframe load event may not fire for cross-origin, so we have two timeouts:
+  // - 8s: assume loaded (normal fallback)
+  // - 15s: assume error if still not visibly loaded
+  setTimeout(() => {
+    if (
+      loadAttempted &&
+      !facade.classList.contains('contact-facade--loaded') &&
+      !facade.classList.contains('contact-facade--error')
+    ) {
+      // First timeout: assume it loaded (iframe load event may not fire cross-origin)
+      facade.classList.remove('contact-facade--loading');
+      facade.classList.add('contact-facade--loaded');
+      facade.setAttribute('aria-busy', 'false');
+    }
+  }, 8000);
+
+  setTimeout(() => {
+    // Extended timeout: if page seems broken, show error
+    // This catches cases where the iframe exists but content failed to render
+    if (
+      loadAttempted &&
+      !facade.classList.contains('contact-facade--loaded') &&
+      !facade.classList.contains('contact-facade--error')
+    ) {
+      showError();
+    }
+  }, 15000);
+
   // Load iframe async after page is ready (non-blocking)
-  requestIdleCallback
-    ? requestIdleCallback(loadIframe)
-    : setTimeout(loadIframe, 0);
+  if (typeof requestIdleCallback !== 'undefined') {
+    requestIdleCallback(loadIframe);
+  } else {
+    setTimeout(loadIframe, 0);
+  }
 }

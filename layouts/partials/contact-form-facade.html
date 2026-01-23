@@ -13,6 +13,15 @@
     <span class="contact-facade__loading-text">Loading contact form...</span>
   </div>
 
+  {{/* Error state (shown if iframe fails to load) */}}
+  <div class="contact-facade__error" aria-live="assertive">
+    <p class="contact-facade__error-title">Having trouble loading the form?</p>
+    <p class="contact-facade__error-contact">
+      Call us at <a href="tel:+1{{ replaceRE "[^0-9]" "" .Site.Params.contact.phone }}">{{ .Site.Params.contact.phone }}</a>
+      or email <a href="mailto:{{ .Site.Params.contact.email }}">{{ .Site.Params.contact.email }}</a>
+    </p>
+  </div>
+
   {{/* Static form preview */}}
   <div class="contact-facade__preview" aria-hidden="true">
     <div class="contact-facade__row">
