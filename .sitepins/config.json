@@ -15,6 +15,13 @@
       "groupName": "Blog",
       "include": "*.md",
       "exclude": "_index.md"
+    },
+    {
+      "type": "folder",
+      "targetPath": "content",
+      "groupName": "Pages",
+      "include": "*.md",
+      "exclude": ""
     }
   ]
 }
