@@ -10,8 +10,9 @@ This document contains detailed development guidelines, design system specificat
 
 ## Project Overview
 
-**Current State:** Webflow-hosted event venue website
-**Target State:** Hugo static site with custom theme
+**Current State:** Hugo static site with Sitepins CMS
+**Target State:** Fully migrated from Webflow with visual content editing
+**CMS Dashboard:** <https://app.sitepins.com/org-_2QC3bASFU/o44Ie9xkJb>
 **Business:** Art gallery and event venue in Germantown, TN (weddings, corporate events, parties)
 
 ### Goals
@@ -19,7 +20,15 @@ This document contains detailed development guidelines, design system specificat
 1. Replicate current design pixel-perfectly in Hugo
 2. Maintain SEO rankings during migration
 3. Improve performance and eliminate Webflow hosting costs
-4. Enable easy content updates without Webflow dependency
+4. Enable easy content updates via Sitepins CMS
+
+## Content Management (Sitepins)
+
+Git-based CMS for visual content editing. See [Sitepins Guide](docs/research/sitepins-comprehensive-guide.md) for full documentation.
+
+- **Dashboard:** <https://app.sitepins.com/org-_2QC3bASFU/o44Ie9xkJb>
+- **Official Docs:** <https://docs.sitepins.com/>
+- **Schemas:** `.sitepins/schema/` | **Snippets:** `.sitepins/snippet/`
 
 ## Design System
 
