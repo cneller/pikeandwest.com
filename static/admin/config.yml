@@ -119,8 +119,8 @@ collections:
         name: image
         widget: image
         required: true
-        media_folder: ''
-        public_folder: ''
+        media_folder: /static/images/venue
+        public_folder: images/venue
         hint: 'Recommended: 1200x630px. Displays as hero background on post.'
       - label: Image Alt Text
         name: image_alt
