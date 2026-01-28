@@ -1,18 +1,23 @@
 ---
-title: "Welcome to the Pike & West Blog | Germantown Event Inspiration"
-description: "Introducing our new blog where we'll share event inspiration, gallery updates, and tips for planning your perfect celebration."
+title: Welcome to the Pike & West Blog | Germantown Event Inspiration
+description: Introducing our new blog where we'll share event inspiration, gallery updates, and tips for planning your perfect celebration.
 date: 2025-01-01
-draft: false
-author: "Pike & West"
-categories: ["News"]
-tags: ["announcement", "welcome", "Germantown venue", "event planning"]
-image: "images/venue/venue-01-interior.jpeg"
-image_alt: "Pike & West gallery interior with elegant lighting and sophisticated decor"
+image: IMG_9248.jpeg
+image_alt: Pike & West gallery interior with elegant lighting and sophisticated decor
+author: Pike & West
+categories:
+  - News
+tags:
+  - announcement
+  - welcome
+  - Germantown venue
+  - event planning
 keywords:
   - Pike & West blog
   - Germantown event venue news
   - event planning inspiration Memphis
   - venue updates Tennessee
+draft: false
 ---
 
 We're excited to launch the Pike & West blog! This is where we'll share event inspiration, practical planning advice, and a glimpse into what makes our Germantown art gallery and event space special.
