@@ -2,7 +2,7 @@
 name: content-auditor
 description: >
   Audit a single page and return STRUCTURED JSON DATA for aggregation.
-  Used by /content-audit command in map-reduce pattern. Returns data needed
+  Used by /check:editorial command in map-reduce pattern. Returns data needed
   for both individual scoring AND cross-article analysis. Updates content
   index with audit results.
 model: haiku

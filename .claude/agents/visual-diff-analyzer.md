@@ -12,7 +12,7 @@ BackstopJS results need interpretation and the user wants to understand the visu
 </example>
 
 <example>
-Context: User ran /visual-diff command and wants deeper analysis
+Context: User ran /migrate:diff command and wants deeper analysis
 user: "The visual diff shows the gallery section is off. What's wrong with it?"
 assistant: "Let me use the visual-diff-analyzer agent to examine the gallery section differences and suggest specific CSS fixes."
 <commentary>

@@ -1,23 +1,24 @@
 # Pike & West - Next Steps
 
-> **Last Updated:** 2026-01-23
+> **Last Updated:** 2026-01-27
 > **Current Phase:** Pre-Launch Testing on beta.pikeandwest.com
 
 This document tracks the current project state and upcoming work. Keep this file updated as tasks are completed or priorities change.
 
 ## Current Status
 
-| Area               | Status   | Notes                                                        |
-|--------------------|----------|--------------------------------------------------------------|
-| Hugo Site          | Complete | All pages migrated from Webflow                              |
-| Staging Deployment | Active   | beta.pikeandwest.com on Cloudflare Pages                     |
-| GTM/GA4 Analytics  | Verified | Tracking active, cross-domain configured                     |
-| Production Domain  | Active   | pikeandwest.com on Cloudflare Pages (naked domain canonical) |
-| Architecture Docs  | Complete | ADRs and patterns in docs/architecture/                      |
-| Marketing Strategy | Complete | Comprehensive docs in docs/marketing-strategy/               |
-| Claude Hooks       | Active   | Pre-commit docs check hook enabled                           |
-| Footer Redesign    | Ready    | PR #15 - Lighthouse 91% avg, ready for merge                 |
-| Event Type Pages   | Complete | 6 landing pages for SEO (/events/\*)                         |
+| Area               | Status    | Notes                                                        |
+|--------------------|-----------|--------------------------------------------------------------|
+| Hugo Site          | Complete  | All pages migrated from Webflow                              |
+| Staging Deployment | Active    | beta.pikeandwest.com on Cloudflare Pages                     |
+| GTM/GA4 Analytics  | Verified  | Tracking active, cross-domain configured                     |
+| Production Domain  | Active    | pikeandwest.com on Cloudflare Pages (naked domain canonical) |
+| Architecture Docs  | Complete  | ADRs and patterns in docs/architecture/                      |
+| Marketing Strategy | Complete  | Comprehensive docs in docs/marketing-strategy/               |
+| Claude Hooks       | Active    | Pre-commit docs check hook enabled                           |
+| Sveltia CMS        | Auth Live | OAuth Worker deployed at auth.pikeandwest.com                |
+| Footer Redesign    | Ready     | PR #15 - Lighthouse 91% avg, ready for merge                 |
+| Event Type Pages   | Complete  | 6 landing pages for SEO (/events/\*)                         |
 
 ## Top Priority
 
@@ -100,11 +101,45 @@ Complete before switching production DNS:
 - [ ] Check total page size <500KB
 - [ ] Test Core Web Vitals pass
 
+### Sveltia CMS
+
+- [x] Create GitHub OAuth App (Settings > Developer settings > OAuth Apps)
+- [x] Deploy Cloudflare Worker for OAuth proxy (`sveltia-cms-auth`)
+- [x] Set Worker secrets: `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`
+- [x] Add Worker custom domain: `auth.pikeandwest.com`
+- [x] Update `static/admin/config.yml` `base_url` to point to auth Worker
+- [ ] Add GitHub collaborators (editors) - see instructions below
+- [ ] Test full CMS login flow on production domain
+- [ ] Verify content edits commit to `main` branch correctly
+
+#### Adding GitHub Collaborators
+
+For each editor who needs CMS access:
+
+1. Go to <https://github.com/cneller/pikeandwest.com/settings/access>
+2. Click **Add people**
+3. Enter their GitHub username or email
+4. Set role to **Write** (required for CMS commits)
+5. Click **Add** - they'll receive an email invitation
+6. If they don't have a GitHub account: <https://github.com/signup>
+7. After they accept, they can sign in at `pikeandwest.com/admin/`
+
 ### Infrastructure
 
 - [ ] Test GitHub Actions deployment workflow
 - [ ] Verify preview URLs work for PRs
 - [ ] Document rollback procedure
+- [ ] Add artifact retention policy to CI workflows (see below)
+
+#### GitHub Actions Artifact Storage
+
+Artifacts (Lighthouse reports, `hugo-site` builds) accumulate and hit the 500 MB free tier limit (hit 4.2 GB on 2026-01-27, cleaned expired artifacts to recover). Two approaches to prevent recurrence:
+
+**Option A: Keep last N artifacts (preferred).** Add a cleanup step to CI that deletes old artifacts, keeping the most recent N per type. GitHub doesn't natively support this, so use `c-hive/gha-remove-artifacts` action or a custom script at the start of CI runs.
+
+**Option B: Retention days.** Set `retention-days: 7` on all `upload-artifact` steps, or set a repo-wide default at Settings > Actions > Artifact and log retention. Simpler but loses history during inactive periods.
+
+Either way, also set a repo-wide retention default as a safety net (Settings > Actions > General > Artifact and log retention).
 
 ## Launch Tasks
 
@@ -160,15 +195,24 @@ hugo --templateMetrics
 
 ### Content (Priority: Medium)
 
-| Task                     | Status      | Notes                                                               |
-|--------------------------|-------------|---------------------------------------------------------------------|
-| Workshops section        | In Progress | Page structure complete, pending Ticket Tailor setup                |
-| Blog section             | Active      | 5 posts published (2 current + 3 backdated Oct-Dec 2025)            |
-| Gallery application page | Basic       | May need form improvements                                          |
-| Team/About section       | Complete    | Consider adding more team photos                                    |
-| Event type pages         | Complete    | 6 pages: weddings, corporate, birthday, baby shower, private, dance |
-| Privacy Policy           | Complete    | /privacy/ - basic policy page                                       |
-| Accessibility Statement  | Complete    | /accessibility/ - basic statement page                              |
+| Task                     | Status      | Notes                                                                    |
+|--------------------------|-------------|--------------------------------------------------------------------------|
+| Workshops section        | In Progress | Page structure complete, pending Ticket Tailor setup                     |
+| Blog section             | Active      | 6 posts published as page bundles (3 current + 3 backdated Oct-Dec 2025) |
+| Gallery application page | Basic       | May need form improvements                                               |
+| Team/About section       | Complete    | Consider adding more team photos                                         |
+| Event type pages         | Complete    | 6 pages: weddings, corporate, birthday, baby shower, private, dance      |
+| Privacy Policy           | Complete    | /privacy/ - basic policy page                                            |
+| Accessibility Statement  | Complete    | /accessibility/ - basic statement page                                   |
+
+### Sveltia CMS (Priority: Medium)
+
+| Enhancement                            | Effort | Blocked By                                                       | Notes                                                                                                                                |
+|----------------------------------------|--------|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| Asset browser folder navigation        | None   | [Sveltia 2.0](https://github.com/sveltia/sveltia-cms/issues/420) | Currently all assets show flat; folder browsing is planned upstream                                                                  |
+| Manual asset categories                | None   | [Sveltia 2.0](https://github.com/sveltia/sveltia-cms/issues/301) | Icons, logos, social images land in "Uncategorized" since no collection references their folders                                     |
+| Venue gallery image management via CMS | Low    | None                                                             | Add image list widget to `venue_gallery` singleton so editors can add/reorder gallery images; currently images are developer-managed |
+| Event page hero image previews         | Low    | None                                                             | Hero Image field shows path text instead of thumbnail preview (see screenshot in commit history)                                     |
 
 ### Technical Debt (Priority: Low)
 
@@ -252,52 +296,61 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 
 ## Changelog
 
-| Date       | Change                                                                                            |
-|------------|---------------------------------------------------------------------------------------------------|
-| 2026-01-23 | Added workshops page with Ticket Tailor widget placeholder (`/workshops/`)                        |
-| 2026-01-23 | Updated CTAs: "Host Your Event" (venue), "Book a Tour" (tours), "Workshops" (classes)             |
-| 2026-01-23 | Header nav changed: Blog → Workshops, Contact Us → Host Your Event                                |
-| 2026-01-23 | Footer nav changed: Contact → Host an Event, added Workshops link                                 |
-| 2026-01-23 | Refactored blog-editor agent as authoritative source for editorial styling; commands delegate to agent |
+| Date       | Change                                                                                                                                  |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| 2026-01-27 | Deployed Sveltia CMS auth: GitHub OAuth App, Cloudflare Worker at `auth.pikeandwest.com`, tested OAuth login flow end-to-end            |
+| 2026-01-27 | Cleaned GitHub Actions artifact storage (4.2 GB of accumulated Lighthouse/build artifacts)                                              |
+| 2026-01-27 | Installed Sveltia CMS: admin UI, config with all collections/singletons, blog page bundles, site settings extraction                    |
+| 2026-01-27 | Removed Sitepins CMS plan, Front Matter CMS config, and `.well-known/sitepins.json` (replaced by Sveltia CMS)                           |
+| 2026-01-27 | Migrated blog posts to Hugo page bundles (`content/blog/*/index.md`) for co-located images                                              |
+| 2026-01-27 | Extracted contact/social data from params.toml to `data/site_settings.yaml` (CMS-editable singleton)                                    |
+| 2026-01-27 | Added dual resource resolution to blog templates (page bundle first, then global assets)                                                |
+| 2026-01-27 | Updated Sveltia skill, agent, and 3 commands for page bundles and singletons                                                            |
+| 2026-01-27 | Updated CLAUDE.md with site_settings data source pattern and page bundle paths                                                          |
+| 2026-01-23 | Added workshops page with Ticket Tailor widget placeholder (`/workshops/`)                                                              |
+| 2026-01-23 | Updated CTAs: "Host Your Event" (venue), "Book a Tour" (tours), "Workshops" (classes)                                                   |
+| 2026-01-23 | Header nav changed: Blog → Workshops, Contact Us → Host Your Event                                                                      |
+| 2026-01-23 | Footer nav changed: Contact → Host an Event, added Workshops link                                                                       |
+| 2026-01-23 | Refactored blog-editor agent as authoritative source for editorial styling; commands delegate to agent                                  |
 | 2026-01-23 | Expanded editorial styling: 8 new shortcodes (standfirst, kicker, tip, fact-box, key-takeaways, timeline, sidebar-quote, numbered-list) |
-| 2026-01-23 | Created blog-editor agent (`.claude/agents/blog-editor.md`) for consistent formatting             |
-| 2026-01-23 | Updated ADR-005 with comprehensive editorial styling system (11 components total)                 |
-| 2026-01-23 | Fixed FOUC on contact page: added full page critical CSS (shimmer, Find Us, footer)               |
-| 2026-01-23 | Consolidated facade/shimmer to single shimmer implementation, removed ~750 lines of dead code     |
-| 2026-01-23 | Added pixel-perfect shimmer measurements via Playwright (docs/contact-form/README.md)             |
-| 2026-01-23 | Added shimmer blocks for all form elements: labels, inputs, hints, buttons, header, footer        |
-| 2026-01-22 | Integrated editorial styling into Claude Code commands (`/blog-draft`, `/blog-outline`, `/content-audit`) |
-| 2026-01-22 | Updated blog archetype with editorial styling examples and quick reference                        |
-| 2026-01-22 | Added blog editorial styling: drop caps, pull quotes, decorative dividers (ADR-005)               |
-| 2026-01-22 | Created Hugo shortcodes: `pull-quote` and `divider` for easy content authoring                    |
-| 2026-01-22 | Fixed Cloudflare bot detection: removed curl health-check, rely on Lighthouse Chrome (score: 90)  |
-| 2026-01-22 | Consolidated GitHub Actions: CI workflow (Build→Validate→Deploy), async Lighthouse workflow       |
-| 2026-01-22 | Removed Artists from main nav, reordered to Blog (left) → Contact Us (right, gold CTA)            |
-| 2026-01-21 | Verified canonical domain is `www.pikeandwest.com` via GSC (Playwright); updated DNS docs         |
-| 2026-01-21 | Added hero images to event pages with front matter support (`image`, `image_alt`)                 |
-| 2026-01-21 | Created shared `_page-hero.scss` styles, refactored blog-hero to extend it (-91 lines)            |
-| 2026-01-21 | Added Front Matter CMS configuration (`frontmatter.json`) for VS Code sidebar editing             |
-| 2026-01-21 | Created event archetype for new event pages                                                       |
-| 2026-01-21 | Created shared `_content-base.scss` mixin for consistent content typography                       |
-| 2026-01-21 | Refactored blog and event pages to use content-base mixin (-94 lines total)                       |
-| 2026-01-21 | Fixed event page text color (`$color-text` instead of `$color-text-light`)                        |
-| 2026-01-21 | Added breadcrumb navigation to event single and list pages                                        |
-| 2026-01-21 | Fixed hero positioning (left-align, vertical center) - flexbox layout                             |
-| 2026-01-21 | Resolved SEO 69 false positive - Cloudflare noindex on previews, added is-preview workflow input  |
-| 2026-01-21 | Performance: async Google Fonts loading, synced critical.scss with \_hero.scss                    |
-| 2026-01-21 | Added Lighthouse troubleshooting docs to CLAUDE.md                                                |
-| 2026-01-21 | Footer redesign with multi-column SEO layout and 6 event landing pages                            |
-| 2026-01-21 | Added Privacy Policy and Accessibility Statement pages                                            |
-| 2026-01-21 | Mobile footer changed from single-column to 2-column grid                                         |
-| 2026-01-20 | Initial creation with analytics verification tasks                                                |
-| 2026-01-20 | Added beta subdomain deployment status                                                            |
-| 2026-01-20 | Added future enhancements from web research                                                       |
-| 2026-01-20 | Added architecture docs (4 ADRs, 2 pattern docs)                                                  |
-| 2026-01-20 | Added marketing strategy documentation suite                                                      |
-| 2026-01-20 | Added pre-commit docs check hook for documentation reminders                                      |
-| 2026-01-20 | SCSS visual parity refinements across all sections                                                |
-| 2026-01-20 | Added 3 backdated blog posts (Oct-Dec 2025) targeting Baby Shower, Anniversary, Birthday personas |
-| 2026-01-20 | Added blog posts to Lighthouse performance testing matrix                                         |
-| 2026-01-20 | Added accessible breadcrumb navigation to blog pages with JSON-LD schema                          |
-| 2026-01-20 | SEO audit fixes merged (keywords, titles, og_image, expanded blog content)                        |
-| 2026-01-20 | Added hero text alignment as top priority (still too far left from logo)                          |
+| 2026-01-23 | Created blog-editor agent (`.claude/agents/blog-editor.md`) for consistent formatting                                                   |
+| 2026-01-23 | Updated ADR-005 with comprehensive editorial styling system (11 components total)                                                       |
+| 2026-01-23 | Fixed FOUC on contact page: added full page critical CSS (shimmer, Find Us, footer)                                                     |
+| 2026-01-23 | Consolidated facade/shimmer to single shimmer implementation, removed ~750 lines of dead code                                           |
+| 2026-01-23 | Added pixel-perfect shimmer measurements via Playwright (docs/contact-form/README.md)                                                   |
+| 2026-01-23 | Added shimmer blocks for all form elements: labels, inputs, hints, buttons, header, footer                                              |
+| 2026-01-22 | Integrated editorial styling into Claude Code commands (`/blog-draft`, `/blog-outline`, `/content-audit`)                               |
+| 2026-01-22 | Updated blog archetype with editorial styling examples and quick reference                                                              |
+| 2026-01-22 | Added blog editorial styling: drop caps, pull quotes, decorative dividers (ADR-005)                                                     |
+| 2026-01-22 | Created Hugo shortcodes: `pull-quote` and `divider` for easy content authoring                                                          |
+| 2026-01-22 | Fixed Cloudflare bot detection: removed curl health-check, rely on Lighthouse Chrome (score: 90)                                        |
+| 2026-01-22 | Consolidated GitHub Actions: CI workflow (Build→Validate→Deploy), async Lighthouse workflow                                             |
+| 2026-01-22 | Removed Artists from main nav, reordered to Blog (left) → Contact Us (right, gold CTA)                                                  |
+| 2026-01-21 | Verified canonical domain is `www.pikeandwest.com` via GSC (Playwright); updated DNS docs                                               |
+| 2026-01-21 | Added hero images to event pages with front matter support (`image`, `image_alt`)                                                       |
+| 2026-01-21 | Created shared `_page-hero.scss` styles, refactored blog-hero to extend it (-91 lines)                                                  |
+| 2026-01-21 | Added Front Matter CMS configuration (`frontmatter.json`) for VS Code sidebar editing (removed 2026-01-27, replaced by Sveltia CMS)     |
+| 2026-01-21 | Created event archetype for new event pages                                                                                             |
+| 2026-01-21 | Created shared `_content-base.scss` mixin for consistent content typography                                                             |
+| 2026-01-21 | Refactored blog and event pages to use content-base mixin (-94 lines total)                                                             |
+| 2026-01-21 | Fixed event page text color (`$color-text` instead of `$color-text-light`)                                                              |
+| 2026-01-21 | Added breadcrumb navigation to event single and list pages                                                                              |
+| 2026-01-21 | Fixed hero positioning (left-align, vertical center) - flexbox layout                                                                   |
+| 2026-01-21 | Resolved SEO 69 false positive - Cloudflare noindex on previews, added is-preview workflow input                                        |
+| 2026-01-21 | Performance: async Google Fonts loading, synced critical.scss with \_hero.scss                                                          |
+| 2026-01-21 | Added Lighthouse troubleshooting docs to CLAUDE.md                                                                                      |
+| 2026-01-21 | Footer redesign with multi-column SEO layout and 6 event landing pages                                                                  |
+| 2026-01-21 | Added Privacy Policy and Accessibility Statement pages                                                                                  |
+| 2026-01-21 | Mobile footer changed from single-column to 2-column grid                                                                               |
+| 2026-01-20 | Initial creation with analytics verification tasks                                                                                      |
+| 2026-01-20 | Added beta subdomain deployment status                                                                                                  |
+| 2026-01-20 | Added future enhancements from web research                                                                                             |
+| 2026-01-20 | Added architecture docs (4 ADRs, 2 pattern docs)                                                                                        |
+| 2026-01-20 | Added marketing strategy documentation suite                                                                                            |
+| 2026-01-20 | Added pre-commit docs check hook for documentation reminders                                                                            |
+| 2026-01-20 | SCSS visual parity refinements across all sections                                                                                      |
+| 2026-01-20 | Added 3 backdated blog posts (Oct-Dec 2025) targeting Baby Shower, Anniversary, Birthday personas                                       |
+| 2026-01-20 | Added blog posts to Lighthouse performance testing matrix                                                                               |
+| 2026-01-20 | Added accessible breadcrumb navigation to blog pages with JSON-LD schema                                                                |
+| 2026-01-20 | SEO audit fixes merged (keywords, titles, og_image, expanded blog content)                                                              |
+| 2026-01-20 | Added hero text alignment as top priority (still too far left from logo)                                                                |

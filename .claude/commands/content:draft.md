@@ -7,7 +7,7 @@ arguments:
     required: true
 ---
 
-# /blog-draft Command
+# /content:draft Command
 
 Generate a publication-ready blog post draft for Pike & West with Hugo front matter.
 
@@ -76,13 +76,14 @@ for editorial styling. The agent handles all formatting decisions.
 ### Phase 2: Editorial Styling (Delegate to Agent)
 
 After writing the initial content, invoke the `blog-editor` agent to apply:
+
 - Pull quotes (1-2 per 1000 words)
 - Section dividers (2-3 per article)
 - Content-appropriate elements (tip boxes, fact boxes, timelines, etc.)
 
 The agent contains all editorial styling logic, shortcode reference, and quality checklists.
 
-```
+```text
 Use the blog-editor agent to apply editorial styling to the new blog post.
 ```
 
@@ -91,6 +92,7 @@ Use the blog-editor agent to apply editorial styling to the new blog post.
 Write the complete draft to: `content/blog/[generated-slug].md`
 
 Report:
+
 - File location created
 - Word count
 - Target persona

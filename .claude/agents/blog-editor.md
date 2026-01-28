@@ -574,9 +574,9 @@ your spring wedding. Call us at 901.206.5575.
 
 This agent is invoked by:
 
-- `/blog-draft` - After generating content structure
-- `/blog-outline` - For styling recommendations
-- `/content-audit` - For evaluating editorial styling compliance
+- `/content:draft` - After generating content structure
+- `/content:outline` - For styling recommendations
+- `/check:editorial` - For evaluating editorial styling compliance
 
 The agent can also be invoked automatically by Claude when editing
 any file in `content/blog/` based on the description in the frontmatter.
