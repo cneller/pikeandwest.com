@@ -2,7 +2,7 @@
 title: Celebrating Your Anniversary During the Holiday Season
 description: Make your anniversary unforgettable during the holidays with the 'low-key luxe' trend—intimate gatherings, memory stations, and romantic elegance at Pike & West.
 date: 2025-11-08T14:47:00-05:00
-image: IMG_9252.jpeg
+image: IMG_9255.jpeg
 image_alt: Romantic dance floor with string lights at Pike & West venue in Germantown Tennessee perfect for anniversary celebrations
 author: Pike & West
 categories:
