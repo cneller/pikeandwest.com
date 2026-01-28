@@ -1,6 +1,7 @@
 {{ define "main" }}
-{{/* Blog Hero */}}
-{{ $heroImage := resources.Get "images/venue/venue-06-soft-seating.jpg" }}
+{{/* Blog Hero - reads from front matter, falls back to default */}}
+{{ $heroPath := .Params.image | default "images/venue/venue-06-soft-seating.jpg" }}
+{{ $heroImage := resources.Get $heroPath }}
 {{ $heroBg := "" }}
 {{ if $heroImage }}
   {{ $heroBg = ($heroImage.Resize "1920x q85").RelPermalink }}
@@ -26,7 +27,10 @@
         {{/* Stretched link overlay - makes entire card clickable */}}
         <a href="{{ $page.RelPermalink }}" class="blog-card__link-overlay" aria-label="Read {{ $page.Title }}"></a>
         {{ with .Params.image }}
-        {{ $img := resources.Get . }}
+        {{ $img := $page.Resources.GetMatch . }}
+        {{ if not $img }}
+          {{ $img = resources.Get . }}
+        {{ end }}
         {{ if $img }}
         {{ $resized := $img.Fill "600x400 q85" }}
         <div class="blog-card__image-wrapper">

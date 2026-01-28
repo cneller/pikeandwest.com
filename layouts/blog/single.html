@@ -2,7 +2,11 @@
 {{/* Blog Hero - Use post's featured image or fallback to venue image */}}
 {{ $heroImage := "" }}
 {{ with .Params.image }}
-  {{ $heroImage = resources.Get . }}
+  {{/* Try page bundle resource first, then global assets */}}
+  {{ $heroImage = $.Resources.GetMatch . }}
+  {{ if not $heroImage }}
+    {{ $heroImage = resources.Get . }}
+  {{ end }}
 {{ end }}
 {{ if not $heroImage }}
   {{ $heroImage = resources.Get "images/venue/venue-06-soft-seating.jpg" }}

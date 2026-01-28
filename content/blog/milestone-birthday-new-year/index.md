@@ -16,7 +16,7 @@ tags:
   - celebration planning
   - 50th birthday
   - adult birthday party
-image: media/assets/images/Screenshot 2026-01-23 at 5.57.53 PM.png
+image: milestone-birthday-hero.png
 image_alt: >-
   Sophisticated Pike & West art gallery venue in Germantown Tennessee with
   elegant lighting perfect for milestone birthday celebrations
