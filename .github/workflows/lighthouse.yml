@@ -106,10 +106,9 @@ jobs:
         with:
           urls: ${{ needs.prepare.outputs.url }}${{ matrix.page.path }}
           configPath: ./lighthouserc.json
-          uploadArtifacts: true
+          uploadArtifacts: false
           temporaryPublicStorage: true
           runs: ${{ needs.prepare.outputs.run-count }}
-          artifactName: lighthouse-${{ matrix.page.name }}
 
       - name: Save results
         run: |
@@ -122,7 +121,7 @@ jobs:
         with:
           name: lighthouse-results-${{ matrix.page.name }}
           path: results/
-          retention-days: 30
+          retention-days: 3
 
   summary:
     name: Summary
