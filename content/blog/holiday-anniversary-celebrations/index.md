@@ -1,13 +1,19 @@
 ---
-title: "Celebrating Your Anniversary During the Holiday Season"
-description: "Make your anniversary unforgettable during the holidays with the 'low-key luxe' trend—intimate gatherings, memory stations, and romantic elegance at Pike & West."
+title: Celebrating Your Anniversary During the Holiday Season
+description: Make your anniversary unforgettable during the holidays with the 'low-key luxe' trend—intimate gatherings, memory stations, and romantic elegance at Pike & West.
 date: 2025-11-08T14:47:00-05:00
-draft: false
-author: "Pike & West"
-categories: ["Anniversaries"]
-tags: ["anniversary", "holiday events", "romantic celebrations", "couples", "milestone anniversary", "intimate gatherings"]
-image: "images/venue/venue-05-dancefloor.jpg"
-image_alt: "Romantic dance floor with string lights at Pike & West venue in Germantown Tennessee perfect for anniversary celebrations"
+image: IMG_9252.jpeg
+image_alt: Romantic dance floor with string lights at Pike & West venue in Germantown Tennessee perfect for anniversary celebrations
+author: Pike & West
+categories:
+  - Anniversaries
+tags:
+  - anniversary
+  - holiday events
+  - romantic celebrations
+  - couples
+  - milestone anniversary
+  - intimate gatherings
 keywords:
   - anniversary party venue Memphis
   - holiday anniversary ideas
@@ -15,6 +21,7 @@ keywords:
   - milestone anniversary celebration
   - intimate anniversary party Tennessee
   - 25th anniversary venue Memphis
+draft: false
 ---
 
 There's something undeniably romantic about marking your anniversary during the holiday season. The twinkling lights, the sense of warmth and gratitude, the natural gathering of family—it all creates a backdrop that makes your milestone feel even more special. If your anniversary falls in November or December, lean into the season's magic rather than competing with it.
@@ -44,11 +51,8 @@ One of the most meaningful trends for milestone anniversaries is revisiting elem
 **Consider bringing back:**
 
 - **Your wedding colors**: Even subtle nods—napkins in your original palette, flowers that echo your bouquet—create a through-line from then to now.
-
 - **A signature dish or drink**: Did you serve your grandmother's recipe at your reception? Was there a cocktail you created together? Bringing these back adds layers of meaning that new guests will appreciate learning about.
-
 - **Your first dance song**: There's something powerful about dancing to the same song 25 or 50 years later. The familiar melody hits differently when you're surrounded by decades of shared history.
-
 - **Wedding photos in the decor**: A timeline display showing photos from your wedding day through the present tells your story visually and gives guests—especially those who weren't at your wedding—a window into your journey.
 
 For couples planning a vow renewal, this is an opportunity to recreate the ceremony elements you loved most, but with the freedom to design it exactly as you wish. No legal requirements, no pressure—just a meaningful exchange of updated promises before the people who matter most.
@@ -64,11 +68,8 @@ Move beyond the traditional guest book with interactive elements that create kee
 **Ideas that work beautifully:**
 
 - **Video message station**: Set up a simple recording area where guests can share memories, advice, or well-wishes. These become treasured keepsakes you can watch on future anniversaries.
-
 - **Polaroid guest book**: Provide an instant camera and a beautiful album. Guests snap a photo, add it to the book, and write a note alongside it. You leave with a complete memory book.
-
 - **Memory jar**: Place cards and pens at each table for guests to write their favorite memories of you as a couple. Read them together after the celebration—or save them for a quiet moment on your actual anniversary.
-
 - **"Decades of Us" timeline**: Create a visual display of your years together and invite guests to add sticky notes with their memories from each era. Where were they when you got engaged? What do they remember from your tenth anniversary?
 
 These elements encourage guests to reflect on your relationship and contribute something meaningful, making them feel more connected to the occasion.
@@ -82,11 +83,8 @@ The key to anniversary decor during the holidays is sophistication over obvious 
 **Elegant palettes that work:**
 
 - **Champagne and gold**: Warm metallics create instant elegance. Mix matte and shimmering finishes for depth. Add ivory candles and soft lighting for romance.
-
 - **Winter white with greenery**: Crisp white linens and candles paired with eucalyptus, olive branches, or simple pine creates freshness without feeling holiday-specific.
-
 - **Deep jewel tones**: Burgundy, emerald, and sapphire feel luxurious and seasonal. Pair with gold accents and candlelight for drama.
-
 - **Blush and champagne**: For a softer look, warm pink tones paired with champagne gold create romance without competing with holiday decor.
 
 At Pike & West, our neutral gallery walls and warm lighting let any palette shine. The rotating artwork adds visual interest without dictating your color scheme, and the existing ambient lighting creates the kind of romantic glow that's hard to manufacture. Our [private event spaces](/events/private-parties/) adapt beautifully to any seasonal color story you envision.
