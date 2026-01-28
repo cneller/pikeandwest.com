@@ -80,4 +80,4 @@ Ask if user wants to:
 
 - Apply suggested fixes to SCSS files
 - Update `docs/webflow-to-hugo-css-mapping.md` with findings
-- Run `/visual-diff` to verify fixes
+- Run `/migrate:diff` to verify fixes

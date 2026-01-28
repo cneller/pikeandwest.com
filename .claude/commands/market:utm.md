@@ -12,7 +12,7 @@ arguments:
     required: true
 ---
 
-# /utm-link Command
+# /market:utm Command
 
 Generate tracked URLs following Pike & West UTM conventions for consistent analytics.
 
@@ -41,7 +41,7 @@ Generate tracked URLs following Pike & West UTM conventions for consistent analy
 3. **Generate URL**
    Construct full URL with parameters:
 
-   ```
+   ```text
    [base-url]?utm_source=[source]&utm_medium=[medium]&utm_campaign=[campaign]
    ```
 
@@ -66,7 +66,7 @@ Generate tracked URLs following Pike & West UTM conventions for consistent analy
    [URL with &utm_content=bio-link example]
 
    **Analytics Location:**
-   In GA4: Acquisition → Traffic acquisition
+   In GA4: Acquisition -> Traffic acquisition
    Filter: Source = [source], Campaign = [campaign]
 
    **Copy-Ready:**
@@ -101,19 +101,19 @@ Generate tracked URLs following Pike & West UTM conventions for consistent analy
 
 ```bash
 # Instagram bio - evergreen
-/utm-link /contact instagram evergreen-tour-booking
+/market:utm /contact instagram evergreen-tour-booking
 
 # Facebook blog promo
-/utm-link /blog/wedding-guide facebook blog-wedding-guide
+/market:utm /blog/wedding-guide facebook blog-wedding-guide
 
 # Email newsletter
-/utm-link /contact email newsletter-2025-02
+/market:utm /contact email newsletter-2025-02
 
 # Google Business Profile
-/utm-link /contact gbp evergreen-local
+/market:utm /contact gbp evergreen-local
 
 # Partner referral
-/utm-link /contact partner-memphis-magazine spring-2025-ad
+/market:utm /contact partner-memphis-magazine spring-2025-ad
 ```
 
 ## Validation Rules

@@ -7,7 +7,7 @@ arguments:
     required: false
 ---
 
-# /content-audit Command
+# /check:editorial Command
 
 Map-reduce content audit for Pike & West blog posts. Spawns parallel sub-agents
 for each piece of content, then aggregates results for cross-article analysis.
@@ -51,7 +51,7 @@ for each piece of content, then aggregates results for cross-article analysis.
 
 1. Scan for blog posts:
 
-   ```
+   ```text
    content/blog/*.md (excluding _index.md)
    ```
 
@@ -160,12 +160,12 @@ Using editorial styling scores:
 
 | Metric                  | Value    | Status   |
 |-------------------------|----------|----------|
-| Average Post Score      | XX/100   | [🟢🟡🔴] |
-| SEO Health              | XX/100   | [🟢🟡🔴] |
-| Brand Voice             | XX/100   | [🟢🟡🔴] |
-| Editorial Styling       | XX/100   | [🟢🟡🔴] |
-| Keyword Cannibalization | X issues | [🟢🟡🔴] |
-| Content Gaps            | X areas  | [🟢🟡🔴] |
+| Average Post Score      | XX/100   | [status] |
+| SEO Health              | XX/100   | [status] |
+| Brand Voice             | XX/100   | [status] |
+| Editorial Styling       | XX/100   | [status] |
+| Keyword Cannibalization | X issues | [status] |
+| Content Gaps            | X areas  | [status] |
 
 ---
 
@@ -234,7 +234,7 @@ Based on existing coverage, consider creating content for:
 
 ### Underserved Keywords
 Keywords mentioned but not targeted as primary:
-- [keyword] → could be its own post
+- [keyword] -> could be its own post
 ```
 
 ---
@@ -258,3 +258,9 @@ Keywords mentioned but not targeted as primary:
 - With 6 posts: ~10-15 seconds total
 - With 20 posts: ~20-30 seconds total
 - Sub-agents run in parallel, so time scales with slowest agent, not count
+
+## Related Commands
+
+- `/check:config` -- Verify CMS schema matches Hugo templates
+- `/check:seo` -- Check SEO fields, broken links, content freshness
+- `/check:all` -- Run all three checks and produce a unified dashboard

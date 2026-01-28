@@ -7,7 +7,7 @@ arguments:
     required: true
 ---
 
-# /persona Command
+# /content:persona Command
 
 Load comprehensive persona details to inform content creation for Pike & West.
 
@@ -106,17 +106,17 @@ Persona remains active until:
 
 - Another persona is loaded
 - Session ends
-- User runs `/persona --clear`
+- User runs `/content:persona --clear`
 
 ## Suggested Actions After Loading
 
 ```bash
 # Create content for this persona
-/blog-outline "[topic relevant to persona]"
+/content:outline "[topic relevant to persona]"
 
 # Check existing coverage
-/content-audit --persona [name]
+/check:editorial --persona [name]
 
 # View content queue filtered by persona
-/content-queue --persona [name]
+/content:queue --persona [name]
 ```

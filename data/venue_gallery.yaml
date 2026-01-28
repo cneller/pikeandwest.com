@@ -1,10 +1,29 @@
 # Venue gallery section content for homepage
-# Edit this file to update the venue gallery section
+# Edit this file or use the CMS to manage gallery images, order, and alt text.
 
 heading: "OUR VENUE"
 subtext: "Want to see more? Follow us on Instagram."
-# Images are auto-loaded from assets/images/venue/
-# To control order or add captions, list them explicitly:
-# images:
-#   - src: "images/venue/photo1.jpg"
-#     alt: "Description of photo 1"
+
+images:
+  - src: "images/venue/venue-01-interior.jpeg"
+    alt:
+      "Pike & West interior gallery space with artwork on walls and elegant
+      lighting"
+  - src: "images/venue/venue-02-foyer.png"
+    alt: "Pike & West foyer entrance with welcoming decor"
+  - src: "images/venue/venue-03-lower-patio.jpg"
+    alt: "Lower patio outdoor space at Pike & West"
+  - src: "images/venue/venue-04-wedding.jpg"
+    alt: "Wedding reception setup at Pike & West with decorated tables"
+  - src: "images/venue/venue-05-dancefloor.jpg"
+    alt: "Open dancefloor area at Pike & West venue"
+  - src: "images/venue/venue-06-soft-seating.jpg"
+    alt: "Soft seating lounge area with elegant event setup"
+  - src: "images/venue/venue-07-bar.jpg"
+    alt: "Bar area at Pike & West venue"
+  - src: "images/venue/venue-08-disco-background.jpg"
+    alt: "Pike & West venue with disco ball ambient lighting"
+  - src: "images/venue/venue-09-table-chairs.png"
+    alt: "Table and chairs arrangement for seated event"
+  - src: "images/venue/venue-10-seating-area.png"
+    alt: "Additional seating area at Pike & West"

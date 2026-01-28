@@ -1,0 +1,769 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# ============================================================
+# Backend Configuration
+# ============================================================
+backend:
+  name: github
+  repo: cneller/pikeandwest.com
+  branch: main
+  base_url: https://auth.pikeandwest.com
+  auth_endpoint: auth
+  commit_messages:
+    create: "[cms] content: add {{collection}} '{{slug}}'"
+    update: "[cms] content: update {{collection}} '{{slug}}'"
+    delete: "[cms] content: delete {{collection}} '{{slug}}'"
+    uploadMedia: "[cms] content: upload '{{path}}'"
+    deleteMedia: "[cms] content: delete media '{{path}}'"
+
+# ============================================================
+# Site
+# ============================================================
+site_url: https://pikeandwest.com
+display_url: https://pikeandwest.com
+logo_url: /favicon.png
+
+# ============================================================
+# Slug
+# ============================================================
+slug:
+  encoding: unicode
+  clean_accents: true
+  sanitize_replacement: '-'
+
+# ============================================================
+# Media
+# ============================================================
+media_folder: static/images
+public_folder: /images
+
+# ============================================================
+# Collections
+# ============================================================
+collections:
+  # ----------------------------------------------------------
+  # Blog Posts (Page Bundles)
+  # ----------------------------------------------------------
+  - name: blog
+    label: Blog Posts
+    label_singular: Blog Post
+    folder: content/blog
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    path: '{{slug}}/index'
+    media_folder: ''
+    public_folder: ''
+    extension: md
+    format: yaml-frontmatter
+    icon: article
+    summary: '{{title}} ({{year}}-{{month}}-{{day}})'
+    sortable_fields:
+      - date
+      - title
+    view_filters:
+      - label: Published
+        field: draft
+        pattern: false
+      - label: Drafts
+        field: draft
+        pattern: true
+    index_file:
+      fields:
+        - label: Title
+          name: title
+          widget: string
+          hint: 'Page title shown in browser tab and search results.'
+        - label: Description
+          name: description
+          widget: text
+          hint: '150-160 characters for Google search results.'
+        - label: Keywords
+          name: keywords
+          widget: list
+          required: false
+          hint: '3-5 SEO keywords including location terms.'
+        - label: Hero Image
+          name: image
+          widget: image
+          required: false
+          media_folder: /static/images/venue
+          public_folder: images/venue
+          hint:
+            '1200x630px recommended. Used as OG image for the blog listing page.'
+        - label: Image Alt Text
+          name: image_alt
+          widget: string
+          required: false
+          hint: 'Describe the image for accessibility.'
+        - label: Body
+          name: body
+          widget: markdown
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        required: true
+        hint: 'Keep under 70 characters for best SEO display'
+      - label: Description
+        name: description
+        widget: text
+        required: true
+        hint: '150-160 characters. This appears in Google search results.'
+      - label: Date
+        name: date
+        widget: datetime
+        required: true
+        format: 'YYYY-MM-DD'
+      - label: Featured Image
+        name: image
+        widget: image
+        required: true
+        media_folder: ''
+        public_folder: ''
+        hint: 'Recommended: 1200x630px. Displays as hero background on post.'
+      - label: Image Alt Text
+        name: image_alt
+        widget: string
+        required: true
+        hint: 'Describe the image for screen readers and SEO.'
+      - label: Author
+        name: author
+        widget: string
+        default: 'Pike & West'
+      - label: Categories
+        name: categories
+        widget: select
+        multiple: true
+        min: 1
+        max: 2
+        options:
+          - News
+          - Weddings
+          - Corporate Events
+          - Planning Tips
+          - Behind the Scenes
+        hint: 'Select 1-2 categories.'
+      - label: Tags
+        name: tags
+        widget: select
+        multiple: true
+        options:
+          - announcement
+          - welcome
+          - venue updates
+          - weddings
+          - corporate
+          - parties
+          - celebrations
+          - planning tips
+          - event planning
+          - venue tips
+          - checklist
+          - spring
+          - summer
+          - fall
+          - winter
+          - holidays
+          - germantown
+          - memphis
+          - tennessee
+        hint: 'Select relevant tags for discovery.'
+      - label: Keywords
+        name: keywords
+        widget: list
+        required: false
+        hint: '3-5 SEO keywords including location terms.'
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        hint: 'Turn on to save without publishing to the live site.'
+      - label: Body
+        name: body
+        widget: markdown
+
+  # ----------------------------------------------------------
+  # Event Pages
+  # ----------------------------------------------------------
+  - name: events
+    label: Event Pages
+    label_singular: Event Page
+    folder: content/events
+    media_folder: /static/images/venue
+    public_folder: images/venue
+    create: false
+    delete: false
+    extension: md
+    format: yaml-frontmatter
+    icon: celebration
+    summary: '{{title}}'
+    index_file:
+      fields:
+        - label: Title
+          name: title
+          widget: string
+          hint: 'Page title shown in browser tab and search results.'
+        - label: Description
+          name: description
+          widget: text
+          hint: '150-160 characters for Google search results.'
+        - label: Hero Image
+          name: image
+          widget: image
+          required: false
+          media_folder: /static/images/venue
+          public_folder: /images/venue
+          hint: '1200x630px recommended.'
+        - label: Image Alt Text
+          name: image_alt
+          widget: string
+          required: false
+          hint: 'Describe the image for accessibility.'
+        - label: Body
+          name: body
+          widget: markdown
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        required: true
+        hint: 'Page title shown in browser tab and search results.'
+      - label: Description
+        name: description
+        widget: text
+        required: true
+        hint: '150-160 characters for Google search results.'
+      - label: Event Type
+        name: eventType
+        widget: select
+        options:
+          - wedding
+          - corporate
+          - birthday
+          - baby-shower
+          - private
+          - dance
+      - label: Icon
+        name: icon
+        widget: image
+        required: true
+        media_folder: /static/images/icons
+        public_folder: images/icons
+        hint:
+          'Event type icon (PNG). Displayed on the events list and homepage
+          grid.'
+      - label: Hero Image
+        name: image
+        widget: image
+        required: true
+        media_folder: /static/images/venue
+        public_folder: /images/venue
+        hint: '1200x630px recommended.'
+      - label: Image Alt Text
+        name: image_alt
+        widget: string
+        required: true
+        hint: 'Describe the image for accessibility.'
+      - label: Keywords
+        name: keywords
+        widget: list
+        required: false
+        hint: '3-5 SEO keywords.'
+      - label: Type
+        name: type
+        widget: hidden
+        default: 'events'
+      - label: Body
+        name: body
+        widget: markdown
+
+  # ----------------------------------------------------------
+  # Divider
+  # ----------------------------------------------------------
+  - divider: true
+
+  # ----------------------------------------------------------
+  # Pages (File Collection)
+  # ----------------------------------------------------------
+  - name: pages
+    label: Pages
+    icon: description
+    files:
+      - name: home
+        label: Homepage
+        file: content/_index.md
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+            hint: '150-160 characters for search results.'
+          - label: Keywords
+            name: keywords
+            widget: list
+            required: false
+          - label: 'Show Hero Section'
+            name: sections
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Hero, name: hero, widget: boolean, default: true }
+              - {
+                  label: Venue Gallery,
+                  name: venue_gallery,
+                  widget: boolean,
+                  default: true,
+                }
+              - { label: Events, name: events, widget: boolean, default: true }
+              - { label: About, name: about, widget: boolean, default: true }
+              - {
+                  label: CTA Banner,
+                  name: cta_banner,
+                  widget: boolean,
+                  default: true,
+                }
+
+      - name: about
+        label: About
+        file: content/about.md
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Keywords
+            name: keywords
+            widget: list
+            required: false
+          - label: Body
+            name: body
+            widget: markdown
+
+      - name: contact
+        label: Contact
+        file: content/contact.md
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Keywords
+            name: keywords
+            widget: list
+            required: false
+          - label: Body
+            name: body
+            widget: markdown
+
+      - name: workshops
+        label: Workshops
+        file: content/workshops.md
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Keywords
+            name: keywords
+            widget: list
+            required: false
+          - label: Body
+            name: body
+            widget: markdown
+
+      - name: privacy
+        label: Privacy Policy
+        file: content/privacy.md
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+            required: false
+          - label: Body
+            name: body
+            widget: markdown
+
+      - name: accessibility
+        label: Accessibility Statement
+        file: content/accessibility.md
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+            required: false
+          - label: Body
+            name: body
+            widget: markdown
+
+      - name: gallery-application
+        label: Gallery Application
+        file: content/gallery-application.md
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Keywords
+            name: keywords
+            widget: list
+            required: false
+          - label: Body
+            name: body
+            widget: markdown
+
+  # ----------------------------------------------------------
+  # Divider
+  # ----------------------------------------------------------
+  - divider: true
+
+# ============================================================
+# Singletons (Data Files)
+# ============================================================
+singletons:
+  # ----------------------------------------------------------
+  # Site Settings
+  # ----------------------------------------------------------
+  - name: site_settings
+    label: Site Settings
+    file: data/site_settings.yaml
+    icon: settings
+    fields:
+      - label: Contact Information
+        name: contact
+        widget: object
+        fields:
+          - label: Phone
+            name: phone
+            widget: string
+            hint: 'Format: 901.206.5575'
+          - label: Email
+            name: email
+            widget: string
+          - label: Street Address
+            name: address
+            widget: string
+          - label: City
+            name: city
+            widget: string
+          - label: State
+            name: state
+            widget: string
+          - label: ZIP Code
+            name: zip
+            widget: string
+          - label: Hours
+            name: hours
+            widget: string
+            hint: 'Supports HTML like <br> for line breaks.'
+          - label: Google Maps URL
+            name: googleMapsUrl
+            widget: string
+      - label: Social Media
+        name: social
+        widget: object
+        fields:
+          - label: Instagram URL
+            name: instagram
+            widget: string
+            hint: 'Full URL: https://www.instagram.com/pikeandwest/'
+          - label: Facebook URL
+            name: facebook
+            widget: string
+            hint: 'Full URL: https://www.facebook.com/pikeandwest'
+          - label: Twitter Handle
+            name: twitter
+            widget: string
+            hint: 'Handle without @: pikeandwest'
+
+  # ----------------------------------------------------------
+  # Hero Section
+  # ----------------------------------------------------------
+  - name: hero
+    label: Hero Section
+    file: data/hero.yaml
+    icon: panorama
+    fields:
+      - label: Title Line 1
+        name: title_line1
+        widget: string
+        hint: 'First line of the hero headline.'
+      - label: Title Line 2
+        name: title_line2
+        widget: string
+        hint: 'Second line (displayed in large script font).'
+      - label: Tagline Lines
+        name: tagline
+        widget: list
+        hint: 'Each line of the tagline displayed separately.'
+      - label: CTA Button
+        name: cta
+        widget: object
+        fields:
+          - { label: Button Text, name: text, widget: string }
+          - { label: Button Link, name: link, widget: string }
+      - label: Background Image
+        name: background_image
+        widget: image
+        media_folder: /static/images/hero
+        public_folder: images/hero
+        hint: '1920x1080px. Tall image for desktop CSS background.'
+      - label: Foreground Image
+        name: foreground_image
+        widget: image
+        media_folder: /static/images/hero
+        public_folder: images/hero
+        hint: '1920x800px. Wider image for mobile.'
+      - label: Image Alt Text
+        name: image_alt
+        widget: text
+
+  # ----------------------------------------------------------
+  # CTA Banner
+  # ----------------------------------------------------------
+  - name: cta_banner
+    label: CTA Banner
+    file: data/cta_banner.yaml
+    icon: campaign
+    fields:
+      - label: Heading
+        name: heading
+        widget: string
+      - label: Body Text
+        name: text
+        widget: text
+      - label: CTA Button
+        name: cta
+        widget: object
+        fields:
+          - { label: Button Text, name: text, widget: string }
+          - { label: Button Link, name: link, widget: string }
+      - label: Background Image
+        name: background_image
+        widget: image
+        media_folder: /static/images/venue
+        public_folder: images/venue
+
+  # ----------------------------------------------------------
+  # About Section
+  # ----------------------------------------------------------
+  - name: about_data
+    label: About Section
+    file: data/about.yaml
+    icon: info
+    fields:
+      - label: Heading
+        name: heading
+        widget: string
+      - label: Content Blocks
+        name: blocks
+        widget: list
+        fields:
+          - {
+              label: Block ID,
+              name: id,
+              widget: string,
+              hint: 'Unique identifier (e.g., who-we-are).',
+            }
+          - { label: Subtitle, name: subtitle, widget: string }
+          - label: Paragraphs
+            name: paragraphs
+            widget: list
+            hint: 'Each paragraph is a separate list item.'
+          - label: CTA Button
+            name: cta
+            widget: object
+            fields:
+              - { label: Button Text, name: text, widget: string }
+              - { label: Button Link, name: link, widget: string }
+          - label: Image
+            name: image
+            widget: object
+            fields:
+              - label: Image File
+                name: src
+                widget: image
+                media_folder: /static/images/about
+                public_folder: images/about
+              - { label: Alt Text, name: alt, widget: string }
+          - label: Reverse Layout
+            name: reverse
+            widget: boolean
+            default: false
+            hint: 'Swap image and text positions.'
+
+  # ----------------------------------------------------------
+  # Event Types Grid
+  # ----------------------------------------------------------
+  - name: events_data
+    label: Event Types Grid
+    file: data/events.yaml
+    icon: grid_view
+    fields:
+      - label: Heading
+        name: heading
+        widget: string
+      - label: CTA Button Text
+        name: cta_text
+        widget: string
+      - label: CTA Button Link
+        name: cta_link
+        widget: string
+      - label: Event Types
+        name: types
+        widget: list
+        fields:
+          - label: Icon
+            name: icon
+            widget: image
+            media_folder: /static/images/icons
+            public_folder: images/icons
+            hint: 'Event type icon (PNG).'
+          - { label: Label, name: label, widget: string }
+          - { label: Link, name: link, widget: string }
+
+  # ----------------------------------------------------------
+  # Workshops Data
+  # ----------------------------------------------------------
+  - name: workshops_data
+    label: Workshops Content
+    file: data/workshops.yaml
+    icon: brush
+    fields:
+      - label: Heading
+        name: heading
+        widget: string
+      - label: Subheading
+        name: subheading
+        widget: string
+      - label: Intro Section
+        name: intro
+        widget: object
+        fields:
+          - { label: Title, name: title, widget: string }
+          - label: Paragraphs
+            name: paragraphs
+            widget: list
+      - label: Features
+        name: features
+        widget: list
+        fields:
+          - label: Icon
+            name: icon
+            widget: image
+            media_folder: /static/images/icons
+            public_folder: images/icons
+            hint: 'Feature icon (SVG or PNG).'
+          - { label: Title, name: title, widget: string }
+          - { label: Description, name: description, widget: text }
+      - label: Host CTA
+        name: host_cta
+        widget: object
+        fields:
+          - { label: Heading, name: heading, widget: string }
+          - { label: Text, name: text, widget: text }
+          - { label: Button Text, name: button_text, widget: string }
+          - { label: Button Link, name: button_link, widget: string }
+
+  # ----------------------------------------------------------
+  # Venue Gallery
+  # ----------------------------------------------------------
+  - name: venue_gallery
+    label: Venue Gallery
+    file: data/venue_gallery.yaml
+    icon: photo_library
+    fields:
+      - label: Heading
+        name: heading
+        widget: string
+      - label: Subtext
+        name: subtext
+        widget: string
+        hint: 'Displayed below the gallery carousel.'
+      - label: Gallery Images
+        name: images
+        widget: list
+        label_singular: Image
+        summary: '{{fields.alt}}'
+        fields:
+          - label: Image
+            name: src
+            widget: image
+            media_folder: /static/images/venue
+            public_folder: images/venue
+          - label: Alt Text
+            name: alt
+            widget: string
+            hint:
+              'Describe what is shown in this venue photo for accessibility.'
+
+  # ----------------------------------------------------------
+  # Blog Taxonomy
+  # ----------------------------------------------------------
+  - name: blog_taxonomy
+    label: Blog Categories & Tags
+    file: data/blog_taxonomy.yaml
+    icon: label
+    fields:
+      - label: Categories
+        name: categories
+        widget: list
+        hint: 'Blog post category options. Add or remove as needed.'
+      - label: Tags
+        name: tags
+        widget: list
+        hint: 'Blog post tag options. Add or remove as needed.'
+
+  # ----------------------------------------------------------
+  # 404 Page
+  # ----------------------------------------------------------
+  - name: error404
+    label: 404 Error Page
+    file: data/error404.yaml
+    icon: error
+    fields:
+      - label: Headline
+        name: headline
+        widget: string
+      - label: Tagline Lines
+        name: tagline
+        widget: list
+      - label: Message
+        name: message
+        widget: text
+      - label: Primary CTA
+        name: cta_primary
+        widget: object
+        fields:
+          - { label: Text, name: text, widget: string }
+          - { label: Link, name: link, widget: string }
+      - label: Secondary CTAs
+        name: cta_secondary
+        widget: list
+        fields:
+          - { label: Text, name: text, widget: string }
+          - { label: Link, name: link, widget: string }
+      - label: Background Image
+        name: background_image
+        widget: image
+        media_folder: /static/images/venue
+        public_folder: images/venue
+      - label: Image Alt Text
+        name: image_alt
+        widget: string

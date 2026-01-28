@@ -11,8 +11,9 @@
     >
       {{- /* CSS Scroll-Snap Gallery Track */ -}}
       <ul class="venue-gallery__track" id="gallery-track" role="list">
-        {{- $images := resources.Match "images/venue/*" -}}
-        {{- range $index, $image := $images -}}
+        {{- range $index, $item := site.Data.venue_gallery.images -}}
+          {{- $image := resources.Get $item.src -}}
+          {{- if $image -}}
           {{- /* Generate WebP and JPEG versions */ -}}
           {{- $thumbWebp := $image.Resize "600x webp q85" -}}
           {{- $thumbJpg := $image.Resize "600x jpg q85" -}}
@@ -23,7 +24,7 @@
             <source type="image/webp" srcset="{{ $thumbWebp.RelPermalink }}">
             <img
               src="{{ $thumbJpg.RelPermalink }}"
-              alt="Pike & West venue photo {{ add $index 1 }}"
+              alt="{{ $item.alt }}"
               class="venue-gallery__image"
               width="{{ $thumbJpg.Width }}"
               height="{{ $thumbJpg.Height }}"
@@ -34,6 +35,7 @@
             >
           </picture>
         </li>
+          {{- end -}}
         {{- end -}}
       </ul>
 

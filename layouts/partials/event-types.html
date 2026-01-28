@@ -7,7 +7,7 @@
       {{- $link := .link | default site.Data.events.cta_link -}}
       <a href="{{ $link }}" class="events__item">
         <div class="events__icon">
-          {{- $icon := resources.Get (printf "images/icons/%s" .icon) -}}
+          {{- $icon := resources.Get .icon -}}
           {{- if $icon -}}
             {{- $resized := $icon.Resize "128x" -}}
             <img

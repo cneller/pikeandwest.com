@@ -10,9 +10,8 @@ This document contains detailed development guidelines, design system specificat
 
 ## Project Overview
 
-**Current State:** Hugo static site with Sitepins CMS
-**Target State:** Fully migrated from Webflow with visual content editing
-**CMS Dashboard:** <https://app.sitepins.com/org-_2QC3bASFU/o44Ie9xkJb>
+**Current State:** Webflow-hosted event venue website
+**Target State:** Hugo static site with custom theme
 **Business:** Art gallery and event venue in Germantown, TN (weddings, corporate events, parties)
 
 ### Goals
@@ -20,15 +19,7 @@ This document contains detailed development guidelines, design system specificat
 1. Replicate current design pixel-perfectly in Hugo
 2. Maintain SEO rankings during migration
 3. Improve performance and eliminate Webflow hosting costs
-4. Enable easy content updates via Sitepins CMS
-
-## Content Management (Sitepins)
-
-Git-based CMS for visual content editing. See [Sitepins Guide](docs/research/sitepins-comprehensive-guide.md) for full documentation.
-
-- **Dashboard:** <https://app.sitepins.com/org-_2QC3bASFU/o44Ie9xkJb>
-- **Official Docs:** <https://docs.sitepins.com/>
-- **Schemas:** `.sitepins/schema/` | **Snippets:** `.sitepins/snippet/`
+4. Enable easy content updates without Webflow dependency
 
 ## Design System
 
@@ -305,15 +296,26 @@ Pike & West made our day magical.
 
 ### Claude Code Commands
 
-| Command                 | Purpose                                        |
-|-------------------------|------------------------------------------------|
-| `/blog-outline <topic>` | Creates outline with editorial styling plan    |
-| `/blog-draft <topic>`   | Generates draft with required styling elements |
-| `/content-audit [path]` | Audits posts for missing editorial styling     |
+| Command                      | Purpose                                             |
+|------------------------------|-----------------------------------------------------|
+| `/content:outline <topic>`   | Creates outline with editorial styling plan         |
+| `/content:draft <topic>`     | Generates draft with required styling elements      |
+| `/content:queue`             | Show prioritized content recommendations            |
+| `/content:persona <name>`    | Load persona context for targeted content           |
+| `/content:social <file>`     | Generate social media posts from a blog post        |
+| `/check:editorial [path]`    | Audits posts for missing editorial styling          |
+| `/check:config`              | Full CMS config health check vs Hugo templates      |
+| `/check:seo [path]`          | Content-level SEO, link, and freshness check        |
+| `/check:all`                 | Run all checks and produce unified dashboard        |
+| `/site:schema <collection>`  | Generate/update Sveltia CMS schema for a collection |
+| `/market:utm <url> ...`      | Generate tracked link with UTM parameters           |
+| `/migrate:compare <section>` | Deep-dive comparison of Webflow vs Hugo section     |
+| `/migrate:mapping`           | Update CSS mapping document with findings           |
+| `/migrate:diff`              | Run BackstopJS visual regression test               |
 
 ### Blog Editor Agent (Auto-Delegated)
 
-**The blog-editor agent is automatically invoked when working with `content/blog/*.md` files.** It handles all editorial styling decisions and ensures consistent formatting across posts.
+**The blog-editor agent is automatically invoked when working with `content/blog/*/index.md` files (page bundles).** It handles all editorial styling decisions and ensures consistent formatting across posts.
 
 Located at `.claude/agents/blog-editor.md`, the agent:
 
@@ -324,20 +326,37 @@ Located at `.claude/agents/blog-editor.md`, the agent:
 
 **Commands delegate to this agent:**
 
-- `/blog-draft` → Phase 2 delegates styling to agent
-- `/content-audit` → Phase 2 delegates evaluation to agent
+- `/content:draft` -> Phase 2 delegates styling to agent
+- `/check:editorial` -> Phase 2 delegates evaluation to agent
 
 The agent contains all editorial styling logic, so even if commands are forgotten, the agent will apply correct formatting when editing blog content.
+
+### Sveltia Schema Manager Agent
+
+**The sveltia-schema-manager agent analyzes Hugo templates and generates Sveltia CMS schemas.** It is invoked by `/check:config` and `/site:schema` commands.
+
+Located at `.claude/agents/sveltia-schema-manager.md`, the agent:
+
+- Reads Hugo templates to extract expected front matter fields
+- Samples existing content to identify field usage patterns
+- Compares against Sveltia CMS config (`static/admin/config.yml`)
+- Produces gap analysis with severity levels (error/warning/info)
+- Generates corrected schema YAML with proper widgets, SEO fields, and field ordering
+
+**Read-only:** Returns schema + gap report. Does not write to config directly.
+
+**Related skill:** `sveltia-hugo-maintenance` (auto-activates for CMS config, front matter, data files, menus, navigation)
 
 ## Mandatory Content Agent Delegation
 
 **CRITICAL:** When editing Pike & West content, you MUST delegate to the appropriate agent:
 
-| Content Location          | Required Agent | Trigger                                 |
-|---------------------------|----------------|-----------------------------------------|
-| `content/blog/*.md`       | `blog-editor`  | Any create, edit, review, or audit task |
-| `content/events/*.md`     | `page-editor`  | Any create, edit, or update task        |
-| `content/*.md` (non-blog) | `page-editor`  | Any static page modifications           |
+| Content Location          | Required Agent           | Trigger                                       |
+|---------------------------|--------------------------|-----------------------------------------------|
+| `content/blog/*/index.md` | `blog-editor`            | Any create, edit, review, or audit task       |
+| `content/events/*.md`     | `page-editor`            | Any create, edit, or update task              |
+| `content/*.md` (non-blog) | `page-editor`            | Any static page modifications                 |
+| `static/admin/config.yml` | `sveltia-schema-manager` | Schema generation, config audit, gap analysis |
 
 **How to delegate:**
 
@@ -583,27 +602,26 @@ Maintain exact URL paths from Webflow:
   googleTagManager = "GTM-XXXXXX"  # Get from current Webflow site
 ```
 
-### Social Media
+### Social Media & Contact Information
 
-```toml
-[social]
-  instagram = "https://www.instagram.com/pikeandwest/"
-  facebook = "https://www.facebook.com/pikeandwest"
-```
-
-### Contact Information
+Contact and social data are stored in `data/site_settings.yaml` (editable via Sveltia CMS singleton).
+Templates access this via `.Site.Data.site_settings.contact` and `.Site.Data.site_settings.social`.
 
 ```yaml
-# data/site.yaml
+# data/site_settings.yaml
 contact:
   phone: "901.206.5575"
-  address:
-    street: "2277 West Street"
-    city: "Germantown"
-    state: "TN"
-    zip: "38138"
-  hours: "Available by appointment only"
-  googleMapsUrl: "https://maps.google.com/..."
+  email: "events@pikeandwest.com"
+  address: "2277 West Street"
+  city: "Germantown"
+  state: "TN"
+  zip: "38138"
+  hours: "Available by appointment only.<br>Call or email to reserve a tour."
+  googleMapsUrl: "https://maps.app.goo.gl/7fNG7K7BEPQKpNzs8"
+social:
+  instagram: "https://www.instagram.com/pikeandwest/"
+  facebook: "https://www.facebook.com/pikeandwest"
+  twitter: "pikeandwest"
 ```
 
 ## Testing Requirements
@@ -696,6 +714,21 @@ HUGO_VERSION=0.146.0
 - Netlify
 - Vercel
 - GitHub Pages
+
+### Preview Deployments
+
+Cloudflare Pages preview deployments are triggered by **pull requests**, not branch pushes alone. A PR must be opened for a preview URL to be generated.
+
+### Sveltia CMS Auth Worker
+
+GitHub OAuth for the CMS admin panel runs on a separate Cloudflare Worker:
+
+- **Worker:** `sveltia-cms-auth` on the Pike + West (2277) account
+- **Custom domain:** `auth.pikeandwest.com`
+- **Repo:** `~/Projects/sveltia-cms-auth` (clone of `sveltia/sveltia-cms-auth`)
+- **Secrets:** `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` (set via `wrangler secret put`)
+- **GitHub OAuth App:** "Pike & West CMS" at github.com/settings/developers
+- **Callback URL:** `https://auth.pikeandwest.com/callback`
 
 ### Domain Configuration
 

@@ -66,9 +66,9 @@
 
     {{/* RIGHT: Contact Section (Address, Phone, Social) */}}
     <div class="footer__contact">
-      {{ with .Site.Params.contact }}
+      {{ with .Site.Data.site_settings.contact }}
       <address class="footer__contact-info">
-        <a href="{{ $.Site.Params.contact.googleMapsUrl }}" target="_blank" rel="noopener noreferrer" class="footer__contact-address">
+        <a href="{{ $.Site.Data.site_settings.contact.googleMapsUrl }}" target="_blank" rel="noopener noreferrer" class="footer__contact-address">
           {{ .address }}<br>{{ .city }}, {{ .state }} {{ .zip }}
         </a>
         <a href="tel:+1{{ replace .phone "." "" }}" class="footer__contact-phone">
@@ -77,7 +77,7 @@
       </address>
       {{ end }}
       <div class="footer__social">
-        {{ with .Site.Params.social.instagram }}
+        {{ with $.Site.Data.site_settings.social.instagram }}
         <a
           href="{{ . }}"
           class="footer__social-link"
@@ -90,7 +90,7 @@
           </svg>
         </a>
         {{ end }}
-        {{ with .Site.Params.social.facebook }}
+        {{ with $.Site.Data.site_settings.social.facebook }}
         <a
           href="{{ . }}"
           class="footer__social-link"

@@ -7,7 +7,7 @@ arguments:
     required: true
 ---
 
-# /blog-outline Command
+# /content:outline Command
 
 Create a detailed outline before writing a full blog post for Pike & West.
 
@@ -123,5 +123,5 @@ Create a detailed outline before writing a full blog post for Pike & West.
 - After [section] - before Conclusion
 
 ## Next Step
-Approve this outline and run `/blog-draft "[topic]"` to generate the full post.
+Approve this outline and run `/content:draft "[topic]"` to generate the full post.
 ```

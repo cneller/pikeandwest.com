@@ -7,7 +7,7 @@ arguments:
     required: true
 ---
 
-# /social-from-blog Command
+# /content:social Command
 
 Transform a Pike & West blog post into platform-optimized social media content.
 

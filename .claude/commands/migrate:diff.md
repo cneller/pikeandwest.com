@@ -45,6 +45,6 @@ Based on results:
 
 Ask user if they want to:
 
-- Deep-dive on a specific section with `/compare-section [section]`
-- Update the CSS mapping document with `/update-mapping`
+- Deep-dive on a specific section with `/migrate:compare [section]`
+- Update the CSS mapping document with `/migrate:mapping`
 - Open the BackstopJS HTML report in browser

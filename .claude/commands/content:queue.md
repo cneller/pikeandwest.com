@@ -3,7 +3,7 @@ description: Show prioritized content recommendations based on strategy, seasona
 allowed-tools: Read, Glob, Grep
 ---
 
-# /content-queue Command
+# /content:queue Command
 
 Display prioritized content recommendations for Pike & West's content strategy.
 
@@ -55,7 +55,7 @@ Display prioritized content recommendations for Pike & West's content strategy.
 
 5. **Include Quick-Start Prompts**
    For each recommendation, provide:
-   - `/blog-outline "[topic]"` prompt
+   - `/content:outline "[topic]"` prompt
    - Estimated effort level (quick win, standard, deep dive)
    - Why now rationale
 

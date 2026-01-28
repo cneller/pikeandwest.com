@@ -132,9 +132,9 @@ Use browser DevTools Computed tab or `window.getComputedStyle()`.
 
 ## Commands
 
-- `/visual-diff` - Run BackstopJS and analyze results
-- `/compare-section [section]` - Deep-dive on specific section
-- `/update-mapping` - Update CSS mapping document
+- `/migrate:diff` - Run BackstopJS and analyze results
+- `/migrate:compare [section]` - Deep-dive on specific section
+- `/migrate:mapping` - Update CSS mapping document
 
 ## Agents
 

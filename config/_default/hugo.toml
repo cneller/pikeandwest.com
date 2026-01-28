@@ -23,3 +23,32 @@ enableRobotsTXT = false
 [sitemap]
   changefreq = "monthly"
   priority = 0.5
+
+# Module mounts: make static/images available as Hugo assets so that
+# resources.Get "images/..." continues to work after moving images from
+# assets/images/ to static/images/ (required for Sveltia CMS visibility).
+# When defining any custom mount, all default mounts must be re-declared.
+[[module.mounts]]
+  source = "assets"
+  target = "assets"
+[[module.mounts]]
+  source = "static/images"
+  target = "assets/images"
+[[module.mounts]]
+  source = "content"
+  target = "content"
+[[module.mounts]]
+  source = "static"
+  target = "static"
+[[module.mounts]]
+  source = "layouts"
+  target = "layouts"
+[[module.mounts]]
+  source = "data"
+  target = "data"
+[[module.mounts]]
+  source = "i18n"
+  target = "i18n"
+[[module.mounts]]
+  source = "archetypes"
+  target = "archetypes"
