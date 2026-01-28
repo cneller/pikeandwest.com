@@ -21,6 +21,10 @@
 /*
   Cache-Control: public, max-age=0, must-revalidate
 
+# Sveltia CMS OAuth popup support
+/admin/*
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+
 # Security headers
 /*
   X-Content-Type-Options: nosniff

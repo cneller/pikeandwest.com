@@ -53,6 +53,24 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-hugomod-
 
+      - name: Set CMS config for deployment
+        run: |
+          BRANCH="${{ github.head_ref || github.ref_name }}"
+          sed -i "s|branch: main|branch: ${BRANCH}|" static/admin/config.yml
+
+          if [ "$BRANCH" = "main" ]; then
+            SITE_URL="https://pikeandwest.com"
+          else
+            # Cloudflare Pages truncates branch aliases to 28 chars
+            ALIAS=$(echo "$BRANCH" | sed 's/[^a-zA-Z0-9-]/-/g' | cut -c1-28)
+            SITE_URL="https://${ALIAS}.pikeandwest.pages.dev"
+          fi
+          sed -i "s|site_url: https://pikeandwest.com|site_url: ${SITE_URL}|" static/admin/config.yml
+          sed -i "s|display_url: https://pikeandwest.com|display_url: ${SITE_URL}|" static/admin/config.yml
+
+          echo "CMS branch: ${BRANCH}"
+          echo "CMS site URL: ${SITE_URL}"
+
       - name: Build site
         id: hugo
         env:
@@ -150,7 +168,9 @@ jobs:
             exit $EXIT_CODE
           fi
           URL=$(echo "$OUTPUT" | grep -oE 'https://[a-z0-9-]+\.pikeandwest\.pages\.dev' | head -1)
-          echo "url=$URL" >> $GITHUB_OUTPUT
+          ALIAS_URL=$(echo "$OUTPUT" | grep 'alias URL' | grep -oE 'https://[a-z0-9-]+\.pikeandwest\.pages\.dev' || echo "")
+          echo "url=${ALIAS_URL:-$URL}" >> $GITHUB_OUTPUT
+          echo "commit-url=$URL" >> $GITHUB_OUTPUT
 
       - name: Comment on PR
         if: github.event_name == 'pull_request'
@@ -158,7 +178,16 @@ jobs:
         with:
           script: |
             const url = '${{ steps.deploy.outputs.url }}';
-            const body = `🚀 **Preview deployed!**\n\n${url}`;
+            const commitUrl = '${{ steps.deploy.outputs.commit-url }}';
+            const body = [
+              `**Preview deployed!**`,
+              ``,
+              `| | URL |`,
+              `|---|---|`,
+              `| **Stable** | ${url} |`,
+              `| **This commit** | ${commitUrl} |`,
+              `| **Admin** | ${url}/admin/ |`,
+            ].join('\n');
 
             const { data: comments } = await github.rest.issues.listComments({
               issue_number: context.issue.number,
