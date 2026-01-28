@@ -1,17 +1,22 @@
 ---
-title: "5 Tips for Planning a Memorable Corporate Event in 2026"
-description: "Make your next company gathering unforgettable with these expert planning tips from Pike & West, Germantown's premier event venue."
+title: 5 Tips for Planning a Memorable Corporate Event in 2026
+description: Make your next company gathering unforgettable with these expert planning tips from Pike & West, Germantown's premier event venue.
 date: 2026-01-20
-draft: false
-author: "Pike & West"
-categories: ["Corporate Events"]
-tags: ["corporate", "planning tips", "event planning", "venue tips"]
-image: "images/venue/venue-05-dancefloor.jpg"
-image_alt: "Elegant event space at Pike & West with sophisticated lighting perfect for corporate gatherings"
+image: IMG_9253.jpeg
+image_alt: Elegant event space at Pike & West with sophisticated lighting perfect for corporate gatherings
+author: Pike & West
+categories:
+  - Corporate Events
+tags:
+  - corporate
+  - planning tips
+  - event planning
+  - venue tips
 keywords:
   - corporate event planning Memphis
   - corporate venue Germantown
   - company party ideas
+draft: false
 ---
 
 {{< standfirst >}}
