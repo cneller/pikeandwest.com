@@ -2,7 +2,7 @@
 title: 5 Tips for Planning a Memorable Corporate Event in 2026
 description: Make your next company gathering unforgettable with these expert planning tips from Pike & West, Germantown's premier event venue.
 date: 2026-01-20
-image: IMG_9253.jpeg
+image: IMG_6715 Copy.jpeg
 image_alt: Elegant event space at Pike & West with sophisticated lighting perfect for corporate gatherings
 author: Pike & West
 categories:
