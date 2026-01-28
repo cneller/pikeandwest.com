@@ -11,21 +11,20 @@
     "width": 600,
     "height": 60
   },
-  "image": "{{ "images/hero/venue-exterior.jpg" | absURL }}",
   "description": "{{ .Site.Params.description }}",
-  "telephone": "{{ .Site.Params.contact.phone }}",
-  "email": "{{ .Site.Params.contact.email }}",
+  "telephone": "{{ .Site.Data.site_settings.contact.phone }}",
+  "email": "{{ .Site.Data.site_settings.contact.email }}",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "{{ .Site.Params.contact.address }}",
-    "addressLocality": "{{ .Site.Params.contact.city }}",
-    "addressRegion": "{{ .Site.Params.contact.state }}",
-    "postalCode": "{{ .Site.Params.contact.zip }}",
+    "streetAddress": "{{ .Site.Data.site_settings.contact.address }}",
+    "addressLocality": "{{ .Site.Data.site_settings.contact.city }}",
+    "addressRegion": "{{ .Site.Data.site_settings.contact.state }}",
+    "postalCode": "{{ .Site.Data.site_settings.contact.zip }}",
     "addressCountry": "US"
   },
   "sameAs": [
-    "{{ .Site.Params.social.instagram }}",
-    "{{ .Site.Params.social.facebook }}"
+    "{{ .Site.Data.site_settings.social.instagram }}",
+    "{{ .Site.Data.site_settings.social.facebook }}"
   ]
 }
 </script>
@@ -38,14 +37,14 @@
   "name": "Pike & West",
   "description": "{{ .Site.Params.description }}",
   "url": "{{ .Site.BaseURL }}",
-  "telephone": "{{ .Site.Params.contact.phone }}",
+  "telephone": "{{ .Site.Data.site_settings.contact.phone }}",
   "priceRange": "$$$",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "{{ .Site.Params.contact.address }}",
-    "addressLocality": "{{ .Site.Params.contact.city }}",
-    "addressRegion": "{{ .Site.Params.contact.state }}",
-    "postalCode": "{{ .Site.Params.contact.zip }}",
+    "streetAddress": "{{ .Site.Data.site_settings.contact.address }}",
+    "addressLocality": "{{ .Site.Data.site_settings.contact.city }}",
+    "addressRegion": "{{ .Site.Data.site_settings.contact.state }}",
+    "postalCode": "{{ .Site.Data.site_settings.contact.zip }}",
     "addressCountry": "US"
   },
   "geo": {
@@ -68,8 +67,8 @@
     "closes": "23:59"
   },
   "sameAs": [
-    "{{ .Site.Params.social.instagram }}",
-    "{{ .Site.Params.social.facebook }}"
+    "{{ .Site.Data.site_settings.social.instagram }}",
+    "{{ .Site.Data.site_settings.social.facebook }}"
   ],
   "image": [
     "{{ "images/venue/pike-west-exterior.jpg" | absURL }}",
@@ -118,7 +117,6 @@
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "name": "Breadcrumb",
   "itemListElement": [
     {
       "@type": "ListItem",

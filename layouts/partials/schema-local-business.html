@@ -15,7 +15,7 @@
   Usage: {{ partial "schema-local-business.html" . }}
 */}}
 
-{{ with .Site.Params.contact }}
+{{ with .Site.Data.site_settings.contact }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -48,7 +48,7 @@
     "description": "Available by appointment only"
   },
   "sameAs": [
-    {{ with $.Site.Params.social.instagram }}"{{ . }}"{{ end }}{{ with $.Site.Params.social.facebook }},
+    {{ with $.Site.Data.site_settings.social.instagram }}"{{ . }}"{{ end }}{{ with $.Site.Data.site_settings.social.facebook }},
     "{{ . }}"{{ end }}
   ],
   "amenityFeature": [

@@ -9,7 +9,7 @@
       {{ else }}
       <p>
         Contact form coming soon. Please call us at {{
-        .Site.Params.contact.phone }}.
+        .Site.Data.site_settings.contact.phone }}.
       </p>
       {{ end }}
     </address>
@@ -36,24 +36,24 @@
         <div class="find-us__detail">
           <strong>OUR LOCATION</strong>
           <a
-            href="{{ .Site.Params.contact.googleMapsUrl }}"
+            href="{{ .Site.Data.site_settings.contact.googleMapsUrl }}"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {{ .Site.Params.contact.address }}<br />
-            {{ .Site.Params.contact.city }} {{ .Site.Params.contact.state }} {{
-            .Site.Params.contact.zip }}
+            {{ .Site.Data.site_settings.contact.address }}<br />
+            {{ .Site.Data.site_settings.contact.city }} {{ .Site.Data.site_settings.contact.state }} {{
+            .Site.Data.site_settings.contact.zip }}
           </a>
         </div>
 
         <div class="find-us__detail">
           <strong>HOURS</strong>
-          <span>{{ .Site.Params.contact.hours | safeHTML }}</span>
+          <span>{{ .Site.Data.site_settings.contact.hours | safeHTML }}</span>
         </div>
 
         <div class="find-us__detail">
           <strong>PHONE</strong>
-          <span>{{ .Site.Params.contact.phone }}</span>
+          <span>{{ .Site.Data.site_settings.contact.phone }}</span>
         </div>
       </div>
     </div>

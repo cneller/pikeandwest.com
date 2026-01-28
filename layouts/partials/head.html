@@ -88,12 +88,12 @@
 
 {{/* Twitter Card */}}
 <meta name="twitter:card" content="summary_large_image" />
-{{- with .Site.Params.social.twitter }}
+{{- with .Site.Data.site_settings.social.twitter }}
 <meta name="twitter:site" content="@{{ . }}" />
 {{- end }}
 {{- with .Params.author_twitter }}
 <meta name="twitter:creator" content="@{{ . }}" />
-{{- else with .Site.Params.social.twitter }}
+{{- else with .Site.Data.site_settings.social.twitter }}
 <meta name="twitter:creator" content="@{{ . }}" />
 {{- end }}
 <meta name="twitter:title" content="{{ $ogTitle }}" />
@@ -174,7 +174,10 @@
 {{- if eq .Section "blog" -}}
   {{- $heroImage := "" -}}
   {{- with .Params.image -}}
-    {{- $heroImage = resources.Get . -}}
+    {{- $heroImage = $.Resources.GetMatch . -}}
+    {{- if not $heroImage -}}
+      {{- $heroImage = resources.Get . -}}
+    {{- end -}}
   {{- end -}}
   {{- if not $heroImage -}}
     {{- $heroImage = resources.Get "images/venue/venue-06-soft-seating.jpg" -}}
