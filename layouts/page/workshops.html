@@ -79,7 +79,7 @@
       {{ range . }}
       <div class="workshops-features__item">
         <div class="workshops-features__icon">
-          {{- $icon := resources.Get (printf "images/icons/%s" .icon) -}}
+          {{- $icon := resources.Get .icon -}}
           {{- if $icon -}}
             {{- if eq $icon.MediaType.SubType "svg" -}}
               <img

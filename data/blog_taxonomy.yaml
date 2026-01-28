@@ -1,6 +1,6 @@
 # Blog Taxonomy Reference
 # Use these predefined categories and tags for consistency across posts.
-# Sitepins editors can reference this file when creating new posts.
+# Sveltia CMS editors can reference this file when creating new posts.
 
 categories:
   - News

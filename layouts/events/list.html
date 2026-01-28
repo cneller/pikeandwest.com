@@ -34,7 +34,7 @@
       {{ range .Pages }}
       <a href="{{ .RelPermalink }}" class="events-list__card">
         {{ with .Params.icon }}
-        {{ $icon := resources.Get (printf "images/icons/%s" .) }}
+        {{ $icon := resources.Get . }}
         {{ if $icon }}
         <div class="events-list__icon">
           <img src="{{ $icon.RelPermalink }}" alt="" width="48" height="48" loading="lazy" />

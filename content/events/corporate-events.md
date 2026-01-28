@@ -3,8 +3,8 @@ title: "Corporate Events at Pike & West | Memphis Venue"
 description: "Host your corporate event at Pike & West in Germantown, TN. Our art gallery setting offers a sophisticated alternative to traditional venues for holiday parties, client events, and team celebrations."
 type: "events"
 eventType: "corporate"
-icon: "icon-badge.png"
-image: "images/venue/venue-01-interior.jpeg"
+icon: "images/icons/icon-badge.png"
+image: "/images/venue/venue-01-interior.jpeg"
 image_alt: "Pike & West interior space perfect for corporate events"
 ---
 
