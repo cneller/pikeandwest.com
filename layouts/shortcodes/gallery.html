@@ -1,0 +1,46 @@
+{{/*
+  Gallery shortcode for PhotoSwipe lightbox
+
+  Usage:
+    {{< gallery name="reception" >}}
+    ![Alt text](image1.jpg)
+    ![Alt text](image2.jpg)
+    {{< /gallery >}}
+
+  Parameters:
+    - name: Gallery group name (default: "gallery")
+    - cols: Number of columns 2-4 (default: "3")
+*/}}
+{{ $name := .Get "name" | default "gallery" }}
+{{ $cols := .Get "cols" | default "3" }}
+{{ $page := .Page }}
+
+<div class="gallery gallery--cols-{{ $cols }}" data-pswp-gallery="{{ $name }}">
+  {{- $inner := .Inner -}}
+  {{- /* Parse markdown images from inner content */ -}}
+  {{- range findRE `!\[([^\]]*)\]\(([^)]+)\)` $inner -}}
+    {{- $alt := . | replaceRE `!\[([^\]]*)\]\(([^)]+)\)` "$1" -}}
+    {{- $src := . | replaceRE `!\[([^\]]*)\]\(([^)]+)\)` "$2" -}}
+    {{- /* Handle page bundle images (relative) and static images (absolute) */ -}}
+    {{- $image := "" -}}
+    {{- if hasPrefix $src "/" -}}
+      {{- $image = resources.Get (strings.TrimPrefix "/" $src) -}}
+    {{- else -}}
+      {{- $image = $page.Resources.GetMatch $src -}}
+    {{- end -}}
+    {{- if $image -}}
+      {{- $thumb := $image.Resize "400x webp q85" -}}
+      {{- $full := $image.Resize "1600x webp q90" -}}
+      <a href="{{ $full.RelPermalink }}"
+         data-pswp-width="{{ $full.Width }}"
+         data-pswp-height="{{ $full.Height }}">
+        <img src="{{ $thumb.RelPermalink }}"
+             alt="{{ $alt }}"
+             width="{{ $thumb.Width }}"
+             height="{{ $thumb.Height }}"
+             loading="lazy"
+             decoding="async">
+      </a>
+    {{- end -}}
+  {{- end -}}
+</div>
