@@ -171,7 +171,7 @@ Site uses PhotoSwipe 5 for image galleries. Loaded via CDN with dynamic ES modul
 - `name`: Gallery group name (images navigate together)
 - `cols`: Grid columns (2, 3, or 4; default 3)
 
-See also: [Animation Patterns](docs/architecture/patterns/animation-patterns.md) | [SCSS Organization](docs/architecture/patterns/scss-organization.md)
+See also: [Animation Patterns](docs/architecture/patterns/animation-patterns.md) | [SCSS Organization](docs/architecture/patterns/scss-organization.md) | [URL Migration](docs/architecture/patterns/url-migration-patterns.md)
 
 ## Blog Post Styling
 
@@ -370,6 +370,33 @@ Located at `.claude/agents/sveltia-schema-manager.md`, the agent:
 
 **Related skill:** `sveltia-hugo-maintenance` (auto-activates for CMS config, front matter, data files, menus, navigation)
 
+### Sitemap Architect Agent
+
+**The sitemap-architect agent analyzes URL changes before implementation.** It is automatically triggered when discussing URL reorganization.
+
+Located at `.claude/agents/sitemap-architect.md`, the agent:
+
+- Parses intended URL changes from natural language
+- Crawls current site structure (content, links, redirects, JS/CSS)
+- Checks Google Search Console index status (if configured)
+- Assesses risk levels based on internal links, indexing, and page age
+- Outputs structured recommendations for the planning agent
+
+**Trigger phrases:**
+
+- "move page from X to Y"
+- "change URL structure"
+- "reorganize site structure"
+- "rename this section"
+- "migrate URLs"
+- "consolidate pages"
+
+**Output:** Structured YAML with redirect mappings, internal links to update, risk assessments, and actionable checklist.
+
+**Does NOT:** Create the final implementation plan or execute changes. Feeds into the planning workflow.
+
+**Related:** [URL Migration Patterns](docs/architecture/patterns/url-migration-patterns.md)
+
 ## Mandatory Content Agent Delegation
 
 **CRITICAL:** When editing Pike & West content, you MUST delegate to the appropriate agent:
@@ -380,6 +407,7 @@ Located at `.claude/agents/sveltia-schema-manager.md`, the agent:
 | `content/events/*.md`     | `page-editor`            | Any create, edit, or update task              |
 | `content/*.md` (non-blog) | `page-editor`            | Any static page modifications                 |
 | `static/admin/config.yml` | `sveltia-schema-manager` | Schema generation, config audit, gap analysis |
+| URL changes proposed      | `sitemap-architect`      | Move, rename, restructure, consolidate        |
 
 **How to delegate:**
 
@@ -445,10 +473,12 @@ pikeandwest.com/
 │       └── seo.html             # SEO meta tags
 ├── static/
 │   ├── images/
-│   │   ├── logo/                # Logo variants
-│   │   ├── venue/               # Venue photos
-│   │   ├── events/              # Event photos
-│   │   └── team/                # Team photos
+│   │   ├── brand/               # Logos and social icons
+│   │   ├── photos/              # Venue and event photos
+│   │   ├── homepage-hero/       # Homepage hero images
+│   │   ├── blog/                # Blog post images
+│   │   ├── categories/          # Blog category images
+│   │   └── icons/               # UI icons
 │   └── favicon.ico
 ├── config/
 │   ├── _default/
@@ -528,12 +558,12 @@ them into the assets pipeline:
   target = "assets/images"
 ```
 
-This means `resources.Get "images/venue/photo.jpg"` works even though the file
-is physically at `static/images/venue/photo.jpg`. All image processing
+This means `resources.Get "images/photos/photo.jpg"` works even though the file
+is physically at `static/images/photos/photo.jpg`. All image processing
 (`Resize`, WebP conversion, etc.) requires this pipeline — files accessed only
 via `/images/...` URL paths bypass Hugo's asset processing entirely.
 
-**Front matter image paths** use a leading slash (`/images/venue/photo.jpg`)
+**Front matter image paths** use a leading slash (`/images/photos/photo.jpg`)
 because Sveltia CMS generates paths relative to the site root. Hugo's
 `resources.Get` strips the leading slash when resolving against the mount.
 
@@ -542,11 +572,22 @@ leading slashes for image paths. Without them, Sveltia CMS cannot resolve
 previews since data files have no parent content file to be relative to. The CMS
 config `public_folder` must use `/images/...` for singletons.
 
+**Image directory structure:**
+
+| Directory                      | Contents                                   |
+|--------------------------------|--------------------------------------------|
+| `static/images/photos/`        | General venue and event photos             |
+| `static/images/homepage-hero/` | Homepage hero background/foreground images |
+| `static/images/brand/`         | Logos and social icons                     |
+| `static/images/blog/`          | Blog post images (page bundles preferred)  |
+| `static/images/categories/`    | Blog category taxonomy images              |
+| `static/images/icons/`         | UI icons                                   |
+
 ### Image Processing
 
 ```go-html-template
 {{/* Responsive image with WebP fallback */}}
-{{ $img := resources.GetMatch "images/venue/main.jpg" }}
+{{ $img := resources.GetMatch "images/photos/venue-exterior.jpg" }}
 {{ $webp := $img.Resize "800x webp" }}
 {{ $jpg := $img.Resize "800x jpg" }}
 
@@ -778,6 +819,10 @@ hugo --templateMetrics --templateMetricsHints
 
 # Create new content
 hugo new content/page-name.md
+
+# Google Search Console URL Inspection
+scripts/gsc/check-url.sh "https://pikeandwest.com/page/"  # Check single URL
+scripts/gsc/bulk-check.sh urls.txt                         # Bulk check from file
 ```
 
 ## Project Status & Next Steps
