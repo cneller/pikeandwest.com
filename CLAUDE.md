@@ -710,6 +710,32 @@ HUGO_VERSION=0.146.0
 
 Cloudflare Pages preview deployments are triggered by **pull requests**, not branch pushes alone. A PR must be opened for a preview URL to be generated.
 
+### CI/CD Pipeline
+
+Deployments are handled by **GitHub Actions**, not Cloudflare's GitHub integration directly.
+
+**Workflow:** `.github/workflows/ci.yml`
+
+1. Hugo builds the site
+2. Artifacts uploaded to GitHub
+3. Wrangler deploys to Cloudflare Pages
+
+**Common Issues:**
+
+| Issue                                 | Cause                       | Fix                                                                                                                                                     |
+|---------------------------------------|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Artifact storage quota has been hit` | GitHub Actions storage full | Delete old artifacts at github.com/cneller/pikeandwest.com/actions → "..." → "Delete all workflow runs", wait 6-12 hours for recalculation, then re-run |
+| Deployment not triggering             | CI failed silently          | Check `gh run list` and `gh run view <id> --log-failed`                                                                                                 |
+| Lighthouse skipped                    | CI build failed             | Fix CI first, Lighthouse runs on `workflow_run` trigger                                                                                                 |
+
+**Re-run failed CI:**
+
+```bash
+gh run list --limit 5          # Find failed run ID
+gh run rerun <run-id>          # Re-run it
+gh run watch <run-id>          # Watch progress
+```
+
 ### Sveltia CMS Source Code
 
 The Sveltia CMS source is cloned locally for investigating CMS behavior and contributing fixes:
@@ -796,6 +822,6 @@ hugo new content/page-name.md
 - [Hugo Partial Templates](https://cloudcannon.com/tutorials/hugo-beginner-tutorial/hugo-partials/)
 - [Building Hugo Themes with Go Templates](https://dasroot.net/posts/2025/12/building-hugo-themes-with-go-templates/)
 
-```
+```text
 
 ```
