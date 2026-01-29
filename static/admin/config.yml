@@ -326,6 +326,35 @@ collections:
         widget: markdown
 
   # ----------------------------------------------------------
+  # Categories
+  # ----------------------------------------------------------
+  - name: categories
+    label: Categories
+    label_singular: Category
+    folder: content/categories
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    summary: '{{title}}'
+    icon: category
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Image
+        name: image
+        widget: image
+        required: false
+        media_folder: /static/images/categories
+        public_folder: /images/categories
+        hint: 'Category card image. 800x600px recommended.'
+      - label: Description
+        name: description
+        widget: text
+        required: false
+        hint: 'Brief description for SEO meta tags.'
+
+  # ----------------------------------------------------------
   # Divider
   # ----------------------------------------------------------
   - divider: true
