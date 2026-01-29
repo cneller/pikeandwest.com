@@ -1,7 +1,5 @@
 # Pike & West - Hugo Migration Project
 
-> Converting pikeandwest.com from Webflow to Hugo while preserving the elegant, luxury aesthetic.
-
 **See [README.md](README.md) for quick start, badges, and contributor overview.**
 
 This document contains detailed development guidelines, design system specifications, and AI assistant context for working on this project.
@@ -10,16 +8,8 @@ This document contains detailed development guidelines, design system specificat
 
 ## Project Overview
 
-**Current State:** Webflow-hosted event venue website
 **Target State:** Hugo static site with custom theme
 **Business:** Art gallery and event venue in Germantown, TN (weddings, corporate events, parties)
-
-### Goals
-
-1. Replicate current design pixel-perfectly in Hugo
-2. Maintain SEO rankings during migration
-3. Improve performance and eliminate Webflow hosting costs
-4. Enable easy content updates without Webflow dependency
 
 ## Design System
 
@@ -31,8 +21,6 @@ This document contains detailed development guidelines, design system specificat
 
 ### Color Palette
 
-> **Verified via Webflow MCP extraction on 2026-01-20**
-
 | Color    | Hex       | CSS Variable | Usage                        |
 |----------|-----------|--------------|------------------------------|
 | PW Black | `#434345` | --pw-black   | Primary text, headers        |
@@ -43,19 +31,17 @@ This document contains detailed development guidelines, design system specificat
 
 ### Typography
 
-> **Verified via Webflow MCP extraction on 2026-01-20**
-
 ```scss
 // Primary Font - Headlines (Adobe Fonts / Typekit)
-$font-headline: 'le-mores-collection', serif;
+$font-headline: "le-mores-collection", serif;
 // Typekit Kit ID: jxr6fkv
 
 // Secondary Font - Body Text (Google Fonts)
-$font-body: 'Montserrat', sans-serif;
+$font-body: "Montserrat", sans-serif;
 $font-weights-body: (300, 400, 500, 600);
 
 // Tertiary Font - Navigation/Buttons (Google Fonts)
-$font-nav: 'Oswald', sans-serif;
+$font-nav: "Oswald", sans-serif;
 $font-weights-nav: (200, 300, 400, 500, 600, 700);
 
 // Font Loading
@@ -67,59 +53,55 @@ $font-weights-nav: (200, 300, 400, 500, 600, 700);
 
 ```scss
 $spacing: (
-  xs: 0.25rem,   // 4px
-  sm: 0.5rem,    // 8px
-  md: 1rem,      // 16px
-  lg: 1.5rem,    // 24px
-  xl: 2rem,      // 32px
-  2xl: 3rem,     // 48px
-  3xl: 4rem      // 64px
+  xs: 0.25rem,
+  // 4px
+  sm: 0.5rem,
+  // 8px
+  md: 1rem,
+  // 16px
+  lg: 1.5rem,
+  // 24px
+  xl: 2rem,
+  // 32px
+  2xl: 3rem,
+  // 48px
+  3xl: 4rem, // 64px
 );
 ```
 
 ### Responsive Breakpoints
 
-Breakpoints are aligned exactly with Webflow export values:
-
-| Variable          | Value  | Webflow Query       | Description      |
-|-------------------|--------|---------------------|------------------|
-| `$breakpoint-sm`  | 479px  | `max-width: 479px`  | Mobile portrait  |
-| `$breakpoint-md`  | 767px  | `max-width: 767px`  | Mobile landscape |
-| `$breakpoint-lg`  | 991px  | `max-width: 991px`  | Tablet           |
-| `$breakpoint-xl`  | 1280px | `min-width: 1280px` | Large desktop    |
-| `$breakpoint-2xl` | 1920px | `min-width: 1920px` | Ultra-wide       |
+| Variable          | Value  | Description      |
+|-------------------|--------|------------------|
+| `$breakpoint-sm`  | 479px  | Mobile portrait  |
+| `$breakpoint-md`  | 767px  | Mobile landscape |
+| `$breakpoint-lg`  | 991px  | Tablet           |
+| `$breakpoint-xl`  | 1280px | Large desktop    |
+| `$breakpoint-2xl` | 1920px | Ultra-wide       |
 
 **Usage patterns:**
 
 ```scss
 // Mobile-first (min-width) - styles apply at breakpoint and above
-@media (min-width: $breakpoint-xl) { /* 1280px+ */ }
+@media (min-width: $breakpoint-xl) {
+  /* 1280px+ */
+}
 
 // Desktop-first (max-width) - styles apply at breakpoint and below
-@media (max-width: $breakpoint-lg) { /* 991px and below */ }
+@media (max-width: $breakpoint-lg) {
+  /* 991px and below */
+}
 
 // For min-width at standard breakpoints, add 1px
-@media (min-width: $breakpoint-md + 1) { /* 768px+ */ }
+@media (min-width: $breakpoint-md + 1) {
+  /* 768px+ */
+}
 ```
 
 **Header behavior:**
 
 - Full nav buttons: 768px and above (tablets, desktops)
 - Hamburger menu: 991px and below (tablet/mobile)
-
-## Architecture Decisions
-
-Key decisions made during development. Full details in `docs/architecture/decisions/`.
-
-| Decision             | Choice             | Rationale                                                                                                                                        |
-|----------------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Header positioning   | `position: sticky` | Eliminates padding/margin offset hacks ([ADR-001](docs/architecture/decisions/ADR-001-sticky-header.md))                                         |
-| Hamburger animation  | 3D Y-axis flip     | Luxury brand feel; elastic easing `cubic-bezier(0.68, -0.6, 0.32, 1.6)` ([ADR-002](docs/architecture/decisions/ADR-002-hamburger-animations.md)) |
-| Hamburger breakpoint | 991px              | Webflow alignment; nav buttons visible on tablets ([ADR-004](docs/architecture/decisions/ADR-004-responsive-breakpoints.md))                     |
-| Hero height          | 75vh/65vh/60vh     | Shows content peek below fold; Webflow parity ([ADR-003](docs/architecture/decisions/ADR-003-hero-layout.md))                                    |
-| Breakpoints          | Webflow-aligned    | 479/767/991/1280/1920px for pixel-perfect parity ([ADR-004](docs/architecture/decisions/ADR-004-responsive-breakpoints.md))                      |
-| Blog editorial style | Drop caps, quotes  | Magazine-style luxury feel; accessible `::first-letter` ([ADR-005](docs/architecture/decisions/ADR-005-blog-editorial-styling.md))               |
-| CTA language         | Host/Attend split  | Clear distinction between venue rentals and workshop attendance ([plan](docs/plans/2026-01-23-workshops-classes-feature.md))                     |
 
 ## CTA Language System
 
@@ -150,27 +132,44 @@ See [Workshops Plan](docs/plans/2026-01-23-workshops-classes-feature.md) for ful
 
 Quick reference for common patterns. Full details in `docs/architecture/patterns/`.
 
-### 3D CSS Animation
+### PhotoSwipe Lightbox
 
-```scss
-.container { perspective: 200px; }
-.child {
-  transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-}
-.child.open { transform: rotateY(180deg); }
+Site uses PhotoSwipe 5 for image galleries. Loaded via CDN with dynamic ES module imports.
+
+**Enable on any gallery container:**
+
+```html
+<div data-pswp-gallery="unique-name">
+  <a href="/full.jpg" data-pswp-width="1600" data-pswp-height="1200">
+    <img src="/thumb.jpg" alt="Description" />
+  </a>
+</div>
 ```
 
-### Sticky Header
+**Hugo template pattern** (with image processing):
 
-```scss
-.header {
-  position: sticky;
-  top: 0;
-  z-index: $z-index-header;
-}
-// No offset hacks needed on content
+```go-html-template
+{{ $full := $image.Resize "1600x webp q90" }}
+<a href="{{ $full.RelPermalink }}"
+   data-pswp-width="{{ $full.Width }}"
+   data-pswp-height="{{ $full.Height }}">
+  <img src="{{ $thumb.RelPermalink }}" alt="{{ $alt }}">
+</a>
 ```
+
+**Blog post shortcode:**
+
+```markdown
+{{</* gallery name="event-name" cols="3" */>}}
+![Alt text](image.jpg)
+![Another image](image2.jpg)
+{{</* /gallery */>}}
+```
+
+**Parameters:**
+
+- `name`: Gallery group name (images navigate together)
+- `cols`: Grid columns (2, 3, or 4; default 3)
 
 See also: [Animation Patterns](docs/architecture/patterns/animation-patterns.md) | [SCSS Organization](docs/architecture/patterns/scss-organization.md)
 
@@ -231,9 +230,9 @@ Automatic on first paragraph. Disable with `{.no-drop-cap}` or add manually with
 #### Section Dividers
 
 ```markdown
-{{</* divider */>}}                    <!-- Gold diamond (default) -->
-{{</* divider style="line" */>}}       <!-- Gradient gold line -->
-{{</* divider style="flourish" */>}}   <!-- Fading lines -->
+{{</* divider */>}} <!-- Gold diamond (default) -->
+{{</* divider style="line" */>}} <!-- Gradient gold line -->
+{{</* divider style="flourish" */>}} <!-- Fading lines -->
 ```
 
 #### Standfirst (Intro Summary)
@@ -261,9 +260,10 @@ Bold intro paragraph bridging headline and body copy.
 
 ```markdown
 {{</* fact-box title="At a Glance" */>}}
+
 - **Capacity:** 150 seated
 - **Square Feet:** 4,500
-{{</* /fact-box */>}}
+  {{</* /fact-box */>}}
 
 {{</* fact-box title="Details" position="right" */>}}
 Floated sidebar version.
@@ -274,18 +274,20 @@ Floated sidebar version.
 
 ```markdown
 {{</* key-takeaways */>}}
+
 - Main point one
 - Main point two
-{{</* /key-takeaways */>}}
+  {{</* /key-takeaways */>}}
 ```
 
 #### Timeline
 
 ```markdown
 {{</* timeline title="Planning Timeline" */>}}
+
 - **12-18 months:** Book venue
 - **9-12 months:** Send save-the-dates
-{{</* /timeline */>}}
+  {{</* /timeline */>}}
 ```
 
 #### Sidebar Quote (Testimonial)
@@ -300,11 +302,23 @@ Pike & West made our day magical.
 
 ```markdown
 {{</* numbered-list title="How to Book" */>}}
+
 1. Choose your date
 2. Schedule a tour
 3. Review options
-{{</* /numbered-list */>}}
+   {{</* /numbered-list */>}}
 ```
+
+#### Image Gallery
+
+```markdown
+{{</* gallery name="unique-name" cols="3" */>}}
+![Alt text](image1.jpg)
+![Alt text](image2.jpg)
+{{</* /gallery */>}}
+```
+
+Opens in PhotoSwipe lightbox with swipe/zoom.
 
 ### When to Use Each Feature
 
@@ -321,25 +335,6 @@ Pike & West made our day magical.
 | Timeline      | Planning guides, milestones     |
 | Sidebar quote | Client testimonials             |
 | Numbered list | Step-by-step instructions       |
-
-### Claude Code Commands
-
-| Command                      | Purpose                                             |
-|------------------------------|-----------------------------------------------------|
-| `/content:outline <topic>`   | Creates outline with editorial styling plan         |
-| `/content:draft <topic>`     | Generates draft with required styling elements      |
-| `/content:queue`             | Show prioritized content recommendations            |
-| `/content:persona <name>`    | Load persona context for targeted content           |
-| `/content:social <file>`     | Generate social media posts from a blog post        |
-| `/check:editorial [path]`    | Audits posts for missing editorial styling          |
-| `/check:config`              | Full CMS config health check vs Hugo templates      |
-| `/check:seo [path]`          | Content-level SEO, link, and freshness check        |
-| `/check:all`                 | Run all checks and produce unified dashboard        |
-| `/site:schema <collection>`  | Generate/update Sveltia CMS schema for a collection |
-| `/market:utm <url> ...`      | Generate tracked link with UTM parameters           |
-| `/migrate:compare <section>` | Deep-dive comparison of Webflow vs Hugo section     |
-| `/migrate:mapping`           | Update CSS mapping document with findings           |
-| `/migrate:diff`              | Run BackstopJS visual regression test               |
 
 ### Blog Editor Agent (Auto-Delegated)
 
@@ -395,51 +390,16 @@ Located at `.claude/agents/sveltia-schema-manager.md`, the agent:
 **DO NOT** edit content files directly without delegating to the appropriate agent.
 This ensures consistent editorial quality and proper content index maintenance.
 
-## Webflow Reference
-
-The original Webflow site export is preserved for reference during migration:
-
-### Webflow Export Directory
-
-```text
-webflow-export/
-├── index.html              # Homepage markup
-├── contact.html            # Contact page
-├── gallery-application.html
-├── css/
-│   ├── pikeandwest.webflow.css  # Main styles (inspect for exact values)
-│   └── webflow.css              # Webflow framework styles
-├── fonts/                  # Custom fonts (Le Mores Collection)
-├── images/                 # Original images at full resolution
-└── js/                     # Webflow interactions
-```
-
 ### Analysis Documents
 
 - **[Next Steps](docs/next-steps.md)** - Current project status and upcoming work (keep updated)
 - **[Analytics Strategy](docs/analytics/README.md)** - GTM/GA4 configuration and cross-domain tracking
-- **[CSS Mapping](docs/webflow-to-hugo-css-mapping.md)** - Webflow class → Hugo SCSS mapping
 - **[Site Analysis](docs/site-analysis/current-site-documentation.md)** - Original site documentation
 - **[Architecture Decisions](docs/architecture/decisions/)** - ADRs for key technical decisions
 - **[Implementation Patterns](docs/architecture/patterns/)** - Reusable code patterns
-- **[DNS Configuration](docs/infrastructure/dns-configuration.md)** - Current Webflow DNS and target Hugo/Cloudflare Pages setup
-
-### Workflow for Style Matching
-
-1. Open `webflow-export/css/pikeandwest.webflow.css` to find exact values
-2. Search for Webflow class name (e.g., `.hero-header-section`)
-3. Note computed values at each breakpoint (991px, 767px, 479px)
-4. Compare with Hugo SCSS and adjust to match
+- **[DNS Configuration](docs/infrastructure/dns-configuration.md)** - Hugo & Cloudflare Pages setup
 
 ## Site Structure
-
-### Current Pages (Webflow)
-
-```text
-/                    # Homepage - Hero, venue gallery, event types, about, contact CTA
-/contact             # Contact page - Address, phone, hours, tour scheduling
-/gallery-application # Artist application page (minimal content)
-```
 
 ### Proposed Hugo Structure
 
@@ -561,6 +521,11 @@ via `/images/...` URL paths bypass Hugo's asset processing entirely.
 because Sveltia CMS generates paths relative to the site root. Hugo's
 `resources.Get` strips the leading slash when resolving against the mount.
 
+**Singleton data files** (e.g., `data/hero.yaml`, `data/about.yaml`) also require
+leading slashes for image paths. Without them, Sveltia CMS cannot resolve
+previews since data files have no parent content file to be relative to. The CMS
+config `public_folder` must use `/images/...` for singletons.
+
 ### Image Processing
 
 ```go-html-template
@@ -574,30 +539,6 @@ because Sveltia CMS generates paths relative to the site root. Hugo's
   <img src="{{ $jpg.RelPermalink }}" alt="Pike & West venue" loading="lazy">
 </picture>
 ```
-
-## Content Migration Checklist
-
-### From Webflow
-
-- [ ] Export all images at highest resolution
-- [ ] Document all text content per section
-- [ ] Capture exact CSS values (inspect in DevTools)
-- [ ] Record all animations and transitions
-- [ ] Note form field configurations
-- [ ] Screenshot each page at mobile, tablet, desktop
-
-### To Hugo
-
-- [ ] Create base theme structure
-- [ ] Implement design tokens (colors, fonts, spacing)
-- [ ] Build header/footer partials
-- [ ] Create homepage sections as partials
-- [ ] Build contact page with form
-- [ ] Implement image gallery component
-- [ ] Add SEO meta tags
-- [ ] Configure analytics (Google Tag Manager)
-- [ ] Set up redirects if URLs change
-- [ ] Test cross-browser compatibility
 
 ## SEO Requirements
 
@@ -633,14 +574,6 @@ because Sveltia CMS generates paths relative to the site root. Hugo's
 </script>
 ```
 
-### URL Structure
-
-Maintain exact URL paths from Webflow:
-
-- `/` - Homepage
-- `/contact` - Contact page
-- `/gallery-application` - Artist application
-
 ## External Integrations
 
 ### Analytics & Tracking
@@ -675,17 +608,10 @@ social:
 
 ## Testing Requirements
 
-### Visual Regression
-
-- Compare screenshots of Hugo build vs live Webflow site
-- Test at Webflow breakpoints: 375px (mobile), 768px (tablet), 992px (desktop), 1280px (large), 1920px (ultra-wide)
-- Verify all hover states and animations
-
 ### Performance Targets
 
 | Metric                   | Target  |
 |--------------------------|---------|
-| Lighthouse Score         | > 95    |
 | First Contentful Paint   | < 1.5s  |
 | Largest Contentful Paint | < 2.5s  |
 | Total Page Size          | < 500KB |
@@ -816,8 +742,6 @@ hugo new content/page-name.md
 
 ### DNS Switch (`scripts/dns-switch.sh`)
 
-Toggle DNS between Webflow and Hugo configurations via Cloudflare API.
-
 ```bash
 # Required environment variables
 export CF_API_TOKEN="your-cloudflare-api-token"
@@ -828,10 +752,6 @@ export CF_ZONE_ID="your-zone-id"
 
 # Switch to Hugo (Cloudflare Pages)
 ./scripts/dns-switch.sh hugo
-
-# Switch back to Webflow
-./scripts/dns-switch.sh webflow
-```
 
 **Prerequisites:** `jq` installed, Cloudflare API token with `Zone.DNS (Edit)` permission.
 
@@ -878,3 +798,4 @@ See [DNS Configuration](docs/infrastructure/dns-configuration.md) for full detai
 - [New Template System (v0.146.0)](https://gohugo.io/templates/new-templatesystem-overview/)
 - [Hugo Partial Templates](https://cloudcannon.com/tutorials/hugo-beginner-tutorial/hugo-partials/)
 - [Building Hugo Themes with Go Templates](https://dasroot.net/posts/2025/12/building-hugo-themes-with-go-templates/)
+```
