@@ -87,8 +87,8 @@ collections:
           name: image
           widget: image
           required: false
-          media_folder: /static/images/venue
-          public_folder: images/venue
+          media_folder: /static/images/photos
+          public_folder: images/photos
           hint:
             '1200x630px recommended. Used as OG image for the blog listing page.'
         - label: Image Alt Text
@@ -119,8 +119,8 @@ collections:
         name: image
         widget: image
         required: true
-        media_folder: /static/images/venue
-        public_folder: images/venue
+        media_folder: /static/images/photos
+        public_folder: images/photos
         hint: 'Recommended: 1200x630px. Displays as hero background on post.'
       - label: Image Alt Text
         name: image_alt
@@ -259,8 +259,8 @@ collections:
           name: image
           widget: image
           required: false
-          media_folder: /static/images/venue
-          public_folder: /images/venue
+          media_folder: /static/images/photos
+          public_folder: /images/photos
           hint: '1200x630px recommended.'
         - label: Image Alt Text
           name: image_alt
@@ -304,8 +304,8 @@ collections:
         name: image
         widget: image
         required: true
-        media_folder: /static/images/venue
-        public_folder: /images/venue
+        media_folder: /static/images/photos
+        public_folder: /images/photos
         hint: '1200x630px recommended.'
       - label: Image Alt Text
         name: image_alt
@@ -358,8 +358,8 @@ collections:
             name: image
             widget: image
             required: false
-            media_folder: /static/images/hero
-            public_folder: /images/hero
+            media_folder: /static/images/homepage-hero
+            public_folder: /images/homepage-hero
           - label: Hero Image Alt Text
             name: image_alt
             widget: string
@@ -405,8 +405,8 @@ collections:
             name: og_image
             widget: image
             required: false
-            media_folder: /static/images/about
-            public_folder: /images/about
+            media_folder: /static/images/photos
+            public_folder: /images/photos
             hint: 'Image shown when shared on social media.'
           - label: Body
             name: body
@@ -432,8 +432,8 @@ collections:
             name: og_image
             widget: image
             required: false
-            media_folder: /static/images/hero
-            public_folder: /images/hero
+            media_folder: /static/images/homepage-hero
+            public_folder: /images/homepage-hero
             hint: 'Image shown when shared on social media.'
           - label: Body
             name: body
@@ -459,8 +459,8 @@ collections:
             name: og_image
             widget: image
             required: false
-            media_folder: /static/images/venue
-            public_folder: /images/venue
+            media_folder: /static/images/photos
+            public_folder: /images/photos
             hint: 'Image shown when shared on social media.'
           - label: Body
             name: body
@@ -610,14 +610,14 @@ singletons:
       - label: Background Image
         name: background_image
         widget: image
-        media_folder: /static/images/hero
-        public_folder: /images/hero
+        media_folder: /static/images/homepage-hero
+        public_folder: /images/homepage-hero
         hint: '1920x1080px. Tall image for desktop CSS background.'
       - label: Foreground Image
         name: foreground_image
         widget: image
-        media_folder: /static/images/hero
-        public_folder: /images/hero
+        media_folder: /static/images/homepage-hero
+        public_folder: /images/homepage-hero
         hint: '1920x800px. Wider image for mobile.'
       - label: Image Alt Text
         name: image_alt
@@ -646,8 +646,8 @@ singletons:
       - label: Background Image
         name: background_image
         widget: image
-        media_folder: /static/images/venue
-        public_folder: /images/venue
+        media_folder: /static/images/photos
+        public_folder: /images/photos
 
   # ----------------------------------------------------------
   # About Section
@@ -688,8 +688,8 @@ singletons:
               - label: Image File
                 name: src
                 widget: image
-                media_folder: /static/images/about
-                public_folder: /images/about
+                media_folder: /static/images/photos
+                public_folder: /images/photos
               - { label: Alt Text, name: alt, widget: string }
           - label: Reverse Layout
             name: reverse
@@ -794,8 +794,8 @@ singletons:
           - label: Image
             name: src
             widget: image
-            media_folder: /static/images/venue
-            public_folder: /images/venue
+            media_folder: /static/images/photos
+            public_folder: /images/photos
           - label: Alt Text
             name: alt
             widget: string
@@ -851,8 +851,8 @@ singletons:
       - label: Background Image
         name: background_image
         widget: image
-        media_folder: /static/images/venue
-        public_folder: /images/venue
+        media_folder: /static/images/photos
+        public_folder: /images/photos
       - label: Image Alt Text
         name: image_alt
         widget: string
