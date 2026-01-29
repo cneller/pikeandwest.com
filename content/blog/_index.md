@@ -1,9 +1,6 @@
 ---
-title: "Event Planning Tips & Inspiration | Pike & West Blog"
-description: "Discover expert event planning advice, celebration inspiration, and venue insights from Pike & West in Germantown, TN. From wedding planning timelines to corporate event ideas."
-layout: "list"
-type: "blog"
-# SEO
+title: Event Planning Tips & Inspiration | Pike & West Blog
+description: Discover expert event planning advice, celebration inspiration, and venue insights from Pike & West in Germantown, TN. From wedding planning timelines to corporate event ideas.
 keywords:
   - event planning tips Memphis
   - wedding venue blog Germantown
@@ -11,8 +8,10 @@ keywords:
   - celebration inspiration Memphis area
   - party planning advice
   - venue planning guide
-image: "images/venue/venue-06-soft-seating.jpg"
-image_alt: "Pike & West gallery soft seating area with elegant event setup"
+image: /images/venue/IMG_9271.jpeg
+image_alt: Pike & West gallery soft seating area with elegant event setup
+type: blog
+layout: list
 ---
 
 Welcome to the Pike & West blog, where art and celebration inspire every story. Here you will find expert insights on event planning, seasonal inspiration for your next gathering, and behind-the-scenes glimpses of life at Germantown's premier art gallery venue.

@@ -3,7 +3,7 @@ title: "Dance Events at Pike & West | Memphis Venue"
 description: "Host dance parties, quinceañeras, and celebration events at Pike & West in Germantown, TN. Our art gallery setting provides an elegant backdrop with open floor space, atmospheric lighting, and room to move."
 type: "events"
 eventType: "dance"
-icon: "images/icons/icon-disco-ball.png"
+icon: "/images/icons/icon-disco-ball.png"
 image: "/images/venue/venue-08-disco-background.jpg"
 image_alt: "Dance floor with ambient lighting at Pike & West art gallery venue"
 ---

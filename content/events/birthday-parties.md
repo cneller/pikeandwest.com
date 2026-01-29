@@ -2,7 +2,7 @@
 title: Birthday Parties at Pike & West | Memphis Venue
 description: Celebrate milestone birthdays at Pike & West in Germantown, TN. Our elegant art gallery venue is perfect for 30th, 40th, 50th birthdays and beyond.
 eventType: birthday
-icon: images/icons/icon-cake.png
+icon: /images/icons/icon-cake.png
 image: /images/venue/IMG_9271.jpeg
 image_alt: Dance floor and celebration space at Pike & West perfect for birthday parties
 type: events

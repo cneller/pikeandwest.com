@@ -16,17 +16,17 @@ intro:
 
 # What to expect section
 features:
-  - icon: "images/icons/icon-palette.svg"
+  - icon: "/images/icons/icon-palette.svg"
     title: "Social Atmosphere"
     description:
       "Create alongside fellow art enthusiasts in our elegant venue. Meet new
       friends over shared creativity in an intimate, supportive setting."
-  - icon: "images/icons/icon-instructor.svg"
+  - icon: "/images/icons/icon-instructor.svg"
     title: "Expert Instruction"
     description:
       "Learn from talented local artists and instructors. Our instructors guide
       you step by step, so you'll feel confident from your first brushstroke."
-  - icon: "images/icons/icon-supplies.svg"
+  - icon: "/images/icons/icon-supplies.svg"
     title: "All Materials Included"
     description:
       "Everything you need is provided—just bring yourself. Canvas, paints,

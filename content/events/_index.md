@@ -1,6 +1,8 @@
 ---
-title: "Host Your Event at Pike & West | Germantown Art Gallery Venue"
-description: "Discover Pike & West, Germantown's premier art gallery event venue. From elegant weddings to corporate gatherings, our gallery space transforms your celebration into a work of art."
+title: Host Your Event at Pike & West | Germantown Art Gallery Venue
+description: Discover Pike & West, Germantown's premier art gallery event venue. From elegant weddings to corporate gatherings, our gallery space transforms your celebration into a work of art.
+image: /images/venue/venue-06-soft-seating.jpg
+image_alt: ''
 ---
 
 Art and life converge at Pike & West. Our gallery venue in Germantown, TN provides an exceptional setting where every celebration becomes a masterpiece. Whether you envision an intimate gathering or a grand affair, our rotating art exhibitions create a backdrop unlike any other venue in the Memphis area.

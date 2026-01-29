@@ -3,7 +3,7 @@ title: "Private Parties at Pike & West | Memphis Venue"
 description: "Host your private party at Pike & West in Germantown, TN. Our art gallery setting creates an unforgettable backdrop for anniversaries, reunions, holiday gatherings, and milestone celebrations."
 type: "events"
 eventType: "private-party"
-icon: "images/icons/icon-champagne.png"
+icon: "/images/icons/icon-champagne.png"
 image: "/images/venue/venue-07-bar.jpg"
 image_alt: "Bar area at Pike & West perfect for private parties and celebrations in Germantown Tennessee"
 ---

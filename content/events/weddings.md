@@ -3,7 +3,7 @@ title: "Wedding Venue Germantown TN | Pike & West Art Gallery"
 description: "Host your wedding at Pike & West, Germantown's premier art gallery venue. Elegant ceremonies and receptions surrounded by curated artwork in the Memphis area."
 type: "events"
 eventType: "wedding"
-icon: "images/icons/icon-wedding-rings.png"
+icon: "/images/icons/icon-wedding-rings.png"
 image: "/images/venue/venue-04-wedding.jpg"
 image_alt: "Elegant wedding reception setup at Pike & West venue with gallery lighting"
 keywords:

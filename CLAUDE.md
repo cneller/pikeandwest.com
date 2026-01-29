@@ -740,6 +740,15 @@ HUGO_VERSION=0.146.0
 
 Cloudflare Pages preview deployments are triggered by **pull requests**, not branch pushes alone. A PR must be opened for a preview URL to be generated.
 
+### Sveltia CMS Source Code
+
+The Sveltia CMS source is cloned locally for investigating CMS behavior and contributing fixes:
+
+- **Repo:** `~/Projects/sveltia-cms` (clone of `sveltia/sveltia-cms`)
+- **Use for:** Debugging widget behavior, understanding config options, tracing image path handling, submitting PRs for bugs or enhancements
+
+When investigating CMS issues (e.g., image previews not showing, field behavior), read the source code directly rather than guessing. For bugs or small enhancements, submit PRs upstream.
+
 ### Sveltia CMS Auth Worker
 
 GitHub OAuth for the CMS admin panel runs on a separate Cloudflare Worker:

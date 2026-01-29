@@ -190,14 +190,13 @@ collections:
     label: Event Pages
     label_singular: Event Page
     folder: content/events
-    media_folder: /static/images/venue
-    public_folder: images/venue
     create: false
     delete: false
     extension: md
     format: yaml-frontmatter
     icon: celebration
     summary: '{{title}}'
+    thumbnail: image
     index_file:
       fields:
         - label: Title
@@ -249,7 +248,7 @@ collections:
         widget: image
         required: true
         media_folder: /static/images/icons
-        public_folder: images/icons
+        public_folder: /images/icons
         hint:
           'Event type icon (PNG). Displayed on the events list and homepage
           grid.'
@@ -293,6 +292,8 @@ collections:
       - name: home
         label: Homepage
         file: content/_index.md
+        icon: home
+        thumbnail: image
         fields:
           - label: Title
             name: title
@@ -304,6 +305,16 @@ collections:
           - label: Keywords
             name: keywords
             widget: list
+            required: false
+          - label: Hero Image
+            name: image
+            widget: image
+            required: false
+            media_folder: /static/images/hero
+            public_folder: /images/hero
+          - label: Hero Image Alt Text
+            name: image_alt
+            widget: string
             required: false
           - label: 'Show Hero Section'
             name: sections
@@ -329,6 +340,8 @@ collections:
       - name: about
         label: About
         file: content/about.md
+        icon: info
+        thumbnail: og_image
         fields:
           - label: Title
             name: title
@@ -340,6 +353,13 @@ collections:
             name: keywords
             widget: list
             required: false
+          - label: Social Image
+            name: og_image
+            widget: image
+            required: false
+            media_folder: /static/images/about
+            public_folder: images/about
+            hint: 'Image shown when shared on social media.'
           - label: Body
             name: body
             widget: markdown
@@ -347,6 +367,8 @@ collections:
       - name: contact
         label: Contact
         file: content/contact.md
+        icon: mail
+        thumbnail: og_image
         fields:
           - label: Title
             name: title
@@ -358,6 +380,13 @@ collections:
             name: keywords
             widget: list
             required: false
+          - label: Social Image
+            name: og_image
+            widget: image
+            required: false
+            media_folder: /static/images/hero
+            public_folder: images/hero
+            hint: 'Image shown when shared on social media.'
           - label: Body
             name: body
             widget: markdown
@@ -365,6 +394,8 @@ collections:
       - name: workshops
         label: Workshops
         file: content/workshops.md
+        icon: brush
+        thumbnail: og_image
         fields:
           - label: Title
             name: title
@@ -376,6 +407,13 @@ collections:
             name: keywords
             widget: list
             required: false
+          - label: Social Image
+            name: og_image
+            widget: image
+            required: false
+            media_folder: /static/images/venue
+            public_folder: images/venue
+            hint: 'Image shown when shared on social media.'
           - label: Body
             name: body
             widget: markdown
@@ -633,7 +671,7 @@ singletons:
             name: icon
             widget: image
             media_folder: /static/images/icons
-            public_folder: images/icons
+            public_folder: /images/icons
             hint: 'Event type icon (PNG).'
           - { label: Label, name: label, widget: string }
           - { label: Link, name: link, widget: string }
@@ -668,7 +706,7 @@ singletons:
             name: icon
             widget: image
             media_folder: /static/images/icons
-            public_folder: images/icons
+            public_folder: /images/icons
             hint: 'Feature icon (SVG or PNG).'
           - { label: Title, name: title, widget: string }
           - { label: Description, name: description, widget: text }
