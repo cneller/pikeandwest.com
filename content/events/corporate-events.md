@@ -4,7 +4,7 @@ description: "Host your corporate event at Pike & West in Germantown, TN. Our ar
 type: "events"
 eventType: "corporate"
 icon: "/images/icons/icon-badge.png"
-image: "/images/venue/venue-01-interior.jpeg"
+image: "/images/photos/venue-01-interior.jpeg"
 image_alt: "Pike & West interior space perfect for corporate events"
 ---
 

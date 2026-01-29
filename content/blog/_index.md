@@ -8,7 +8,7 @@ keywords:
   - celebration inspiration Memphis area
   - party planning advice
   - venue planning guide
-image: /images/venue/IMG_9271.jpeg
+image: /images/photos/IMG_9271.jpeg
 image_alt: Pike & West gallery soft seating area with elegant event setup
 type: blog
 layout: list

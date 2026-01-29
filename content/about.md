@@ -10,7 +10,7 @@ keywords:
   - Germantown gallery space
   - family-owned event venue Tennessee
   - art gallery wedding venue
-og_image: "/images/about/team-eden-lyndal.jpg"
+og_image: "/images/photos/team-eden-lyndal.jpg"
 schema:
   type: "AboutPage"
   name: "About Pike & West"

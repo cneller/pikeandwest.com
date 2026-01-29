@@ -15,7 +15,7 @@ tags:
   - planning tips
   - families
   - event inspiration
-image: /images/venue/venue-08-disco-background.jpg
+image: /images/photos/venue-08-disco-background.jpg
 image_alt: >-
   Elegant Pike & West gallery space with atmospheric lighting perfect for
   milestone winter birthday celebrations in Germantown Tennessee

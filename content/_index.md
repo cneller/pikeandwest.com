@@ -15,5 +15,5 @@ sections:
   events: true
   about: true
 image_alt: Pike & West venue exterior - white brick carriage house style building in Germantown, TN
-image: /images/hero/venue-exterior.jpg
+image: /images/homepage-hero/venue-exterior.jpg
 ---

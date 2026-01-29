@@ -15,7 +15,7 @@ tags:
   - event inspiration
   - fall
   - families
-image: /images/venue/venue-02-foyer.png
+image: /images/photos/venue-02-foyer.png
 image_alt: >-
   Elegant Pike & West art gallery interior in Germantown Tennessee with warm
   lighting perfect for sophisticated fall baby showers

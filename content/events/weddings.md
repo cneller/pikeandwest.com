@@ -4,7 +4,7 @@ description: "Host your wedding at Pike & West, Germantown's premier art gallery
 type: "events"
 eventType: "wedding"
 icon: "/images/icons/icon-wedding-rings.png"
-image: "/images/venue/venue-04-wedding.jpg"
+image: "/images/photos/venue-04-wedding.jpg"
 image_alt: "Elegant wedding reception setup at Pike & West venue with gallery lighting"
 keywords:
   - wedding venue Germantown TN

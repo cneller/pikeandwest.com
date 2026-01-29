@@ -10,7 +10,7 @@ keywords:
   - Pike & West artist application
   - local artist exhibition opportunities
   - art gallery call for artists Memphis
-og_image: "images/venue/venue-01-interior.jpeg"
+og_image: "images/photos/venue-01-interior.jpeg"
 schema_type: "ContactPage"
 ---
 

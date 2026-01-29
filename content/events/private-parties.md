@@ -4,7 +4,7 @@ description: "Host your private party at Pike & West in Germantown, TN. Our art 
 type: "events"
 eventType: "private-party"
 icon: "/images/icons/icon-champagne.png"
-image: "/images/venue/venue-07-bar.jpg"
+image: "/images/photos/venue-07-bar.jpg"
 image_alt: "Bar area at Pike & West perfect for private parties and celebrations in Germantown Tennessee"
 ---
 

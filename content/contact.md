@@ -12,7 +12,7 @@ keywords:
   - wedding venue tour Germantown
   - corporate event venue Memphis contact
   - private party venue Tennessee
-og_image: "/images/hero/venue-exterior.jpg"
+og_image: "/images/homepage-hero/venue-exterior.jpg"
 og_type: "website"
 schema:
   type: "ContactPage"
