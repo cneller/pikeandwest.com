@@ -1,0 +1,757 @@
+# BackstopJS CI Integration Implementation Plan
+
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+
+**Goal:** Add async visual regression testing to CI pipeline, running as a peer to Lighthouse after deployment completes.
+
+**Architecture:** BackstopJS workflow triggers on CI completion (like Lighthouse), tests deployed preview URL against reference images stored in git, and reports results to PR comments. Reference images update automatically when main branch is merged.
+
+**Tech Stack:** BackstopJS, GitHub Actions, Puppeteer, GitHub Artifacts
+
+---
+
+## Design Decisions
+
+### Reference Image Strategy
+
+Store reference images in git on a dedicated `backstop-references` branch:
+
+- Keeps main branch clean (no binary bloat)
+- Persists across workflow runs (unlike artifacts)
+- Easy to update via workflow automation
+- Can be manually inspected/updated if needed
+
+### Core Pages to Test
+
+| Page     | Path        | Rationale                            |
+|----------|-------------|--------------------------------------|
+| Homepage | `/`         | Primary landing page                 |
+| About    | `/about/`   | Key content page                     |
+| Contact  | `/contact/` | Conversion page (has HoneyBook form) |
+| Blog     | `/blog/`    | Content list page                    |
+| Events   | `/events/`  | Service category page                |
+
+### Viewport Coverage
+
+Match site breakpoints for comprehensive coverage:
+
+| Label   | Width  | Breakpoint              |
+|---------|--------|-------------------------|
+| mobile  | 375px  | Below $breakpoint-sm    |
+| tablet  | 768px  | $breakpoint-md boundary |
+| desktop | 1280px | $breakpoint-xl          |
+
+### Workflow Trigger
+
+Same pattern as Lighthouse:
+
+- Trigger: `workflow_run` on CI completion
+- Non-blocking: `continue-on-error: true`
+- Async: Doesn't block deployment
+
+---
+
+## Task 1: Update backstop.json for CI
+
+**Files:**
+
+- Modify: `backstop.json`
+
+**Step 1: Update backstop.json with CI-compatible config**
+
+```json
+{
+  "id": "pike-west",
+  "viewports": [
+    { "label": "mobile", "width": 375, "height": 812 },
+    { "label": "tablet", "width": 768, "height": 1024 },
+    { "label": "desktop", "width": 1280, "height": 800 }
+  ],
+  "scenarios": [
+    {
+      "label": "Homepage",
+      "url": "__DEPLOY_URL__/",
+      "delay": 3000,
+      "selectors": ["document"],
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false,
+      "hideSelectors": [".honeybook-embed", "iframe"]
+    },
+    {
+      "label": "About",
+      "url": "__DEPLOY_URL__/about/",
+      "delay": 2000,
+      "selectors": ["document"],
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Contact",
+      "url": "__DEPLOY_URL__/contact/",
+      "delay": 4000,
+      "selectors": ["document"],
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false,
+      "hideSelectors": [".honeybook-embed", "iframe", ".contact-form-container"]
+    },
+    {
+      "label": "Blog",
+      "url": "__DEPLOY_URL__/blog/",
+      "delay": 2000,
+      "selectors": ["document"],
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Events",
+      "url": "__DEPLOY_URL__/events/",
+      "delay": 2000,
+      "selectors": ["document"],
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
+    "bitmaps_test": "backstop_data/bitmaps_test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
+  },
+  "report": ["CI"],
+  "engine": "puppeteer",
+  "engineOptions": {
+    "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+  },
+  "asyncCaptureLimit": 3,
+  "asyncCompareLimit": 30,
+  "debug": false,
+  "debugWindow": false
+}
+```
+
+**Notes:**
+
+- `__DEPLOY_URL__` placeholder replaced by CI workflow
+- `hideSelectors` for dynamic content (HoneyBook form)
+- `report: ["CI"]` for machine-readable JSON output
+- Increased delay on Contact page for form load
+- `misMatchThreshold: 1` (1%) allows minor rendering variance
+
+**Step 2: Verify config is valid JSON**
+
+Run: `cat backstop.json | jq .`
+Expected: Valid JSON output with no errors
+
+**Step 3: Commit**
+
+```bash
+git add backstop.json
+git commit -m "chore(backstop): update config for CI integration"
+```
+
+---
+
+## Task 2: Create onReady script to disable animations
+
+**Files:**
+
+- Create: `backstop_data/engine_scripts/puppet/onReady.js`
+
+**Step 1: Create the onReady script**
+
+```javascript
+module.exports = async (page) => {
+  // Disable all animations and transitions for consistent screenshots
+  await page.addStyleTag({
+    content: `
+      *, *::before, *::after {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+      }
+    `
+  });
+
+  // Wait for web fonts to load
+  await page.evaluateHandle('document.fonts.ready');
+
+  // Additional wait for lazy-loaded images
+  await page.evaluate(async () => {
+    const images = Array.from(document.querySelectorAll('img[loading="lazy"]'));
+    await Promise.all(images.map(img => {
+      if (img.complete) return;
+      return new Promise(resolve => {
+        img.onload = resolve;
+        img.onerror = resolve;
+      });
+    }));
+  });
+};
+```
+
+**Step 2: Verify file exists**
+
+Run: `ls -la backstop_data/engine_scripts/puppet/onReady.js`
+Expected: File exists with correct permissions
+
+**Step 3: Commit**
+
+```bash
+git add backstop_data/engine_scripts/puppet/onReady.js
+git commit -m "chore(backstop): add onReady script for consistent screenshots"
+```
+
+---
+
+## Task 3: Create GitHub Actions workflow
+
+**Files:**
+
+- Create: `.github/workflows/visual-regression.yml`
+
+**Step 1: Create the workflow file**
+
+```yaml
+name: Visual Regression
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'URL to test (e.g., https://pikeandwest.com)'
+        required: true
+        type: string
+
+concurrency:
+  group: visual-regression-${{ github.event.workflow_run.head_branch || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prepare:
+    name: Prepare
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    outputs:
+      url: ${{ steps.get-url.outputs.url }}
+      is-main: ${{ steps.get-url.outputs.is-main }}
+    steps:
+      - name: Get deployment URL
+        id: get-url
+        uses: actions/github-script@v7
+        with:
+          script: |
+            if (context.eventName === 'workflow_dispatch') {
+              const url = '${{ inputs.url }}';
+              core.setOutput('url', url);
+              core.setOutput('is-main', url.includes('pikeandwest.com') && !url.includes('pages.dev') ? 'true' : 'false');
+              return;
+            }
+
+            const branch = context.payload.workflow_run.head_branch;
+            const isMain = branch === 'main';
+            const url = isMain
+              ? 'https://pikeandwest.com'
+              : `https://${branch.replace(/[^a-z0-9-]/gi, '-').substring(0, 28)}.pikeandwest.pages.dev`;
+
+            core.setOutput('url', url);
+            core.setOutput('is-main', isMain ? 'true' : 'false');
+
+  test:
+    name: BackstopJS Test
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout reference images
+        uses: actions/checkout@v4
+        with:
+          ref: backstop-references
+          path: backstop-refs
+        continue-on-error: true
+
+      - name: Setup reference images
+        run: |
+          if [ -d "backstop-refs/bitmaps_reference" ]; then
+            mkdir -p backstop_data
+            cp -r backstop-refs/bitmaps_reference backstop_data/
+            echo "Reference images loaded from backstop-references branch"
+            ls -la backstop_data/bitmaps_reference/ | head -20
+          else
+            echo "No reference images found - will create baseline"
+            echo "BASELINE_RUN=true" >> $GITHUB_ENV
+          fi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Update config with deploy URL
+        run: |
+          URL="${{ needs.prepare.outputs.url }}"
+          sed -i "s|__DEPLOY_URL__|${URL}|g" backstop.json
+          echo "Testing against: ${URL}"
+          cat backstop.json | jq '.scenarios[].url'
+
+      - name: Run BackstopJS test
+        id: backstop
+        run: |
+          if [ "$BASELINE_RUN" = "true" ]; then
+            echo "Creating baseline reference images..."
+            npx backstop reference
+            echo "result=baseline" >> $GITHUB_OUTPUT
+          else
+            set +e
+            npx backstop test --config=backstop.json
+            EXIT_CODE=$?
+            set -e
+            if [ $EXIT_CODE -eq 0 ]; then
+              echo "result=pass" >> $GITHUB_OUTPUT
+            else
+              echo "result=fail" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Parse results
+        id: results
+        if: steps.backstop.outputs.result != 'baseline'
+        run: |
+          if [ -f "backstop_data/ci_report/xunit.xml" ]; then
+            TOTAL=$(grep -oP 'tests="\K\d+' backstop_data/ci_report/xunit.xml || echo "0")
+            FAILURES=$(grep -oP 'failures="\K\d+' backstop_data/ci_report/xunit.xml || echo "0")
+            PASSED=$((TOTAL - FAILURES))
+            echo "total=${TOTAL}" >> $GITHUB_OUTPUT
+            echo "passed=${PASSED}" >> $GITHUB_OUTPUT
+            echo "failed=${FAILURES}" >> $GITHUB_OUTPUT
+          else
+            echo "total=0" >> $GITHUB_OUTPUT
+            echo "passed=0" >> $GITHUB_OUTPUT
+            echo "failed=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate summary
+        run: |
+          echo "## Visual Regression Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.backstop.outputs.result }}" = "baseline" ]; then
+            echo "**Baseline Created** - Reference images captured for future comparisons." >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ steps.backstop.outputs.result }}" = "pass" ]; then
+            echo "✅ **All visual tests passed**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+            echo "| Total | ${{ steps.results.outputs.total }} |" >> $GITHUB_STEP_SUMMARY
+            echo "| Passed | ${{ steps.results.outputs.passed }} |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ **Visual differences detected**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+            echo "| Total | ${{ steps.results.outputs.total }} |" >> $GITHUB_STEP_SUMMARY
+            echo "| Passed | ${{ steps.results.outputs.passed }} |" >> $GITHUB_STEP_SUMMARY
+            echo "| Failed | ${{ steps.results.outputs.failed }} |" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Download the report artifact to review visual differences." >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**URL tested:** ${{ needs.prepare.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backstop-report
+          path: backstop_data/html_report/
+          retention-days: 7
+
+      - name: Upload test screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backstop-screenshots
+          path: |
+            backstop_data/bitmaps_test/
+            backstop_data/bitmaps_reference/
+          retention-days: 7
+
+    outputs:
+      result: ${{ steps.backstop.outputs.result }}
+      total: ${{ steps.results.outputs.total }}
+      passed: ${{ steps.results.outputs.passed }}
+      failed: ${{ steps.results.outputs.failed }}
+
+  comment:
+    name: Comment on PR
+    needs: [prepare, test]
+    if: always() && needs.prepare.result == 'success' && github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const result = '${{ needs.test.outputs.result }}';
+            const total = '${{ needs.test.outputs.total }}';
+            const passed = '${{ needs.test.outputs.passed }}';
+            const failed = '${{ needs.test.outputs.failed }}';
+            const url = '${{ needs.prepare.outputs.url }}';
+
+            let body;
+            if (result === 'baseline') {
+              body = `## 📸 Visual Regression - Baseline Created
+
+              Reference images have been captured. Future runs will compare against these.
+
+              **URL:** ${url}`;
+            } else if (result === 'pass') {
+              body = `## ✅ Visual Regression - Passed
+
+              All ${total} visual tests passed.
+
+              **URL:** ${url}`;
+            } else {
+              body = `## ⚠️ Visual Regression - Differences Detected
+
+              | Metric | Value     |
+              |--------|-----------|
+              | Total  | ${total}  |
+              | Passed | ${passed} |
+              | Failed | ${failed} |
+
+              Download the \`backstop-report\` artifact to review visual differences.
+
+              **URL:** ${url}`;
+            }
+
+            // Get PR number from the workflow run
+            const runId = context.payload.workflow_run.id;
+            const run = await github.rest.actions.getWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            });
+
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: `${context.repo.owner}:${run.data.head_branch}`,
+              state: 'open',
+            });
+
+            if (prs.data.length === 0) {
+              console.log('No open PR found');
+              return;
+            }
+
+            const prNumber = prs.data[0].number;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' && comment.body.includes('Visual Regression')
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                comment_id: botComment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: prNumber,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            }
+
+  update-references:
+    name: Update References
+    needs: [prepare, test]
+    if: needs.prepare.outputs.is-main == 'true' && needs.test.outputs.result != 'baseline'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Download screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: backstop-screenshots
+          path: backstop_data/
+
+      - name: Update reference branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Create orphan branch if it doesn't exist
+          git fetch origin backstop-references || true
+
+          if git show-ref --verify --quiet refs/remotes/origin/backstop-references; then
+            git checkout backstop-references
+            rm -rf bitmaps_reference
+          else
+            git checkout --orphan backstop-references
+            git rm -rf . || true
+          fi
+
+          # Copy test images as new references
+          if [ -d "backstop_data/bitmaps_test" ]; then
+            mkdir -p bitmaps_reference
+            # Get the latest test run folder
+            LATEST=$(ls -t backstop_data/bitmaps_test/ | head -1)
+            if [ -n "$LATEST" ]; then
+              cp -r "backstop_data/bitmaps_test/$LATEST"/* bitmaps_reference/
+              git add bitmaps_reference/
+              git commit -m "chore: update visual regression references [skip ci]" || echo "No changes to commit"
+              git push origin backstop-references --force
+            fi
+          fi
+```
+
+**Step 2: Verify workflow YAML is valid**
+
+Run: `cat .github/workflows/visual-regression.yml | head -50`
+Expected: Valid YAML with correct structure
+
+**Step 3: Commit**
+
+```bash
+git add .github/workflows/visual-regression.yml
+git commit -m "feat(ci): add visual regression workflow with BackstopJS"
+```
+
+---
+
+## Task 4: Create initial reference images branch
+
+**Files:**
+
+- None (git operations only)
+
+**Step 1: Create empty backstop-references branch**
+
+```bash
+git checkout --orphan backstop-references
+git rm -rf .
+echo "# BackstopJS Reference Images" > README.md
+echo "" >> README.md
+echo "This branch stores reference screenshots for visual regression testing." >> README.md
+echo "Updated automatically when main branch builds pass." >> README.md
+git add README.md
+git commit -m "chore: initialize backstop-references branch"
+```
+
+**Step 2: Push the branch**
+
+```bash
+git push origin backstop-references
+```
+
+**Step 3: Return to main branch**
+
+```bash
+git checkout main
+```
+
+---
+
+## Task 5: Update .gitignore for BackstopJS artifacts
+
+**Files:**
+
+- Modify: `.gitignore`
+
+**Step 1: Verify current .gitignore entries**
+
+Check that these lines exist:
+
+```text
+backstop_data/bitmaps_test/
+backstop_data/html_report/
+```
+
+**Step 2: Add ci_report if missing**
+
+Add this line if not present:
+
+```text
+backstop_data/ci_report/
+```
+
+**Step 3: Commit if changes made**
+
+```bash
+git add .gitignore
+git commit -m "chore: update gitignore for backstop ci artifacts"
+```
+
+---
+
+## Task 6: Update package.json scripts
+
+**Files:**
+
+- Modify: `package.json`
+
+**Step 1: Read current package.json**
+
+Verify current backstop scripts exist.
+
+**Step 2: No changes needed**
+
+The existing scripts are sufficient:
+
+- `backstop:reference` - Capture reference images
+- `backstop:test` - Run comparison test
+- `backstop:approve` - Approve changes
+- `backstop:report` - Open HTML report
+
+**Step 3: Skip commit (no changes)**
+
+---
+
+## Task 7: Test workflow locally
+
+**Files:**
+
+- None (manual testing)
+
+**Step 1: Start Hugo server**
+
+```bash
+npm run serve
+```
+
+**Step 2: In another terminal, create reference images**
+
+```bash
+# Update backstop.json URLs to localhost temporarily
+sed -i 's|__DEPLOY_URL__|http://localhost:1313|g' backstop.json
+
+# Capture reference images
+npm run backstop:reference
+```
+
+**Step 3: Run test to verify setup**
+
+```bash
+npm run backstop:test
+```
+
+Expected: All tests pass (comparing against self)
+
+**Step 4: Restore backstop.json**
+
+```bash
+git checkout backstop.json
+```
+
+**Step 5: Verify test artifacts exist**
+
+```bash
+ls -la backstop_data/bitmaps_reference/
+ls -la backstop_data/bitmaps_test/
+```
+
+---
+
+## Task 8: Update documentation
+
+**Files:**
+
+- Modify: `docs/next-steps.md`
+
+**Step 1: Add visual regression to Current Status table**
+
+Add row:
+
+```markdown
+| Visual Regression  | Active    | BackstopJS in CI, async like Lighthouse          |
+```
+
+**Step 2: Add to Pre-Launch Checklist if not present**
+
+Under Performance section, add:
+
+```markdown
+- [ ] Verify visual regression baseline images captured
+```
+
+**Step 3: Add to Recently Completed section**
+
+```markdown
+### BackstopJS CI Integration (2026-01-29)
+
+**Goal:** Add async visual regression testing to CI pipeline.
+
+**Implementation:**
+- Workflow triggers after CI completes (like Lighthouse)
+- Tests core pages: Homepage, About, Contact, Blog, Events
+- Reference images stored in `backstop-references` branch
+- Reports to PR comments with pass/fail status
+- Updates references automatically on main branch merges
+
+**Files Created:**
+- `.github/workflows/visual-regression.yml`
+- `backstop_data/engine_scripts/puppet/onReady.js`
+
+**Files Modified:**
+- `backstop.json` - CI-compatible config with URL placeholder
+```
+
+**Step 4: Commit**
+
+```bash
+git add docs/next-steps.md
+git commit -m "docs: add visual regression to next-steps"
+```
+
+---
+
+## Summary
+
+After completing all tasks:
+
+1. **backstop.json** - Updated with CI-compatible config, URL placeholder, hide selectors
+2. **onReady.js** - Disables animations, waits for fonts and images
+3. **visual-regression.yml** - Async workflow triggered after CI
+4. **backstop-references branch** - Stores golden reference images
+5. **.gitignore** - Excludes test/report artifacts
+6. **Documentation** - Updated with new capability
+
+**Workflow behavior:**
+
+- PRs: Compare against reference images, report differences
+- Main: Capture new references after successful deploy
+- Manual: Can trigger with custom URL via workflow_dispatch

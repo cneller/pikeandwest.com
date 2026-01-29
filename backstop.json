@@ -1,64 +1,60 @@
 {
   "id": "pike-west",
   "viewports": [
-    {
-      "label": "mobile",
-      "width": 375,
-      "height": 812
-    },
-    {
-      "label": "tablet",
-      "width": 768,
-      "height": 1024
-    },
-    {
-      "label": "desktop",
-      "width": 1280,
-      "height": 800
-    }
+    { "label": "mobile", "width": 375, "height": 812 },
+    { "label": "tablet", "width": 768, "height": 1024 },
+    { "label": "desktop", "width": 1280, "height": 800 }
   ],
   "scenarios": [
     {
       "label": "Homepage",
-      "url": "http://localhost:1313/",
-      "delay": 2000,
+      "url": "__DEPLOY_URL__/",
+      "delay": 3000,
       "selectors": ["document"],
-      "misMatchThreshold": 0.5
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false,
+      "hideSelectors": [".honeybook-embed", "iframe"]
     },
     {
       "label": "About",
-      "url": "http://localhost:1313/about/",
+      "url": "__DEPLOY_URL__/about/",
       "delay": 2000,
       "selectors": ["document"],
-      "misMatchThreshold": 0.5
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
     },
     {
       "label": "Contact",
-      "url": "http://localhost:1313/contact/",
-      "delay": 3000,
+      "url": "__DEPLOY_URL__/contact/",
+      "delay": 4000,
       "selectors": ["document"],
-      "misMatchThreshold": 0.5
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false,
+      "hideSelectors": [".honeybook-embed", "iframe", ".contact-form-container"]
     },
     {
-      "label": "Blog List",
-      "url": "http://localhost:1313/blog/",
+      "label": "Blog",
+      "url": "__DEPLOY_URL__/blog/",
       "delay": 2000,
       "selectors": ["document"],
-      "misMatchThreshold": 0.5
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
     },
     {
       "label": "Workshops",
-      "url": "http://localhost:1313/workshops/",
+      "url": "__DEPLOY_URL__/workshops/",
       "delay": 2000,
       "selectors": ["document"],
-      "misMatchThreshold": 0.5
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
     },
     {
-      "label": "Events List",
-      "url": "http://localhost:1313/events/",
+      "label": "Events",
+      "url": "__DEPLOY_URL__/events/",
       "delay": 2000,
       "selectors": ["document"],
-      "misMatchThreshold": 0.5
+      "misMatchThreshold": 1,
+      "requireSameDimensions": false
     }
   ],
   "paths": {
@@ -68,10 +64,10 @@
     "html_report": "backstop_data/html_report",
     "ci_report": "backstop_data/ci_report"
   },
-  "report": ["browser"],
+  "report": ["CI"],
   "engine": "puppeteer",
   "engineOptions": {
-    "args": ["--no-sandbox"]
+    "args": ["--no-sandbox", "--disable-setuid-sandbox"]
   },
   "asyncCaptureLimit": 3,
   "asyncCompareLimit": 30,
