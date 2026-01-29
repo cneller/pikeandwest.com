@@ -1,8 +1,5 @@
-module.exports = async (page, scenario, vp) => {
-  console.log('SCENARIO > ' + scenario.label);
-  await require('./clickAndHoverHelper')(page, scenario);
-
-  // Disable animations for consistent screenshots
+module.exports = async (page) => {
+  // Disable all animations and transitions for consistent screenshots
   await page.addStyleTag({
     content: `
       *, *::before, *::after {
@@ -14,6 +11,20 @@ module.exports = async (page, scenario, vp) => {
     `,
   });
 
-  // Wait for fonts to load
-  await page.evaluate(() => document.fonts.ready);
+  // Wait for web fonts to load
+  await page.evaluateHandle('document.fonts.ready');
+
+  // Additional wait for lazy-loaded images
+  await page.evaluate(async () => {
+    const images = Array.from(document.querySelectorAll('img[loading="lazy"]'));
+    await Promise.all(
+      images.map((img) => {
+        if (img.complete) return;
+        return new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      })
+    );
+  });
 };

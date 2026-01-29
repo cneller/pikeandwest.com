@@ -9,16 +9,17 @@ For completed work, see [CHANGELOG.md](./CHANGELOG.md).
 
 ## Current Status
 
-| Area               | Status   | Notes                                          |
-|--------------------|----------|------------------------------------------------|
-| Hugo Site          | Complete | All pages live                                 |
-| Staging Deployment | Active   | beta.pikeandwest.com on Cloudflare Pages       |
-| GTM/GA4 Analytics  | Verified | Tracking active, cross-domain configured       |
-| Production Domain  | Active   | pikeandwest.com on Cloudflare Pages            |
-| Architecture Docs  | Complete | ADRs and patterns in docs/architecture/        |
-| Marketing Strategy | Complete | Comprehensive docs in docs/marketing-strategy/ |
-| Sveltia CMS        | Active   | OAuth Worker deployed at auth.pikeandwest.com  |
-| Event Type Pages   | Complete | 6 landing pages for SEO (/events/\*)           |
+| Area               | Status   | Notes                                            |
+|--------------------|----------|--------------------------------------------------|
+| Hugo Site          | Complete | All pages live                                   |
+| Staging Deployment | Active   | beta.pikeandwest.com on Cloudflare Pages         |
+| GTM/GA4 Analytics  | Verified | Tracking active, cross-domain configured         |
+| Production Domain  | Active   | pikeandwest.com on Cloudflare Pages              |
+| Architecture Docs  | Complete | ADRs and patterns in docs/architecture/          |
+| Marketing Strategy | Complete | Comprehensive docs in docs/marketing-strategy/   |
+| Sveltia CMS        | Active   | OAuth Worker deployed at auth.pikeandwest.com    |
+| Event Type Pages   | Complete | 6 landing pages for SEO (/events/\*)             |
+| Visual Regression  | Active   | BackstopJS in CI, async workflow like Lighthouse |
 
 ## Immediate Tasks (Blocked)
 
@@ -56,6 +57,7 @@ Complete before switching production DNS:
 - [ ] Verify images are optimized (WebP with fallbacks)
 - [ ] Check total page size <500KB
 - [ ] Test Core Web Vitals pass
+- [ ] Verify visual regression baseline images captured on first main branch run
 
 ### Sveltia CMS
 

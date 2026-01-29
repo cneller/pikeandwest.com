@@ -4,7 +4,7 @@
 
 **Goal:** Add async visual regression testing to CI pipeline, running as a peer to Lighthouse after deployment completes.
 
-**Architecture:** BackstopJS workflow triggers on CI completion (like Lighthouse), tests deployed preview URL against reference images stored in git, and reports results to PR comments. Reference images update automatically when main branch is merged.
+**Architecture:** BackstopJS workflow triggers on CI completion (like Lighthouse), tests deployed preview URL against reference images stored as GitHub artifacts (not git), and reports results to PR comments. Reference images update automatically when main branch is merged.
 
 **Tech Stack:** BackstopJS, GitHub Actions, Puppeteer, GitHub Artifacts
 
@@ -14,12 +14,12 @@
 
 ### Reference Image Strategy
 
-Store reference images in git on a dedicated `backstop-references` branch:
+Store reference images as **GitHub Artifacts** (not a git branch):
 
-- Keeps main branch clean (no binary bloat)
-- Persists across workflow runs (unlike artifacts)
-- Easy to update via workflow automation
-- Can be manually inspected/updated if needed
+- No source control bloat (binary images stay out of git)
+- Auto-cleanup via retention policy (30 days for references, 7 days for reports)
+- Uses `dawidd6/action-download-artifact@v3` to fetch from previous main runs
+- Simpler workflow (no branch switching)
 
 ### Core Pages to Test
 
@@ -273,23 +273,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Checkout reference images
-        uses: actions/checkout@v4
+      - name: Download reference images from previous main run
+        id: download-refs
+        uses: dawidd6/action-download-artifact@v3
         with:
-          ref: backstop-references
-          path: backstop-refs
+          workflow: visual-regression.yml
+          branch: main
+          name: backstop-references
+          path: backstop_data/bitmaps_reference
+          search_artifacts: true
+          if_no_artifact_found: warn
         continue-on-error: true
 
-      - name: Setup reference images
+      - name: Check for references
+        id: check-refs
         run: |
-          if [ -d "backstop-refs/bitmaps_reference" ]; then
-            mkdir -p backstop_data
-            cp -r backstop-refs/bitmaps_reference backstop_data/
-            echo "Reference images loaded from backstop-references branch"
-            ls -la backstop_data/bitmaps_reference/ | head -20
+          if [ -d "backstop_data/bitmaps_reference" ] && [ "$(ls -A backstop_data/bitmaps_reference 2>/dev/null)" ]; then
+            echo "Reference images found"
+            ls -la backstop_data/bitmaps_reference/ | head -10
+            echo "has-refs=true" >> $GITHUB_OUTPUT
           else
             echo "No reference images found - will create baseline"
-            echo "BASELINE_RUN=true" >> $GITHUB_ENV
+            echo "has-refs=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Setup Node
@@ -311,7 +316,7 @@ jobs:
       - name: Run BackstopJS test
         id: backstop
         run: |
-          if [ "$BASELINE_RUN" = "true" ]; then
+          if [ "${{ steps.check-refs.outputs.has-refs }}" != "true" ]; then
             echo "Creating baseline reference images..."
             npx backstop reference
             echo "result=baseline" >> $GITHUB_OUTPUT
@@ -350,7 +355,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
 
           if [ "${{ steps.backstop.outputs.result }}" = "baseline" ]; then
-            echo "**Baseline Created** - Reference images captured for future comparisons." >> $GITHUB_STEP_SUMMARY
+            echo "📸 **Baseline Created** - Reference images captured for future comparisons." >> $GITHUB_STEP_SUMMARY
           elif [ "${{ steps.backstop.outputs.result }}" = "pass" ]; then
             echo "✅ **All visual tests passed**" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
@@ -381,15 +386,14 @@ jobs:
           path: backstop_data/html_report/
           retention-days: 7
 
-      - name: Upload test screenshots
-        if: always()
+      - name: Upload reference images (for main branch)
+        if: needs.prepare.outputs.is-main == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: backstop-screenshots
-          path: |
-            backstop_data/bitmaps_test/
-            backstop_data/bitmaps_reference/
-          retention-days: 7
+          name: backstop-references
+          path: backstop_data/bitmaps_reference/
+          retention-days: 30
+          overwrite: true
 
     outputs:
       result: ${{ steps.backstop.outputs.result }}
@@ -420,27 +424,27 @@ jobs:
             if (result === 'baseline') {
               body = `## 📸 Visual Regression - Baseline Created
 
-              Reference images have been captured. Future runs will compare against these.
+            Reference images have been captured. Future runs will compare against these.
 
-              **URL:** ${url}`;
+            **URL:** ${url}`;
             } else if (result === 'pass') {
               body = `## ✅ Visual Regression - Passed
 
-              All ${total} visual tests passed.
+            All ${total} visual tests passed.
 
-              **URL:** ${url}`;
+            **URL:** ${url}`;
             } else {
               body = `## ⚠️ Visual Regression - Differences Detected
 
-              | Metric | Value     |
-              |--------|-----------|
-              | Total  | ${total}  |
-              | Passed | ${passed} |
-              | Failed | ${failed} |
+            | Metric | Value     |
+            |--------|-----------|
+            | Total  | ${total}  |
+            | Passed | ${passed} |
+            | Failed | ${failed} |
 
-              Download the \`backstop-report\` artifact to review visual differences.
+            Download the \`backstop-report\` artifact to review visual differences.
 
-              **URL:** ${url}`;
+            **URL:** ${url}`;
             }
 
             // Get PR number from the workflow run
@@ -490,53 +494,6 @@ jobs:
                 body: body
               });
             }
-
-  update-references:
-    name: Update References
-    needs: [prepare, test]
-    if: needs.prepare.outputs.is-main == 'true' && needs.test.outputs.result != 'baseline'
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout main
-        uses: actions/checkout@v4
-
-      - name: Download screenshots
-        uses: actions/download-artifact@v4
-        with:
-          name: backstop-screenshots
-          path: backstop_data/
-
-      - name: Update reference branch
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Create orphan branch if it doesn't exist
-          git fetch origin backstop-references || true
-
-          if git show-ref --verify --quiet refs/remotes/origin/backstop-references; then
-            git checkout backstop-references
-            rm -rf bitmaps_reference
-          else
-            git checkout --orphan backstop-references
-            git rm -rf . || true
-          fi
-
-          # Copy test images as new references
-          if [ -d "backstop_data/bitmaps_test" ]; then
-            mkdir -p bitmaps_reference
-            # Get the latest test run folder
-            LATEST=$(ls -t backstop_data/bitmaps_test/ | head -1)
-            if [ -n "$LATEST" ]; then
-              cp -r "backstop_data/bitmaps_test/$LATEST"/* bitmaps_reference/
-              git add bitmaps_reference/
-              git commit -m "chore: update visual regression references [skip ci]" || echo "No changes to commit"
-              git push origin backstop-references --force
-            fi
-          fi
 ```
 
 **Step 2: Verify workflow YAML is valid**
@@ -553,40 +510,7 @@ git commit -m "feat(ci): add visual regression workflow with BackstopJS"
 
 ---
 
-## Task 4: Create initial reference images branch
-
-**Files:**
-
-- None (git operations only)
-
-**Step 1: Create empty backstop-references branch**
-
-```bash
-git checkout --orphan backstop-references
-git rm -rf .
-echo "# BackstopJS Reference Images" > README.md
-echo "" >> README.md
-echo "This branch stores reference screenshots for visual regression testing." >> README.md
-echo "Updated automatically when main branch builds pass." >> README.md
-git add README.md
-git commit -m "chore: initialize backstop-references branch"
-```
-
-**Step 2: Push the branch**
-
-```bash
-git push origin backstop-references
-```
-
-**Step 3: Return to main branch**
-
-```bash
-git checkout main
-```
-
----
-
-## Task 5: Update .gitignore for BackstopJS artifacts
+## Task 4: Update .gitignore for BackstopJS artifacts
 
 **Files:**
 
@@ -601,13 +525,16 @@ backstop_data/bitmaps_test/
 backstop_data/html_report/
 ```
 
-**Step 2: Add ci_report if missing**
+**Step 2: Add ci_report and bitmaps_reference if missing**
 
-Add this line if not present:
+Add these lines if not present:
 
 ```text
 backstop_data/ci_report/
+backstop_data/bitmaps_reference/
 ```
+
+Note: `bitmaps_reference/` is now gitignored since references are stored as artifacts, not in git.
 
 **Step 3: Commit if changes made**
 
@@ -618,7 +545,7 @@ git commit -m "chore: update gitignore for backstop ci artifacts"
 
 ---
 
-## Task 6: Update package.json scripts
+## Task 5: Verify package.json scripts
 
 **Files:**
 
@@ -641,7 +568,7 @@ The existing scripts are sufficient:
 
 ---
 
-## Task 7: Test workflow locally
+## Task 6: Test workflow locally
 
 **Files:**
 
@@ -657,7 +584,7 @@ npm run serve
 
 ```bash
 # Update backstop.json URLs to localhost temporarily
-sed -i 's|__DEPLOY_URL__|http://localhost:1313|g' backstop.json
+sed -i '' 's|__DEPLOY_URL__|http://localhost:1313|g' backstop.json
 
 # Capture reference images
 npm run backstop:reference
@@ -686,7 +613,7 @@ ls -la backstop_data/bitmaps_test/
 
 ---
 
-## Task 8: Update documentation
+## Task 7: Update documentation
 
 **Files:**
 
@@ -716,18 +643,22 @@ Under Performance section, add:
 **Goal:** Add async visual regression testing to CI pipeline.
 
 **Implementation:**
+
 - Workflow triggers after CI completes (like Lighthouse)
 - Tests core pages: Homepage, About, Contact, Blog, Events
-- Reference images stored in `backstop-references` branch
+- Reference images stored as GitHub artifacts (30-day retention)
 - Reports to PR comments with pass/fail status
 - Updates references automatically on main branch merges
 
 **Files Created:**
+
 - `.github/workflows/visual-regression.yml`
 - `backstop_data/engine_scripts/puppet/onReady.js`
 
 **Files Modified:**
+
 - `backstop.json` - CI-compatible config with URL placeholder
+- `.gitignore` - Exclude backstop artifacts
 ```
 
 **Step 4: Commit**
@@ -746,12 +677,17 @@ After completing all tasks:
 1. **backstop.json** - Updated with CI-compatible config, URL placeholder, hide selectors
 2. **onReady.js** - Disables animations, waits for fonts and images
 3. **visual-regression.yml** - Async workflow triggered after CI
-4. **backstop-references branch** - Stores golden reference images
-5. **.gitignore** - Excludes test/report artifacts
-6. **Documentation** - Updated with new capability
+4. **.gitignore** - Excludes all backstop artifacts (including references)
+5. **Documentation** - Updated with new capability
 
 **Workflow behavior:**
 
-- PRs: Compare against reference images, report differences
-- Main: Capture new references after successful deploy
-- Manual: Can trigger with custom URL via workflow_dispatch
+- **PRs:** Download references from last main run → compare → report differences
+- **Main:** Capture screenshots → upload as `backstop-references` artifact (30-day retention)
+- **Manual:** Can trigger with custom URL via workflow_dispatch
+
+**Key simplification vs git branch approach:**
+
+- No `backstop-references` git branch needed
+- References stored as GitHub artifacts with auto-cleanup
+- Uses `dawidd6/action-download-artifact@v3` to fetch from previous runs

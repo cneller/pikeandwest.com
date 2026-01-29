@@ -1,0 +1,285 @@
+name: Visual Regression
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'URL to test (e.g., https://pikeandwest.com)'
+        required: true
+        type: string
+
+concurrency:
+  group:
+    visual-regression-${{ github.event.workflow_run.head_branch || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prepare:
+    name: Prepare
+    if:
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    outputs:
+      url: ${{ steps.get-url.outputs.url }}
+      is-main: ${{ steps.get-url.outputs.is-main }}
+    steps:
+      - name: Get deployment URL
+        id: get-url
+        uses: actions/github-script@v7
+        with:
+          script: |
+            if (context.eventName === 'workflow_dispatch') {
+              const url = '${{ inputs.url }}';
+              core.setOutput('url', url);
+              core.setOutput('is-main', url.includes('pikeandwest.com') && !url.includes('pages.dev') ? 'true' : 'false');
+              return;
+            }
+
+            const branch = context.payload.workflow_run.head_branch;
+            const isMain = branch === 'main';
+            const url = isMain
+              ? 'https://pikeandwest.com'
+              : `https://${branch.replace(/[^a-z0-9-]/gi, '-').substring(0, 28)}.pikeandwest.pages.dev`;
+
+            core.setOutput('url', url);
+            core.setOutput('is-main', isMain ? 'true' : 'false');
+
+  test:
+    name: BackstopJS Test
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download reference images from previous main run
+        id: download-refs
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          workflow: visual-regression.yml
+          branch: main
+          name: backstop-references
+          path: backstop_data/bitmaps_reference
+          search_artifacts: true
+          if_no_artifact_found: warn
+        continue-on-error: true
+
+      - name: Check for references
+        id: check-refs
+        run: |
+          if [ -d "backstop_data/bitmaps_reference" ] && [ "$(ls -A backstop_data/bitmaps_reference 2>/dev/null)" ]; then
+            echo "Reference images found"
+            ls -la backstop_data/bitmaps_reference/ | head -10
+            echo "has-refs=true" >> $GITHUB_OUTPUT
+          else
+            echo "No reference images found - will create baseline"
+            echo "has-refs=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Update config with deploy URL
+        run: |
+          URL="${{ needs.prepare.outputs.url }}"
+          sed -i "s|__DEPLOY_URL__|${URL}|g" backstop.json
+          echo "Testing against: ${URL}"
+          cat backstop.json | jq '.scenarios[].url'
+
+      - name: Run BackstopJS test
+        id: backstop
+        run: |
+          if [ "${{ steps.check-refs.outputs.has-refs }}" != "true" ]; then
+            echo "Creating baseline reference images..."
+            npx backstop reference
+            echo "result=baseline" >> $GITHUB_OUTPUT
+          else
+            set +e
+            npx backstop test --config=backstop.json
+            EXIT_CODE=$?
+            set -e
+            if [ $EXIT_CODE -eq 0 ]; then
+              echo "result=pass" >> $GITHUB_OUTPUT
+            else
+              echo "result=fail" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Parse results
+        id: results
+        if: steps.backstop.outputs.result != 'baseline'
+        run: |
+          if [ -f "backstop_data/ci_report/xunit.xml" ]; then
+            TOTAL=$(grep -oP 'tests="\K\d+' backstop_data/ci_report/xunit.xml || echo "0")
+            FAILURES=$(grep -oP 'failures="\K\d+' backstop_data/ci_report/xunit.xml || echo "0")
+            PASSED=$((TOTAL - FAILURES))
+            echo "total=${TOTAL}" >> $GITHUB_OUTPUT
+            echo "passed=${PASSED}" >> $GITHUB_OUTPUT
+            echo "failed=${FAILURES}" >> $GITHUB_OUTPUT
+          else
+            echo "total=0" >> $GITHUB_OUTPUT
+            echo "passed=0" >> $GITHUB_OUTPUT
+            echo "failed=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate summary
+        run: |
+          echo "## Visual Regression Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.backstop.outputs.result }}" = "baseline" ]; then
+            echo "📸 **Baseline Created** - Reference images captured for future comparisons." >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ steps.backstop.outputs.result }}" = "pass" ]; then
+            echo "✅ **All visual tests passed**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+            echo "| Total | ${{ steps.results.outputs.total }} |" >> $GITHUB_STEP_SUMMARY
+            echo "| Passed | ${{ steps.results.outputs.passed }} |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ **Visual differences detected**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+            echo "| Total | ${{ steps.results.outputs.total }} |" >> $GITHUB_STEP_SUMMARY
+            echo "| Passed | ${{ steps.results.outputs.passed }} |" >> $GITHUB_STEP_SUMMARY
+            echo "| Failed | ${{ steps.results.outputs.failed }} |" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Download the report artifact to review visual differences." >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**URL tested:** ${{ needs.prepare.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backstop-report
+          path: backstop_data/html_report/
+          retention-days: 7
+
+      - name: Upload reference images (for main branch)
+        if: needs.prepare.outputs.is-main == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: backstop-references
+          path: backstop_data/bitmaps_reference/
+          retention-days: 30
+          overwrite: true
+
+    outputs:
+      result: ${{ steps.backstop.outputs.result }}
+      total: ${{ steps.results.outputs.total }}
+      passed: ${{ steps.results.outputs.passed }}
+      failed: ${{ steps.results.outputs.failed }}
+
+  comment:
+    name: Comment on PR
+    needs: [prepare, test]
+    if:
+      always() && needs.prepare.result == 'success' &&
+      github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const result = '${{ needs.test.outputs.result }}';
+            const total = '${{ needs.test.outputs.total }}';
+            const passed = '${{ needs.test.outputs.passed }}';
+            const failed = '${{ needs.test.outputs.failed }}';
+            const url = '${{ needs.prepare.outputs.url }}';
+
+            let body;
+            if (result === 'baseline') {
+              body = `## 📸 Visual Regression - Baseline Created
+
+            Reference images have been captured. Future runs will compare against these.
+
+            **URL:** ${url}`;
+            } else if (result === 'pass') {
+              body = `## ✅ Visual Regression - Passed
+
+            All ${total} visual tests passed.
+
+            **URL:** ${url}`;
+            } else {
+              body = `## ⚠️ Visual Regression - Differences Detected
+
+            | Metric | Value |
+            |--------|-------|
+            | Total | ${total} |
+            | Passed | ${passed} |
+            | Failed | ${failed} |
+
+            Download the \`backstop-report\` artifact to review visual differences.
+
+            **URL:** ${url}`;
+            }
+
+            // Get PR number from the workflow run
+            const runId = context.payload.workflow_run.id;
+            const run = await github.rest.actions.getWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            });
+
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: `${context.repo.owner}:${run.data.head_branch}`,
+              state: 'open',
+            });
+
+            if (prs.data.length === 0) {
+              console.log('No open PR found');
+              return;
+            }
+
+            const prNumber = prs.data[0].number;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' && comment.body.includes('Visual Regression')
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                comment_id: botComment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: prNumber,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            }

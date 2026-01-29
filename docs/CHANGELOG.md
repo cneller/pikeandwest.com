@@ -66,6 +66,7 @@ This document tracks completed work and changes to the project.
 
 | Date       | Change                                                                                                                                  |
 |------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| 2026-01-29 | Added BackstopJS visual regression to CI pipeline (async workflow, artifact-based reference storage, 5 pages × 3 viewports)             |
 | 2026-01-27 | Deployed Sveltia CMS auth: GitHub OAuth App, Cloudflare Worker at `auth.pikeandwest.com`, tested OAuth login flow end-to-end            |
 | 2026-01-27 | Cleaned GitHub Actions artifact storage (4.2 GB of accumulated Lighthouse/build artifacts)                                              |
 | 2026-01-27 | Installed Sveltia CMS: admin UI, config with all collections/singletons, blog page bundles, site settings extraction                    |

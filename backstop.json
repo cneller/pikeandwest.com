@@ -41,14 +41,6 @@
       "requireSameDimensions": false
     },
     {
-      "label": "Workshops",
-      "url": "__DEPLOY_URL__/workshops/",
-      "delay": 2000,
-      "selectors": ["document"],
-      "misMatchThreshold": 1,
-      "requireSameDimensions": false
-    },
-    {
       "label": "Events",
       "url": "__DEPLOY_URL__/events/",
       "delay": 2000,
