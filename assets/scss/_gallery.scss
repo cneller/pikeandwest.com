@@ -82,11 +82,16 @@
     border-radius: 8px;
   }
 
+  &__slide a {
+    display: block;
+    text-decoration: none;
+  }
+
   &__image {
     width: 100%;
     aspect-ratio: 4/3;
     object-fit: cover;
-    cursor: pointer;
+    cursor: zoom-in;
     border-radius: 8px;
     // GPU-accelerated transform for smooth animations
     will-change: transform;
@@ -111,7 +116,9 @@
 
   &__arrows {
     position: absolute;
-    top: calc(50% - 32px); // Center on image area (accounting for padding-bottom)
+    top: calc(
+      50% - 32px
+    ); // Center on image area (accounting for padding-bottom)
     transform: translateY(-50%);
     width: 100%;
     display: flex;
@@ -198,55 +205,60 @@
   }
 }
 
-// Lightbox
-.lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: $z-index-lightbox;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba($color-black, 0.9);
+// PhotoSwipe brand overrides
+.pswp {
+  --pswp-bg: rgba(0, 0, 0, 0.92);
+  --pswp-icon-color: #{$color-white};
+  --pswp-icon-color-secondary: rgba(255, 255, 255, 0.6);
+}
 
-  &--open {
-    display: flex;
+// Blog post gallery grid
+.gallery {
+  display: grid;
+  gap: $spacing-md;
+  margin: $spacing-xl 0;
+
+  &--cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  &--cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  &--cols-4 {
+    grid-template-columns: repeat(4, 1fr);
   }
 
-  &__close {
-    position: absolute;
-    top: $spacing-lg;
-    right: $spacing-lg;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    color: $color-white;
-    cursor: pointer;
-    font-size: $font-size-2xl;
-    transition: transform $transition-fast;
+  @media (max-width: $breakpoint-md) {
+    &--cols-3,
+    &--cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &--cols-2,
+    &--cols-3,
+    &--cols-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  a {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.03);
     }
-
-    &:focus-visible {
-      outline: 2px solid $color-gold;
-      outline-offset: 2px;
-    }
-  }
-
-  &__picture {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__image {
-    max-width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
   }
 }

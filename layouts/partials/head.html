@@ -219,6 +219,9 @@
   />
 </noscript>
 
+{{- /* PhotoSwipe lightbox */ -}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.css">
+
 {{/* 5. Critical CSS - Inlined for faster FCP */}}
 {{- $criticalScss := resources.Get "scss/critical.scss" -}}
 {{- if $criticalScss -}}

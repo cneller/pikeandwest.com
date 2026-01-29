@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   initMobileNav();
   initGalleryScrollButtons();
-  initLightbox();
+  initPhotoSwipe();
   initScrollAnimations();
   initLazyIframes();
   initContactShimmer();
@@ -116,66 +116,41 @@ function initGalleryScrollButtons() {
   }
 }
 
-// Lightbox with WebP support
-function initLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImage = document.getElementById('lightbox-image');
-  const lightboxSourceWebp = document.getElementById('lightbox-source-webp');
-  const closeBtn = lightbox?.querySelector('.lightbox__close');
-  const galleryTrack = document.getElementById('gallery-track');
+// PhotoSwipe Gallery (replaces custom lightbox)
+async function initPhotoSwipe() {
+  const galleries = document.querySelectorAll('[data-pswp-gallery]');
+  if (galleries.length === 0) return;
 
-  if (!lightbox || !lightboxImage) return;
+  try {
+    // Dynamic import - only loads when galleries exist on page
+    const { default: PhotoSwipeLightbox } = await import(
+      'https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe-lightbox.esm.min.js'
+    );
 
-  // Use event delegation for better INP - single listener instead of many
-  if (galleryTrack) {
-    galleryTrack.addEventListener('click', (e) => {
-      const img = e.target.closest('.venue-gallery__image');
-      if (!img) return;
-
-      const fullSrc = img.dataset.full || img.src;
-      const fullSrcWebp = img.dataset.fullWebp || '';
-
-      // Set WebP source if available
-      if (lightboxSourceWebp && fullSrcWebp) {
-        lightboxSourceWebp.srcset = fullSrcWebp;
-      }
-
-      lightboxImage.src = fullSrc;
-      lightboxImage.alt = img.alt;
-      lightbox.classList.add('lightbox--open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-
-      // Focus management for accessibility
-      closeBtn?.focus();
+    galleries.forEach((gallery) => {
+      const lightbox = new PhotoSwipeLightbox({
+        gallery: gallery,
+        children: 'a[data-pswp-width]',
+        pswpModule: () =>
+          import(
+            'https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.esm.min.js'
+          ),
+        // Luxury feel - slower, smoother animations
+        showAnimationDuration: 300,
+        hideAnimationDuration: 200,
+        // Accessibility
+        trapFocus: true,
+        returnFocus: true,
+        // Touch UX
+        pinchToClose: true,
+        closeOnVerticalDrag: true,
+      });
+      lightbox.init();
     });
+  } catch (error) {
+    // Graceful degradation - galleries remain as simple links to full images
+    console.warn('PhotoSwipe failed to load:', error);
   }
-
-  // Close lightbox
-  function closeLightbox() {
-    lightbox.classList.remove('lightbox--open');
-    lightbox.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    lightboxImage.src =
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-    if (lightboxSourceWebp) {
-      lightboxSourceWebp.srcset = '';
-    }
-  }
-
-  closeBtn?.addEventListener('click', closeLightbox);
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
-      closeLightbox();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.classList.contains('lightbox--open')) {
-      closeLightbox();
-    }
-  });
 }
 
 // Scroll Animations (Fade-in on scroll)

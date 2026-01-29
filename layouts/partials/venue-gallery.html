@@ -8,6 +8,7 @@
       role="region"
       aria-label="Venue photo gallery"
       aria-roledescription="carousel"
+      data-pswp-gallery="venue"
     >
       {{- /* CSS Scroll-Snap Gallery Track */ -}}
       <ul class="venue-gallery__track" id="gallery-track" role="list">
@@ -20,20 +21,24 @@
           {{- $fullWebp := $image.Resize "1600x webp q90" -}}
           {{- $fullJpg := $image.Resize "1600x jpg q90" -}}
         <li class="venue-gallery__slide" data-index="{{ $index }}">
-          <picture>
-            <source type="image/webp" srcset="{{ $thumbWebp.RelPermalink }}">
-            <img
-              src="{{ $thumbJpg.RelPermalink }}"
-              alt="{{ $item.alt }}"
-              class="venue-gallery__image"
-              width="{{ $thumbJpg.Width }}"
-              height="{{ $thumbJpg.Height }}"
-              loading="lazy"
-              decoding="async"
-              data-full="{{ $fullJpg.RelPermalink }}"
-              data-full-webp="{{ $fullWebp.RelPermalink }}"
-            >
-          </picture>
+          <a href="{{ $fullJpg.RelPermalink }}"
+             data-pswp-width="{{ $fullJpg.Width }}"
+             data-pswp-height="{{ $fullJpg.Height }}"
+             data-pswp-srcset="{{ $fullWebp.RelPermalink }} {{ $fullWebp.Width }}w"
+             data-cropped="true">
+            <picture>
+              <source type="image/webp" srcset="{{ $thumbWebp.RelPermalink }}">
+              <img
+                src="{{ $thumbJpg.RelPermalink }}"
+                alt="{{ $item.alt }}"
+                class="venue-gallery__image"
+                width="{{ $thumbJpg.Width }}"
+                height="{{ $thumbJpg.Height }}"
+                loading="lazy"
+                decoding="async"
+              >
+            </picture>
+          </a>
         </li>
           {{- end -}}
         {{- end -}}
@@ -77,17 +82,3 @@
     </div>
   </div>
 </section>
-
-{{- /* Lightbox */ -}}
-<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image lightbox">
-  <button class="lightbox__close" aria-label="Close lightbox" type="button">&times;</button>
-  <picture class="lightbox__picture">
-    <source id="lightbox-source-webp" type="image/webp" srcset="">
-    <img
-      src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-      alt="Enlarged venue photo"
-      class="lightbox__image"
-      id="lightbox-image"
-    >
-  </picture>
-</div>
