@@ -15,7 +15,7 @@ blocks:
       text: SCHEDULE A TOUR
       link: /contact/
     image:
-      src: /images/about/team-eden-lyndal.jpg
+      src: /images/photos/team-eden-lyndal.jpg
       alt: Lyndal Brumley and Eden Neller, Pike & West team members
     reverse: false
   - id: what-we-do
@@ -37,6 +37,6 @@ blocks:
       text: CONTACT US
       link: /contact/
     image:
-      src: /images/about/event-party-bw.jpg
+      src: /images/photos/event-party-bw.jpg
       alt: Guests enjoying an elegant event at Pike & West gallery venue
     reverse: true

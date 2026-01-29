@@ -366,7 +366,7 @@ pages:
       hero_image: true
       all_have_alt: true
       images_list:
-        - images/venue/venue-01-interior.jpeg
+        - images/photos/venue-01-interior.jpeg
     links_out:
       - /contact/
       - /events/baby-showers/
@@ -449,7 +449,7 @@ pages:
       hero_image: true
       all_have_alt: true
       images_list:
-        - images/venue/venue-05-dancefloor.jpg
+        - images/photos/venue-05-dancefloor.jpg
     links_out:
       - /events/private-parties/
       - /contact/
@@ -530,7 +530,7 @@ pages:
       hero_image: true
       all_have_alt: true
       images_list:
-        - images/venue/venue-02-foyer.png
+        - images/photos/venue-02-foyer.png
     links_out:
       - /events/birthday-parties/
       - /contact/
@@ -614,7 +614,7 @@ pages:
       hero_image: true
       all_have_alt: true
       images_list:
-        - images/venue/venue-06-soft-seating.jpg
+        - images/photos/venue-06-soft-seating.jpg
     links_out:
       - /contact
     links_in: []
@@ -697,7 +697,7 @@ pages:
       hero_image: true
       all_have_alt: true
       images_list:
-        - images/venue/venue-08-disco-background.jpg
+        - images/photos/venue-08-disco-background.jpg
     links_out:
       - /events/birthday-parties/
       - /contact/
@@ -781,7 +781,7 @@ pages:
       hero_image: true
       all_have_alt: true
       images_list:
-        - images/venue/venue-01-interior.jpeg
+        - images/photos/venue-01-interior.jpeg
     links_out:
       - /events/weddings
       - /events/corporate-events
@@ -1004,7 +1004,7 @@ pages:
       hero_image: true
       all_have_alt: true
       images_list:
-        - images/venue/venue-05-dancefloor.jpg
+        - images/photos/venue-05-dancefloor.jpg
     links_out:
       - /events/private-parties/
       - /blog/milestone-birthday-new-year/
@@ -1082,7 +1082,7 @@ pages:
       hero_image: true
       all_have_alt: true
       images_list:
-        - images/venue/venue-06-soft-seating.jpg
+        - images/photos/venue-06-soft-seating.jpg
     links_out:
       - /blog/fall-baby-shower-inspiration/
       - /contact/
@@ -1232,7 +1232,7 @@ pages:
       hero_image: true
       all_have_alt: true
       images_list:
-        - images/venue/venue-08-disco-background.jpg
+        - images/photos/venue-08-disco-background.jpg
     links_out:
       - /blog/valentines-day-love-in-all-forms
       - /contact/

@@ -14,10 +14,10 @@ cta:
   link: "/contact/"
 
 # Background image (taller, 1920x1080) - used as CSS background-image
-background_image: "/images/hero/venue-exterior-tall.jpg"
+background_image: "/images/homepage-hero/venue-exterior-tall.jpg"
 
 # Foreground image (wider, 1920x800) - used as <img> element on mobile breakpoints
-foreground_image: "/images/hero/venue-exterior.jpg"
+foreground_image: "/images/homepage-hero/venue-exterior.jpg"
 
 # Alt text for accessibility
 image_alt:
