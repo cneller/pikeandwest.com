@@ -673,6 +673,20 @@ social:
 | Largest Contentful Paint | < 2.5s  |
 | Total Page Size          | < 500KB |
 
+### Playwright Screenshots
+
+When taking screenshots with Playwright, **always use full page screenshots by default** unless there's a specific reason to capture only the viewport.
+
+```javascript
+// Preferred - captures entire page
+await page.screenshot({ path: 'page.png', fullPage: true });
+
+// Only use viewport when specifically needed (e.g., above-the-fold testing)
+await page.screenshot({ path: 'viewport.png' });
+```
+
+This ensures visual regression tests and documentation capture the complete page state.
+
 ### Lighthouse CI & Troubleshooting
 
 Lighthouse runs automatically on PRs via GitHub Actions. Each page is tested separately.
