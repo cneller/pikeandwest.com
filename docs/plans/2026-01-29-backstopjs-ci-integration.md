@@ -559,10 +559,10 @@ Verify current backstop scripts exist.
 
 The existing scripts are sufficient:
 
-- `backstop:reference` - Capture reference images
-- `backstop:test` - Run comparison test
-- `backstop:approve` - Approve changes
-- `backstop:report` - Open HTML report
+- `backstop:capture-baseline` - Capture reference images
+- `backstop:run-comparison` - Run comparison test
+- `backstop:approve-changes` - Approve changes
+- `backstop:view-report` - Open HTML report
 
 **Step 3: Skip commit (no changes)**
 
@@ -587,13 +587,13 @@ npm run serve
 sed -i '' 's|__DEPLOY_URL__|http://localhost:1313|g' backstop.json
 
 # Capture reference images
-npm run backstop:reference
+npm run backstop:capture-baseline
 ```
 
 **Step 3: Run test to verify setup**
 
 ```bash
-npm run backstop:test
+npm run backstop:run-comparison
 ```
 
 Expected: All tests pass (comparing against self)

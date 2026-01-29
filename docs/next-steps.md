@@ -103,7 +103,7 @@ Execute in this order when ready to go live:
 hugo --gc --minify
 
 # Run visual regression
-npm run backstop:test
+npm run backstop:run-comparison
 
 # Check for broken links
 hugo --templateMetrics
