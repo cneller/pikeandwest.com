@@ -358,7 +358,7 @@ collections:
             widget: image
             required: false
             media_folder: /static/images/about
-            public_folder: images/about
+            public_folder: /images/about
             hint: 'Image shown when shared on social media.'
           - label: Body
             name: body
@@ -385,7 +385,7 @@ collections:
             widget: image
             required: false
             media_folder: /static/images/hero
-            public_folder: images/hero
+            public_folder: /images/hero
             hint: 'Image shown when shared on social media.'
           - label: Body
             name: body
@@ -412,7 +412,7 @@ collections:
             widget: image
             required: false
             media_folder: /static/images/venue
-            public_folder: images/venue
+            public_folder: /images/venue
             hint: 'Image shown when shared on social media.'
           - label: Body
             name: body
@@ -421,6 +421,7 @@ collections:
       - name: privacy
         label: Privacy Policy
         file: content/privacy.md
+        icon: policy
         fields:
           - label: Title
             name: title
@@ -436,6 +437,7 @@ collections:
       - name: accessibility
         label: Accessibility Statement
         file: content/accessibility.md
+        icon: accessible
         fields:
           - label: Title
             name: title
@@ -451,6 +453,7 @@ collections:
       - name: gallery-application
         label: Gallery Application
         file: content/gallery-application.md
+        icon: palette
         fields:
           - label: Title
             name: title

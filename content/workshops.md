@@ -12,7 +12,7 @@ keywords:
   - pottery classes near me Memphis
   - adult art classes Germantown
   - mixed media workshops Tennessee
-og_image: "images/venue/venue-01-interior.jpeg"
+og_image: "/images/venue/venue-01-interior.jpeg"
 canonical: "/workshops/"
 schema_type: "Event"
 ---
