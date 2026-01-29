@@ -30,8 +30,21 @@
 
 {{- $items := slice (dict "name" "Home" "url" "/") -}}
 
-{{- /* Add section (e.g., Blog) */ -}}
-{{- if $page.Section -}}
+{{- /* Handle taxonomy pages (e.g., /blog/categories/) */ -}}
+{{- if eq $page.Kind "taxonomy" -}}
+  {{- /* Taxonomy list page: Home > Blog > Categories */ -}}
+  {{- $items = $items | append (dict "name" "Blog" "url" "/blog/") -}}
+  {{- $items = $items | append (dict "name" $page.Title "url" "") -}}
+{{- else if eq $page.Kind "term" -}}
+  {{- /* Term page: Home > Blog > Categories > [Term Name] */ -}}
+  {{- $taxPage := site.GetPage (printf "/%s" $page.Data.Plural) -}}
+  {{- $items = $items | append (dict "name" "Blog" "url" "/blog/") -}}
+  {{- if $taxPage -}}
+    {{- $items = $items | append (dict "name" $taxPage.Title "url" $taxPage.RelPermalink) -}}
+  {{- end -}}
+  {{- $items = $items | append (dict "name" $page.Title "url" "") -}}
+{{- else if $page.Section -}}
+  {{- /* Add section (e.g., Blog) */ -}}
   {{- $sectionTitle := $page.Section | humanize | title -}}
   {{- if eq $page.Kind "section" -}}
     {{- /* On section list page: section is current (non-linked) */ -}}
