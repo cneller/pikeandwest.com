@@ -4,7 +4,7 @@ description: "Host your {{ .Name | replace "-" " " }} at Pike & West, Germantown
 type: "events"
 eventType: "{{ .Name }}"
 icon: "icon-placeholder.png"
-image: "images/venue/venue-01-interior.jpeg"
+image: "images/photos/venue-01-interior.jpeg"
 image_alt: "Pike & West venue interior"
 ---
 

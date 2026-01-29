@@ -8,7 +8,7 @@ categories: []
   # Options: News, Weddings, Corporate Events, Planning Tips, Behind the Scenes
 tags: []
 image: ""
-  # Image path from assets/images/, e.g.: images/venue/venue-01-interior.jpeg
+  # Image path from assets/images/, e.g.: images/photos/venue-01-interior.jpeg
 image_alt: "Describe the image for accessibility"
 keywords:
   # SEO keywords for this post (3-5 recommended)
@@ -107,6 +107,7 @@ Transition to your next main topic. Each section should flow naturally
 from the previous one while introducing new value for the reader.
 
 {{< fact-box title="At a Glance" position="right" >}}
+
 - **Key Stat:** Value
 - **Another Stat:** Value
 - **Detail:** Information
@@ -115,6 +116,7 @@ from the previous one while introducing new value for the reader.
 For step-by-step content, use numbered lists:
 
 {{< numbered-list title="How to Get Started" >}}
+
 1. Choose your date and guest count
 2. Schedule a venue tour with our team
 3. Review catering and decor options
@@ -124,6 +126,7 @@ For step-by-step content, use numbered lists:
 For planning content, use timelines:
 
 {{< timeline title="Planning Timeline" >}}
+
 - **12-18 months out:** Book venue and caterer
 - **9-12 months out:** Send save-the-dates
 - **6-9 months out:** Finalize guest list and vendors
@@ -136,6 +139,7 @@ For planning content, use timelines:
 End with a call-to-action that connects your content to Pike & West's services.
 
 {{< key-takeaways >}}
+
 - Key point one from this article
 - Key point two from this article
 - Key point three from this article
