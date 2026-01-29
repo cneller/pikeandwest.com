@@ -2,10 +2,10 @@
 <html lang="{{ .Site.LanguageCode | default "en-us" }}">
 <head>
   {{- partial "head.html" . -}}
-  {{- partial "gtm-head.html" . -}}
+  {{- partialCached "gtm-head.html" . -}}
 </head>
 <body{{ if .IsHome }} class="home"{{ end }}>
-  {{- partial "gtm-body.html" . -}}
+  {{- partialCached "gtm-body.html" . -}}
   {{- /* Header cached - doesn't change per page */ -}}
   {{- partialCached "header.html" . -}}
 
