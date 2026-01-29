@@ -1,20 +1,15 @@
 {
-  "id": "pike-west-migration",
+  "id": "pike-west",
   "viewports": [
     {
-      "label": "mobile-portrait",
-      "width": 480,
-      "height": 844
-    },
-    {
-      "label": "mobile-landscape",
-      "width": 768,
-      "height": 480
+      "label": "mobile",
+      "width": 375,
+      "height": 812
     },
     {
       "label": "tablet",
-      "width": 992,
-      "height": 768
+      "width": 768,
+      "height": 1024
     },
     {
       "label": "desktop",
@@ -24,68 +19,46 @@
   ],
   "scenarios": [
     {
-      "label": "Section - Hero",
+      "label": "Homepage",
       "url": "http://localhost:1313/",
-      "referenceUrl": "https://pikeandwest.com/",
       "delay": 2000,
-      "selectors": [".hero"],
-      "misMatchThreshold": 1,
-      "requireSameDimensions": false
+      "selectors": ["document"],
+      "misMatchThreshold": 0.5
     },
     {
-      "label": "Section - Our Venue Gallery",
-      "url": "http://localhost:1313/",
-      "referenceUrl": "https://pikeandwest.com/",
+      "label": "About",
+      "url": "http://localhost:1313/about/",
       "delay": 2000,
-      "selectors": [".venue-gallery"],
-      "misMatchThreshold": 1,
-      "requireSameDimensions": false
+      "selectors": ["document"],
+      "misMatchThreshold": 0.5
     },
     {
-      "label": "Section - Event Types",
-      "url": "http://localhost:1313/",
-      "referenceUrl": "https://pikeandwest.com/",
-      "delay": 2000,
-      "selectors": [".event-types"],
-      "misMatchThreshold": 1,
-      "requireSameDimensions": false
-    },
-    {
-      "label": "Section - About",
-      "url": "http://localhost:1313/",
-      "referenceUrl": "https://pikeandwest.com/",
-      "delay": 2000,
-      "selectors": [".about"],
-      "misMatchThreshold": 1,
-      "requireSameDimensions": false
-    },
-    {
-      "label": "Section - CTA Banner",
-      "url": "http://localhost:1313/",
-      "referenceUrl": "https://pikeandwest.com/",
-      "delay": 2000,
-      "selectors": [".cta-banner"],
-      "misMatchThreshold": 1,
-      "requireSameDimensions": false
-    },
-    {
-      "label": "Section - Footer",
-      "url": "http://localhost:1313/",
-      "referenceUrl": "https://pikeandwest.com/",
-      "delay": 2000,
-      "selectors": ["footer"],
-      "misMatchThreshold": 1,
-      "requireSameDimensions": false
-    },
-    {
-      "label": "Homepage - Full Page",
-      "url": "http://localhost:1313/",
-      "referenceUrl": "https://pikeandwest.com/",
+      "label": "Contact",
+      "url": "http://localhost:1313/contact/",
       "delay": 3000,
       "selectors": ["document"],
-      "fullPage": true,
-      "misMatchThreshold": 1,
-      "requireSameDimensions": false
+      "misMatchThreshold": 0.5
+    },
+    {
+      "label": "Blog List",
+      "url": "http://localhost:1313/blog/",
+      "delay": 2000,
+      "selectors": ["document"],
+      "misMatchThreshold": 0.5
+    },
+    {
+      "label": "Workshops",
+      "url": "http://localhost:1313/workshops/",
+      "delay": 2000,
+      "selectors": ["document"],
+      "misMatchThreshold": 0.5
+    },
+    {
+      "label": "Events List",
+      "url": "http://localhost:1313/events/",
+      "delay": 2000,
+      "selectors": ["document"],
+      "misMatchThreshold": 0.5
     }
   ],
   "paths": {
@@ -95,13 +68,13 @@
     "html_report": "backstop_data/html_report",
     "ci_report": "backstop_data/ci_report"
   },
-  "report": ["browser", "CI"],
+  "report": ["browser"],
   "engine": "puppeteer",
   "engineOptions": {
     "args": ["--no-sandbox"]
   },
-  "asyncCaptureLimit": 5,
-  "asyncCompareLimit": 50,
+  "asyncCaptureLimit": 3,
+  "asyncCompareLimit": 30,
   "debug": false,
   "debugWindow": false
 }
