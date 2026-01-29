@@ -512,6 +512,27 @@ hugo version  # Minimum: v0.146.0+extended
 */}}
 ```
 
+### Image Storage and Hugo Assets Pipeline
+
+Images live in `static/images/` (not `assets/images/`) so that Sveltia CMS can
+access them directly. A Hugo module mount in `config/_default/hugo.toml` maps
+them into the assets pipeline:
+
+```toml
+[[module.mounts]]
+  source = "static/images"
+  target = "assets/images"
+```
+
+This means `resources.Get "images/venue/photo.jpg"` works even though the file
+is physically at `static/images/venue/photo.jpg`. All image processing
+(`Resize`, WebP conversion, etc.) requires this pipeline — files accessed only
+via `/images/...` URL paths bypass Hugo's asset processing entirely.
+
+**Front matter image paths** use a leading slash (`/images/venue/photo.jpg`)
+because Sveltia CMS generates paths relative to the site root. Hugo's
+`resources.Get` strips the leading slash when resolving against the mount.
+
 ### Image Processing
 
 ```go-html-template

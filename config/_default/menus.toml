@@ -54,10 +54,6 @@
   url = "/about/"
   weight = 1
 
-[[footer_explore]]
-  name = "Gallery"
-  url = "/"
-  weight = 2
 
 [[footer_explore]]
   name = "Artist"
