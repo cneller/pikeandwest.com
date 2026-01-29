@@ -2,7 +2,7 @@
 
 > Comprehensive reference for Sveltia CMS media configuration, image paths, and asset management for the Pike & West Hugo site.
 
-**Last updated:** 2026-01-28
+**Last updated:** 2026-01-29
 
 ---
 
@@ -32,7 +32,7 @@ This site uses Sveltia CMS for content management with images stored in `static/
 2. **Hugo module mount** in `config/_default/hugo.toml` maps `static/images` to `assets/images`
 3. **All templates use `resources.Get()`** to load images, then `.RelPermalink` for output
 4. **Templates never use raw front matter paths as `src` attributes** - they always pass through Hugo's asset pipeline
-5. `resources.Get()` normalizes paths, so both `images/venue/photo.jpg` and `/images/venue/photo.jpg` resolve correctly
+5. `resources.Get()` normalizes paths, so both `images/photos/photo.jpg` and `/images/photos/photo.jpg` resolve correctly
 
 ---
 
@@ -45,12 +45,12 @@ This site uses Sveltia CMS for content management with images stored in `static/
 | `media_folder`  | Where the file is **stored** in the Git repository | Physical file path in repo    |
 | `public_folder` | What path is **written** into the content file     | Front matter / markdown `src` |
 
-**Example:** With `media_folder: /static/images/venue` and `public_folder: /images/venue`:
+**Example:** With `media_folder: /static/images/photos` and `public_folder: /images/photos`:
 
-- File saved to: `static/images/venue/photo.jpg` (in the repo)
-- Front matter value: `/images/venue/photo.jpg` (in the content file)
+- File saved to: `static/images/photos/photo.jpg` (in the repo)
+- Front matter value: `/images/photos/photo.jpg` (in the content file)
 
-Hugo strips the `static/` prefix at build time, so `static/images/venue/photo.jpg` becomes `/images/venue/photo.jpg` on the published site.
+Hugo strips the `static/` prefix at build time, so `static/images/photos/photo.jpg` becomes `/images/photos/photo.jpg` on the published site.
 
 ### Hugo Module Mount
 
@@ -61,7 +61,7 @@ Hugo strips the `static/` prefix at build time, so `static/images/venue/photo.jp
   target = "assets/images"
 ```
 
-This enables `resources.Get "images/venue/photo.jpg"` to find files at `static/images/venue/photo.jpg`.
+This enables `resources.Get "images/photos/photo.jpg"` to find files at `static/images/photos/photo.jpg`.
 
 ---
 
@@ -80,11 +80,11 @@ Each level overrides the previous. Lower levels inherit from higher levels if no
 
 ### Path Resolution Rules
 
-| Path Format            | Type     | Resolved From         | Example                       |
-|------------------------|----------|-----------------------|-------------------------------|
-| `/static/images/venue` | Absolute | Repository root       | `<repo>/static/images/venue/` |
-| `images`               | Relative | Collection's `folder` | `<collection-folder>/images/` |
-| `''` (empty string)    | Relative | Entry's own directory | `<entry-directory>/`          |
+| Path Format             | Type     | Resolved From         | Example                        |
+|-------------------------|----------|-----------------------|--------------------------------|
+| `/static/images/photos` | Absolute | Repository root       | `<repo>/static/images/photos/` |
+| `images`                | Relative | Collection's `folder` | `<collection-folder>/images/`  |
+| `''` (empty string)     | Relative | Entry's own directory | `<entry-directory>/`           |
 
 ---
 
@@ -100,41 +100,41 @@ public_folder: /images
 
 ### Blog Collection
 
-| Level          | `media_folder`         | `public_folder` | Purpose                      |
-|----------------|------------------------|-----------------|------------------------------|
-| Collection     | `''`                   | `''`            | Page bundle (entry-relative) |
-| Hero Image     | `/static/images/venue` | `images/venue`  | Shared venue photos          |
-| Featured Image | `/static/images/venue` | `images/venue`  | Shared venue photos          |
+| Level          | `media_folder`          | `public_folder` | Purpose                      |
+|----------------|-------------------------|-----------------|------------------------------|
+| Collection     | `''`                    | `''`            | Page bundle (entry-relative) |
+| Hero Image     | `/static/images/photos` | `images/photos` | Shared venue photos          |
+| Featured Image | `/static/images/photos` | `images/photos` | Shared venue photos          |
 
 ### Events Collection
 
-| Level      | `media_folder`         | `public_folder` | Purpose          |
-|------------|------------------------|-----------------|------------------|
-| Collection | _(inherits)_           | _(inherits)_    | Uses global      |
-| Icon       | `/static/images/icons` | `/images/icons` | Event type icons |
-| Hero Image | `/static/images/venue` | `/images/venue` | Venue photos     |
+| Level      | `media_folder`          | `public_folder`  | Purpose          |
+|------------|-------------------------|------------------|------------------|
+| Collection | _(inherits)_            | _(inherits)_     | Uses global      |
+| Icon       | `/static/images/icons`  | `/images/icons`  | Event type icons |
+| Hero Image | `/static/images/photos` | `/images/photos` | Venue photos     |
 
 ### Singletons (Data Files)
 
-| Singleton     | Field              | `media_folder`         | `public_folder` |
-|---------------|--------------------|------------------------|-----------------|
-| Hero Section  | background_image   | `/static/images/hero`  | `images/hero`   |
-| Hero Section  | foreground_image   | `/static/images/hero`  | `images/hero`   |
-| CTA Banner    | background_image   | `/static/images/venue` | `images/venue`  |
-| About Section | blocks[].image.src | `/static/images/about` | `images/about`  |
-| Event Types   | types[].icon       | `/static/images/icons` | `/images/icons` |
-| Workshops     | features[].icon    | `/static/images/icons` | `/images/icons` |
-| Venue Gallery | images[].src       | `/static/images/venue` | `images/venue`  |
-| 404 Page      | background_image   | `/static/images/venue` | `images/venue`  |
+| Singleton     | Field              | `media_folder`                 | `public_folder`        |
+|---------------|--------------------|--------------------------------|------------------------|
+| Hero Section  | background_image   | `/static/images/homepage-hero` | `images/homepage-hero` |
+| Hero Section  | foreground_image   | `/static/images/homepage-hero` | `images/homepage-hero` |
+| CTA Banner    | background_image   | `/static/images/photos`        | `images/photos`        |
+| About Section | blocks[].image.src | `/static/images/photos`        | `images/photos`        |
+| Event Types   | types[].icon       | `/static/images/icons`         | `/images/icons`        |
+| Workshops     | features[].icon    | `/static/images/icons`         | `/images/icons`        |
+| Venue Gallery | images[].src       | `/static/images/photos`        | `images/photos`        |
+| 404 Page      | background_image   | `/static/images/photos`        | `images/photos`        |
 
 ### Pages Collection
 
-| Page      | Field    | `media_folder`         | `public_folder` |
-|-----------|----------|------------------------|-----------------|
-| Homepage  | image    | `/static/images/hero`  | `/images/hero`  |
-| About     | og_image | `/static/images/about` | `/images/about` |
-| Contact   | og_image | `/static/images/hero`  | `/images/hero`  |
-| Workshops | og_image | `/static/images/venue` | `/images/venue` |
+| Page      | Field    | `media_folder`                 | `public_folder`         |
+|-----------|----------|--------------------------------|-------------------------|
+| Homepage  | image    | `/static/images/homepage-hero` | `/images/homepage-hero` |
+| About     | og_image | `/static/images/photos`        | `/images/photos`        |
+| Contact   | og_image | `/static/images/homepage-hero` | `/images/homepage-hero` |
+| Workshops | og_image | `/static/images/photos`        | `/images/photos`        |
 
 ---
 
@@ -157,14 +157,14 @@ Sveltia CMS suppresses a tab when its `media_folder` resolves to the same direct
 
 ### Current Tab Behavior
 
-| Editor Context           | Tabs Shown                                        |
-|--------------------------|---------------------------------------------------|
-| Blog post Featured Image | Field Assets (venue), Entry Assets, Global Assets |
-| Blog \_index Hero Image  | Field Assets (venue), Global Assets               |
-| Events Hero Image        | Field Assets (venue), Global Assets               |
-| Events Icon              | Field Assets (icons), Global Assets               |
-| Hero Section images      | Field Assets (hero), Global Assets                |
-| Venue Gallery images     | Field Assets (venue), Global Assets               |
+| Editor Context           | Tabs Shown                                         |
+|--------------------------|----------------------------------------------------|
+| Blog post Featured Image | Field Assets (photos), Entry Assets, Global Assets |
+| Blog \_index Hero Image  | Field Assets (photos), Global Assets               |
+| Events Hero Image        | Field Assets (photos), Global Assets               |
+| Events Icon              | Field Assets (icons), Global Assets                |
+| Hero Section images      | Field Assets (homepage-hero), Global Assets        |
+| Venue Gallery images     | Field Assets (photos), Global Assets               |
 
 ---
 
@@ -174,26 +174,27 @@ Sveltia CMS suppresses a tab when its `media_folder` resolves to the same direct
 
 ```text
 static/images/
-├── about/          # 2 files - About section images
 ├── blog/           # Empty (.gitkeep) - Blog page bundles use content/blog/<slug>/
-├── hero/           # 2 files - Homepage hero images
+├── brand/          # 4 files - Logos and social icons
+├── categories/     # Empty (.gitkeep) - Blog category taxonomy images
+├── homepage-hero/  # 2 files - Homepage hero images
 ├── icons/          # 9 files - Event type and feature icons
-├── logo/           # 2 files - Brand logos (not CMS-managed)
-├── social/         # 2 files - Social media icons (not CMS-managed)
-├── venue/          # 11 files - Venue photos (shared across site)
-└── og-default.jpg  # 1 file - SEO fallback image
+├── photos/         # 14 files - Venue and event photos (shared across site)
+└── og-default.jpg  # In photos/ - SEO fallback image
 ```
 
 ### Complete File List
 
-#### `static/images/about/` (2 files)
+#### `static/images/brand/` (4 files)
 
-| File                   | Used By       |
-|------------------------|---------------|
-| `event-party-bw.jpg`   | About section |
-| `team-eden-lyndal.jpg` | About section |
+| File                            | Used By                 |
+|---------------------------------|-------------------------|
+| `pike-west-logo-horizontal.png` | Header, structured data |
+| `pike-west-logomark.png`        | Footer                  |
+| `icon-facebook.png`             | Footer social links     |
+| `icon-instagram.png`            | Footer social links     |
 
-#### `static/images/hero/` (2 files)
+#### `static/images/homepage-hero/` (2 files)
 
 | File                      | Used By                 |
 |---------------------------|-------------------------|
@@ -214,10 +215,13 @@ static/images/
 | `icon-supplies.svg`      | Workshops feature |
 | `icon-wedding-rings.png` | Weddings          |
 
-#### `static/images/venue/` (11 files)
+#### `static/images/photos/` (14 files)
 
 | File                            | Used By                                |
 |---------------------------------|----------------------------------------|
+| `event-party-bw.jpg`            | About section                          |
+| `team-eden-lyndal.jpg`          | About section                          |
+| `og-default.jpg`                | SEO fallback image                     |
 | `venue-01-interior.jpeg`        | Events, Gallery, Blog                  |
 | `venue-02-foyer.png`            | Gallery, Blog                          |
 | `venue-03-lower-patio.jpg`      | Gallery                                |
@@ -228,15 +232,7 @@ static/images/
 | `venue-08-disco-background.jpg` | Dance events, CTA banner, 404, Gallery |
 | `venue-09-table-chairs.png`     | Gallery                                |
 | `venue-10-seating-area.png`     | Gallery                                |
-| `IMG_9271.jpeg`                 | Available for use                      |
-
-#### Non-CMS Managed
-
-| Directory               | Files                                                     | Purpose      |
-|-------------------------|-----------------------------------------------------------|--------------|
-| `static/images/logo/`   | `pike-west-logo-horizontal.png`, `pike-west-logomark.png` | Brand logos  |
-| `static/images/social/` | `icon-facebook.png`, `icon-instagram.png`                 | Social icons |
-| `static/images/`        | `og-default.jpg`                                          | SEO fallback |
+| `IMG_9271.jpeg`                 | Birthday events, Blog index            |
 
 ---
 
@@ -255,11 +251,11 @@ Both conventions work because templates use `resources.Get()` which normalizes p
 
 ### Recommended Path Patterns
 
-| Use Case            | `media_folder`         | `public_folder` | Front Matter Result      |
-|---------------------|------------------------|-----------------|--------------------------|
-| Shared venue photos | `/static/images/venue` | `images/venue`  | `images/venue/photo.jpg` |
-| Page bundle images  | `''`                   | `''`            | `photo.jpg`              |
-| Event icons         | `/static/images/icons` | `/images/icons` | `/images/icons/icon.png` |
+| Use Case            | `media_folder`          | `public_folder` | Front Matter Result       |
+|---------------------|-------------------------|-----------------|---------------------------|
+| Shared venue photos | `/static/images/photos` | `images/photos` | `images/photos/photo.jpg` |
+| Page bundle images  | `''`                    | `''`            | `photo.jpg`               |
+| Event icons         | `/static/images/icons`  | `/images/icons` | `/images/icons/icon.png`  |
 
 ---
 
@@ -280,7 +276,7 @@ Both conventions work because templates use `resources.Get()` which normalizes p
 
 ```go-html-template
 {{/* Load with fallback to default */}}
-{{ $imagePath := .Params.image | default "images/venue/venue-01-interior.jpeg" }}
+{{ $imagePath := .Params.image | default "images/photos/venue-01-interior.jpeg" }}
 {{ $image := resources.Get $imagePath }}
 ```
 
@@ -301,8 +297,8 @@ Both conventions work because templates use `resources.Get()` which normalizes p
 
 ```yaml
 # Explicit (preferred)
-media_folder: /static/images/venue
-public_folder: images/venue
+media_folder: /static/images/photos
+public_folder: images/photos
 
 # Don't rely on defaults
 ```
@@ -314,8 +310,8 @@ fields:
   - label: Hero Image
     name: image
     widget: image
-    media_folder: /static/images/venue    # absolute, repo-root
-    public_folder: images/venue            # for resources.Get
+    media_folder: /static/images/photos    # absolute, repo-root
+    public_folder: images/photos            # for resources.Get
 ```
 
 ### 3. Keep Field and Collection `media_folder` Different
@@ -325,11 +321,11 @@ Ensures the Field Assets tab appears in the picker:
 ```yaml
 collections:
   - name: blog
-    media_folder: ''                       # entry-relative
+    media_folder: ''                        # entry-relative
     fields:
       - name: image
         widget: image
-        media_folder: /static/images/venue # different from collection
+        media_folder: /static/images/photos # different from collection
 ```
 
 ### 4. Use Entry-Relative Paths for Page Bundles
@@ -346,10 +342,10 @@ collections:
 
 ```text
 static/images/
-  about/     # About section
-  hero/      # Homepage hero
-  icons/     # Event/feature icons
-  venue/     # Shared venue photos
+  brand/          # Logos and social icons
+  homepage-hero/  # Homepage hero images
+  icons/          # Event/feature icons
+  photos/         # Shared venue and event photos
 ```
 
 ---
@@ -373,8 +369,8 @@ static/images/
 **Fix:** For images in `static/`, use paths without `static/` prefix:
 
 ```yaml
-media_folder: /static/images/venue   # where it's stored
-public_folder: images/venue           # what resources.Get sees
+media_folder: /static/images/photos   # where it's stored
+public_folder: images/photos           # what resources.Get sees
 ```
 
 ### Pitfall 3: Default `public_folder` Includes `static/`
