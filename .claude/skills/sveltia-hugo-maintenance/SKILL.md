@@ -496,13 +496,12 @@ scores.
 
 ```text
 static/images/
-  about/         # Team and about section photos
-  blog/          # Blog post images (placeholder)
-  hero/          # Homepage hero images
-  icons/         # Event type and workshop icons (PNG + SVG)
-  logo/          # Logo variants (horizontal, logomark)
-  social/        # Social media icons
-  venue/         # Venue photography (venue-01 through venue-XX)
+  blog/           # Blog post images (placeholder, page bundles preferred)
+  brand/          # Logo variants and social media icons
+  categories/     # Blog category taxonomy images
+  homepage-hero/  # Homepage hero background/foreground images
+  icons/          # Event type and workshop icons (PNG + SVG)
+  photos/         # Venue and event photography (venue-01 through venue-XX)
 ```
 
 **Hugo module mount** (in `config/_default/hugo.toml`):
@@ -514,7 +513,7 @@ static/images/
 ```
 
 This mount makes `static/images/` available as `assets/images/` so that
-`resources.Get "images/hero/venue-exterior.jpg"` resolves correctly for Hugo
+`resources.Get "images/homepage-hero/venue-exterior.jpg"` resolves correctly for Hugo
 Pipes processing.
 
 ---
