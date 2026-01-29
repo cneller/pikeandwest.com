@@ -326,7 +326,7 @@ collections:
         widget: markdown
 
   # ----------------------------------------------------------
-  # Categories
+  # Categories (Hugo taxonomy terms use _index.md in subdirectories)
   # ----------------------------------------------------------
   - name: categories
     label: Categories
@@ -335,6 +335,9 @@ collections:
     create: false
     delete: false
     slug: '{{slug}}'
+    path: '{{slug}}/_index'
+    extension: md
+    format: yaml-frontmatter
     summary: '{{title}}'
     icon: category
     fields:
