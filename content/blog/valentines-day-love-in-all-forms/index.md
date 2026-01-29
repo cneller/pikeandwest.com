@@ -8,16 +8,13 @@ date: 2026-01-22T00:00:00.000Z
 draft: false
 author: Pike & West
 categories:
-  - Planning Tips
+  - Celebrations
 tags:
-  - Valentine's Day
-  - Galentine's Day
-  - singles party
-  - daddy daughter dance
-  - celebration ideas
-  - February events
-  - friendship
-  - self-love
+  - valentines day
+  - romantic
+  - couples
+  - families
+  - event inspiration
 image: valentines-day-hero.jpg
 image_alt: >-
   Elegant soft seating area at Pike & West venue with warm lighting perfect for

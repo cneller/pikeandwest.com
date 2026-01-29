@@ -10,12 +10,11 @@ author: Pike & West
 categories:
   - Birthdays
 tags:
-  - winter birthday
-  - January birthday
-  - February birthday
   - milestone birthday
-  - birthday party planning
-  - winter party themes
+  - winter
+  - planning tips
+  - families
+  - event inspiration
 image: /images/venue/venue-08-disco-background.jpg
 image_alt: >-
   Elegant Pike & West gallery space with atmospheric lighting perfect for
@@ -59,6 +58,7 @@ The key to an unforgettable winter birthday is leaning into the season rather th
 One of the best aspects of January and February celebrations is access to winter-themed decor that has nothing to do with the holidays. All those beautiful seasonal elements that get overshadowed by Christmas trees and menorahs? They finally get their moment.
 
 **Ice and Crystal Themes**
+
 - Ice sculptures that would melt at a summer gathering become stunning centerpieces
 - LED furniture that glows like icebergs creates an otherworldly atmosphere
 - Crystal and glass elements catch light beautifully against dark winter evenings
@@ -69,12 +69,14 @@ We went full ice palace theme and it was magical. You can't do that in July. My 
 {{< /sidebar-quote >}}
 
 **Warm Contrast Elements**
+
 - Candlelight everywhere—the shorter days mean more dramatic effect
 - Rich jewel tones (emerald, sapphire, amethyst) that feel luxurious against winter white
 - Velvet textures and metallic accents that complement the season's natural drama
 - Warm wood elements that create coziness without kitsch
 
 **Nature-Inspired Winter**
+
 - Bare branches with fairy lights (elegant, not holiday)
 - Pine and eucalyptus (fresh, botanical, sophisticated)
 - Frost and snow motifs that celebrate the season authentically
@@ -113,11 +115,12 @@ Ready to give a winter birthday the celebration it deserves? Here's how to make 
 ### Timing Considerations
 
 {{< fact-box title="Best Winter Party Windows" position="right" >}}
+
 - **Mid-January:** 2+ weeks post-holidays, energy returns
 - **Late January:** People actively seeking social plans
 - **Early February:** Pre-Valentine's, excellent availability
 - **Mid-February:** Can pair with Valentine's theme if desired
-{{< /fact-box >}}
+  {{< /fact-box >}}
 
 The sweet spot for January birthdays is typically two to three weeks after New Year's. By then, the holiday exhaustion has lifted, resolutions are losing steam, and people welcome a reason to dress up and go out. February birthdays benefit from even more distance—guests are genuinely eager for a midwinter celebration by then.
 
@@ -126,16 +129,19 @@ The sweet spot for January birthdays is typically two to three weeks after New Y
 Winter gatherings require extra attention to comfort:
 
 **Arrival and Departure**
+
 - Clear, well-lit parking and entrance areas
 - Coat check is essential, not optional
 - Consider the drive home—timing matters when roads might be icy
 
 **Venue Atmosphere**
+
 - Indoor venues eliminate weather anxiety entirely
 - Warm lighting creates instant coziness
 - Comfortable seating areas for conversation (cold weather makes people want to linger)
 
 **Food and Drink**
+
 - Warm options alongside cold (hot chocolate bar, mulled wine station)
 - Hearty, satisfying menu—winter appetites differ from summer ones
 - Coffee and tea service for the end of the evening

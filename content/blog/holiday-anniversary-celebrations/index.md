@@ -8,12 +8,11 @@ author: Pike & West
 categories:
   - Anniversaries
 tags:
-  - anniversary
-  - holiday events
-  - romantic celebrations
-  - couples
   - milestone anniversary
-  - intimate gatherings
+  - holidays
+  - romantic
+  - intimate gathering
+  - couples
 keywords:
   - anniversary party venue Memphis
   - holiday anniversary ideas

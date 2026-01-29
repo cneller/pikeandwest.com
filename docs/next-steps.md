@@ -1,6 +1,6 @@
 # Pike & West - Next Steps
 
-> **Last Updated:** 2026-01-27
+> **Last Updated:** 2026-01-28
 > **Current Phase:** Pre-Launch Testing on beta.pikeandwest.com
 
 This document tracks the current project state and upcoming work. Keep this file updated as tasks are completed or priorities change.
@@ -252,6 +252,23 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 - [Server-Side Tagging Guide](https://usercentrics.com/guides/smarter-tagging-with-google-tag-manager/cross-domain-tracking/)
 
 ## Recently Completed
+
+### Blog Taxonomy Redesign (2026-01-28)
+
+**Goal:** Align blog categories with customer personas for better content targeting.
+
+**Changes:**
+
+| Component       | Before                          | After                                  |
+|-----------------|---------------------------------|----------------------------------------|
+| Categories      | 5 mixed (event types + pillars) | 8 event-type only (maps to personas)   |
+| Tags            | 19 flat options                 | 50+ organized by purpose               |
+| CMS Enforcement | Multiple categories allowed     | Single category, 3-6 tags required     |
+| Blog-editor     | No category guidance            | Category Selection Guide with personas |
+
+**Plan:** `docs/plans/2026-01-28-blog-categories-redesign.md`
+
+---
 
 ### Footer Redesign (2026-01-21)
 

@@ -1,9 +1,9 @@
 meta:
   version: "1.0"
   schema_version: "1.0"
-  last_updated: "2026-01-29"
+  last_updated: "2026-01-28"
   last_full_audit: "2026-01-23"
-  updated_by: blog-editor
+  updated_by: blog-taxonomy-migration
   stats:
     total_pages: 22
     blog_posts: 7
@@ -64,6 +64,13 @@ definitions:
     anniversary:
       name: Anniversary Party
       page: null
+    graduation:
+      name: Graduation Party
+      page: null
+      includes:
+        - high-school
+        - college
+        - professional-degree
     private-party:
       name: Private Party
       page: /events/private-parties
@@ -106,6 +113,40 @@ definitions:
     transactional:
       name: Transactional
       description: User ready to take action
+  blog_categories:
+    weddings:
+      name: Weddings
+      maps_to_personas: [bride, groom, wedding-planner]
+      maps_to_event_types: [wedding]
+    corporate-events:
+      name: Corporate Events
+      maps_to_personas: [corporate-planner, executive]
+      maps_to_event_types: [corporate]
+    birthdays:
+      name: Birthdays
+      maps_to_personas: [parent, host]
+      maps_to_event_types: [birthday]
+    baby-showers:
+      name: Baby Showers
+      maps_to_personas: [parent, host]
+      maps_to_event_types: [baby-shower]
+    anniversaries:
+      name: Anniversaries
+      maps_to_personas: [host]
+      maps_to_event_types: [anniversary]
+    graduations:
+      name: Graduations
+      maps_to_personas: [parent]
+      maps_to_event_types: [graduation]
+    celebrations:
+      name: Celebrations
+      maps_to_personas: [host]
+      maps_to_event_types: [private-party]
+    news:
+      name: News
+      maps_to_personas: []
+      maps_to_event_types: []
+      is_meta: true
 clusters:
   weddings:
     name: Weddings at Pike & West
@@ -189,6 +230,10 @@ pages:
     title: 5 Tips for Planning a Memorable Corporate Event in 2026
     type: blog
     status: published
+    taxonomy:
+      category: Corporate Events
+      tag_count: 4
+      tags_valid: true
     primary_keyword: corporate event planning
     secondary_keywords:
       - corporate venue Germantown
@@ -262,6 +307,10 @@ pages:
     title: Creating the Perfect Fall Baby Shower in 2026
     type: blog
     status: published
+    taxonomy:
+      category: Baby Showers
+      tag_count: 5
+      tags_valid: true
     primary_keyword: fall baby shower ideas
     secondary_keywords:
       - baby shower venue Germantown
@@ -344,6 +393,10 @@ pages:
     title: Celebrating Your Anniversary During the Holiday Season
     type: blog
     status: published
+    taxonomy:
+      category: Anniversaries
+      tag_count: 5
+      tags_valid: true
     primary_keyword: anniversary party venue
     secondary_keywords:
       - holiday anniversary ideas
@@ -423,6 +476,10 @@ pages:
     title: Planning a Milestone Birthday Celebration to Start the New Year
     type: blog
     status: published
+    taxonomy:
+      category: Birthdays
+      tag_count: 5
+      tags_valid: true
     primary_keyword: milestone birthday venue
     secondary_keywords:
       - 50th birthday party ideas
@@ -498,6 +555,10 @@ pages:
     title: "Valentine's Day Is for Everyone: Celebrating Love in All Its Forms"
     type: blog
     status: published
+    taxonomy:
+      category: Celebrations
+      tag_count: 5
+      tags_valid: true
     primary_keyword: Valentine's Day party ideas for all
     secondary_keywords:
       - Galentine's Day celebration
@@ -580,6 +641,10 @@ pages:
     title: Why Winter Birthdays Deserve the Most Unforgettable Celebrations
     type: blog
     status: published
+    taxonomy:
+      category: Birthdays
+      tag_count: 5
+      tags_valid: true
     primary_keyword: winter birthday party Memphis
     secondary_keywords:
       - January birthday celebration venue
@@ -658,6 +723,10 @@ pages:
     title: Welcome to the Pike & West Blog | Germantown Event Inspiration
     type: blog
     status: published
+    taxonomy:
+      category: News
+      tag_count: 4
+      tags_valid: true
     primary_keyword: Pike & West blog
     secondary_keywords:
       - Germantown event venue news

@@ -10,8 +10,8 @@ categories:
 tags:
   - announcement
   - welcome
-  - Germantown venue
-  - event planning
+  - venue spotlight
+  - germantown
 keywords:
   - Pike & West blog
   - Germantown event venue news

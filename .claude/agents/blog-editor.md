@@ -93,8 +93,8 @@ description: "Meta description for SEO..."      # 150-160 characters
 date: 2026-01-23T04:45:00-0600                  # ACTUAL current time (run date command)
 draft: false                                    # Set true only if explicitly drafting
 author: "Pike & West"
-categories: ["Event Planning"]                  # One primary category
-tags: ["tag1", "tag2", "tag3"]                  # 3-6 relevant tags
+categories: ["Birthdays"]                       # Exactly 1 event-type category
+tags: ["milestone birthday", "planning tips", "families"]  # 3-6 descriptive tags
 image: "images/venue/venue-XX.jpeg"             # Hero image path
 image_alt: "Descriptive alt text..."            # Required for accessibility
 keywords:
@@ -103,6 +103,87 @@ keywords:
   - tertiary keyword Tennessee
 ---
 ```
+
+### Category Selection Guide
+
+Categories are **event-type based** and map directly to personas:
+
+| Category         | Use For Posts About                            | Target Persona               |
+|------------------|------------------------------------------------|------------------------------|
+| Weddings         | Wedding planning, venues, trends               | Bride, Groom, Planner        |
+| Corporate Events | Company events, team building, holiday parties | Victoria (VP of Events)      |
+| Birthdays        | Milestone birthdays, party planning            | Michelle (Milestone Mom)     |
+| Baby Showers     | Shower planning, hosting, themes               | Jasmine (Joyful Auntie)      |
+| Anniversaries    | Anniversary celebrations, vow renewals         | Diana (Devoted Wife)         |
+| Graduations      | Graduation parties, achievement celebrations   | Grace (Proud Graduate's Mom) |
+| Celebrations     | General parties, Valentine's, holidays         | General host persona         |
+| News             | Announcements, venue updates, welcome posts    | All personas                 |
+
+**Rule:** Exactly 1 category per post. If content spans two event types, pick the primary one.
+
+### Tag Selection (Pick 3-6)
+
+Tags are descriptive metadata. Select from these groups:
+
+**Layer 1: Event Detail (0-2 tags)** - Specifics within category
+
+- Birthdays: `milestone birthday`, `sweet 16`, `50th birthday`
+- Baby Showers: `sprinkle`, `gender reveal`
+- Celebrations: `prom send-off`, `engagement party`, `rehearsal dinner`
+- Corporate: `team building`, `holiday party`, `client appreciation`
+- Anniversaries: `milestone anniversary`, `vow renewal`
+
+**Layer 2: Planning/Format (1-2 tags)** - Content angle
+
+- Educational: `planning tips`, `checklist`, `budget planning`, `timeline`
+- Behind-the-scenes: `behind the scenes`, `venue spotlight`, `vendor spotlight`
+
+**Layer 3: Theme (0-1 tags)** - Aesthetic
+
+- `boho`, `elegant`, `modern`, `romantic`, `intimate gathering`, `eco-friendly`
+
+**Layer 4: Seasonal (0-1 tags)** - Timing
+
+- `spring`, `summer`, `fall`, `winter`, `holidays`, `valentines day`, `new year`
+
+**Layer 5: Audience (0-1 tags)** - Who it serves
+
+- `families`, `couples`, `teens`, `professionals`, `first-time hosts`
+
+**Layer 6: Location (0-1 tags)** - SEO (only if central to content)
+
+- `germantown`, `memphis`, `collierville`
+
+### Examples
+
+**Birthday planning guide:**
+
+```yaml
+categories: ["Birthdays"]
+tags: ["milestone birthday", "planning tips", "checklist", "families"]
+```
+
+**Baby shower inspiration:**
+
+```yaml
+categories: ["Baby Showers"]
+tags: ["boho", "event inspiration", "spring", "families"]
+```
+
+**Corporate holiday party tips:**
+
+```yaml
+categories: ["Corporate Events"]
+tags: ["holiday party", "planning tips", "budget planning", "professionals"]
+```
+
+### Validation Checklist
+
+- [ ] Exactly 1 category selected
+- [ ] Category is an event type (NOT "Planning Tips" or "Behind the Scenes")
+- [ ] 3-6 tags selected
+- [ ] Tags come from `data/blog_taxonomy.yaml`
+- [ ] No redundant tags
 
 ---
 
@@ -434,6 +515,10 @@ After EVERY blog post edit, you MUST update `data/content-index.yaml`:
     all_have_alt: [true/false]
   drop_cap: [true if first para eligible]
   has_cta: [true if ends with CTA]
+  taxonomy:
+    category: [the single category]
+    tag_count: [number]
+    tags_valid: [true/false - all from taxonomy]
 ```
 
 ### Update Process
@@ -476,6 +561,12 @@ Before completing any blog editing task, verify:
 - [ ] Timeline for planning guides (if applicable)
 - [ ] Numbered list for step-by-step content (if applicable)
 - [ ] Sidebar quotes for testimonials (if applicable)
+
+### Taxonomy
+
+- [ ] Category: Exactly 1 event-type category
+- [ ] Tags: 3-6 descriptive tags from taxonomy
+- [ ] No "Planning Tips" or "Behind the Scenes" as category
 
 ### Technical
 

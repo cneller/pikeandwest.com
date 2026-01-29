@@ -11,11 +11,10 @@ categories:
   - Birthdays
 tags:
   - milestone birthday
-  - birthday party
-  - new year
-  - celebration planning
   - 50th birthday
-  - adult birthday party
+  - new year
+  - planning tips
+  - families
 image: milestone-birthday-hero.png
 image_alt: >-
   Sophisticated Pike & West art gallery venue in Germantown Tennessee with
@@ -127,10 +126,10 @@ Music sets the emotional tone more than any decoration. For milestone birthdays,
 
 Give guests something to do beyond eating and talking:
 
-* Photo booth with decade-appropriate props
-* Memory station for writing notes
-* Signature cocktail with the honoree's name or favorite flavors
-* Display of memorabilia from their life (jerseys, awards, photos)
+- Photo booth with decade-appropriate props
+- Memory station for writing notes
+- Signature cocktail with the honoree's name or favorite flavors
+- Display of memorabilia from their life (jerseys, awards, photos)
 
 ### Personal Surprise Moments
 
@@ -154,10 +153,10 @@ Memphis winters are unpredictable, but indoor venues eliminate weather worries e
 
 Milestone birthdays often bring together grandparents and grandchildren, colleagues and childhood friends. Consider:
 
-* Music volume that allows conversation
-* Seating options for those who can't stand long
-* Food that appeals across generations
-* A flow that creates natural gathering spots
+- Music volume that allows conversation
+- Seating options for those who can't stand long
+- Food that appeals across generations
+- A flow that creates natural gathering spots
 
 ### Traffic and Logistics
 
@@ -173,27 +172,27 @@ January might seem far off, but smart planning starts in early fall.
 
 **September-October:**
 
-* Book your venue (January dates often have good availability, but don't wait)
-* Set your guest list and send save-the-dates
-* Begin collecting photos for memory displays
+- Book your venue (January dates often have good availability, but don't wait)
+- Set your guest list and send save-the-dates
+- Begin collecting photos for memory displays
 
 **November:**
 
-* Send formal invitations (early December at the latest)
-* Book caterer, photographer, and any entertainment
-* Coordinate with speakers for "This Is Your Life" moments
+- Send formal invitations (early December at the latest)
+- Book caterer, photographer, and any entertainment
+- Coordinate with speakers for "This Is Your Life" moments
 
 **December:**
 
-* Finalize menu and rentals
-* Create playlists and slideshow
-* Confirm RSVPs and finalize headcount
+- Finalize menu and rentals
+- Create playlists and slideshow
+- Confirm RSVPs and finalize headcount
 
 **Week Before:**
 
-* Confirm all vendor arrival times
-* Prepare any DIY elements
-* Brief anyone giving speeches or toasts
+- Confirm all vendor arrival times
+- Prepare any DIY elements
+- Brief anyone giving speeches or toasts
 
 ### Budget Advantage
 
@@ -223,7 +222,7 @@ Quality over quantity applies to guest lists too—a room full of people who gen
 
 Focus on personal touches rather than expensive ones. A curated photo display, meaningful toasts from close friends, and a playlist that tells the honoree's story create more impact than elaborate decorations.
 
-***
+---
 
 ## Start the New Year with a Milestone Moment
 

@@ -1,31 +1,57 @@
 # Blog Taxonomy Reference
-# Use these predefined categories and tags for consistency across posts.
-# Sveltia CMS editors can reference this file when creating new posts.
+# Categories are EVENT-TYPE based (map to personas).
+# Tags describe content format and cross-cutting topics.
+# Sveltia CMS editors reference this file when creating new posts.
 
 categories:
-  - News
-  - Weddings
-  - Corporate Events
-  - Planning Tips
-  - Behind the Scenes
+  # Event-type categories (map to personas)
+  - Weddings # Persona: Bride, Groom, Wedding Planner
+  - Corporate Events # Persona: Victoria (VP of Events)
+  - Birthdays # Persona: Michelle (Milestone Mom)
+  - Baby Showers # Persona: Jasmine (Joyful Auntie)
+  - Anniversaries # Persona: Diana (Devoted Wife)
+  - Graduations # Persona: Grace (Proud Graduate's Mom)
+  - Celebrations # Persona: General host (private parties)
+  - News # Meta: Announcements, updates
 
 tags:
-  # General
-  - announcement
-  - welcome
-  - venue updates
-
-  # Event Types
-  - weddings
-  - corporate
-  - parties
-  - celebrations
-
-  # Planning
+  # Planning & Format
   - planning tips
-  - event planning
-  - venue tips
   - checklist
+  - timeline
+  - budget planning
+  - vendor selection
+  - guest list
+  - venue tips
+  - behind the scenes
+  - venue spotlight
+  - vendor spotlight
+
+  # Event Detail
+  - milestone birthday
+  - sweet 16
+  - 50th birthday
+  - milestone anniversary
+  - vow renewal
+  - sprinkle
+  - gender reveal
+  - prom send-off
+  - engagement party
+  - rehearsal dinner
+  - team building
+  - holiday party
+  - client appreciation
+  - corporate retreat
+
+  # Themes
+  - boho
+  - elegant
+  - modern
+  - romantic
+  - intimate gathering
+  - garden party
+  - eco-friendly
+  - gallery aesthetic
 
   # Seasonal
   - spring
@@ -33,8 +59,27 @@ tags:
   - fall
   - winter
   - holidays
+  - new year
+  - valentines day
+  - mothers day
+  - fathers day
 
-  # Location
+  # Audience
+  - families
+  - couples
+  - teens
+  - professionals
+  - first-time hosts
+  - parents
+
+  # Location (SEO)
   - germantown
   - memphis
+  - collierville
   - tennessee
+
+  # Content Type
+  - event inspiration
+  - real celebration
+  - announcement
+  - welcome

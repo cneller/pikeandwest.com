@@ -8,10 +8,10 @@ author: Pike & West
 categories:
   - Corporate Events
 tags:
-  - corporate
   - planning tips
-  - event planning
   - venue tips
+  - professionals
+  - budget planning
 keywords:
   - corporate event planning Memphis
   - corporate venue Germantown

@@ -186,6 +186,34 @@ The blog supports magazine-style visual enhancements for engaging, professional 
 | Pull quotes      | `{{</* pull-quote */>}}`     | 1-2 per 1000 words                      |
 | Section dividers | `{{</* divider */>}}`        | 2-3 per article                         |
 
+### Taxonomy (Categories vs Tags)
+
+**Categories** = Event type (1 per post). Maps to persona.
+
+| Category         | Persona                      |
+|------------------|------------------------------|
+| Birthdays        | Michelle (Milestone Mom)     |
+| Baby Showers     | Jasmine (Joyful Auntie)      |
+| Anniversaries    | Diana (Devoted Wife)         |
+| Corporate Events | Victoria (VP of Events)      |
+| Graduations      | Grace (Proud Graduate's Mom) |
+| Celebrations     | General (prom, engagement)   |
+| Weddings         | Bride/Planner                |
+| News             | All (meta)                   |
+
+**Tags** = Descriptive metadata (3-6 per post).
+
+| Tag Group    | Examples                                            |
+|--------------|-----------------------------------------------------|
+| Event Detail | `milestone birthday`, `prom send-off`, `sprinkle`   |
+| Planning     | `planning tips`, `checklist`, `behind the scenes`   |
+| Theme        | `boho`, `elegant`, `romantic`, `intimate gathering` |
+| Seasonal     | `spring`, `winter`, `holidays`, `valentines day`    |
+| Audience     | `families`, `couples`, `teens`, `professionals`     |
+| Location     | `germantown`, `memphis`                             |
+
+See `data/blog_taxonomy.yaml` for full list and persona mappings.
+
 ### All Available Shortcodes
 
 #### Drop Caps

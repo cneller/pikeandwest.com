@@ -131,44 +131,92 @@ collections:
         name: author
         widget: string
         default: 'Pike & West'
-      - label: Categories
+      - label: Category
         name: categories
         widget: select
-        multiple: true
-        min: 1
-        max: 2
+        multiple: false
         options:
-          - News
           - Weddings
           - Corporate Events
-          - Planning Tips
-          - Behind the Scenes
-        hint: 'Select 1-2 categories.'
+          - Birthdays
+          - Baby Showers
+          - Anniversaries
+          - Graduations
+          - Celebrations
+          - News
+        hint: 'Event type this content is about. Select exactly 1.'
       - label: Tags
         name: tags
         widget: select
         multiple: true
+        min: 3
+        max: 6
         options:
-          - announcement
-          - welcome
-          - venue updates
-          - weddings
-          - corporate
-          - parties
-          - celebrations
+          # Planning & Format
           - planning tips
-          - event planning
-          - venue tips
           - checklist
+          - timeline
+          - budget planning
+          - vendor selection
+          - guest list
+          - venue tips
+          - behind the scenes
+          - venue spotlight
+          - vendor spotlight
+          # Event Detail
+          - milestone birthday
+          - sweet 16
+          - 50th birthday
+          - milestone anniversary
+          - vow renewal
+          - sprinkle
+          - gender reveal
+          - prom send-off
+          - engagement party
+          - rehearsal dinner
+          - team building
+          - holiday party
+          - client appreciation
+          - corporate retreat
+          # Themes
+          - boho
+          - elegant
+          - modern
+          - romantic
+          - intimate gathering
+          - garden party
+          - eco-friendly
+          - gallery aesthetic
+          # Seasonal
           - spring
           - summer
           - fall
           - winter
           - holidays
+          - new year
+          - valentines day
+          - mothers day
+          - fathers day
+          # Audience
+          - families
+          - couples
+          - teens
+          - professionals
+          - first-time hosts
+          - parents
+          # Location
           - germantown
           - memphis
+          - collierville
           - tennessee
-        hint: 'Select relevant tags for discovery.'
+          # Content Type
+          - event inspiration
+          - real celebration
+          - announcement
+          - welcome
+        hint:
+          'Select 3-6 descriptive tags. See data/blog_taxonomy.yaml for
+          guidance.'
       - label: Keywords
         name: keywords
         widget: list

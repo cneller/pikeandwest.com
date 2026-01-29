@@ -10,12 +10,11 @@ author: Pike & West
 categories:
   - Baby Showers
 tags:
-  - baby shower
-  - fall events
+  - boho
+  - eco-friendly
   - event inspiration
-  - party planning
-  - boho baby shower
-  - eco-friendly events
+  - fall
+  - families
 image: /images/venue/venue-02-foyer.png
 image_alt: >-
   Elegant Pike & West art gallery interior in Germantown Tennessee with warm
@@ -122,11 +121,12 @@ Skip the awkward games that make guests uncomfortable. Instead, focus on meaning
 A well-planned baby shower takes about six to eight weeks to pull together comfortably. Here's a general timeline:
 
 {{< timeline title="Baby Shower Planning Timeline" >}}
-* **6-8 Weeks Before:** Book your venue, set the guest list with the parents-to-be, and choose your theme and color palette
-* **4-6 Weeks Before:** Send invitations (digital or print), book catering and any rentals, order custom items like banners or personalized favors
-* **2 Weeks Before:** Confirm final guest count with venue and caterer, plan your timeline for the day, finalize any activities or games
-* **Day Before:** Prep any DIY decorations, confirm delivery times, charge camera batteries
-{{< /timeline >}}
+
+- **6-8 Weeks Before:** Book your venue, set the guest list with the parents-to-be, and choose your theme and color palette
+- **4-6 Weeks Before:** Send invitations (digital or print), book catering and any rentals, order custom items like banners or personalized favors
+- **2 Weeks Before:** Confirm final guest count with venue and caterer, plan your timeline for the day, finalize any activities or games
+- **Day Before:** Prep any DIY decorations, confirm delivery times, charge camera batteries
+  {{< /timeline >}}
 
 ## Frequently Asked Questions
 
@@ -142,7 +142,7 @@ Early afternoon (1-3 PM start time) works beautifully for fall showers. Guests a
 
 This depends entirely on your venue and the atmosphere you want to create. Intimate showers of 15-25 guests allow for meaningful conversation, while larger celebrations of 40-60 can still feel personal with the right room layout.
 
-***
+---
 
 ## Celebrate at Pike & West
 
