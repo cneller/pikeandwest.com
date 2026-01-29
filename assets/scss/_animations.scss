@@ -162,11 +162,13 @@
 }
 
 // -------------------------
-// Accessibility
+// Accessibility & Testing
 // -------------------------
 // Respect user preferences for reduced motion
+// Also support .no-animations class for visual regression testing
 
-@media (prefers-reduced-motion: reduce) {
+// Mixin for disabling animations
+@mixin disable-animations {
   .fade-in-up {
     opacity: 1;
     transform: none;
@@ -210,5 +212,25 @@
 
   .link-underline::after {
     transition: none;
+  }
+}
+
+// For users who prefer reduced motion
+@media (prefers-reduced-motion: reduce) {
+  @include disable-animations;
+}
+
+// For visual regression testing (triggered by ?backstop=1)
+.no-animations {
+  @include disable-animations;
+
+  // Additional aggressive reset for testing
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
   }
 }

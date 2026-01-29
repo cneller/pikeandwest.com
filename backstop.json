@@ -8,7 +8,7 @@
   "scenarios": [
     {
       "label": "Homepage",
-      "url": "__DEPLOY_URL__/",
+      "url": "__DEPLOY_URL__/?noanimation",
       "delay": 5000,
       "selectors": ["document"],
       "misMatchThreshold": 1,
@@ -17,7 +17,7 @@
     },
     {
       "label": "About",
-      "url": "__DEPLOY_URL__/about/",
+      "url": "__DEPLOY_URL__/about/?noanimation",
       "delay": 4000,
       "selectors": ["document"],
       "misMatchThreshold": 1,
@@ -25,7 +25,7 @@
     },
     {
       "label": "Contact",
-      "url": "__DEPLOY_URL__/contact/",
+      "url": "__DEPLOY_URL__/contact/?noanimation",
       "delay": 5000,
       "selectors": ["document"],
       "misMatchThreshold": 1,
@@ -34,7 +34,7 @@
     },
     {
       "label": "Blog",
-      "url": "__DEPLOY_URL__/blog/",
+      "url": "__DEPLOY_URL__/blog/?noanimation",
       "delay": 4000,
       "selectors": ["document"],
       "misMatchThreshold": 1,
@@ -42,7 +42,7 @@
     },
     {
       "label": "Events",
-      "url": "__DEPLOY_URL__/events/",
+      "url": "__DEPLOY_URL__/events/?noanimation",
       "delay": 4000,
       "selectors": ["document"],
       "misMatchThreshold": 1,

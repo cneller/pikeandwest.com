@@ -3,6 +3,7 @@
 // Optimized for CSS Scroll-Snap gallery
 
 document.addEventListener('DOMContentLoaded', function () {
+  initBackstopMode(); // Must run first to disable animations before they start
   initMobileNav();
   initGalleryScrollButtons();
   initPhotoSwipe();
@@ -10,6 +11,31 @@ document.addEventListener('DOMContentLoaded', function () {
   initLazyIframes();
   initContactShimmer();
 });
+
+// No Animation Mode - disable animations for visual regression testing
+// Triggered by ?noanimation query parameter
+function initBackstopMode() {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.has('noanimation')) return;
+
+  // Add class to disable all CSS animations/transitions
+  document.body.classList.add('no-animations');
+
+  // Immediately show all fade-in elements (don't wait for scroll)
+  document.querySelectorAll('.fade-in-up').forEach((el) => {
+    el.classList.add('is-visible');
+  });
+
+  // Immediately show hero elements (don't wait for animation)
+  document.querySelectorAll('.hero-animate').forEach((hero) => {
+    hero
+      .querySelectorAll('.hero__title, .hero__tagline, .hero__cta')
+      .forEach((el) => {
+        el.style.opacity = '1';
+        el.style.animation = 'none';
+      });
+  });
+}
 
 // Mobile Navigation
 function initMobileNav() {
