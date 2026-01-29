@@ -121,7 +121,7 @@ jobs:
         with:
           name: lighthouse-results-${{ matrix.page.name }}
           path: results/
-          retention-days: 3
+          retention-days: 1
 
   summary:
     name: Summary
