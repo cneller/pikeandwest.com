@@ -1,3 +1,7 @@
-{{ define "main" }} {{- partialCached "hero.html" . -}} {{- partialCached
-"venue-gallery.html" . -}} {{- partialCached "event-types.html" . -}} {{- partialCached
-"about.html" . -}} {{ end }}
+{{ define "main" }}
+{{- /* All homepage partials cached - they read only from site.Data files */ -}}
+{{- partialCached "hero.html" . -}}
+{{- partialCached "venue-gallery.html" . -}}
+{{- partialCached "event-types.html" . -}}
+{{- partialCached "about.html" . -}}
+{{ end }}

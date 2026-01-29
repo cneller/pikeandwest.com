@@ -250,6 +250,7 @@
 {{- end -}}
 
 {{/* 7. Speculation Rules - Instant page navigation (Chromium 109+) */}}
+{{/* Speculation rules cached - static JSON, no dynamic content */}}
 {{- partialCached "speculation-rules.html" . -}}
 
 {{/* 8. Fallback prefetch for non-Chromium browsers */}}

@@ -2,11 +2,12 @@
 <html lang="{{ .Site.LanguageCode | default "en-us" }}">
 <head>
   {{- partial "head.html" . -}}
+  {{- /* GTM partials cached - only use site.Params, identical on all pages */ -}}
   {{- partialCached "gtm-head.html" . -}}
 </head>
 <body{{ if .IsHome }} class="home"{{ end }}>
   {{- partialCached "gtm-body.html" . -}}
-  {{- /* Header cached - doesn't change per page */ -}}
+  {{- /* Header cached - uses site.Menus, identical on all pages */ -}}
   {{- partialCached "header.html" . -}}
 
   <main>
@@ -16,6 +17,7 @@
   {{- $isContactPage := and .File (eq .File.BaseFileName "contact") -}}
   {{- $is404Page := eq .Kind "404" -}}
   {{- if and (not $isContactPage) (not $is404Page) -}}
+    {{- /* CTA banner cached - only uses site.Data.cta_banner */ -}}
     {{- partialCached "cta-banner.html" . -}}
   {{- end -}}
   {{- /* Footer cached - doesn't change per page */ -}}
@@ -24,6 +26,7 @@
   {{- /* LocalBusiness Schema for SEO - cached since it's site-wide */ -}}
   {{- partialCached "schema-local-business.html" . -}}
 
+  {{- /* Scripts cached - static JS bundle, identical on all pages */ -}}
   {{- partialCached "scripts.html" . -}}
 </body>
 </html>
