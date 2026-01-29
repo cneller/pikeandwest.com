@@ -5,7 +5,7 @@
 .events {
   height: 50vh;
   max-height: 50vh;
-  margin: 0; // Webflow: no vertical margin - section flows directly after gallery
+  margin: 0;
   padding: 0 5%; // Side padding only
   background-color: $color-medium-gray;
   text-align: center;
@@ -92,39 +92,39 @@
 
   // Mobile landscape responsive (max-width: 767px)
   @media (max-width: $breakpoint-md) {
-    height: 75vh; // Webflow: .event-wrap-container height: 75vh at 767px
+    height: 75vh;
     max-height: 75vh;
 
     .events__heading {
-      font-size: 22px; // Webflow: .section-header-h2.drk-bkgrnd.mobile font-size: 22px
-      line-height: 1.5em; // Webflow: line-height: 1.5em
+      font-size: 22px;
+      line-height: 1.5em;
     }
 
     .events__grid {
-      grid-template-columns: repeat(3, 1fr); // Webflow: 3 columns at mobile
+      grid-template-columns: repeat(3, 1fr);
       grid-template-rows: 1fr 1fr; // 2 rows
     }
 
     .events__label {
-      font-size: 13px; // Webflow: .heading-3.events.mobile font-size: 13px
+      font-size: 13px;
     }
   }
 
   // Mobile portrait responsive (max-width: 479px)
   @media (max-width: $breakpoint-sm) {
-    height: auto; // Webflow: .event-wrap-container height: auto at 479px
+    height: auto;
     max-height: none;
     padding-top: $spacing-lg; // 24px explicit top padding
     padding-bottom: $spacing-lg;
 
     .events__heading {
-      font-size: 18px; // Webflow: .section-header-h2.drk-bkgrnd.mobile.vertical font-size: 18px
+      font-size: 18px;
       padding-top: 0;
       margin-bottom: $spacing-md;
     }
 
     .events__grid {
-      grid-template-columns: repeat(2, 1fr); // Webflow: 2 columns at 479px
+      grid-template-columns: repeat(2, 1fr);
       gap: 16px;
       padding-left: 20px;
       padding-right: 20px;

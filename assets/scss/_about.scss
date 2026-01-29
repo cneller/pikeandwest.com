@@ -3,27 +3,23 @@
 // =========================
 
 .about {
-  // Webflow: .section.cc-store-home-wrap exact values
   margin-top: 0;
-  margin-left: 1.875rem; // Webflow: 30px
+  margin-left: 1.875rem;
   margin-right: 1.875rem;
-  padding-top: 1.25rem; // Webflow: 20px
-  padding-bottom: 0; // Webflow: no bottom padding - content defines spacing
+  padding-top: 1.25rem;
+  padding-bottom: 0;
 
   &__heading {
     text-align: center;
-    // Webflow: heading margin-bottom 32px
     margin-bottom: 32px;
   }
 
   &__block {
     display: grid;
     grid-template-columns: 1fr;
-    // Webflow: column-gap 20px, row-gap 30px
     column-gap: 20px;
     row-gap: 30px;
     align-items: center;
-    // Webflow: first block margin-bottom 80px
     margin-bottom: 80px;
 
     @media (min-width: $breakpoint-md) {
@@ -31,7 +27,6 @@
     }
 
     &:last-child {
-      // Webflow: cc-about-2 has row-gap 20px, margin-bottom 40px
       row-gap: 20px;
       margin-bottom: 40px;
     }
@@ -58,7 +53,6 @@
   }
 
   &__subtitle {
-    // Webflow: .heading-2 exact values
     font-family: $font-primary; // Raleway, NOT Le Mores!
     font-size: 28px;
     font-weight: $font-weight-regular; // 400
@@ -68,12 +62,11 @@
     white-space: nowrap;
     color: $color-medium-gray;
     margin-top: 0;
-    margin-bottom: 10px; // Webflow: .heading-2.mobile.vertical margin-bottom: 10px
+    margin-bottom: 10px;
   }
 
   &__text {
     margin-bottom: $spacing-lg;
-    // Webflow .paragraph-light values
     opacity: 0.6;
     color: $color-medium-gray;
     letter-spacing: 0;
@@ -92,7 +85,7 @@
   // Tablet responsive (max-width: 991px)
   @media (max-width: $breakpoint-lg) {
     .about__block {
-      grid-row-gap: 20px; // Webflow: grid-row-gap: 20px
+      grid-row-gap: 20px;
       text-align: center;
       grid-template-columns: 1fr; // Single column at tablet
     }
@@ -100,12 +93,12 @@
 
   // Mobile landscape responsive (max-width: 767px)
   @media (max-width: $breakpoint-md) {
-    margin-left: 15px; // Webflow: section margin-left/right: 15px
+    margin-left: 15px;
     margin-right: 15px;
 
     .about__block {
       grid-column-gap: 0;
-      grid-row-gap: 0; // Webflow: grid-row-gap: 0 at 767px
+      grid-row-gap: 0;
     }
 
     .about__content {
@@ -113,7 +106,7 @@
     }
 
     .about__subtitle {
-      margin-top: 20px; // Webflow: .heading-2.mobile
+      margin-top: 20px;
       margin-bottom: 15px;
       font-size: 22px;
     }
@@ -127,20 +120,20 @@
     display: flex;
 
     .about__heading {
-      font-size: 24px; // Webflow: .section-heading font-size: 24px at 479px
+      font-size: 24px;
       margin-top: 15px;
       margin-bottom: 10px;
     }
 
     .about__subtitle {
-      margin-top: 15px; // Webflow: .heading-2.mobile.vertical
+      margin-top: 15px;
       margin-bottom: 10px;
       font-size: 15px;
     }
 
     .about__text {
-      font-size: 13px; // Webflow: .paragraph-light font-size: 13px at 479px
-      line-height: 1.5em; // Webflow: line-height: 1.5em (~19.5px at 13px)
+      font-size: 13px;
+      line-height: 1.5em;
       text-align: center;
 
       p {
@@ -149,7 +142,7 @@
     }
 
     .about__content {
-      padding-bottom: 30px; // Webflow: .home-section-wrap.mobile.vertical padding-bottom
+      padding-bottom: 30px;
     }
   }
 }

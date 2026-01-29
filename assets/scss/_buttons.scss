@@ -1,22 +1,21 @@
 // =========================
 // Buttons
 // =========================
-// Webflow button styles: .button-1-pw-black, .button-1-pw-cream
 
 .btn {
   display: inline-block;
-  padding: 9px 16px; // Webflow: 9px 16px
+  padding: 9px 16px;
   font-family: $font-primary; // Raleway
   font-size: 16px;
   font-weight: $font-weight-regular;
   text-transform: uppercase;
-  letter-spacing: 0.15em; // Webflow: 0.15em
+  letter-spacing: 0.15em;
   text-align: center;
   text-decoration: none;
   border: none;
   border-radius: 0;
   cursor: pointer;
-  margin-top: 20px; // Webflow default
+  margin-top: 20px;
 
   // Micro-animation: gentle lift + shadow on hover
   transition:
@@ -49,7 +48,6 @@
 }
 
 // Secondary button (cream filled - used in hero)
-// Webflow: .button-1-pw-cream
 .btn-secondary {
   background-color: $color-cream; // #fff7e1
   color: $color-medium-gray; // #434345
@@ -64,7 +62,6 @@
   }
 }
 
-// Dark button (charcoal filled) - Webflow: .button-1-pw-black
 .btn-dark {
   background-color: $color-medium-gray; // #434345
   color: $color-cream;
@@ -80,11 +77,10 @@
   }
 }
 
-// Outline button (for dark backgrounds) - Webflow: .button-1-pw-cream.outline
 .btn-outline {
   background-color: transparent;
   color: $color-cream;
-  border: 1.5px solid $color-cream; // Webflow: 1.5px
+  border: 1.5px solid $color-cream;
 
   &:hover {
     background-color: rgba($color-cream, 0.1);

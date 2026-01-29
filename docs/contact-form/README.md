@@ -237,7 +237,6 @@ The shimmer skeleton uses these measurements to create a pixel-accurate loading 
 ## Related Documentation
 
 - [Contact Page Layout](../architecture/decisions/ADR-006-contact-form-shimmer.md) - Architecture decision record
-- [CSS Mapping](../webflow-to-hugo-css-mapping.md) - Webflow to Hugo style mapping
 
 ---
 

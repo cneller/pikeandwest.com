@@ -143,7 +143,6 @@
 }
 
 // Visibility
-// Mobile: 767px and below (matches Webflow mobile landscape breakpoint)
 @media (max-width: $breakpoint-md) {
   .hide-mobile {
     display: none !important;

@@ -346,7 +346,6 @@ Before launching this strategy, establish baselines by:
 
 - [Analytics Strategy](../analytics/README.md) - GTM/GA4 configuration and tracking setup
 - [Next Steps](../next-steps.md) - Current project status and priorities
-- [Website CSS Mapping](../webflow-to-hugo-css-mapping.md) - Design system reference
 
 ---
 

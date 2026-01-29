@@ -4,19 +4,17 @@
 // =========================
 
 .venue-gallery {
-  // Webflow: .section_gallery17 + .padding-section-large
-  overflow: hidden; // Webflow: section_gallery17 overflow: hidden
-  padding-top: 1.75rem; // Webflow: 28px
-  padding-bottom: 1.75rem; // Webflow: 28px
+  overflow: hidden;
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
   text-align: center;
 
   &__heading {
-    // Webflow .heading-2 values
-    font-family: $font-display; // Le Mores Collection Serif (Webflow .h1-les-mores-blk)
+    font-family: $font-display;
     font-size: 28px;
     font-weight: $font-weight-regular; // 400
     line-height: 1.15em; // 32.2px at 28px
-    letter-spacing: 0.1em; // Webflow .h1-les-mores-blk value
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     white-space: nowrap;
     text-align: center;
@@ -39,7 +37,7 @@
     display: flex;
     gap: $spacing-md;
     padding: 0 $spacing-md;
-    padding-bottom: 64px; // Webflow: 4rem
+    padding-bottom: 64px;
     margin: 0;
     list-style: none;
 
@@ -129,14 +127,14 @@
   }
 
   &__arrow {
-    width: 56px; // Was 40px - Webflow uses 56px
-    height: 56px; // Was 40px - Webflow uses 56px
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba($color-white, 0.6);
     border: none;
-    border-radius: 100%; // Match Webflow
+    border-radius: 100%;
     cursor: pointer;
     pointer-events: auto;
     transition: all $transition-fast;
@@ -162,33 +160,33 @@
 
   // Tablet responsive (max-width: 991px)
   @media (max-width: $breakpoint-lg) {
-    padding-top: 6rem; // Webflow: 96px at 991px
+    padding-top: 6rem;
     padding-bottom: 6rem;
 
     .venue-gallery__arrow {
-      width: 48px; // Webflow: gallery17_arrow 3rem = 48px at 991px
+      width: 48px;
       height: 48px;
     }
   }
 
   // Mobile landscape responsive (max-width: 767px)
   @media (max-width: $breakpoint-md) {
-    padding-top: 4rem; // Webflow: 64px at 767px
+    padding-top: 4rem;
     padding-bottom: 4rem;
 
     .venue-gallery__heading {
-      margin-top: 20px; // Webflow: .heading-2.mobile margin-top: 20px
-      margin-bottom: 15px; // Webflow: margin-bottom: 15px
-      font-size: 22px; // Webflow: font-size: 22px
+      margin-top: 20px;
+      margin-bottom: 15px;
+      font-size: 22px;
     }
 
     .venue-gallery__track {
-      padding-bottom: 48px; // Webflow: 3rem at 767px
+      padding-bottom: 48px;
       gap: $spacing-sm;
     }
 
     .venue-gallery__slide {
-      padding-left: 12px; // Webflow: .75rem
+      padding-left: 12px;
       padding-right: 12px;
     }
 

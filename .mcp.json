@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "webflow": {
-      "type": "sse",
-      "url": "https://mcp.webflow.com/sse"
-    }
-  }
-}

@@ -1,7 +1,6 @@
 // =========================
 // Hero Section
 // =========================
-// Matches Webflow .hero-header-section implementation
 // Uses background-image (taller 1920x1080) at ALL breakpoints
 // The <img> element exists for potential future use but is hidden
 
@@ -51,7 +50,6 @@
   }
 
   // ===== Title =====
-  // Webflow: .h1-crm-les-mores
   &__title {
     font-family: $font-display;
     font-size: 32px;
@@ -86,7 +84,6 @@
   }
 
   // ===== BREAKPOINT: 767px (Mobile Landscape) =====
-  // Webflow keeps using background-image (taller 1920x1080) at mobile
   // with background-size: cover - NOT the <img> element
   @media (max-width: $breakpoint-md) {
     display: flex;
@@ -98,7 +95,7 @@
     max-height: 50vh;
     background-position: calc(50% - 80px) 50%; // Shift to center door/walkway
 
-    // Hide the <img> element - Webflow uses background-image at mobile
+   
     &__image {
       display: none;
     }
@@ -131,7 +128,7 @@
     padding-top: 15px;
     background-position: calc(50% - 80px) 70%; // Shift down to show door below text
 
-    // Hide the <img> element - Webflow uses background-image at mobile
+   
     &__image {
       display: none;
     }
@@ -159,7 +156,6 @@
 }
 
 // ===== Tagline =====
-// Webflow: .hero-subheader-1
 .tagline {
   font-family: $font-secondary;
   font-size: 22px;
@@ -170,7 +166,7 @@
   color: $color-cream;
   margin-top: 15px;
 
-  // Desktop modifier (Webflow: .hero-subheader-1.desktop)
+ 
   .hero & {
     font-size: 18px;
   }

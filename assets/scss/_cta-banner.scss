@@ -1,24 +1,22 @@
 // =========================
 // CTA Banner Section
 // =========================
-// Webflow: .section.cc-cta (lines 207-225)
-// Webflow: .cta-heading (lines 504-513)
 
 .cta-banner {
   position: relative;
   height: 50vh;
-  margin: 0; // Webflow: no margin on .section.cc-cta
+  margin: 0;
   padding-top: 0;
   padding-bottom: 0;
-  padding-left: 5rem; // 80px - Webflow: padding-left: 5rem
-  padding-right: 5rem; // 80px - Webflow: padding-right: 5rem
+  padding-left: 5rem;
+  padding-right: 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   background-size: cover;
-  background-position: 50%; // Webflow: background-position: 50%
+  background-position: 50%;
   background-repeat: no-repeat;
 
   // Semi-transparent cream overlay for improved text contrast
@@ -45,11 +43,11 @@
     font-family: $font-display;
     font-size: 36px;
     font-weight: $font-weight-regular; // 400
-    line-height: 1.5em; // 54px at 36px - Webflow uses 1.5em
+    line-height: 1.5em;
     color: $color-medium-gray; // #434345
     text-transform: none;
-    margin-top: 10px; // Webflow: margin-top: 10px
-    margin-bottom: 15px; // Webflow: margin-bottom: 15px
+    margin-top: 10px;
+    margin-bottom: 15px;
   }
 
   &__text {
@@ -61,29 +59,29 @@
 
   // Tablet responsive (max-width: 991px)
   @media (max-width: $breakpoint-lg) {
-    padding-left: 0; // Webflow: padding-left/right: 0 at 991px
+    padding-left: 0;
     padding-right: 0;
   }
 
   // Mobile landscape responsive (max-width: 767px)
   @media (max-width: $breakpoint-md) {
-    padding: 15px; // Webflow: padding: 15px at 767px
+    padding: 15px;
 
     .cta-banner__heading {
-      font-size: 30px; // Webflow: .cta-heading font-size: 30px
-      line-height: 52px; // Webflow: line-height: 52px
+      font-size: 30px;
+      line-height: 52px;
     }
 
     .cta-banner__text {
-      font-size: 16px; // Webflow: .paragraph-bigger font-size: 16px at 767px
-      line-height: 28px; // Webflow: line-height: 28px
+      font-size: 16px;
+      line-height: 28px;
     }
   }
 
   // Mobile portrait responsive (max-width: 479px)
   @media (max-width: $breakpoint-sm) {
     .cta-banner__heading {
-      line-height: 1.5em; // Webflow: line-height: 1.5em at 479px
+      line-height: 1.5em;
     }
   }
 }

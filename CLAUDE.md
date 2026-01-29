@@ -1,4 +1,4 @@
-# Pike & West - Hugo Migration Project
+# Pike & West - Website
 
 **See [README.md](README.md) for quick start, badges, and contributor overview.**
 
@@ -394,7 +394,6 @@ This ensures consistent editorial quality and proper content index maintenance.
 
 - **[Next Steps](docs/next-steps.md)** - Current project status and upcoming work (keep updated)
 - **[Analytics Strategy](docs/analytics/README.md)** - GTM/GA4 configuration and cross-domain tracking
-- **[Site Analysis](docs/site-analysis/current-site-documentation.md)** - Original site documentation
 - **[Architecture Decisions](docs/architecture/decisions/)** - ADRs for key technical decisions
 - **[Implementation Patterns](docs/architecture/patterns/)** - Reusable code patterns
 - **[DNS Configuration](docs/infrastructure/dns-configuration.md)** - Hugo & Cloudflare Pages setup
@@ -489,6 +488,23 @@ hugo version  # Minimum: v0.146.0+extended
 - **NEVER** use JavaScript where CSS can accomplish the same effect
 - **NEVER** break existing URL paths (maintain SEO)
 
+### Git Commit Strategy
+
+Use grouped, semantic commits. A hook (`.claude/hooks/semantic-commit-check.sh`) enforces this:
+
+- **On commit**: Analyzes staged files, reminds to include all related changes
+- **On push**: Reviews commit count, suggests squashing if fragmented
+
+**Quick reference:**
+
+| Commit Type  | Scope Example                 |
+|--------------|-------------------------------|
+| `feat(hero)` | All files for hero feature    |
+| `fix(nav)`   | Bug fix + related adjustments |
+| `docs`       | Batch related doc updates     |
+
+Group template + styles + content for the same feature. Don't split tightly-coupled changes.
+
 ### Partial Template Standards
 
 ```go-html-template
@@ -581,7 +597,7 @@ config `public_folder` must use `/images/...` for singletons.
 ```toml
 # config/_default/params.toml
 [analytics]
-  googleTagManager = "GTM-XXXXXX"  # Get from current Webflow site
+  googleTagManager = "GTM-XXXXXX"
 ```
 
 ### Social Media & Contact Information
@@ -738,25 +754,6 @@ hugo --templateMetrics --templateMetricsHints
 hugo new content/page-name.md
 ```
 
-## Scripts
-
-### DNS Switch (`scripts/dns-switch.sh`)
-
-```bash
-# Required environment variables
-export CF_API_TOKEN="your-cloudflare-api-token"
-export CF_ZONE_ID="your-zone-id"
-
-# Check current DNS configuration
-./scripts/dns-switch.sh status
-
-# Switch to Hugo (Cloudflare Pages)
-./scripts/dns-switch.sh hugo
-
-**Prerequisites:** `jq` installed, Cloudflare API token with `Zone.DNS (Edit)` permission.
-
-See [DNS Configuration](docs/infrastructure/dns-configuration.md) for full details.
-
 ## Project Status & Next Steps
 
 **Current project status and upcoming work is tracked in [docs/next-steps.md](docs/next-steps.md).**
@@ -798,4 +795,7 @@ See [DNS Configuration](docs/infrastructure/dns-configuration.md) for full detai
 - [New Template System (v0.146.0)](https://gohugo.io/templates/new-templatesystem-overview/)
 - [Hugo Partial Templates](https://cloudcannon.com/tutorials/hugo-beginner-tutorial/hugo-partials/)
 - [Building Hugo Themes with Go Templates](https://dasroot.net/posts/2025/12/building-hugo-themes-with-go-templates/)
+
+```
+
 ```

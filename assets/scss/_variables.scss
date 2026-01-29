@@ -20,7 +20,6 @@ $color-background: $color-white;
 
 // Typography
 // Le Mores Collection Serif - Display font for headlines (h1, h2)
-// Custom font from Webflow export - loaded via @font-face in _fonts.scss
 $font-display: 'Le Mores Collection Serif', serif;
 $font-primary: 'Raleway', sans-serif; // Used for buttons, nav, h3+
 $font-secondary: 'Montserrat', sans-serif; // Body text
@@ -54,12 +53,11 @@ $spacing-2xl: 3rem; // 48px
 $spacing-3xl: 4rem; // 64px
 $spacing-4xl: 6rem; // 96px
 
-// Breakpoints (aligned with Webflow export)
-$breakpoint-sm: 479px; // Webflow: max-width: 479px (mobile portrait)
-$breakpoint-md: 767px; // Webflow: max-width: 767px (mobile landscape)
-$breakpoint-lg: 991px; // Webflow: max-width: 991px (tablet)
-$breakpoint-xl: 1280px; // Webflow: min-width: 1280px (large desktop)
-$breakpoint-2xl: 1920px; // Webflow: min-width: 1920px (ultra-wide)
+$breakpoint-sm: 479px;
+$breakpoint-md: 767px;
+$breakpoint-lg: 991px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1920px;
 
 // Container
 $container-max-width: 1280px;

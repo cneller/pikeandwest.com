@@ -9,7 +9,7 @@ This document tracks the current project state and upcoming work. Keep this file
 
 | Area               | Status    | Notes                                                        |
 |--------------------|-----------|--------------------------------------------------------------|
-| Hugo Site          | Complete  | All pages migrated from Webflow                              |
+| Hugo Site          | Complete  | All pages live                                               |
 | Staging Deployment | Active    | beta.pikeandwest.com on Cloudflare Pages                     |
 | GTM/GA4 Analytics  | Verified  | Tracking active, cross-domain configured                     |
 | Production Domain  | Active    | pikeandwest.com on Cloudflare Pages (naked domain canonical) |
@@ -79,13 +79,6 @@ Complete before switching production DNS:
 - [ ] Confirm no self-referrals from tix.pikeandwest.com
 - [ ] Test full user journey: homepage → ticket page → purchase
 - [ ] Implement `contact_request` event for contact form
-
-### Visual Parity
-
-- [ ] Run BackstopJS visual regression tests against Webflow
-- [ ] Fix any typography discrepancies (see [typography audit](./audits/2026-01-20-typography-audit.md))
-- [ ] Verify all breakpoints match Webflow exactly
-- [ ] Test all hover states and animations
 
 ### SEO
 
@@ -216,11 +209,11 @@ hugo --templateMetrics
 
 ### Technical Debt (Priority: Low)
 
-| Item                                | Notes                                                                                           |
-|-------------------------------------|-------------------------------------------------------------------------------------------------|
-| CSS custom properties               | Consider adding `:root` variables per [SCSS audit](./audits/2026-01-20-scss-variables-audit.md) |
-| Remove unused Playfair Display font | Loaded but not used per [typography audit](./audits/2026-01-20-typography-audit.md)             |
-| Image lazy loading audit            | Verify all below-fold images have `loading="lazy"`                                              |
+| Item                                | Notes                                              |
+|-------------------------------------|----------------------------------------------------|
+| CSS custom properties               | Consider adding `:root` variables                  |
+| Remove unused Playfair Display font | Loaded but not used                                |
+| Image lazy loading audit            | Verify all below-fold images have `loading="lazy"` |
 
 ## Privacy Considerations
 
@@ -238,8 +231,6 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 - [Analytics Strategy](./analytics/README.md)
 - [Contact Form Shimmer](./contact-form/README.md) - HubSpot form measurements and shimmer specs
 - [Cross-Domain Tracking Verification](./cross-domain-tracking-verification.md)
-- [CSS Mapping](./webflow-to-hugo-css-mapping.md)
-- [Site Analysis](./site-analysis/current-site-documentation.md)
 - [Architecture Decisions](./architecture/decisions/) - ADRs for key technical choices
 - [Implementation Patterns](./architecture/patterns/) - Reusable code patterns
 - [Marketing Strategy](./marketing-strategy/README.md) - Comprehensive marketing docs
@@ -365,9 +356,7 @@ Per [GA4 cross-domain tracking best practices](https://usercentrics.com/guides/s
 | 2026-01-20 | Added architecture docs (4 ADRs, 2 pattern docs)                                                                                        |
 | 2026-01-20 | Added marketing strategy documentation suite                                                                                            |
 | 2026-01-20 | Added pre-commit docs check hook for documentation reminders                                                                            |
-| 2026-01-20 | SCSS visual parity refinements across all sections                                                                                      |
 | 2026-01-20 | Added 3 backdated blog posts (Oct-Dec 2025) targeting Baby Shower, Anniversary, Birthday personas                                       |
 | 2026-01-20 | Added blog posts to Lighthouse performance testing matrix                                                                               |
 | 2026-01-20 | Added accessible breadcrumb navigation to blog pages with JSON-LD schema                                                                |
 | 2026-01-20 | SEO audit fixes merged (keywords, titles, og_image, expanded blog content)                                                              |
-| 2026-01-20 | Added hero text alignment as top priority (still too far left from logo)                                                                |

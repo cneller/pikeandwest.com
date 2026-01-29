@@ -7,15 +7,15 @@
   top: 0;
   left: 0;
   z-index: $z-index-header;
-  background-color: $color-white; // Webflow: white background
-  height: auto; // Webflow: height: auto
-  min-height: 4.5rem; // Webflow: min-height: 4.5rem (72px)
-  width: 100%; // Webflow: width: 100%
+  background-color: $color-white;
+  height: auto;
+  min-height: 4.5rem;
+  width: 100%;
   display: flex;
   align-items: center;
-  padding: 0 5%; // Webflow: padding-left/right: 5%
+  padding: 0 5%;
 
-  // Border bottom like Webflow
+ 
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   &__container {
@@ -37,7 +37,6 @@
   }
 
   // Hamburger menu button - tablet and below (991px and below)
-  // Webflow: hamburger appears at 991px breakpoint
   // Standard size: 30x24px touch target, 24x3px bars
   // Option 7: hover spread + staggered timing + elastic ease + gold color
   &__hamburger {
@@ -164,7 +163,7 @@
     gap: $spacing-md;
 
     // Mobile nav - hidden by default, shown when hamburger is open
-    // Tablet and below (991px and below) - Webflow breakpoint
+   
     @media (max-width: $breakpoint-lg) {
       // Use flex always, control visibility with other properties
       display: flex;
@@ -205,16 +204,15 @@
     }
   }
 
-  // Webflow: .navigation-item
   &__link {
     position: relative;
     font-family: $font-primary; // Raleway
-    font-size: 12px; // Webflow: 12px
-    font-weight: $font-weight-medium; // Webflow: 500
+    font-size: 12px;
+    font-weight: $font-weight-medium;
     text-transform: uppercase;
-    letter-spacing: 0.1em; // Webflow: 0.1em
-    line-height: 20px; // Webflow: 20px
-    padding: 12px 25px; // Webflow: 0.75rem 1.5625rem (12px 25px)
+    letter-spacing: 0.1em;
+    line-height: 20px;
+    padding: 12px 25px;
     border: 1px solid $color-gold;
     text-decoration: none;
     // Micro-animation: gentle lift + glow
@@ -247,7 +245,7 @@
       }
     }
 
-    // Secondary/Outline: white with gold border (Webflow: .is-secondary)
+   
     &--outline {
       background-color: $color-white;
       color: $color-gold;
@@ -264,19 +262,19 @@
 // Tablet responsive (max-width: 991px)
 @media (max-width: $breakpoint-lg) {
   .header {
-    min-height: 4rem; // Webflow: min-height: 4rem (64px) at tablet
-    padding: 0 30px; // Webflow: navbar1_component has no vertical padding
+    min-height: 4rem;
+    padding: 0 30px;
   }
 }
 
 // Mobile landscape responsive (max-width: 767px)
 @media (max-width: $breakpoint-md) {
   .header {
-    min-height: 4rem; // Webflow: navbar1_component min-height: 4rem
-    padding: 0 30px; // Webflow: navbar1_component has no vertical padding
+    min-height: 4rem;
+    padding: 0 30px;
 
     &__logo {
-      padding-left: 0; // Webflow: .logo-link padding-left: 0
+      padding-left: 0;
     }
   }
 }
@@ -284,7 +282,7 @@
 // Mobile portrait responsive (max-width: 479px)
 @media (max-width: $breakpoint-sm) {
   .header {
-    padding: 0 20px; // Webflow: navbar1_component has no vertical padding
+    padding: 0 20px;
   }
 }
 

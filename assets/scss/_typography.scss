@@ -2,11 +2,10 @@
 // Typography
 // =========================
 
-// Headings - Webflow exact values (pikeandwest.webflow.css lines 69-99)
 
 h1,
 .h1 {
-  color: $color-medium-gray; // Webflow: #434345
+  color: $color-medium-gray;
   margin-top: 20px;
   margin-bottom: 15px;
   font-family: $font-display; // Le Mores Collection Serif
@@ -28,7 +27,7 @@ h2,
 
 h3,
 .h3 {
-  color: $color-cream; // Webflow: #fff7e1
+  color: $color-cream;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin-top: 10px;
@@ -43,7 +42,7 @@ h4,
 .h4 {
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 24px; // Webflow: 24px
+  font-size: 24px;
   font-weight: $font-weight-regular; // 400
   line-height: 38px;
 }
@@ -52,7 +51,7 @@ h5,
 .h5 {
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 20px; // Webflow: 20px
+  font-size: 20px;
   font-weight: $font-weight-medium; // 500
   line-height: 34px;
 }
@@ -61,7 +60,7 @@ h6,
 .h6 {
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 16px; // Webflow: 16px
+  font-size: 16px;
   font-weight: $font-weight-medium; // 500
   line-height: 28px;
 }
