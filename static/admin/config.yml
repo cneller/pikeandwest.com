@@ -611,13 +611,13 @@ singletons:
         name: background_image
         widget: image
         media_folder: /static/images/hero
-        public_folder: images/hero
+        public_folder: /images/hero
         hint: '1920x1080px. Tall image for desktop CSS background.'
       - label: Foreground Image
         name: foreground_image
         widget: image
         media_folder: /static/images/hero
-        public_folder: images/hero
+        public_folder: /images/hero
         hint: '1920x800px. Wider image for mobile.'
       - label: Image Alt Text
         name: image_alt
@@ -647,7 +647,7 @@ singletons:
         name: background_image
         widget: image
         media_folder: /static/images/venue
-        public_folder: images/venue
+        public_folder: /images/venue
 
   # ----------------------------------------------------------
   # About Section
@@ -689,7 +689,7 @@ singletons:
                 name: src
                 widget: image
                 media_folder: /static/images/about
-                public_folder: images/about
+                public_folder: /images/about
               - { label: Alt Text, name: alt, widget: string }
           - label: Reverse Layout
             name: reverse
@@ -795,7 +795,7 @@ singletons:
             name: src
             widget: image
             media_folder: /static/images/venue
-            public_folder: images/venue
+            public_folder: /images/venue
           - label: Alt Text
             name: alt
             widget: string
@@ -852,7 +852,7 @@ singletons:
         name: background_image
         widget: image
         media_folder: /static/images/venue
-        public_folder: images/venue
+        public_folder: /images/venue
       - label: Image Alt Text
         name: image_alt
         widget: string

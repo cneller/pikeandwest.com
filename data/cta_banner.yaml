@@ -6,4 +6,4 @@ text: "Host your next event at Pike & West and create unforgettable memories!"
 cta:
   text: "Book a Tour"
   link: "/contact/"
-background_image: "images/venue/venue-08-disco-background.jpg"
+background_image: "/images/venue/venue-08-disco-background.jpg"
