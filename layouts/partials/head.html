@@ -51,6 +51,17 @@
 {{/* Canonical URL - supports custom canonical via front matter */}}
 <link rel="canonical" href="{{ with .Params.canonical }}{{ . }}{{ else }}{{ .Permalink }}{{ end }}" />
 
+{{/* Pagination SEO - rel="prev/next" for search engines and accessibility */}}
+{{/* Only list pages (section, taxonomy, home) support pagination - single pages error on .Paginator */}}
+{{- if and .IsNode (gt .Paginator.TotalPages 1) -}}
+  {{- if .Paginator.HasPrev -}}
+<link rel="prev" href="{{ .Paginator.Prev.URL | absURL }}" />
+  {{- end -}}
+  {{- if .Paginator.HasNext -}}
+<link rel="next" href="{{ .Paginator.Next.URL | absURL }}" />
+  {{- end -}}
+{{- end -}}
+
 {{/* Open Graph - reuse $title and $description for consistency */}}
 {{- $ogTitle := .Title -}}
 {{- if eq .Kind "404" -}}

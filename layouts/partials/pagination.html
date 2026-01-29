@@ -1,0 +1,46 @@
+{{/*
+  Custom Blog Pagination
+  - Understated typography style matching Pike & West luxury brand
+  - Accessible: nav landmark, aria-current, aria-labels
+  - Responsive: hides page numbers on mobile, shows prev/next only
+  - SEO: rel="prev/next" on navigation links
+*/}}
+{{ $pag := .Paginator }}
+{{ if gt $pag.TotalPages 1 }}
+<nav class="blog-pagination" aria-label="Blog pagination">
+  <p class="blog-pagination__context">
+    Page {{ $pag.PageNumber }} of {{ $pag.TotalPages }}
+  </p>
+
+  <ul class="blog-pagination__list">
+    {{/* Previous */}}
+    <li class="blog-pagination__item blog-pagination__item--prev">
+      {{ if $pag.HasPrev }}
+        <a href="{{ $pag.Prev.URL }}" rel="prev" aria-label="Go to previous page">&larr; Previous</a>
+      {{ else }}
+        <span class="blog-pagination__disabled" aria-hidden="true">&larr; Previous</span>
+      {{ end }}
+    </li>
+
+    {{/* Page numbers (hidden on mobile via CSS) */}}
+    {{ range $pag.Pagers }}
+      <li class="blog-pagination__item blog-pagination__item--number">
+        {{ if eq . $pag }}
+          <span aria-current="page" class="blog-pagination__current">{{ .PageNumber }}</span>
+        {{ else }}
+          <a href="{{ .URL }}" aria-label="Go to page {{ .PageNumber }}">{{ .PageNumber }}</a>
+        {{ end }}
+      </li>
+    {{ end }}
+
+    {{/* Next */}}
+    <li class="blog-pagination__item blog-pagination__item--next">
+      {{ if $pag.HasNext }}
+        <a href="{{ $pag.Next.URL }}" rel="next" aria-label="Go to next page">Next &rarr;</a>
+      {{ else }}
+        <span class="blog-pagination__disabled" aria-hidden="true">Next &rarr;</span>
+      {{ end }}
+    </li>
+  </ul>
+</nav>
+{{ end }}

@@ -60,7 +60,7 @@
       {{ end }}
     </div>
     {{/* Pagination */}}
-    {{ template "_internal/pagination.html" . }}
+    {{ partial "pagination.html" . }}
     {{ else }}
     <p class="blog-list__empty">No blog posts yet. Check back soon!</p>
     {{ end }}

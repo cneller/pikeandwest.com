@@ -1,60 +1,115 @@
 // =========================
-// Pagination
+// Blog Pagination
 // =========================
-// Styles for Hugo's built-in pagination template
+// Understated typography-driven pagination for luxury brand
+// Desktop: Prev + numbered pages + Next
+// Mobile: Prev/Next only with page context
 
-.pagination {
+.blog-pagination {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 3rem;
-  padding: 1rem 0;
-  list-style: none;
+  margin-top: $spacing-3xl;
+  padding: $spacing-xl 0;
 
-  li {
-    display: inline-block;
+  // Page context: "Page 2 of 3"
+  &__context {
+    font-family: $font-secondary;
+    font-size: $font-size-sm;
+    color: $color-text-light;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: $spacing-md;
   }
 
-  a,
-  .page-item.active .page-link,
-  .page-item.disabled .page-link {
+  // Navigation list
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // Individual items
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Links and current page base styles
+  &__list a,
+  &__current,
+  &__disabled {
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    padding: $spacing-sm $spacing-md;
+    min-height: 48px;
+    min-width: 48px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 2.5rem;
-    height: 2.5rem;
-    padding: 0.5rem 0.75rem;
-    font-family: $font-primary;
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-decoration: none;
-    border: 1px solid $color-gold;
-    transition: all 0.2s ease;
+    transition: color $transition-fast;
   }
 
-  a {
+  // Active links
+  &__list a {
+    color: $color-text;
+
+    &:hover,
+    &:focus {
+      color: $color-gold;
+    }
+
+    &:focus {
+      outline: 2px solid $color-gold;
+      outline-offset: 2px;
+    }
+  }
+
+  // Current page (not a link)
+  &__current {
     color: $color-gold;
-    background-color: transparent;
-
-    &:hover {
-      background-color: $color-gold;
-      color: $color-white;
-    }
+    font-weight: $font-weight-semibold;
   }
 
-  .page-item {
-    &.active .page-link {
-      background-color: $color-gold;
-      color: $color-white;
-      cursor: default;
+  // Disabled prev/next
+  &__disabled {
+    color: rgba($color-text-light, 0.4);
+    cursor: default;
+  }
+
+  // =========================
+  // Mobile Adaptation (≤767px)
+  // =========================
+  @media (max-width: $breakpoint-md) {
+    // Hide page numbers on mobile
+    &__item--number {
+      display: none;
     }
 
-    &.disabled .page-link {
-      color: rgba($color-medium-gray, 0.5);
-      border-color: rgba($color-medium-gray, 0.3);
-      cursor: not-allowed;
-      pointer-events: none;
+    // Larger context text since numbers are hidden
+    &__context {
+      font-size: $font-size-base;
+      font-weight: $font-weight-medium;
+      margin-bottom: $spacing-lg;
+    }
+
+    // Wider spacing for thumb reach
+    &__list {
+      gap: $spacing-2xl;
+    }
+
+    // Larger touch targets
+    &__list a,
+    &__current,
+    &__disabled {
+      font-size: $font-size-base;
+      padding: $spacing-md $spacing-lg;
     }
   }
 }
