@@ -1,0 +1,68 @@
+# Category metadata for the categories page redesign
+# Images reference files in static/images/categories/
+
+groups:
+  - name: "Wedding & Relationship"
+    slug: "wedding-relationship"
+    categories:
+      - name: "Weddings"
+        slug: "weddings"
+        image: "/images/categories/weddings-1.jpg"
+      - name: "Engagement Parties"
+        slug: "engagement-parties"
+        image: "/images/categories/engagement-parties-1.jpg"
+      - name: "Anniversaries"
+        slug: "anniversaries"
+        image: "/images/categories/anniversaries-1.jpg"
+
+  - name: "Coming of Age"
+    slug: "coming-of-age"
+    categories:
+      - name: "Bar Mitzvah"
+        slug: "bar-mitzvah"
+        image: "/images/categories/bar-mitzvah-1.jpg"
+      - name: "Bat Mitzvah"
+        slug: "bat-mitzvah"
+        image: "/images/categories/bat-mitzvah-1.jpg"
+      - name: "Quinceañera"
+        slug: "quinceanera"
+        image: "/images/categories/quinceanera-1.jpg"
+      - name: "Graduations"
+        slug: "graduations"
+        image: "/images/categories/graduations-1.jpg"
+      - name: "Birthdays"
+        slug: "birthdays"
+        image: "/images/categories/birthdays-1.jpg"
+
+  - name: "Baby & Family"
+    slug: "baby-family"
+    categories:
+      - name: "Baby Showers"
+        slug: "baby-showers"
+        image: "/images/categories/baby-showers-1.jpg"
+      - name: "Family Reunions"
+        slug: "family-reunions"
+        image: "/images/categories/family-reunions-1.jpg"
+
+  - name: "Youth & Teen"
+    slug: "youth-teen"
+    categories:
+      - name: "Daddy Daughter Dances"
+        slug: "daddy-daughter-dances"
+        image: "/images/categories/daddy-daughter-dances-1.jpg"
+      - name: "Prom Send-Offs"
+        slug: "prom-send-offs"
+        image: "/images/categories/prom-send-offs-1.jpg"
+
+  - name: "Professional & Social"
+    slug: "professional-social"
+    categories:
+      - name: "Corporate Events"
+        slug: "corporate-events"
+        image: "/images/categories/corporate-events-1.jpg"
+      - name: "Holiday Parties"
+        slug: "holiday-parties"
+        image: "/images/categories/holiday-parties-1.jpg"
+      - name: "Retirement"
+        slug: "retirement"
+        image: "/images/categories/retirement-1.jpg"
