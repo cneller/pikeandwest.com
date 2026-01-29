@@ -7,3 +7,6 @@
 #
 # Add any path-level redirects below (relative URLs only):
 
+# Redirect old categories URL to new location
+/categories/ /blog/categories/ 301
+/categories/* /blog/categories/:splat 301

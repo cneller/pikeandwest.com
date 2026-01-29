@@ -24,6 +24,18 @@ enableRobotsTXT = false
   changefreq = "monthly"
   priority = 0.5
 
+# Taxonomy configuration
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+# Move categories under /blog/
+[permalinks]
+  [permalinks.term]
+    categories = "/blog/categories/:slug/"
+  [permalinks.taxonomy]
+    categories = "/blog/categories/"
+
 # Module mounts: make static/images available as Hugo assets so that
 # resources.Get "images/..." continues to work after moving images from
 # assets/images/ to static/images/ (required for Sveltia CMS visibility).
