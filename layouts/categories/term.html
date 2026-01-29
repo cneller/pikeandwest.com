@@ -1,0 +1,100 @@
+{{/* layouts/categories/term.html */}}
+{{/*
+  Purpose: Display posts in a specific category
+  Context: Individual category page (e.g., /blog/categories/weddings/)
+*/}}
+{{ define "main" }}
+{{/* Find category image from data file */}}
+{{ $categoryImage := "" }}
+{{ $categorySlug := .Page.Title | urlize }}
+{{ range .Site.Data.categories.groups }}
+  {{ range .categories }}
+    {{ if eq .slug $categorySlug }}
+      {{ $categoryImage = .image }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Hero */}}
+{{ $heroImage := "" }}
+{{ if $categoryImage }}
+  {{ $imgPath := strings.TrimPrefix "/" $categoryImage }}
+  {{ $heroImage = resources.Get $imgPath }}
+{{ end }}
+{{ if not $heroImage }}
+  {{ $heroImage = resources.Get "images/photos/venue-06-soft-seating.jpg" }}
+{{ end }}
+{{ $heroBg := "" }}
+{{ if $heroImage }}
+  {{ $heroBg = ($heroImage.Resize "1920x q85").RelPermalink }}
+{{ end }}
+
+<section class="blog-hero" style="background-image: url('{{ $heroBg }}');">
+  <div class="blog-hero__content">
+    <h1 class="blog-hero__title">{{ .Title }}</h1>
+    <p class="blog-hero__subtitle">{{ len .Pages }} {{ if eq (len .Pages) 1 }}post{{ else }}posts{{ end }}</p>
+  </div>
+</section>
+
+{{/* Breadcrumb */}}
+{{ partial "breadcrumb.html" (dict "Page" . "accentBar" true) }}
+
+{{/* Posts Grid */}}
+<section class="blog-list section">
+  <div class="container">
+    {{ if .Pages }}
+    <div class="blog-list__grid">
+      {{ range .Pages.ByDate.Reverse }}
+      {{ $page := . }}
+      <article class="blog-card">
+        {{/* Stretched link overlay - makes entire card clickable */}}
+        <a href="{{ $page.RelPermalink }}" class="blog-card__link-overlay" aria-label="Read {{ $page.Title }}"></a>
+        {{ with .Params.image }}
+        {{ $img := $page.Resources.GetMatch . }}
+        {{ if not $img }}
+          {{ $img = resources.Get . }}
+        {{ end }}
+        {{ if $img }}
+        {{ $resized := $img.Fill "600x400 q85" }}
+        <div class="blog-card__image-wrapper">
+          <img
+            src="{{ $resized.RelPermalink }}"
+            alt="{{ $page.Params.image_alt | default $page.Title }}"
+            class="blog-card__image"
+            loading="lazy"
+          />
+        </div>
+        {{ end }}
+        {{ end }}
+        <div class="blog-card__content">
+          {{ with index .Params.categories 0 }}
+          <span class="blog-card__category">{{ . }}</span>
+          {{ end }}
+          <time class="blog-card__date" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format "January 2, 2006" }}
+          </time>
+          <h2 class="blog-card__title">{{ .Title }}</h2>
+          <p class="blog-card__excerpt">
+            {{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 150 }}{{ end }}
+          </p>
+          <span class="blog-card__link">Read More</span>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    {{ else }}
+    <p class="blog-list__empty">No posts in this category yet. Check back soon!</p>
+    {{ end }}
+  </div>
+</section>
+
+{{/* CTA */}}
+<section class="cta-banner">
+  <div class="container">
+    <div class="categories-cta">
+      <p class="categories-cta__text">Planning an event? We'd love to help.</p>
+      <a href="/contact/" class="categories-cta__button">Book a Tour</a>
+    </div>
+  </div>
+</section>
+{{ end }}

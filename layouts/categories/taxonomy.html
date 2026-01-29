@@ -1,0 +1,140 @@
+{{/* layouts/categories/taxonomy.html */}}
+{{/*
+  Purpose: Display all categories with grouped image cards
+  Context: /blog/categories/ page
+  Data: Uses data/categories.yaml for grouping and images
+*/}}
+{{ define "main" }}
+{{/* Hero Section */}}
+{{ $heroImage := resources.Get "images/photos/venue-06-soft-seating.jpg" }}
+{{ $heroBg := "" }}
+{{ if $heroImage }}
+  {{ $heroBg = ($heroImage.Resize "1920x q85").RelPermalink }}
+{{ end }}
+
+<section class="blog-hero" style="background-image: url('{{ $heroBg }}');">
+  <div class="blog-hero__content">
+    <h1 class="blog-hero__title">Browse by Category</h1>
+  </div>
+</section>
+
+{{/* Breadcrumb */}}
+{{ partial "breadcrumb.html" (dict "Page" . "accentBar" true) }}
+
+{{/* Two-Column Layout */}}
+<div class="categories-layout">
+  {{/* Sidebar */}}
+  <aside class="categories-sidebar">
+    {{ range .Site.Data.categories.groups }}
+    <h2 class="categories-sidebar__group-title">{{ .name }}</h2>
+    {{ range .categories }}
+      {{ $category := site.GetPage (printf "/categories/%s" .slug) }}
+      {{ $postCount := 0 }}
+      {{ if $category }}
+        {{ $postCount = len $category.Pages }}
+      {{ end }}
+      <a href="{{ if gt $postCount 0 }}/blog/categories/{{ .slug }}/{{ else }}#{{ end }}"
+         class="categories-sidebar__link{{ if eq $postCount 0 }} categories-sidebar__link--disabled{{ end }}">
+        <span>{{ .name }}</span>
+        <span class="categories-sidebar__count">{{ $postCount }}</span>
+      </a>
+    {{ end }}
+    {{ end }}
+  </aside>
+
+  {{/* Main Content */}}
+  <main class="categories-main">
+    <div class="categories-intro">
+      <h2 class="categories-intro__title">Find Your Inspiration</h2>
+      <p class="categories-intro__text">Explore our blog posts organized by event type. Whether you're planning a wedding, milestone celebration, or corporate gathering, find real examples and planning tips from Pike & West.</p>
+    </div>
+
+    {{/* Most Popular Categories (Dynamic) */}}
+    {{ $allCategories := slice }}
+    {{ range .Site.Data.categories.groups }}
+      {{ range .categories }}
+        {{ $cat := . }}
+        {{ $category := site.GetPage (printf "/categories/%s" .slug) }}
+        {{ $postCount := 0 }}
+        {{ if $category }}
+          {{ $postCount = len $category.Pages }}
+        {{ end }}
+        {{ $allCategories = $allCategories | append (dict "name" .name "slug" .slug "image" .image "count" $postCount) }}
+      {{ end }}
+    {{ end }}
+
+    {{/* Sort by count descending and take top 4 with posts */}}
+    {{ $popular := sort $allCategories "count" "desc" }}
+    {{ $popularWithPosts := slice }}
+    {{ range $popular }}
+      {{ if gt .count 0 }}
+        {{ $popularWithPosts = $popularWithPosts | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $topFour := first 4 $popularWithPosts }}
+
+    {{ if gt (len $topFour) 0 }}
+    <section class="category-group">
+      <h3 class="category-group__header">Most Popular Categories</h3>
+      <div class="category-grid">
+        {{ range $topFour }}
+        {{ $imgPath := strings.TrimPrefix "/" .image }}
+        {{ $img := resources.Get $imgPath }}
+        <a href="/blog/categories/{{ .slug }}/" class="category-card">
+          {{ if $img }}
+          {{ $processed := $img.Resize "600x webp q80" }}
+          <img src="{{ $processed.RelPermalink }}" alt="{{ .name }}" class="category-card__image" loading="lazy">
+          {{ end }}
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">{{ .name }}</h3>
+            <div class="category-card__meta">
+              <span class="category-card__count">{{ .count }} {{ if eq .count 1 }}post{{ else }}posts{{ end }}</span>
+              <span class="category-card__arrow">&rarr;</span>
+            </div>
+          </div>
+        </a>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+    {{/* Grouped Categories */}}
+    {{ range .Site.Data.categories.groups }}
+    <section class="category-group">
+      <h3 class="category-group__header">{{ .name }}</h3>
+      <div class="category-grid">
+        {{ range .categories }}
+        {{ $category := site.GetPage (printf "/categories/%s" .slug) }}
+        {{ $postCount := 0 }}
+        {{ if $category }}
+          {{ $postCount = len $category.Pages }}
+        {{ end }}
+        {{ $imgPath := strings.TrimPrefix "/" .image }}
+        {{ $img := resources.Get $imgPath }}
+        <a href="/blog/categories/{{ .slug }}/"
+           class="category-card{{ if eq $postCount 0 }} category-card--disabled{{ end }}">
+          {{ if $img }}
+          {{ $processed := $img.Resize "600x webp q80" }}
+          <img src="{{ $processed.RelPermalink }}" alt="{{ .name }}" class="category-card__image" loading="lazy">
+          {{ end }}
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">{{ .name }}</h3>
+            <div class="category-card__meta">
+              <span class="category-card__count">{{ $postCount }} {{ if eq $postCount 1 }}post{{ else }}posts{{ end }}</span>
+              <span class="category-card__arrow">&rarr;</span>
+            </div>
+          </div>
+        </a>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+    {{/* CTA */}}
+    <div class="categories-cta">
+      <p class="categories-cta__text">Planning an event? We'd love to help.</p>
+      <a href="/contact/" class="categories-cta__button">Book a Tour</a>
+    </div>
+  </main>
+</div>
+{{ end }}
