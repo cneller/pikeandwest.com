@@ -511,7 +511,7 @@ Reusable responsive image partial with WebP support and lazy loading.
 **Usage Example:**
 
 ```go-html-template
-{{ $img := resources.Get "images/venue/main.jpg" }}
+{{ $img := resources.Get "images/photos/venue-exterior.jpg" }}
 {{ partial "responsive-image.html" (dict
   "image" $img
   "alt" "Pike & West venue interior"
