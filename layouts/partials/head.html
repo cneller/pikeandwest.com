@@ -250,7 +250,7 @@
 {{- end -}}
 
 {{/* 7. Speculation Rules - Instant page navigation (Chromium 109+) */}}
-{{- partial "speculation-rules.html" . -}}
+{{- partialCached "speculation-rules.html" . -}}
 
 {{/* 8. Fallback prefetch for non-Chromium browsers */}}
 {{- if .IsHome -}}
