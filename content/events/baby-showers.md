@@ -1,11 +1,11 @@
 ---
-title: "Baby Showers at Pike & West | Memphis Venue"
-description: "Host an elegant baby shower at Pike & West in Germantown, TN. Our art gallery venue provides a sophisticated yet warm backdrop for celebrating new arrivals with style."
-type: "events"
-eventType: "baby-shower"
-icon: "images/icons/icon-rattle.png"
-image: "/images/venue/venue-06-soft-seating.jpg"
-image_alt: "Comfortable seating area at Pike & West for intimate baby shower gatherings"
+title: Baby Showers at Pike & West | Memphis Venue
+description: Host an elegant baby shower at Pike & West in Germantown, TN. Our art gallery venue provides a sophisticated yet warm backdrop for celebrating new arrivals with style.
+eventType: baby-shower
+icon: /images/icons/icon-rattle.png
+image: /images/venue/venue-06-soft-seating.jpg
+image_alt: Comfortable seating area at Pike & West for intimate baby shower gatherings
+type: events
 ---
 
 ## A Beautiful Beginning Deserves a Beautiful Celebration
