@@ -1,50 +1,26 @@
-# About section content for homepage and about page
-# Edit this file to update the about section
-
-heading: "ABOUT US"
-
+heading: ABOUT US
 blocks:
-  - id: "who-we-are"
-    subtitle: "Who we are"
+  - id: who-we-are
+    subtitle: Who we are
     paragraphs:
-      - "Nestled in the heart of Germantown, Tennessee, Pike & West is a
-        distinctive art gallery and event venue where creativity meets
-        celebration. We are a family-owned and operated business, established in
-        2023, with a passion for transforming spaces into unforgettable
-        experiences surrounded by inspiring artwork."
-      - "Our venue coordinator, Eden Neller, and event coordinator, Lyndal
-        Brumley, bring over six years of combined experience in the event
-        industry. Their dedication to realizing your vision shows in every
-        detail, from the initial consultation to the final farewell. At Pike &
-        West, we believe that art and life intertwine to create moments worth
-        remembering."
+      - Nestled in the heart of Germantown, Tennessee, Pike & West is a distinctive art gallery and event venue where creativity meets celebration. We are a family-owned and operated business, established in 2023, with a passion for transforming spaces into unforgettable experiences.
+      - Our dedication to realizing your vision shows in every detail, from the initial consultation to the final farewell. At Pike & West, we believe that art and life intertwine to create moments worth remembering.
     cta:
-      text: "SCHEDULE A TOUR"
-      link: "/contact/"
+      text: SCHEDULE A TOUR
+      link: /contact/
     image:
-      src: "images/about/team-eden-lyndal.jpg"
-      alt: "Lyndal Brumley and Eden Neller, Pike & West team members"
+      src: images/about/team-eden-lyndal.jpg
+      alt: Lyndal Brumley and Eden Neller, Pike & West team members
     reverse: false
-
-  - id: "what-we-do"
-    subtitle: "What we do"
+  - id: what-we-do
+    subtitle: What we do
     paragraphs:
-      - "Whether you envision an intimate wedding ceremony, a milestone birthday
-        celebration, an elegant corporate gathering, or a lively social event,
-        Pike & West provides the perfect canvas for your occasion. Our modern
-        gallery space features rotating art exhibitions that create a
-        sophisticated backdrop unlike any other venue in the Memphis area,
-        complemented by a dreamy multi-story patio perfect for receptions and
-        cocktail hours."
-      - "We pride ourselves on delivering exceptional service with a personal
-        touch. Our team works closely with you to understand your vision and
-        execute every detail with precision and care. From curating the ambiance
-        to coordinating logistics, we ensure your event reflects your unique
-        style while exceeding your expectations."
+      - Whether you envision an intimate wedding ceremony, a milestone birthday celebration, an elegant corporate gathering, or a lively social event, Pike & West provides the perfect canvas for your occasion. Our modern gallery space features rotating art exhibitions that create a sophisticated backdrop unlike any other venue in the Memphis area, complemented by a dreamy multi-story patio perfect for receptions and cocktail hours.
+      - We pride ourselves on delivering exceptional service with a personal touch. Our team works closely with you to understand your vision and execute every detail with precision and care. From curating the ambiance to coordinating logistics, we ensure your event reflects your unique style while exceeding your expectations.
     cta:
-      text: "CONTACT US"
-      link: "/contact/"
+      text: CONTACT US
+      link: /contact/
     image:
-      src: "images/about/event-party-bw.jpg"
-      alt: "Guests enjoying an elegant event at Pike & West gallery venue"
+      src: images/about/event-party-bw.jpg
+      alt: Guests enjoying an elegant event at Pike & West gallery venue
     reverse: true
