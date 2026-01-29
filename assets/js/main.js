@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initContactShimmer();
 });
 
-// No Animation Mode - disable animations for visual regression testing
+// No Animation Mode - disable animations and lazy loading for visual regression testing
 // Triggered by ?noanimation query parameter
 function initBackstopMode() {
   const params = new URLSearchParams(window.location.search);
@@ -34,6 +34,24 @@ function initBackstopMode() {
         el.style.opacity = '1';
         el.style.animation = 'none';
       });
+  });
+
+  // Disable lazy loading on all images - load immediately
+  document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
+    img.removeAttribute('loading');
+  });
+
+  // Trigger immediate load for lazy iframes by removing lazy containers
+  document.querySelectorAll('.iframe-lazy').forEach((container) => {
+    const src = container.dataset.src;
+    if (src) {
+      const iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.title = container.dataset.title || 'Embedded content';
+      container.innerHTML = '';
+      container.appendChild(iframe);
+      container.classList.add('iframe-lazy--loaded');
+    }
   });
 }
 
