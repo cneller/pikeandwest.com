@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{/* Blog Hero - reads from front matter, falls back to default */}}
-{{ $heroPath := .Params.image | default "images/venue/venue-06-soft-seating.jpg" }}
+{{ $heroPath := .Params.image | default "images/photos/venue-06-soft-seating.jpg" }}
 {{ $heroImage := resources.Get $heroPath }}
 {{ $heroBg := "" }}
 {{ if $heroImage }}

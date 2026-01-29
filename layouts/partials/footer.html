@@ -18,7 +18,7 @@
     {{/* LEFT: Brand Section (Logo & Tagline) */}}
     <div class="footer__brand">
       <a href="/" class="footer__logo" aria-label="Pike & West Home">
-        {{ $logo := resources.Get "images/logo/pike-west-logomark.png" }}
+        {{ $logo := resources.Get "images/brand/pike-west-logomark.png" }}
         {{ if $logo }}
           {{ $resized := $logo.Resize "112x" }}
           <img

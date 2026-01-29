@@ -5,7 +5,7 @@
 */}}
 {{ define "main" }}
 {{/* Term Hero - matches blog styling */}}
-{{ $heroImage := resources.Get "images/venue/venue-06-soft-seating.jpg" }}
+{{ $heroImage := resources.Get "images/photos/venue-06-soft-seating.jpg" }}
 {{ $heroBg := "" }}
 {{ if $heroImage }}
   {{ $heroBg = ($heroImage.Resize "1920x q85").RelPermalink }}

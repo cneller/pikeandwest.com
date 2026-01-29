@@ -1,7 +1,7 @@
 <header class="header">
   <div class="container header__container">
     <a href="/" class="header__logo" aria-label="Pike & West Home">
-      {{ $logo := resources.Get "images/logo/pike-west-logo-horizontal.png" }}
+      {{ $logo := resources.Get "images/brand/pike-west-logo-horizontal.png" }}
       {{ if $logo }} {{ $resized := $logo.Resize "300x" }}
       <img
         src="{{ $resized.RelPermalink }}"
