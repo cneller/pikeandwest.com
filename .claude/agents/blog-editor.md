@@ -95,7 +95,7 @@ draft: false                                    # Set true only if explicitly dr
 author: "Pike & West"
 categories: ["Birthdays"]                       # Exactly 1 event-type category
 tags: ["milestone birthday", "planning tips", "families"]  # 3-6 descriptive tags
-image: "images/venue/venue-XX.jpeg"             # Hero image path
+image: "images/photos/venue-XX.jpeg"            # Hero image path
 image_alt: "Descriptive alt text..."            # Required for accessibility
 keywords:
   - primary keyword Memphis
