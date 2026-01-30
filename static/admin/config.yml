@@ -57,7 +57,8 @@ collections:
     extension: md
     format: yaml-frontmatter
     icon: article
-    summary: '{{title}} ({{year}}-{{month}}-{{day}})'
+    summary: '{{title}} — {{date}}'
+    thumbnail: image
     sortable_fields:
       - date
       - title
@@ -131,20 +132,18 @@ collections:
         name: author
         widget: string
         default: 'Pike & West'
-      - label: Category
+      - label: Categories
         name: categories
-        widget: select
-        multiple: false
-        options:
-          - Weddings
-          - Corporate Events
-          - Birthdays
-          - Baby Showers
-          - Anniversaries
-          - Graduations
-          - Celebrations
-          - News
-        hint: 'Event type this content is about. Select exactly 1.'
+        widget: relation
+        collection: categories
+        value_field: title
+        search_fields:
+          - title
+        display_fields:
+          - title
+        multiple: true
+        min: 1
+        hint: 'Event type(s) this content is about. Select at least 1.'
       - label: Tags
         name: tags
         widget: select
@@ -338,7 +337,8 @@ collections:
     path: '{{slug}}/_index'
     extension: md
     format: yaml-frontmatter
-    summary: '{{title}}'
+    summary: '{{title}} — {{description}}'
+    thumbnail: image
     icon: category
     fields:
       - label: Title
