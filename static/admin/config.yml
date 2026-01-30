@@ -435,6 +435,47 @@ collections:
           - label: Body
             name: body
             widget: markdown
+          - label: OpenGraph Type
+            name: og_type
+            widget: select
+            options: ['website', 'article']
+            default: 'website'
+            required: false
+            hint: 'Type for social media previews'
+          - label: Schema Configuration
+            name: schema
+            widget: object
+            collapsed: true
+            fields:
+              - {
+                  label: Type,
+                  name: type,
+                  widget: string,
+                  default: 'ContactPage',
+                }
+              - {
+                  label: Main Entity,
+                  name: main_entity,
+                  widget: string,
+                  required: false,
+                }
+          - label: Page Sections
+            name: sections
+            widget: object
+            collapsed: true
+            fields:
+              - {
+                  label: Show Contact Form,
+                  name: contact_form,
+                  widget: boolean,
+                  default: true,
+                }
+              - {
+                  label: Show Find Us Map,
+                  name: find_us,
+                  widget: boolean,
+                  default: true,
+                }
 
       - name: workshops
         label: Workshops
@@ -462,6 +503,17 @@ collections:
           - label: Body
             name: body
             widget: markdown
+          - label: Canonical URL
+            name: canonical
+            widget: string
+            required: false
+            hint: 'Override default URL if needed (e.g., /workshops/)'
+          - label: Schema Type
+            name: schema_type
+            widget: select
+            options: ['Event', 'WebPage', 'LocalBusiness']
+            required: false
+            hint: 'Structured data type for search engines'
 
       - name: privacy
         label: Privacy Policy
@@ -645,6 +697,11 @@ singletons:
         widget: image
         media_folder: /static/images/photos
         public_folder: /images/photos
+      - label: Image Alt Text
+        name: image_alt
+        widget: string
+        required: false
+        hint: 'Describe the background image for accessibility'
 
   # ----------------------------------------------------------
   # About Section
