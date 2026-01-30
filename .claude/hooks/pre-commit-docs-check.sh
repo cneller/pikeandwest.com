@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Pre-commit documentation check hook
-# Injects a reminder for Claude to review documentation before git commit/push
+# BLOCKS git commit/push until documentation checklist is reviewed
+#
+# Uses permissionDecision: "deny" to prevent the commit from executing.
+# Claude must acknowledge the checklist and re-run the commit.
 
 set -e
 
@@ -15,8 +18,8 @@ if echo "$COMMAND" | grep -qE '^git\s+(commit|push)'; then
 	cat <<'EOF'
 {
   "hookSpecificOutput": {
-    "hookEventName": "PreToolUse",
-    "additionalContext": "PRE-COMMIT DOCUMENTATION CHECK\n\nBefore committing, review changes against project documentation:\n\n[ ] ADR Check: Did changes involve architectural decisions (CSS patterns, layout approaches, tool choices)?\n    -> If yes: Create docs/architecture/decisions/ADR-XXX-*.md\n\n[ ] Pattern Extraction: Any reusable code patterns worth documenting?\n    -> If yes: Update docs/architecture/patterns/*.md\n\n[ ] CLAUDE.md Sync: If new ADR created, update Architecture Decisions table\n\n[ ] Next Steps: Update docs/next-steps.md (completed items -> Changelog, add new tasks)\n\nSkip if: Only fixing typos, comments, or trivial changes."
+    "permissionDecision": "deny",
+    "permissionDecisionReason": "PRE-COMMIT DOCUMENTATION CHECK\n\nReview changes against project documentation before committing:\n\n[ ] ADR Check: Did changes involve architectural decisions (CSS patterns, layout approaches, tool choices)?\n    -> If yes: Create docs/architecture/decisions/ADR-XXX-*.md\n\n[ ] Pattern Extraction: Any reusable code patterns worth documenting?\n    -> If yes: Update docs/architecture/patterns/*.md\n\n[ ] CLAUDE.md Sync: If new ADR created, update Architecture Decisions table\n\n[ ] Next Steps: Add any new tasks discovered during implementation\n    -> Update docs/next-steps.md\n\n[ ] Changelog: Move completed items from next-steps to changelog\n    -> Update docs/CHANGELOG.md\n\nTo proceed: Review the checklist above, address any items, then re-run the commit.\nTo skip: If only fixing typos/comments/trivial changes, re-run with acknowledgment."
   }
 }
 EOF
