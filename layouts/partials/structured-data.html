@@ -71,8 +71,8 @@
     "{{ .Site.Data.site_settings.social.facebook }}"
   ],
   "image": [
-    "{{ "images/photos/pike-west-exterior.jpg" | absURL }}",
-    "{{ "images/photos/pike-west-gallery.jpg" | absURL }}"
+    "{{ "images/homepage-hero/venue-exterior.jpg" | absURL }}",
+    "{{ "images/photos/venue-01-interior.jpeg" | absURL }}"
   ],
   "amenityFeature": [
     {
@@ -180,9 +180,16 @@
     "@id": "{{ .Permalink }}"
   }
   {{- with .Params.image }}
+  {{- $imageUrl := . }}
+  {{- /* For page bundles, resolve relative image paths */}}
+  {{- with $.Resources.GetMatch . }}
+    {{- $imageUrl = .Permalink }}
+  {{- else }}
+    {{- $imageUrl = . | absURL }}
+  {{- end }}
   ,"image": {
     "@type": "ImageObject",
-    "url": "{{ . | absURL }}",
+    "url": "{{ $imageUrl }}",
     "caption": "{{ $.Params.image_alt | default $.Title }}"
   }
   {{- end }}
