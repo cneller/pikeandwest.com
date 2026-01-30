@@ -17,7 +17,7 @@ author = "Pike & West"
   twitter = "pikeandwest"
 
 # Default Open Graph image (used when pages don't specify their own)
-defaultOgImage = "/images/og-default.jpg"
+defaultOgImage = "/images/photos/og-default.jpg"
 
 [analytics]
   googleTagManager = "GTM-P8XR8C5S"
