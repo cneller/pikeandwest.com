@@ -95,7 +95,7 @@ collections:
         - label: Image Alt Text
           name: image_alt
           widget: string
-          required: false
+          required: true
           hint: 'Describe the image for accessibility.'
         - label: Body
           name: body
@@ -206,7 +206,7 @@ collections:
         - label: Image Alt Text
           name: image_alt
           widget: string
-          required: false
+          required: true
           hint: 'Describe the image for accessibility.'
         - label: Body
           name: body
@@ -293,6 +293,13 @@ collections:
         media_folder: /static/images/categories
         public_folder: /images/categories
         hint: 'Category card image. 800x600px recommended.'
+      - label: Image Alt Text
+        name: image_alt
+        widget: string
+        required: true
+        hint:
+          'Describe the image for screen readers. Example: "Elegant wedding
+          reception with floral centerpieces at Pike & West"'
       - label: Description
         name: description
         widget: text
@@ -353,7 +360,7 @@ collections:
           - label: Hero Image Alt Text
             name: image_alt
             widget: string
-            required: false
+            required: true
           - label: 'Show Hero Section'
             name: sections
             widget: object

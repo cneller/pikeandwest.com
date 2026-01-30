@@ -52,20 +52,6 @@
     "latitude": "35.0868",
     "longitude": "-89.8100"
   },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ],
-    "opens": "00:00",
-    "closes": "23:59"
-  },
   "sameAs": [
     "{{ .Site.Data.site_settings.social.instagram }}",
     "{{ .Site.Data.site_settings.social.facebook }}"
@@ -179,20 +165,26 @@
     "@type": "WebPage",
     "@id": "{{ .Permalink }}"
   }
+  {{- $imageUrl := "" }}
+  {{- $imageAlt := .Title }}
   {{- with .Params.image }}
-  {{- $imageUrl := . }}
-  {{- /* For page bundles, resolve relative image paths */}}
-  {{- with $.Resources.GetMatch . }}
-    {{- $imageUrl = .Permalink }}
+    {{- /* For page bundles, resolve relative image paths */}}
+    {{- with $.Resources.GetMatch . }}
+      {{- $imageUrl = .Permalink }}
+    {{- else }}
+      {{- $imageUrl = . | absURL }}
+    {{- end }}
+    {{- $imageAlt = $.Params.image_alt | default $.Title }}
   {{- else }}
-    {{- $imageUrl = . | absURL }}
+    {{- /* Fallback to default venue image when no featured image */}}
+    {{- $imageUrl = "images/photos/venue-06-soft-seating.jpg" | absURL }}
+    {{- $imageAlt = "Pike & West venue interior with elegant soft seating area" }}
   {{- end }}
   ,"image": {
     "@type": "ImageObject",
     "url": "{{ $imageUrl }}",
-    "caption": "{{ $.Params.image_alt | default $.Title }}"
+    "caption": "{{ $imageAlt }}"
   }
-  {{- end }}
   {{- with .Params.tags }}
   ,"keywords": "{{ delimit . ", " }}"
   {{- end }}
