@@ -46,24 +46,24 @@ Complete before switching production DNS:
 
 ### SEO
 
-- [ ] Verify meta tags render correctly on all pages
-- [ ] Confirm Open Graph images work (test with social sharing debuggers)
-- [ ] Validate JSON-LD structured data
-- [ ] Check canonical URLs point to production domain
+- [x] Verify meta tags render correctly on all pages
+- [x] Confirm Open Graph images work (test with social sharing debuggers)
+- [x] Validate JSON-LD structured data
+- [x] Check canonical URLs point to production domain
 
 ### Performance
 
-- [ ] Run Lighthouse audit, target score >95
+- [x] Run Lighthouse audit, target score >95
 - [ ] Verify images are optimized (WebP with fallbacks)
 - [ ] Check total page size <500KB
-- [ ] Test Core Web Vitals pass
+- [x] Test Core Web Vitals pass
 - [ ] Verify visual regression baseline images captured on first main branch run
 
 ### Sveltia CMS
 
 - [ ] Add GitHub collaborators (editors) - see instructions below
-- [ ] Test full CMS login flow on production domain
-- [ ] Verify content edits commit to `main` branch correctly
+- [x] Test full CMS login flow on production domain
+- [ ] Verify content edits commit to `main` branch correctly (requires manual test)
 
 #### Adding GitHub Collaborators
 
