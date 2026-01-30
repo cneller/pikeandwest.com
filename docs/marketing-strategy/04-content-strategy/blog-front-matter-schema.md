@@ -49,7 +49,7 @@ related: ""                 # Comma-delimited slugs of related posts
 cta: ""                     # Primary CTA: tour | contact | download | subscribe
 
 # Optional Enhancement
-featured_image: ""          # Path to featured image in assets/images/blog/
+featured_image: ""          # Relative path within page bundle (e.g., "featured.jpg")
 featured_image_alt: ""      # Alt text for featured image
 author: ""                  # Author name (defaults to "Pike & West Team")
 reading_time: 0             # Estimated reading time in minutes (auto-calculated if 0)

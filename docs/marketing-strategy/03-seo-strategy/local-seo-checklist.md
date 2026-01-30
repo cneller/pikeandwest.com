@@ -303,7 +303,7 @@ Pike & West
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "EventVenue"],
   "name": "Pike & West",
-  "image": "https://pikeandwest.com/images/venue/main.jpg",
+  "image": "https://pikeandwest.com/images/photos/venue-exterior.jpg",
   "url": "https://pikeandwest.com",
   "telephone": "+1-901-206-5575",
   "email": "info@pikeandwest.com",

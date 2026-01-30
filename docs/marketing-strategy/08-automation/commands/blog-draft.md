@@ -64,7 +64,7 @@ keywords:
   - art gallery wedding
   - creative wedding venues Memphis
 author: "Pike & West"
-image: "/images/blog/unique-wedding-reception-ideas/featured.jpg"
+image: "featured.jpg"  # Relative to page bundle
 imageAlt: "Elegant wedding reception in Pike & West art gallery"
 ---
 ```
@@ -112,7 +112,7 @@ keywords:
   - unique wedding venue Memphis
   - gallery wedding venue
 author: "Pike & West"
-image: "/images/blog/art-gallery-wedding-reasons/featured.jpg"
+image: "featured.jpg"  # Relative to page bundle
 imageAlt: "Couple exchanging vows surrounded by contemporary art at Pike & West"
 ---
 

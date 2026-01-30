@@ -122,8 +122,8 @@ All content tools reference these brand guidelines:
 
 ### Blog Post Workflow
 
-1. Commands generate content in `content/blog/` with proper Hugo front matter
-2. Images are placed in `static/images/blog/[post-slug]/`
+1. Commands generate content in `content/blog/[post-slug]/index.md` (page bundles)
+2. Images are co-located in the page bundle alongside `index.md`
 3. Generated posts include required SEO fields (title, description, keywords)
 4. Social posts reference the blog URL for cross-promotion
 

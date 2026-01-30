@@ -102,7 +102,7 @@ Select images that enhance the content:
 
 **Venue Photos (Preferred)**
 
-- Check `static/images/venue/` for existing assets
+- Check `static/images/photos/` for existing venue assets
 - Use photos that match the blog topic
 - Ensure proper aspect ratios (16:9 for headers, 4:3 for inline)
 
@@ -136,7 +136,7 @@ categories:
   - Weddings  # or Corporate Events, Venue Tips, etc.
 personas:
   - elegant-emily  # Target persona(s)
-featured_image: "/images/blog/post-slug/featured.jpg"
+featured_image: "featured.jpg"  # Relative to page bundle
 author: "Pike & West Team"
 social_distributed:
   instagram: false
@@ -170,8 +170,7 @@ When ready to publish:
 2. Commit changes:
 
    ```bash
-   git add content/blog/[post-slug].md
-   git add static/images/blog/[post-slug]/
+   git add content/blog/[post-slug]/
    git commit -m "Add blog post: [title]"
    ```
 

@@ -314,7 +314,7 @@ backend:
 site_url: https://yoursite.com
 display_url: https://yoursite.com
 logo:
-  src: /images/logo/logo.svg
+  src: /images/brand/logo.svg
 
 # ============================================================
 # Slug
