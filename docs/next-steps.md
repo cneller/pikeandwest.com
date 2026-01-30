@@ -82,7 +82,7 @@ For each editor who needs CMS access:
 - [ ] Test GitHub Actions deployment workflow
 - [ ] Verify preview URLs work for PRs
 - [ ] Document rollback procedure
-- [ ] Add artifact retention policy to CI workflows (see below)
+- [x] Add artifact retention policy to CI workflows (see below)
 
 #### GitHub Actions Artifact Storage
 
