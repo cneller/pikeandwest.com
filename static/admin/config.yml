@@ -147,7 +147,7 @@ collections:
       - label: Tags
         name: tags
         widget: relation
-        collection: singletons
+        collection: taxonomy
         file: blog_taxonomy
         value_field: tags.*
         search_fields:
@@ -298,6 +298,22 @@ collections:
         widget: text
         required: false
         hint: 'Brief description for SEO meta tags.'
+
+  # ----------------------------------------------------------
+  # Taxonomy (Files Collection for relation widgets)
+  # ----------------------------------------------------------
+  - name: taxonomy
+    label: Taxonomy
+    icon: label
+    files:
+      - name: blog_taxonomy
+        label: Blog Tags
+        file: data/blog_taxonomy.yaml
+        fields:
+          - label: Tags
+            name: tags
+            widget: list
+            hint: 'Add, remove, or reorder blog post tags.'
 
   # ----------------------------------------------------------
   # Divider
@@ -775,21 +791,6 @@ singletons:
             widget: string
             hint:
               'Describe what is shown in this venue photo for accessibility.'
-
-  # ----------------------------------------------------------
-  # Blog Tags
-  # ----------------------------------------------------------
-  - name: blog_taxonomy
-    label: Blog Tags
-    file: data/blog_taxonomy.yaml
-    icon: label
-    fields:
-      - label: Tags
-        name: tags
-        widget: list
-        hint:
-          'Add, remove, or reorder blog post tags. Categories are managed in the
-          Categories collection.'
 
   # ----------------------------------------------------------
   # 404 Page
