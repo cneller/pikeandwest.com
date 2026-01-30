@@ -146,76 +146,18 @@ collections:
         hint: 'Event type(s) this content is about. Select at least 1.'
       - label: Tags
         name: tags
-        widget: select
+        widget: relation
+        collection: singletons
+        file: blog_taxonomy
+        value_field: tags.*
+        search_fields:
+          - tags.*
+        display_fields:
+          - tags.*
         multiple: true
         min: 3
         max: 6
-        options:
-          # Planning & Format
-          - planning tips
-          - checklist
-          - timeline
-          - budget planning
-          - vendor selection
-          - guest list
-          - venue tips
-          - behind the scenes
-          - venue spotlight
-          - vendor spotlight
-          # Event Detail
-          - milestone birthday
-          - sweet 16
-          - 50th birthday
-          - milestone anniversary
-          - vow renewal
-          - sprinkle
-          - gender reveal
-          - prom send-off
-          - engagement party
-          - rehearsal dinner
-          - team building
-          - holiday party
-          - client appreciation
-          - corporate retreat
-          # Themes
-          - boho
-          - elegant
-          - modern
-          - romantic
-          - intimate gathering
-          - garden party
-          - eco-friendly
-          - gallery aesthetic
-          # Seasonal
-          - spring
-          - summer
-          - fall
-          - winter
-          - holidays
-          - new year
-          - valentines day
-          - mothers day
-          - fathers day
-          # Audience
-          - families
-          - couples
-          - teens
-          - professionals
-          - first-time hosts
-          - parents
-          # Location
-          - germantown
-          - memphis
-          - collierville
-          - tennessee
-          # Content Type
-          - event inspiration
-          - real celebration
-          - announcement
-          - welcome
-        hint:
-          'Select 3-6 descriptive tags. See data/blog_taxonomy.yaml for
-          guidance.'
+        hint: 'Type to search. Select 3-6 descriptive tags.'
       - label: Keywords
         name: keywords
         widget: list
@@ -835,21 +777,19 @@ singletons:
               'Describe what is shown in this venue photo for accessibility.'
 
   # ----------------------------------------------------------
-  # Blog Taxonomy
+  # Blog Tags
   # ----------------------------------------------------------
   - name: blog_taxonomy
-    label: Blog Categories & Tags
+    label: Blog Tags
     file: data/blog_taxonomy.yaml
     icon: label
     fields:
-      - label: Categories
-        name: categories
-        widget: list
-        hint: 'Blog post category options. Add or remove as needed.'
       - label: Tags
         name: tags
         widget: list
-        hint: 'Blog post tag options. Add or remove as needed.'
+        hint:
+          'Add, remove, or reorder blog post tags. Categories are managed in the
+          Categories collection.'
 
   # ----------------------------------------------------------
   # 404 Page

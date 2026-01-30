@@ -13,5 +13,21 @@
       rel="cms-config-url"
     />
   </head>
-  <body></body>
+  <body>
+    <script type="module">
+      // Register custom preview styles after CMS loads
+      // Styles match live site typography; shortcodes shown as placeholders
+      // Future: registerPreviewTemplate for shortcode rendering (see docs/next-steps.md)
+      if (window.CMS) {
+        window.CMS.registerPreviewStyle('/admin/preview.css');
+      } else {
+        // Wait for CMS to initialize
+        window.addEventListener('load', () => {
+          if (window.CMS) {
+            window.CMS.registerPreviewStyle('/admin/preview.css');
+          }
+        });
+      }
+    </script>
+  </body>
 </html>

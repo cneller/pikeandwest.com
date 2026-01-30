@@ -1,0 +1,265 @@
+/**
+ * Pike & West Blog Preview Styles
+ * Registered via CMS.registerPreviewStyle()
+ *
+ * Makes the CMS preview match the live site's typography and layout.
+ * Shortcodes display as styled placeholder blocks (cannot render until
+ * registerPreviewTemplate is available - see docs/next-steps.md).
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Oswald:wght@400;500;600&display=swap');
+
+/* ============================================
+   Design Tokens (from site SCSS)
+   ============================================ */
+:root {
+  --pw-black: #434345;
+  --pw-gold: #aa6e0b;
+  --pw-cream: #fff7e1;
+  --font-body: 'Montserrat', sans-serif;
+  --font-heading: 'Oswald', sans-serif;
+}
+
+/* ============================================
+   Hide metadata fields from preview
+   Show only content the reader will see
+   ============================================ */
+[data-field='draft'],
+[data-field='keywords'],
+[data-field='author'],
+[data-field='date'],
+[data-field='categories'],
+[data-field='tags'],
+[data-field='image_alt'] {
+  display: none !important;
+}
+
+/* ============================================
+   Base preview container
+   ============================================ */
+.frame-content,
+.preview-content {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--pw-black);
+  line-height: 1.75;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #fff;
+}
+
+/* ============================================
+   Title / H1
+   ============================================ */
+.frame-content h1,
+.preview-content h1 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 2.25rem;
+  color: var(--pw-black);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   Headings (H2, H3)
+   ============================================ */
+.frame-content h2,
+.preview-content h2 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.75rem;
+  color: var(--pw-black);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.frame-content h3,
+.preview-content h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.35rem;
+  color: var(--pw-black);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.01em;
+}
+
+.frame-content h4,
+.preview-content h4 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: var(--pw-black);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   Body paragraphs
+   ============================================ */
+.frame-content p,
+.preview-content p {
+  margin-bottom: 1.25rem;
+}
+
+/* First paragraph / description styling */
+.frame-content > p:first-of-type,
+.preview-content > p:first-of-type {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+.frame-content a,
+.preview-content a {
+  color: var(--pw-gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.frame-content a:hover,
+.preview-content a:hover {
+  color: #8a5a09;
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+.frame-content ul,
+.frame-content ol,
+.preview-content ul,
+.preview-content ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.frame-content li,
+.preview-content li {
+  margin-bottom: 0.5rem;
+}
+
+.frame-content li strong,
+.preview-content li strong {
+  color: var(--pw-black);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+.frame-content blockquote,
+.preview-content blockquote {
+  border-left: 4px solid var(--pw-gold);
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  background: var(--pw-cream);
+  font-style: italic;
+  color: #555;
+}
+
+.frame-content blockquote p:last-child,
+.preview-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   Inline code
+   ============================================ */
+.frame-content code,
+.preview-content code {
+  background: #f5f5f5;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+  font-family: 'SF Mono', Consolas, monospace;
+}
+
+/* ============================================
+   Code blocks
+   ============================================ */
+.frame-content pre,
+.preview-content pre {
+  background: #2d2d2d;
+  color: #f8f8f2;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.frame-content pre code,
+.preview-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* ============================================
+   Horizontal rules
+   ============================================ */
+.frame-content hr,
+.preview-content hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 2rem 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+.frame-content img,
+.preview-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+.frame-content table,
+.preview-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.frame-content th,
+.frame-content td,
+.preview-content th,
+.preview-content td {
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.frame-content th,
+.preview-content th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+/* ============================================
+   Shortcode Placeholder Styling
+
+   Hugo shortcodes appear as raw text in preview:
+   {{< pull-quote >}}Quote text{{< /pull-quote >}}
+
+   Style them as visual placeholders so editors
+   know where they are and what type they are.
+   ============================================ */
+
+/*
+ * Target shortcode syntax - displayed in gold-bordered callouts
+ * This uses the general sibling combinator to style paragraphs
+ * that contain the distinctive {{ characters
+ */

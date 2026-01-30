@@ -1,18 +1,8 @@
-# Blog Taxonomy Reference
-# Categories are EVENT-TYPE based (map to personas).
-# Tags describe content format and cross-cutting topics.
-# Sveltia CMS editors reference this file when creating new posts.
-
-categories:
-  # Event-type categories (map to personas)
-  - Weddings # Persona: Bride, Groom, Wedding Planner
-  - Corporate Events # Persona: Victoria (VP of Events)
-  - Birthdays # Persona: Michelle (Milestone Mom)
-  - Baby Showers # Persona: Jasmine (Joyful Auntie)
-  - Anniversaries # Persona: Diana (Devoted Wife)
-  - Graduations # Persona: Grace (Proud Graduate's Mom)
-  - Celebrations # Persona: General host (private parties)
-  - News # Meta: Announcements, updates
+# Blog Tag Reference
+# Tags are managed via CMS singleton (Blog Tags)
+# Group headings below are for human reference only
+#
+# Categories are managed separately in content/categories/
 
 tags:
   # Planning & Format

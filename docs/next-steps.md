@@ -154,12 +154,33 @@ hugo --templateMetrics
 
 ### Sveltia CMS (Priority: Medium)
 
-| Enhancement                            | Effort | Blocked By                                                       | Notes                                                 |
-|----------------------------------------|--------|------------------------------------------------------------------|-------------------------------------------------------|
-| Asset browser folder navigation        | None   | [Sveltia 2.0](https://github.com/sveltia/sveltia-cms/issues/420) | Folder browsing planned upstream                      |
-| Manual asset categories                | None   | [Sveltia 2.0](https://github.com/sveltia/sveltia-cms/issues/301) | Icons, logos land in "Uncategorized"                  |
-| Venue gallery image management via CMS | Low    | None                                                             | Add image list widget to `venue_gallery` singleton    |
-| Event page hero image previews         | Low    | None                                                             | Hero Image field shows path text instead of thumbnail |
+| Enhancement                            | Effort | Blocked By                                                                        | Notes                                                 |
+|----------------------------------------|--------|-----------------------------------------------------------------------------------|-------------------------------------------------------|
+| Asset browser folder navigation        | None   | [Sveltia 2.0](https://github.com/sveltia/sveltia-cms/issues/420)                  | Folder browsing planned upstream                      |
+| Manual asset categories                | None   | [Sveltia 2.0](https://github.com/sveltia/sveltia-cms/issues/301)                  | Icons, logos land in "Uncategorized"                  |
+| Venue gallery image management via CMS | Low    | None                                                                              | Add image list widget to `venue_gallery` singleton    |
+| Event page hero image previews         | Low    | None                                                                              | Hero Image field shows path text instead of thumbnail |
+| Blog post shortcode preview rendering  | Medium | [registerPreviewTemplate](https://github.com/sveltia/sveltia-cms/discussions/153) | See details below                                     |
+
+#### Blocked: Blog Post Preview Templates
+
+**Status:** Blocked on `CMS.registerPreviewTemplate()` — expected Q1 2026
+
+**Current implementation:** Using `registerPreviewStyle` to match site typography and hide metadata fields. Preview looks like the live site but shortcodes (pull-quote, tip, divider, etc.) display as raw `{{< shortcode >}}` text in styled placeholder blocks.
+
+**When `registerPreviewTemplate` is available, implement:**
+
+1. **Shortcode rendering** — React/Preact components matching Hugo shortcode output:
+   - `pull-quote` → Styled blockquote with optional author attribution
+   - `tip` / `tip title="..."` → Gold-bordered callout box
+   - `divider` / `divider style="..."` → Visual section breaks
+   - `fact-box`, `sidebar-quote`, `timeline`, `gallery`, etc.
+
+2. **Hero image treatment** — Display featured image as full-width hero above content
+
+3. **Blog card preview** — Secondary view showing how post appears in the blog listing grid
+
+**Tracking:** [GitHub Discussion #153](https://github.com/sveltia/sveltia-cms/discussions/153)
 
 ### Technical Debt (Priority: Low)
 
