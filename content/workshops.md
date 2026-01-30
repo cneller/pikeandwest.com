@@ -13,7 +13,7 @@ keywords:
   - adult art classes Germantown
   - mixed media workshops Tennessee
 og_image: "/images/photos/venue-01-interior.jpeg"
-canonical: "/workshops/"
+canonical: "https://pikeandwest.com/workshops/"
 schema_type: "Event"
 ---
 
