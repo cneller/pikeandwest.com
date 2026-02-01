@@ -1,11 +1,9 @@
 ---
-title: "Celebrating Senior Athletes: End-of-Season Banquets That Honor the Journey"
-description: >-
-  Sports team banquets do more than hand out trophies. They honor seniors leaving
-  the team, acknowledge mentors, and create lasting memories. Here's how to plan
-  an end-of-season celebration that matches the significance of the moment.
+title: 'Celebrating Senior Athletes: End-of-Season Banquets That Honor the Journey'
+description: Sports team banquets do more than hand out trophies. They honor seniors leaving the team, acknowledge mentors, and create lasting memories. Here's how to plan an end-of-season celebration that matches the significance of the moment.
 date: 2026-02-01T02:51:42+0000
-draft: false
+image: /images/photos/IMG_9291.jpeg
+image_alt: Elegant table settings at Pike & West gallery space perfect for sports team banquets and senior athlete celebrations in Germantown Tennessee
 author: Pike & West
 categories:
   - Graduations
@@ -15,16 +13,13 @@ tags:
   - families
   - event inspiration
   - spring
-image: /images/photos/venue-09-table-chairs.png
-image_alt: >-
-  Elegant table settings at Pike & West gallery space perfect for sports team
-  banquets and senior athlete celebrations in Germantown Tennessee
 keywords:
   - sports banquet venue Memphis
   - senior athlete celebration Germantown
   - team end of season party Tennessee
   - cheerleader banquet venue
   - volleyball team celebration Memphis
+draft: false
 ---
 
 When a sports season ends, something more than games concludes. For seniors on the team, it marks the end of an identity they have carried for years. The early morning practices, the bus rides to away games, the victories and defeats shared with teammates who became family. An end-of-season banquet acknowledges all of it, giving the team space to honor what they built together before those seniors walk away.
