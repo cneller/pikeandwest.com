@@ -1,12 +1,12 @@
 meta:
   version: "1.0"
   schema_version: "1.0"
-  last_updated: "2026-01-28"
+  last_updated: "2026-02-01"
   last_full_audit: "2026-01-23"
-  updated_by: blog-taxonomy-migration
+  updated_by: blog-editor
   stats:
-    total_pages: 22
-    blog_posts: 7
+    total_pages: 23
+    blog_posts: 8
     event_pages: 6
     static_pages: 9
     orphan_pages: 0
@@ -211,6 +211,7 @@ clusters:
       - /blog/winter-birthday-celebration-guide
       - /blog/holiday-anniversary-celebrations
       - /blog/fall-baby-shower-inspiration
+      - /blog/sports-team-celebrations-senior-banquets
     planned_content:
       - title: "Anniversary Party Ideas: Celebrating Milestone Years"
         primary_keyword: anniversary party venue
@@ -802,6 +803,87 @@ pages:
       editorial: 12
       freshness: 13
       technical: 20
+    issues_count: 0
+    updated_by: blog-editor
+  /blog/sports-team-celebrations-senior-banquets:
+    title: "Celebrating Senior Athletes: End-of-Season Banquets That Honor the Journey"
+    type: blog
+    status: published
+    taxonomy:
+      category: Graduations
+      tag_count: 5
+      tags_valid: true
+    primary_keyword: sports banquet venue Memphis
+    secondary_keywords:
+      - senior athlete celebration Germantown
+      - team end of season party Tennessee
+      - cheerleader banquet venue
+      - volleyball team celebration Memphis
+    search_intent: informational
+    keyword_difficulty: medium
+    topic_summary:
+      Guide to planning sports team end-of-season banquets that honor senior
+      athletes with special tables, awards presentations, photo books, and
+      meaningful teammate tributes.
+    cluster: celebrations
+    funnel_stage: tofu
+    content_goal: traffic
+    entities:
+      - Pike & West
+      - Memphis
+      - Germantown
+    personas:
+      - parent
+    personas_primary: parent
+    event_types:
+      - graduation
+    event_types_primary: graduation
+    word_count: 1850
+    target_word_count: 1500
+    evergreen: true
+    seasonal_relevance:
+      - Q2
+      - Q4
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 4
+      divider: 4
+      tip: 2
+      fact-box: 1
+      timeline: 1
+      sidebar-quote: 1
+      numbered-list: 1
+      standfirst: 1
+      kicker: 0
+      key-takeaways: 1
+    shortcodes_recommended: []
+    drop_cap: true
+    has_cta: true
+    images:
+      count: 1
+      hero_image: true
+      all_have_alt: true
+      images_list:
+        - images/photos/venue-09-table-chairs.png
+    links_out:
+      - /contact/
+    links_in: []
+    links_recommended:
+      - /events/private-parties
+    orphan: false
+    author: Pike & West
+    created: "2026-02-01"
+    last_modified: "2026-02-01"
+    last_audited: "2026-02-01"
+    next_review: "2026-08-01"
+    audit_score: 92
+    audit_scores:
+      seo: 20
+      brand_voice: 18
+      editorial: 18
+      freshness: 15
+      technical: 21
     issues_count: 0
     updated_by: blog-editor
   /events/weddings:
