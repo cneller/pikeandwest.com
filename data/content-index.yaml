@@ -1,12 +1,12 @@
 meta:
   version: "1.0"
   schema_version: "1.0"
-  last_updated: "2026-01-28"
+  last_updated: "2026-02-01"
   last_full_audit: "2026-01-23"
-  updated_by: blog-taxonomy-migration
+  updated_by: blog-editor
   stats:
-    total_pages: 22
-    blog_posts: 7
+    total_pages: 23
+    blog_posts: 8
     event_pages: 6
     static_pages: 9
     orphan_pages: 0
@@ -301,6 +301,87 @@ pages:
       editorial: 18
       freshness: 15
       technical: 23
+    issues_count: 0
+    updated_by: blog-editor
+  /blog/graduation-party-planning-guide:
+    title: "The Art of Celebrating Graduation: A Parent's Guide to Honoring Achievement"
+    type: blog
+    status: published
+    taxonomy:
+      category: Graduations
+      tag_count: 5
+      tags_valid: true
+    primary_keyword: graduation party venue Memphis
+    secondary_keywords:
+      - graduation celebration Germantown TN
+      - high school graduation party ideas
+      - college graduation venue Tennessee
+      - elegant graduation party planning
+      - art gallery event venue Memphis
+    search_intent: informational
+    keyword_difficulty: medium
+    topic_summary:
+      Parent's guide to planning graduation celebrations that honor both endings
+      and beginnings, covering high school through doctoral degrees with emphasis
+      on the rare opportunity for parental celebration in adulthood.
+    cluster: celebrations
+    funnel_stage: tofu
+    content_goal: traffic
+    entities:
+      - Pike & West
+      - Memphis
+      - Germantown
+    personas:
+      - parent
+    personas_primary: parent
+    event_types:
+      - graduation
+    event_types_primary: graduation
+    word_count: 1780
+    target_word_count: 1500
+    evergreen: true
+    seasonal_relevance:
+      - Q2
+    cta_type: tour-booking
+    cta_destination: /contact
+    shortcodes:
+      pull-quote: 2
+      divider: 3
+      tip: 1
+      fact-box: 1
+      timeline: 1
+      sidebar-quote: 0
+      numbered-list: 0
+      standfirst: 0
+      kicker: 0
+      key-takeaways: 0
+    shortcodes_recommended: []
+    drop_cap: true
+    has_cta: true
+    images:
+      count: 1
+      hero_image: true
+      all_have_alt: true
+      images_list:
+        - images/photos/venue-02-foyer.png
+    links_out:
+      - /contact/
+    links_in: []
+    links_recommended:
+      - /events/private-parties
+    orphan: false
+    author: Pike & West
+    created: "2026-02-01"
+    last_modified: "2026-02-01"
+    last_audited: "2026-02-01"
+    next_review: "2026-08-01"
+    audit_score: 90
+    audit_scores:
+      seo: 20
+      brand_voice: 18
+      editorial: 16
+      freshness: 15
+      technical: 21
     issues_count: 0
     updated_by: blog-editor
   /blog/fall-baby-shower-inspiration:
